@@ -1,6 +1,6 @@
 {
   "name": "dreamitapp",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "dependencies": {
     "angular": "~1.0.7",
     "jquery": "~2.0.3",
@@ -12,6 +12,9 @@
     "angular-scenario": "~1.0.7",
     "ui-router": "~0.0.1",
     "angular-bootstrap": "~0.4.0",
-    "angular-ui": "~0.4.0"
+    "angular-ui": "~0.4.0",
+    "es6-shim": "~0.8.0",
+    "es5-shim": "~2.1.0",
+    "json3": "~3.2.5"
   }
 }

@@ -3,11 +3,12 @@
 
 # TEAM
 
-    <name> -- <role> -- <twitter>
+	Stephen Kiley -- CEO
+    Roger -- Developer -- @polycademy
 
 # THANKS
 
-    <name>
+    Maria Foo
 
 # TECHNOLOGY COLOPHON
 
