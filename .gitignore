@@ -10,6 +10,7 @@
 vendor/*
 bin/*
 node_modules/*
+bower_components/*
 build/*
 .c9revisions/*
 .secrets/*
