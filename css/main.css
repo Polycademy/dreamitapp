@@ -5446,6 +5446,14 @@ you can use the generic selector below, but it's slower:
 .fui-check-inverted-2:before {
   content: "\e000";
 }
+[ng\:cloak],
+[ng-cloak],
+[data-ng-cloak],
+[x-ng-cloak],
+.ng-cloak,
+.x-ng-cloak {
+  display: none;
+}
 /*
 	RESPONSIVE
 */
