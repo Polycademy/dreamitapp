@@ -40,7 +40,12 @@ $script.ready('jquery', function(){
 	//then it will need to replace this code with main.min.12343455.js into the build directory
 	//oh and then minify this script itself!
 	$script([
-		'js/app.js'
+		'js/app.js',
+		'js/controllers/Home.Controllers.js',
+		'js/controllers/Header.Controllers.js',
+		'js/services/Users.Service.js',
+		'js/services/Accounts.Service.js',
+		'js/services/Sessions.Service.js'
 	], 'local-scripts');
 
 	$script.ready([

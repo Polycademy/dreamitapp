@@ -37,11 +37,11 @@ app.config(
 		'$stateProvider',
 		'$urlRouterProvider',
 		'$locationProvider',
-		'UsersServProvider',
+		//'UsersServProvider',
 		function($stateProvider, $urlRouterProvider, $locationProvider, UsersServProvider) {
 			
 			//setting up the authentication/register page (before any instantiation)
-			UsersServProvider.setLoginPage = '/auth';
+			//UsersServProvider.setLoginPage = '/auth';
 			
 			//HTML5 Mode URLs
 			$locationProvider.html5Mode(true).hashPrefix('!');
