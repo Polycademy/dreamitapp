@@ -15,7 +15,7 @@ var app = angular.module('App', [
 	'ngSanitize',
 	'ui',
 	'ui.bootstrap',
-	'ui.compat'
+	'ui.state'
 ]);
 
 //Define all the page level controllers (Application Logic)
