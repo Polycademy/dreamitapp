@@ -4,7 +4,7 @@
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
 	<head>
-		<!--<base href="<?= base_url() ?>" />-->
+		<base href="<?= base_url() ?>" />
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 		<title><?= $title ?> - <?= $desc ?></title>
@@ -30,10 +30,37 @@
 			<p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
 		<![endif]-->
 
-		<p>TEST PAGE</p>
+		<header>
+			<div class="container">
+				<h3>TITLE</h3>
+			</div>
+		</header>
+
+		<!-- The side bar will be contained inside the container and ui-view to allow Angularjs to handle it -->
+		<div class="main">
+			<div class="container" ui-view></div>
+		</div>
+
+		<!-- Client Side Templates -->
+		<?
+			Template::asset('application/views', 'php', array(
+				'application/views/index.html', //CI stuff
+				'application/views/layouts/**',  //for server side
+				'application/views/errors/**', //this is for CI
+			));
+		?>
+
+		<!-- Pass in PHP variables to Javascript -->
+		<script>
+			var serverVars = {
+				baseUrl: '<?= base_url() ?>',
+				csrfCookieName: '<?= $this->config->item('cookie_prefix') . $this->config->item('csrf_cookie_name') ?>',
+				sessCookieName: '<?= $this->config->item('cookie_prefix') . $this->config->item('sess_cookie_name') ?>'
+			};
+		</script>
 
 		<script>
-			var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
+			var _gaq=[['_setAccount','<?= $google_analytics_key ?>'],['_trackPageview']];
 			(function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
 			g.src='//www.google-analytics.com/ga.js';
 			s.parentNode.insertBefore(g,s)}(document,'script'));
