@@ -20,7 +20,7 @@
 		<link rel="apple-touch-icon-precomposed" href="img/apple-touch-icon-57x57-precomposed.png">
 		<link rel="stylesheet" href="css/main.css">
 		<script src="js/lib/modernizr-2.6.2-respond-1.1.0.min.js"></script>
-		<script src="bower_components/angular-loader/angular-loader.min.js"></script>
+		<!-- <script src="bower_components/angular-loader/angular-loader.min.js"></script> -->
 		<script src="js/lib/script-modified.min.js"></script>
 		<script src="js/loader.js"></script>
 	</head>
@@ -30,9 +30,9 @@
 			<p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
 		<![endif]-->
 
-		<header>
+		<header ng-controller="HeaderCtrl">
 			<div class="container">
-				<h3>TITLE</h3>
+				<h3>TITLE {{data}}</h3>
 			</div>
 		</header>
 
