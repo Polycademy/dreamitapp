@@ -4,6 +4,5 @@ angular.module('Controllers')
 	.controller('HeaderCtrl', [
 		'$scope',
 		function($scope){
-			$scope.data = 'Blah';
 		}
 	]);

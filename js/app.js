@@ -58,6 +58,22 @@ app.config(
 						templateUrl: 'home.html',
 						controller: 'HomeCtrl'
 					}
+				)
+				.state(
+					'about',
+					{
+						url: '/about',
+						templateUrl: 'about.html',
+						controller: 'AboutCtrl'
+					}
+				)
+				.state(
+					'blog',
+					{
+						url: '/blog',
+						templateUrl: 'blog.html',
+						controller: 'BlogCtrl'
+					}
 				);
 			
 			//redirect anything else to home page

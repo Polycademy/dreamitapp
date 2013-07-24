@@ -5295,6 +5295,13 @@ a.badge:focus {
   font-style: normal;
 }
 @font-face {
+  font-family: 'source_sans_probold';
+  src: url('../fonts/sourcesanspro-bold-webfont.eot');
+  src: url('../fonts/sourcesanspro-bold-webfont.eot?#iefix') format('embedded-opentype'), url('../fonts/sourcesanspro-bold-webfont.woff') format('woff'), url('../fonts/sourcesanspro-bold-webfont.ttf') format('truetype'), url('../fonts/sourcesanspro-bold-webfont.svg#source_sans_probold') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
   font-family: 'source_sans_probold_italic';
   src: url('../fonts/sourcesanspro-bolditalic-webfont.eot');
   src: url('../fonts/sourcesanspro-bolditalic-webfont.eot?#iefix') format('embedded-opentype'), url('../fonts/sourcesanspro-bolditalic-webfont.woff') format('woff'), url('../fonts/sourcesanspro-bolditalic-webfont.ttf') format('truetype'), url('../fonts/sourcesanspro-bolditalic-webfont.svg#source_sans_probold_italic') format('svg');
@@ -5311,12 +5318,6 @@ a.badge:focus {
   font-weight: normal;
   font-style: normal;
 }
-/* Use the following CSS code if you want to have a class per icon */
-/*
-Instead of a list of all class selectors,
-you can use the generic selector below, but it's slower:
-[class*="fui-"] {
-*/
 .fui-arrow-right,
 .fui-arrow-left,
 .fui-cmd,
@@ -5453,6 +5454,47 @@ you can use the generic selector below, but it's slower:
 .ng-cloak,
 .x-ng-cloak {
   display: none;
+}
+body {
+  font-family: arial, sans-serif;
+}
+.container {
+  padding: 1.2%;
+}
+header.navbar {
+  background-color: #ecf0f1;
+  margin: 0;
+  box-shadow: 0 0 4px 3px rgba(197, 207, 199, 0.97);
+  border-bottom: 1px solid #C6D1C9;
+}
+header.navbar .container {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+header.navbar div.navbar-inner {
+  background: transparent;
+  filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+  border: none;
+  box-shadow: none;
+}
+header.navbar .logo {
+  float: left;
+  display: block;
+  margin: 16px 0 11px;
+}
+header.navbar .nav {
+  font-family: 'source_sans_probold', arial, sans-serif;
+  font-size: 24px;
+  float: right;
+  margin: 90px 0 0;
+}
+header.navbar .nav li {
+  margin: 0 20px;
+}
+header.navbar .nav li a {
+  color: #95a5a6;
+  text-shadow: none;
+  padding: 10px 0;
 }
 /*
 	RESPONSIVE
@@ -6543,5 +6585,39 @@ you can use the generic selector below, but it's slower:
   .nav-collapse.collapse {
     height: auto !important;
     overflow: visible !important;
+  }
+}
+/*
+	Some Preferred Resets
+*/
+body {
+  padding: 0;
+}
+/*
+	At 600px the header's logo and links should center and stack.
+ */
+@media (max-width: 600px) {
+  header.navbar .logo {
+    float: none;
+    margin: 10px 0;
+  }
+  header.navbar .logo img {
+    margin: 0 auto;
+    display: block;
+  }
+  header.navbar .nav {
+    float: none;
+    overflow: auto;
+    margin: 20px 0;
+    text-align: center;
+  }
+  header.navbar .nav li {
+    display: inline-block;
+    float: none;
+  }
+}
+@media (max-width: 320px) {
+  header.navbar .nav {
+    font-size: 22px;
   }
 }

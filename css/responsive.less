@@ -1,0 +1,42 @@
+/*
+	Some Preferred Resets
+*/
+body{
+	padding: 0; //Remove Side Paddings that Bootstrap adds by default to the body when the browser sizes down!
+}
+
+/*
+	At 600px the header's logo and links should center and stack.
+ */
+@media (max-width: 600px) {
+	
+	header.navbar{
+		.logo{
+			float: none;
+			margin: 10px 0;
+			img{
+				margin: 0 auto;
+				display: block;
+			}
+		}
+		.nav{
+			float: none;
+			overflow: auto;
+			margin: 20px 0;
+			text-align: center;
+			li{
+				display: inline-block;
+				float: none;
+			}
+		}
+	}
+
+}
+
+@media (max-width: 320px) {
+
+	header.navbar .nav{
+		font-size: 22px;
+	}
+
+}

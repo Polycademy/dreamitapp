@@ -30,11 +30,19 @@
 			<p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
 		<![endif]-->
 
-		<header ng-controller="HeaderCtrl">
+        <header class="navbar navbar-static-top" ng-controller="HeaderCtrl">
 			<div class="container">
-				<h3>TITLE {{data}}</h3>
+				<div class="navbar-inner">
+					<a class="logo" href="<?php echo site_url() ?>" title="Go back to Home">
+						<img src="img/logo.png" />
+					</a>
+					<ul class="nav">
+						<li ng-class="{ 'active_link': $state.includes('about') }"><a href="about" title="Learn more about this platform">About</a></li>
+						<li ng-class="{ 'active_link': $state.includes('blog') }"><a href="blog" title="Keep up with the Dream it App team">Blog</a></li>
+					</ul>
+				</div>
 			</div>
-		</header>
+        </header>
 
 		<!-- The side bar will be contained inside the container and ui-view to allow Angularjs to handle it -->
 		<div class="main">

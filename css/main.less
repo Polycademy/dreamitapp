@@ -11,6 +11,51 @@
 	display: none;
 }
 
+body{
+	font-family: arial, sans-serif;
+}
+
+.container{
+	padding: @container_padding;
+}
+
+header.navbar{
+	background-color: @colour_clouds;
+	margin: 0;
+	box-shadow: 0 0 4px 3px rgba(197, 207, 199, 0.97);
+	border-bottom: 1px solid #C6D1C9;
+	.container{
+		padding-top: 0;
+		padding-bottom: 0;
+	}
+	div.navbar-inner{
+		background: transparent;
+		filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+		border: none;
+		box-shadow: none;
+	}
+	.logo{
+		float: left;
+		display: block;
+		margin: 16px 0 11px;
+	}
+	.nav{
+		font-family: 'source_sans_probold', arial, sans-serif;
+		font-size: 24px;
+		float: right;
+		margin: 90px 0 0;
+		li{
+			margin: 0 20px;
+			a{
+				color: @colour_concrete;
+				text-shadow: none;
+				padding: 10px 0;
+			}
+		}
+	}
+}
+
+
 /*
 	RESPONSIVE
 */
