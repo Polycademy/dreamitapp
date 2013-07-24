@@ -8,8 +8,6 @@
     "angular-loader": "~1.0.7",
     "angular-resource": "~1.0.7",
     "angular-sanitize": "~1.0.7",
-    "angular-mocks": "~1.0.7",
-    "angular-scenario": "~1.0.7",
     "angular-ui-router": "~0.0.1",
     "angular-bootstrap": "~0.4.0",
     "angular-ui": "~0.4.0",
