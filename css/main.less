@@ -16,18 +16,17 @@ body{
 }
 
 .container{
-	padding: @container_padding;
+	padding: 0 @container_padding 0;
 }
 
+/*
+	HEADER
+*/
 header.navbar{
 	background-color: @colour_clouds;
 	margin: 0;
 	box-shadow: 0 0 4px 3px rgba(197, 207, 199, 0.97);
 	border-bottom: 1px solid #C6D1C9;
-	.container{
-		padding-top: 0;
-		padding-bottom: 0;
-	}
 	div.navbar-inner{
 		background: transparent;
 		filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
@@ -53,6 +52,21 @@ header.navbar{
 			}
 		}
 	}
+}
+
+/*
+	WALL + SIDEBAR
+*/
+.main{
+
+	.wall{
+
+	}
+	.control_panel{
+		background: @colour_midnight_blue;
+		color: @colour_green_sea;
+	}
+
 }
 
 

@@ -59,7 +59,8 @@ $script.ready([
 			'js/controllers/Header.Controllers.js',
 			'js/services/Users.Service.js',
 			'js/services/Accounts.Service.js',
-			'js/services/Sessions.Service.js'
+			'js/services/Sessions.Service.js',
+			'js/directives/EqualiseHeights.Directive.js'
 		], function(){
 
 			angular.bootstrap(document, ['App']);
