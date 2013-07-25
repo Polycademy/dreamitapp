@@ -5579,9 +5579,10 @@ header.navbar .nav li a {
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#33ffffff, endColorstr=#33ffffff);
 }
 .main .wall .item_panel .item_desc {
-  padding: 5px 15px;
+  padding: 18px 10px 10px;
   font-family: 'source_sans_proregular', arial, sans-serif;
   font-size: 15px;
+  color: #34495e;
 }
 .main .wall .item_panel .item_meta {
   background: #efebe7;
@@ -5600,6 +5601,7 @@ header.navbar .nav li a {
   border-bottom: 1px solid #b1b6ba;
 }
 .main .wall .item_panel .item_meta .item_author a:hover {
+  color: #34495e;
   text-decoration: none;
   border: none;
 }
@@ -5674,6 +5676,9 @@ header.navbar .nav li a {
 }
 .main .wall .item_panel .item_meta .item_tags ul li a:before {
   content: '\0023';
+}
+.main .wall .item_panel .item_meta .item_tags ul li a:hover {
+  color: #333;
 }
 .main .control_panel {
   background: #2c3e50;

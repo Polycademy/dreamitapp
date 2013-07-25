@@ -106,9 +106,10 @@ header.navbar{
 				}
 			}
 			.item_desc{
-				padding: 5px 15px;
+				padding: 18px 10px 10px;
 				font-family: 'source_sans_proregular', arial, sans-serif;
 				font-size: 15px;
+				color: @colour_wet_asphalt;
 			}
 			.item_meta{
 				background: @colour_grey_clouds;
@@ -124,6 +125,7 @@ header.navbar{
 						font-size: 14px;
 						border-bottom: 1px solid #b1b6ba;
 						&:hover{
+							color: @colour_wet_asphalt;
 							text-decoration: none;
 							border: none;
 						};
@@ -187,6 +189,9 @@ header.navbar{
 								color: @colour_asbestos;
 								&:before{
 									content: '\0023';
+								};
+								&:hover{
+									color: #333;
 								};
 							}
 						}
