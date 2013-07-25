@@ -1,19 +1,23 @@
-'use strict';
+define(['angular', 'deps'], function(angular){
 
-angular.module('Services')
-	.factory('AccountsServ', [
-		'$resource',
-		function($resource){
-		
-			return $resource(
-				'api/accounts/:id',
-				{},
-				{
-					update: {
-						method: 'PUT'
+	'use strict';
+
+	angular.module('Services')
+		.factory('AccountsServ', [
+			'$resource',
+			function($resource){
+			
+				return $resource(
+					'api/accounts/:id',
+					{},
+					{
+						update: {
+							method: 'PUT'
+						}
 					}
-				}
-			);
-		
-		}
-	]);
+				);
+			
+			}
+		]);
+
+});

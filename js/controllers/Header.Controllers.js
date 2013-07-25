@@ -1,8 +1,12 @@
-'use strict';
+define(['angular', 'deps'], function(angular){
 
-angular.module('Controllers')
-	.controller('HeaderCtrl', [
-		'$scope',
-		function($scope){
-		}
-	]);
+	'use strict';
+
+	angular.module('Controllers')
+		.controller('HeaderCtrl', [
+			'$scope',
+			function($scope){
+			}
+		]);
+
+});
