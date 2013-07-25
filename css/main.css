@@ -5463,6 +5463,7 @@ a.badge:focus {
 }
 body {
   font-family: arial, sans-serif;
+  font-size: 14px;
 }
 .container {
   padding: 0 1.2% 0;
@@ -5527,15 +5528,25 @@ header.navbar .nav li a {
   border-bottom: 1px solid #b8e0d8;
 }
 .main .wall .item_panel .item_header {
-  color: #2c3e50;
   padding: 5px 10px;
   margin: 0;
 }
+.main .wall .item_panel .item_header a {
+  color: #2c3e50;
+}
+.main .wall .item_panel .item_header a:hover {
+  color: #34495e;
+}
+.main .wall .item_panel .item_image_container {
+  position: relative;
+}
 .main .wall .item_panel .item_image_container .item_rollover {
   position: absolute;
+  top: 0;
+  bottom: 0;
   z-index: 100;
   width: 239px;
-  height: 100px;
+  height: auto;
   -moz-transition-duration: 1s;
   -webkit-transition-duration: 1s;
   -o-transition-duration: 1s;
@@ -5563,9 +5574,106 @@ header.navbar .nav li a {
   -ms-filter: progid:DXImageTransform.Microsoft.Alpha(opacity=1 * 100);
   filter: alpha(opacity=1 * 100);
   background: transparent;
-  background: rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.2);
   -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=argb(rgba(@red, @green, @blue, @alpha)), endColorstr=argb(rgba(@red, @green, @blue, @alpha)))";
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#40ffffff, endColorstr=#40ffffff);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#33ffffff, endColorstr=#33ffffff);
+}
+.main .wall .item_panel .item_desc {
+  padding: 5px 15px;
+  font-family: 'source_sans_proregular', arial, sans-serif;
+  font-size: 15px;
+}
+.main .wall .item_panel .item_meta {
+  background: #efebe7;
+  padding: 14px 0;
+  overflow: auto;
+}
+.main .wall .item_panel .item_meta .item_author {
+  display: block;
+  text-align: center;
+  margin-bottom: 12px;
+}
+.main .wall .item_panel .item_meta .item_author a {
+  color: #2c3e50;
+  font-family: 'source_sans_proitalic', arial, sans-serif;
+  font-size: 14px;
+  border-bottom: 1px solid #b1b6ba;
+}
+.main .wall .item_panel .item_meta .item_author a:hover {
+  text-decoration: none;
+  border: none;
+}
+.main .wall .item_panel .item_meta .item_actions {
+  width: 30%;
+  overflow: auto;
+  float: left;
+}
+.main .wall .item_panel .item_meta .item_actions .item_feedback,
+.main .wall .item_panel .item_meta .item_actions .item_likes {
+  display: block;
+  position: relative;
+}
+.main .wall .item_panel .item_meta .item_actions .item_feedback .item_number,
+.main .wall .item_panel .item_meta .item_actions .item_likes .item_number {
+  position: absolute;
+  z-index: 100;
+  width: 100%;
+  text-align: center;
+  font-size: 11px;
+  font-family: 'source_sans_prosemibold', arial, sans-serif;
+  color: #ecf0f1;
+  padding-top: 2px;
+}
+.main .wall .item_panel .item_meta .item_actions .item_feedback .item_icon,
+.main .wall .item_panel .item_meta .item_actions .item_likes .item_icon {
+  color: #95a5a6;
+  font-size: 32px;
+  padding: 6px;
+  width: 100%;
+  text-align: center;
+  -ms-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.main .wall .item_panel .item_meta .item_actions .item_feedback:hover .item_number,
+.main .wall .item_panel .item_meta .item_actions .item_likes:hover .item_number {
+  color: #95a5a6;
+}
+.main .wall .item_panel .item_meta .item_actions .item_feedback:hover .item_icon,
+.main .wall .item_panel .item_meta .item_actions .item_likes:hover .item_icon {
+  color: #f7f2f2;
+}
+.main .wall .item_panel .item_meta .item_actions .item_likes .item_number {
+  padding-top: 5px;
+}
+.main .wall .item_panel .item_meta .item_tags {
+  width: 70%;
+  overflow: auto;
+  float: right;
+  -ms-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  padding: 10px;
+}
+.main .wall .item_panel .item_meta .item_tags ul {
+  list-style: none;
+  margin: 0;
+  text-align: center;
+  font-family: 'source_sans_proregular', arial, sans-serif;
+  font-size: 13px;
+  letter-spacing: 0.2px;
+}
+.main .wall .item_panel .item_meta .item_tags ul li {
+  display: inline-block;
+  margin: 0 2px;
+}
+.main .wall .item_panel .item_meta .item_tags ul li a {
+  color: #7f8c8d;
+}
+.main .wall .item_panel .item_meta .item_tags ul li a:before {
+  content: '\0023';
 }
 .main .control_panel {
   background: #2c3e50;
