@@ -5256,6 +5256,12 @@ a.badge:focus {
 .ui-match {
   background: yellow;
 }
+/*---------------------------------------------------
+    LESS Elements 0.9
+  ---------------------------------------------------
+    A set of useful LESS mixins
+    More info at: http://lesselements.com
+  ---------------------------------------------------*/
 /*
     FONTS
 */
@@ -5462,18 +5468,32 @@ body {
   padding: 0 1.2% 0;
 }
 /*
+	HEADINGS
+ */
+h3 {
+  font-family: 'source_sans_prosemibold', arial, sans-serif;
+  font-size: 20px;
+  font-weight: normal;
+}
+/*
 	HEADER
 */
 header.navbar {
   background-color: #ecf0f1;
   margin: 0;
-  box-shadow: 0 0 4px 3px rgba(197, 207, 199, 0.97);
+  -webkit-box-shadow: 0 0 2px 2px rgba(63, 116, 86, 0.4);
+  -moz-box-shadow: 0 0 2px 2px rgba(63, 116, 86, 0.4);
+  box-shadow: 0 0 2px 2px rgba(63, 116, 86, 0.4);
   border-bottom: 1px solid #C6D1C9;
+  z-index: 100;
+  position: relative;
 }
 header.navbar div.navbar-inner {
   background: transparent;
   filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
   border: none;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
   box-shadow: none;
 }
 header.navbar .logo {
@@ -5498,6 +5518,55 @@ header.navbar .nav li a {
 /*
 	WALL + SIDEBAR
 */
+.main .wall {
+  background: #f7f2f2;
+}
+.main .wall .item_panel {
+  width: 239px;
+  border-left: 1px solid #b8e0d8;
+  border-bottom: 1px solid #b8e0d8;
+}
+.main .wall .item_panel .item_header {
+  color: #2c3e50;
+  padding: 5px 10px;
+  margin: 0;
+}
+.main .wall .item_panel .item_image_container .item_rollover {
+  position: absolute;
+  z-index: 100;
+  width: 239px;
+  height: 100px;
+  -moz-transition-duration: 1s;
+  -webkit-transition-duration: 1s;
+  -o-transition-duration: 1s;
+  transition-duration: 1s;
+  -moz-opacity: 0;
+  -khtml-opacity: 0;
+  -webkit-opacity: 0;
+  opacity: 0;
+  -ms-filter: progid:DXImageTransform.Microsoft.Alpha(opacity=0 * 100);
+  filter: alpha(opacity=0 * 100);
+  background: transparent;
+  background: rgba(255, 255, 255, 0);
+  -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=argb(rgba(@red, @green, @blue, @alpha)), endColorstr=argb(rgba(@red, @green, @blue, @alpha)))";
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#00ffffff, endColorstr=#00ffffff);
+}
+.main .wall .item_panel .item_image_container .item_rollover:hover {
+  -moz-transition-duration: 1s;
+  -webkit-transition-duration: 1s;
+  -o-transition-duration: 1s;
+  transition-duration: 1s;
+  -moz-opacity: 1;
+  -khtml-opacity: 1;
+  -webkit-opacity: 1;
+  opacity: 1;
+  -ms-filter: progid:DXImageTransform.Microsoft.Alpha(opacity=1 * 100);
+  filter: alpha(opacity=1 * 100);
+  background: transparent;
+  background: rgba(255, 255, 255, 0.25);
+  -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=argb(rgba(@red, @green, @blue, @alpha)), endColorstr=argb(rgba(@red, @green, @blue, @alpha)))";
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#40ffffff, endColorstr=#40ffffff);
+}
 .main .control_panel {
   background: #2c3e50;
   color: #16a085;
