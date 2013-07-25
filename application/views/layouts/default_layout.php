@@ -20,7 +20,7 @@
 		<link rel="apple-touch-icon-precomposed" href="img/apple-touch-icon-57x57-precomposed.png">
 		<link rel="stylesheet" href="css/main.css">
 		<script src="js/lib/modernizr-2.6.2-respond-1.1.0.min.js"></script>
-		<script data-main="js/bootstrap" src="js/lib/require.min.js"></script>
+		<script data-main="js/bootstrap" src="js/lib/require.js"></script>
 	</head>
 	<body class="ng-cloak" ng-cloak>
 

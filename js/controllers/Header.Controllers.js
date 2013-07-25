@@ -1,4 +1,4 @@
-define(['angular', 'deps'], function(angular){
+define(['angular'], function(angular){
 
 	'use strict';
 
@@ -6,6 +6,8 @@ define(['angular', 'deps'], function(angular){
 		.controller('HeaderCtrl', [
 			'$scope',
 			function($scope){
+
+
 			}
 		]);
 

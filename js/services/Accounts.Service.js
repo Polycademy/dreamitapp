@@ -1,4 +1,4 @@
-define(['angular', 'deps'], function(angular){
+define(['angular'], function(angular){
 
 	'use strict';
 

@@ -3,7 +3,7 @@
    ========================================================================== */
 
 requirejs.config({
-	//enforceDefine: true, //this may have problems with scripts that don't export things
+	enforceDefine: true,
 	baseUrl: 'js/',
 	paths: {
 		'jquery': [
@@ -53,43 +53,37 @@ requirejs.config({
 	shim: {
 		'bootstrap': {
 			deps: ['jquery'],
-			exports: '$.fn.popover'
+			exports: "$"
 		},
 		'angular': {
-			exports: 'angular',
-			deps: ['jquery']
+			deps: ['jquery'],
+			exports: "angular"
 		},
 		'angular-resource': {
-			deps: ['angular']
+			deps: ['angular'],
+			exports: "angular"
 		},
 		'angular-cookies': {
-			deps: ['angular']
+			deps: ['angular'],
+			exports: "angular"
 		},
 		'angular-sanitize': {
-			deps: ['angular']
+			deps: ['angular'],
+			exports: "angular"
 		},
 		'angular-ui': {
-			deps: ['angular']
+			deps: ['angular'],
+			exports: "angular"
 		},
 		'angular-bootstrap': {
-			deps: ['angular']
+			deps: ['angular'],
+			exports: "angular"
 		},
 		'angular-ui-router': {
-			deps: ['angular']
+			deps: ['angular'],
+			exports: "angular"
 		}
 	}
 });
 
-define([
-		'angular', //angular needs to be ready
-		'domReady', //the dom is loaded
-		'app',
-	], function(angular, domReady){
-
-		'use strict';
-
-		domReady(function(){
-			return angular.bootstrap(document, ['App']);
-		});
-
-});
+require(['app']);
