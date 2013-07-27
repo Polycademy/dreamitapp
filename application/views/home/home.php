@@ -1,6 +1,6 @@
 <script type="text/ng-template" id="home.html">
 	<div class="main_wrapper row" equalise-heights-dir=".wall, .control_panel">
-		<div class="wall span9">
+		<div class="wall span9" masonry-wall-dir>
 			<div class="item_panel">
 				<h3 class="item_header"><a href="#">Hacker News App</a></h3>
 				<div class="item_image_container">

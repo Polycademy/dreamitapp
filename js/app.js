@@ -5,7 +5,11 @@
 define([
 	'require',
 	'angular',
-	'domReady',
+	'domReady', 
+	//shims!
+	'es5-shim', 
+	'es6-shim', 
+	'json3'
 	], function(require, angular, domReady){
 
 		'use strict';
@@ -55,6 +59,7 @@ define([
 				'controllers/Home.Controllers',
 				//DIRECTIVES
 				'directives/EqualiseHeights.Directive',
+				'directives/MasonryWall.Directive',
 				//SERVICES
 				'services/Accounts.Service',
 				'services/Sessions.Service',

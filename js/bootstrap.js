@@ -6,6 +6,7 @@ requirejs.config({
 	enforceDefine: true,
 	baseUrl: 'js/',
 	paths: {
+		'domReady': 'lib/domReady.min',
 		'jquery': [
 			'//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min',
 			'../bower_components/jquery/jquery.min'
@@ -48,7 +49,16 @@ requirejs.config({
 		],
 		'es6-shim': '../bower_components/es6-shim/es6-shim',
 		'json3': '../bower_components/json3/lib/json3.min',
-		'domReady': 'lib/domReady.min'
+		//MASONRY
+		'eventie': '../bower_components/eventie',
+		'doc-ready': '../bower_components/doc-ready',
+		'eventEmitter': '../bower_components/eventEmitter',
+		'get-style-property': '../bower_components/get-style-property',
+		'get-size': '../bower_components/get-size',
+		'matches-selector': '../bower_components/matches-selector',
+		'outlayer': '../bower_components/outlayer',
+		'imagesLoaded': '../bower_components/imagesloaded/imagesloaded',
+		'masonry': '../bower_components/masonry/masonry'
 	},
 	shim: {
 		'bootstrap': {

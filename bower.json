@@ -13,6 +13,8 @@
     "angular-ui": "~0.4.0",
     "es6-shim": "~0.8.0",
     "es5-shim": "~2.1.0",
-    "json3": "~3.2.5"
+    "json3": "~3.2.5",
+    "masonry": "~3.1.0",
+    "imagesloaded": "~3.0.4"
   }
 }

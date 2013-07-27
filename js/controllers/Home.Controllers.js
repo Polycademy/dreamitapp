@@ -6,6 +6,12 @@ define(['angular'], function(angular){
 		.controller('HomeCtrl', [
 			'$scope',
 			function($scope){
+
+				$scope.appIdeas = {
+
+
+				};
+
 			}
 		]);
 
