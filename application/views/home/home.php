@@ -1,35 +1,36 @@
 <script type="text/ng-template" id="home.html">
 	<div class="main_wrapper row" equalise-heights-dir=".wall, .control_panel">
 		<div class="wall span9" masonry-wall-dir>
-			<div class="item_panel">
-				<h3 class="item_header"><a href="#">Hacker News App</a></h3>
+			<div class="item_panel" ng-repeat="idea in appIdeas">
+				<h3 class="item_header"><a ng-href="{{idea.link}}">{{idea.title}}</a></h3>
 				<div class="item_image_container">
 					<div class="item_rollover">
-						<button type="button">Share</button>
+						<a class="share_button" ng-href="http://www.addthis.com/bookmark.php?v=300&pubid={{dreamItAppConfig.apiKeys.addThis}}" addthis:url="{{baseUrl + idea.link}}" addthis:title="{{idea.title}}" addthis:description="{{idea.description | StripHtml}}">
+							Share
+						</a>
 					</div>
-					<img src="img/example_item_image.png" />
+					<img ng-src="{{idea.image}}" />
 				</div>
-				<div class="item_desc">
-					<p>An app to help read Hacker News on the mobile phone or ipad.</p>
-				</div>
+				<div class="item_desc" ng-bind-html="idea.description"></div>
 				<div class="item_meta">
-					<span class="item_author"><a href="#">Roger Qiu</a></span>
+					<span class="item_author">
+						<a ng-href="{{'users/' + idea.authorLink}}">{{idea.author}}</a>
+					</span>
 					<div class="item_actions">
-						<a class="item_feedback" href="#">
-							<span class="item_number">32</span>
+						<a class="item_feedback" ng-href="{{idea.link}}#feedback">
+							<span class="item_number">{{idea.feedback}}</span>
 							<span class="item_icon fui-chat"></span>
 						</a>
-						<a class="item_likes" href="#">
-							<span class="item_number">42</span>
+						<a class="item_likes" ng-click="likeAction(idea.id)">
+							<span class="item_number">{{idea.likes}}</span>
 							<span class="item_icon fui-heart"></span>
 						</a>
 					</div>
 					<div class="item_tags">
 						<ul>
-							<li><a href="#">iphone</a></li>
-							<li><a href="#">ipad</a></li>
-							<li><a href="#">android</a></li>
-							<li><a href="#">programming</a></li>
+							<li ng-repeat="tag in idea.tags">
+								<a ng-click="TagAction(tag)">{{tag}}</a>
+							</li>
 						</ul>
 					</div>
 				</div>

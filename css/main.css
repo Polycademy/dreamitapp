@@ -5461,6 +5461,9 @@ a.badge:focus {
 .x-ng-cloak {
   display: none;
 }
+a {
+  cursor: pointer;
+}
 body {
   font-family: arial, sans-serif;
   font-size: 14px;
@@ -5637,6 +5640,10 @@ header.navbar .nav li a {
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
+}
+.main .wall .item_panel .item_meta .item_actions .item_feedback:hover,
+.main .wall .item_panel .item_meta .item_actions .item_likes:hover {
+  cursor: pointer;
 }
 .main .wall .item_panel .item_meta .item_actions .item_feedback:hover .item_number,
 .main .wall .item_panel .item_meta .item_actions .item_likes:hover .item_number {

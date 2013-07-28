@@ -58,7 +58,9 @@ requirejs.config({
 		'matches-selector': '../bower_components/matches-selector',
 		'outlayer': '../bower_components/outlayer',
 		'imagesLoaded': '../bower_components/imagesloaded/imagesloaded',
-		'masonry': '../bower_components/masonry/masonry'
+		'masonry': '../bower_components/masonry/masonry',
+		//ADDTHIS (this may need to be shimmed? or moved towards something else)
+		'addthis': '//s7.addthis.com/js/300/addthis_widget.js#' + dreamItAppConfig.apiKeys.addThis
 	},
 	shim: {
 		'bootstrap': {
@@ -92,6 +94,9 @@ requirejs.config({
 		'angular-ui-router': {
 			deps: ['angular'],
 			exports: "angular"
+		},
+		'addthis': {
+			exports: "addthis"
 		}
 	}
 });

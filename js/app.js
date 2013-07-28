@@ -6,6 +6,8 @@ define([
 	'require',
 	'angular',
 	'domReady', 
+	//addthis will be used across the site
+	'addthis',
 	//shims!
 	'es5-shim', 
 	'es6-shim', 
@@ -60,6 +62,8 @@ define([
 				//DIRECTIVES
 				'directives/EqualiseHeights.Directive',
 				'directives/MasonryWall.Directive',
+				//FILTERS
+				'filters/StripHtml.Filter',
 				//SERVICES
 				'services/Accounts.Service',
 				'services/Sessions.Service',
@@ -147,6 +151,9 @@ define([
 						//PROVIDING STATE ON ROOTSCOPE
 						$rootScope.$state = $state;
 						$rootScope.$stateParams = $stateParams;
+
+						//ADDING DREAM IT APP CONFIG TO ROOTSCOPE
+						$rootScope.dreamItAppConfig = dreamItAppConfig;
 						
 					}
 				]);
