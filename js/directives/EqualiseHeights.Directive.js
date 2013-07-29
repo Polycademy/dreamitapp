@@ -17,7 +17,7 @@ define(['angular'], function(angular){
 						//we're not using scope.watch here because, watch would require the values to change, and it can't watch browser events like window.resize, also we're not watching value changes, but events! therefore we're doing jquery event binding
 						//another method here: http://jsfiddle.net/bY5qe/
 						
-						var items = element.find(attributes.equaliseHeightsDir);
+						var items = angular.element(attributes.equaliseHeightsDir);
 						
 						var equaliseHeight = function(){
 							var maxHeight = 0;

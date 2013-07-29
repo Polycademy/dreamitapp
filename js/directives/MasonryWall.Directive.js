@@ -7,30 +7,37 @@ define(['angular', 'masonry', 'imagesLoaded'], function(angular, Masonry, images
 	 */
 	angular.module('Directives')
 		.directive('masonryWallDir', [
-			function(){
+			'$timeout',
+			function($timeout){
 				return {
 					scope: true,
 					link: function(scope, element, attributes){
+						
+						//ng-repeat runs too slow, we need to wait for it too finish
+						//it will also apply() afterwards
+						$timeout(function(){
 
-						// //this will be executed on page load
-						// var masonry = new Masonry(element, {
-						// 	itemSelector: '.item_panel',
-						// 	gutter: 0,
-						// 	//isInitLayout: false //this may not be required, test it with other methods
-						// 	transitionDuration: '0.4s'
-						// });
+							//masonry requires the raw element
+							var masonry = new Masonry(element[0], {
+								itemSelector: '.item_panel',
+								gutter: 0,
+								isInitLayout: false,
+								transitionDuration: '0.3s'
+							});
 
-						// //re-execute this each time new elements come in via the ng-repeat (and window.resize or whenever size changes)
-						// //make sure images are loaded before executing masonry
-						// imagesLoaded(element, function(){
-						// 	masonry.layout();
-						// });
+							//waits for images to load fully
+							imagesLoaded(element, function(){
+								masonry.layout();
+							});
 
-						// //binds masonry to the window resize event
-						// masonry.bindResize();
+							//bind to window resize
+							masonry.bindResize();
 
-						// //btw remember this needs to be recalled when new elements enter via the ng-repeat!
-					
+							//also needs to recall layout() everytime new elements come in
+							//from infinite scroll!
+
+						}, 0);
+
 					}
 				};
 			}

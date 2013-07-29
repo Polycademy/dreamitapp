@@ -5467,6 +5467,7 @@ a {
 body {
   font-family: arial, sans-serif;
   font-size: 14px;
+  background: #fafaf7;
 }
 .container {
   padding: 0 1.2% 0;
@@ -5522,6 +5523,24 @@ header.navbar .nav li a {
 /*
 	WALL + SIDEBAR
 */
+.main .background_splitter {
+  background: #fafaf7;
+  background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2ZhZmFmNyIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjUwJSIgc3RvcC1jb2xvcj0iI2ZhZmFmNyIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjUxJSIgc3RvcC1jb2xvcj0iIzJjM2U1MCIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMyYzNlNTAiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+  background: -moz-linear-gradient(left, #fafaf7 0%, #fafaf7 50%, #2c3e50 51%, #2c3e50 100%);
+  background: -webkit-gradient(linear, left top, right top, color-stop(0%, #fafaf7), color-stop(50%, #fafaf7), color-stop(51%, #2c3e50), color-stop(100%, #2c3e50));
+  background: -webkit-linear-gradient(left, #fafaf7 0%, #fafaf7 50%, #2c3e50 51%, #2c3e50 100%);
+  background: -o-linear-gradient(left, #fafaf7 0%, #fafaf7 50%, #2c3e50 51%, #2c3e50 100%);
+  background: -ms-linear-gradient(left, #fafaf7 0%, #fafaf7 50%, #2c3e50 51%, #2c3e50 100%);
+  background: linear-gradient(to right, #fafaf7 0%, #fafaf7 50%, #2c3e50 51%, #2c3e50 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fafaf7', endColorstr='#2c3e50', GradientType=1);
+}
+.main .wallideas_wrapper {
+  margin-left: 0;
+}
+.main .wallideas_wrapper .wall,
+.main .wallideas_wrapper .control_panel {
+  margin-left: 0;
+}
 .main .wall {
   background: #f7f2f2;
 }
@@ -5688,8 +5707,12 @@ header.navbar .nav li a {
   color: #333;
 }
 .main .control_panel {
-  background: #2c3e50;
   color: #16a085;
+  -ms-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  border-left: 1px solid #53677a;
 }
 /*
 	RESPONSIVE

@@ -49,6 +49,8 @@ requirejs.config({
 		],
 		'es6-shim': '../bower_components/es6-shim/es6-shim',
 		'json3': '../bower_components/json3/lib/json3.min',
+		//jQuery Plugins
+		'jquery-resize': 'lib/jquery.ba-resize.min',
 		//MASONRY
 		'eventie': '../bower_components/eventie',
 		'doc-ready': '../bower_components/doc-ready',
@@ -94,6 +96,10 @@ requirejs.config({
 		'angular-ui-router': {
 			deps: ['angular'],
 			exports: "angular"
+		},
+		'jquery-resize': {
+			deps: ['jquery'],
+			exports: "$"
 		},
 		'addthis': {
 			exports: "addthis"

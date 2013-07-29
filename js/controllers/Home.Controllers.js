@@ -34,6 +34,77 @@ define(['angular'], function(angular){
 							'android',
 							'programming'
 						]
+					},
+					{
+						id: 2,
+						link: 'hacker_news_app1-idea',
+						title: 'Hacker News App',
+						description: '<p>An app to help read Hacker News on the mobile phone or ipad.</p>',
+						authorId: 1,
+						authorLink: 'roger_qiu1',
+						author: 'Roger Qiu',
+						feedback: 32,
+						likes: 40,
+						tags: [
+							'iphone',
+							'ipad',
+							'android',
+							'programming'
+						]
+					},
+					{
+						id: 3,
+						link: 'hacker_news_app1-idea',
+						title: 'Hacker News App',
+						image: 'img/2exampleimg.png',
+						description: '<p>An app to help read Hacker News on the mobile phone or ipad.</p>',
+						authorId: 1,
+						authorLink: 'roger_qiu1',
+						author: 'Roger Qiu',
+						feedback: 32,
+						likes: 40,
+						tags: [
+							'iphone',
+							'ipad',
+							'android',
+							'programming'
+						]
+					},
+					{
+						id: 4,
+						link: 'hacker_news_app1-idea',
+						title: 'Hacker News App',
+						image: 'img/example_item_image.png',
+						description: '<p>An app to help read Hacker News on the mobile phone or ipad.</p>',
+						authorId: 1,
+						authorLink: 'roger_qiu1',
+						author: 'Roger Qiu',
+						feedback: 32,
+						likes: 40,
+						tags: [
+							'iphone',
+							'ipad',
+							'android',
+							'programming'
+						]
+					},
+					{
+						id: 5,
+						link: 'hacker_news_app1-idea',
+						title: 'Hacker News App',
+						image: 'img/2exampleimg.png',
+						description: '<p>An app to help read Hacker News on the mobile phone or ipad.</p>',
+						authorId: 1,
+						authorLink: 'roger_qiu1',
+						author: 'Roger Qiu',
+						feedback: 32,
+						likes: 40,
+						tags: [
+							'iphone',
+							'ipad',
+							'android',
+							'programming'
+						]
 					}
 				];
 
@@ -52,6 +123,17 @@ define(['angular'], function(angular){
 					$location.search({'tag': encodeURIComponent(tag)});
 				};
 
+				//boolean function for whether the app ideas has an image
+				$scope.ideaHasImage = function(index){
+
+					//it is possible that image may be "false"
+					if('image' in $scope.appIdeas[index]){
+						return $scope.appIdeas[index].image;
+					}else{
+						return false;
+					}
+
+				};
 
 			}
 		]);

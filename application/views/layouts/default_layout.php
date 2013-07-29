@@ -19,6 +19,9 @@
 		<link rel="apple-touch-icon-precomposed" sizes="72x72" href="img/apple-touch-icon-72x72-precomposed.png">
 		<link rel="apple-touch-icon-precomposed" href="img/apple-touch-icon-57x57-precomposed.png">
 		<link rel="stylesheet" href="css/main.css">
+		<!--[if gte IE 9]>
+			<link rel="stylesheet" href="css/ie9.css">
+		<![endif]-->
 		<script src="js/lib/modernizr-2.6.2-respond-1.1.0.min.js"></script>
 		<script src="js/config.js"></script>
 		<script data-main="js/bootstrap" src="js/lib/require.min.js"></script>
@@ -44,9 +47,7 @@
         </header>
 
 		<!-- The side bar will be contained inside the container and ui-view to allow Angularjs to handle it -->
-		<div class="main">
-			<div class="container" ui-view></div>
-		</div>
+		<div class="main" ui-view></div>
 
 		<!-- Client Side Templates -->
 		<?

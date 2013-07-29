@@ -61,6 +61,7 @@ define([
 				'controllers/Home.Controllers',
 				//DIRECTIVES
 				'directives/EqualiseHeights.Directive',
+				'directives/EqualiseHeightTo.Directive',
 				'directives/MasonryWall.Directive',
 				//FILTERS
 				'filters/StripHtml.Filter',
