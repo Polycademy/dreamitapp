@@ -4,7 +4,7 @@
 		<!-- This centers the content, and responsively adjusts the width. It also provides a row functionality. -->
 		<div class="wall_container">
 			<div class="wall" masonry-wall-dir>
-				<div class="item_panel" ng-repeat="idea in appIdeas">
+				<div class="item_panel idea_{{idea.id}}" ng-repeat="idea in appIdeas">
 					<h3 class="item_header"><a ng-href="{{idea.link}}">{{idea.title}}</a></h3>
 					<div class="item_image_container" ng-show="ideaHasImage($index)">
 						<div class="item_rollover">

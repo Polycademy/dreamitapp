@@ -6,7 +6,7 @@ requirejs.config({
 	enforceDefine: true,
 	baseUrl: 'js/',
 	paths: {
-		'domReady': 'lib/domReady.min',
+		//FRAMEWORK
 		'jquery': [
 			'//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min',
 			'../bower_components/jquery/jquery.min'
@@ -43,13 +43,19 @@ requirejs.config({
 			'//cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.0.1/angular-ui-router.min',
 			'../bower_components/angular-ui-router/release/angular-ui-router.min'
 		],
+		//SHIMS AND UTILITIES
+		'domReady': 'lib/domReady.min',
+		'lodash': [
+			'//cdnjs.cloudflare.com/ajax/libs/lodash.js/1.3.1/lodash.min',
+			'../bower_components/lodash/dist/lodash.min'
+		],
 		'es5-shim': [
 			'//cdn.jsdelivr.net/es5.shim/2.1.0/es5-shim.min',
 			'../bower_components/es5-shim/es5-shim.min'
 		],
 		'es6-shim': '../bower_components/es6-shim/es6-shim',
 		'json3': '../bower_components/json3/lib/json3.min',
-		//jQuery Plugins
+		//JQUERY PLUGINS
 		'jquery-resize': 'lib/jquery.ba-resize.min',
 		//MASONRY
 		'eventie': '../bower_components/eventie',
@@ -61,7 +67,7 @@ requirejs.config({
 		'outlayer': '../bower_components/outlayer',
 		'imagesLoaded': '../bower_components/imagesloaded/imagesloaded',
 		'masonry': '../bower_components/masonry/masonry',
-		//ADDTHIS (this may need to be shimmed? or moved towards something else)
+		//ADDTHIS
 		'addthis': '//s7.addthis.com/js/300/addthis_widget.js#' + dreamItAppConfig.apiKeys.addThis
 	},
 	shim: {

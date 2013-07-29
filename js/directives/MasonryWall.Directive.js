@@ -1,4 +1,4 @@
-define(['angular', 'masonry', 'imagesLoaded'], function(angular, Masonry, imagesLoaded){
+define(['angular', 'masonry', 'imagesLoaded', 'lodash'], function(angular, Masonry, imagesLoaded, _){
 
 	'use strict';
 
@@ -35,13 +35,41 @@ define(['angular', 'masonry', 'imagesLoaded'], function(angular, Masonry, images
 							//bind to window resize
 							masonry.bindResize();
 
-							//also needs to recall layout() everytime new elements come in
+							//also needs to recall layout() everytime new elements come in or when elements change
 							//from infinite scroll!
-							scope.$watch(scope.appIdeas, function(){
-								masonry.layout();
-							});
+							scope.$watch(
+								'appIdeas', 
+								function(newValue, oldValue){
 
-							console.log(scope);
+									console.dir(newValue);
+									console.dir(oldValue);
+
+									var difference = _.difference(newValue, oldValue);
+
+									console.dir(difference);
+
+									//find the difference between newValue and oldValue
+									//get the differentiated's element's id
+									//use the ids, and find the DOM elements that correspond with those ids
+									//appended those elements to Masonry
+									//PROBLEMS: the id may not yet be intepolated on the DOM
+
+									// console.log(element.children('.item_panel').last()[0]);
+									imagesLoaded(element, function(){
+										masonry.reloadItems();
+										masonry.layout();
+									});
+									// masonry.appended(element.children('.item_panel').last()[0]);
+								}, 
+								true
+							);
+
+							// var lol = $timeout(function myFunction() {
+							// 	console.log('Muahaha');
+							// 	masonry.reloadItems();
+							// 	masonry.layout();
+							// 	lol = $timeout(myFunction, 4000);
+							// },4000);
 
 						}, 0);
 
