@@ -5461,16 +5461,19 @@ a.badge:focus {
 .x-ng-cloak {
   display: none;
 }
-a {
-  cursor: pointer;
-}
+/*
+	CONTAINERS AND RANDOM
+ */
 body {
   font-family: arial, sans-serif;
   font-size: 14px;
   background: #fafaf7;
 }
+a {
+  cursor: pointer;
+}
 .container {
-  padding: 0 1.2% 0;
+  padding: 0 1.2%;
 }
 /*
 	HEADINGS
@@ -5558,6 +5561,7 @@ header.navbar .nav li a {
   background: #f7f2f2;
 }
 .main .wall .item_panel {
+  background: #f7f2f2;
   width: 239px;
   border-left: 1px solid #b8e0d8;
   border-bottom: 1px solid #b8e0d8;
@@ -6855,7 +6859,10 @@ body {
 /*
 	Responsive Wall Widths. Smallest to largest. The min-widths overwrite each other.
  */
-@media (min-width: 720px) {
+@media (max-width: 755px) {
+  
+}
+@media (min-width: 755px) {
   .main .wall_container {
     width: 720px;
   }
@@ -6863,7 +6870,7 @@ body {
     width: 480px;
   }
 }
-@media (min-width: 960px) {
+@media (min-width: 995px) {
   .main .wall_container {
     width: 960px;
   }
@@ -6871,11 +6878,19 @@ body {
     width: 720px;
   }
 }
-@media (min-width: 1200px) {
+@media (min-width: 1235px) {
   .main .wall_container {
     width: 1200px;
   }
   .main .wall_container .wall {
     width: 960px;
+  }
+}
+@media (min-width: 1475px) {
+  .main .wall_container {
+    width: 1440px;
+  }
+  .main .wall_container .wall {
+    width: 1200px;
   }
 }

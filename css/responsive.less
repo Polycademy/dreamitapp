@@ -44,7 +44,13 @@ body{
 /*
 	Responsive Wall Widths. Smallest to largest. The min-widths overwrite each other.
  */
-@media(min-width: @3_wall_cols){
+@media(max-width: (@3_wall_cols + @scrollbar)){
+
+	//below 3 columns, we need to change the menu
+
+}
+
+@media(min-width: (@3_wall_cols + @scrollbar)){
 
 	.main{
 		.wall_container{
@@ -57,7 +63,7 @@ body{
 
 }
 
-@media(min-width: @4_wall_cols){
+@media(min-width: (@4_wall_cols + @scrollbar)){
 
 	.main{
 		.wall_container{
@@ -70,13 +76,26 @@ body{
 
 }
 
-@media(min-width: @5_wall_cols){
+@media(min-width: (@5_wall_cols + @scrollbar)){
 
 	.main{
 		.wall_container{
 			width: @5_wall_cols;
 			.wall{
 				width: (@5_wall_cols - @panel_width);
+			}
+		}
+	}
+
+}
+
+@media(min-width: (@6_wall_cols + @scrollbar)){
+
+	.main{
+		.wall_container{
+			width: @6_wall_cols;
+			.wall{
+				width: (@6_wall_cols - @panel_width);
 			}
 		}
 	}

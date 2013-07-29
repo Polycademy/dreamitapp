@@ -13,8 +13,10 @@ define(['angular', 'masonry', 'imagesLoaded'], function(angular, Masonry, images
 					scope: true,
 					link: function(scope, element, attributes){
 						
-						//ng-repeat runs too slow, we need to wait for it too finish
-						//it will also apply() afterwards
+						//ng-repeat runs too slow (it runs after the masonry)
+						//we need to wait for ng-repeat too finish, then apply masonry (by putting at the end of the exe loop)
+						//another method is to put this on the ng-repeat at a lower priority, then running this once
+						//via a class designation (see: http://jsfiddle.net/Dz5uT/14/)
 						$timeout(function(){
 
 							//masonry requires the raw element
@@ -35,6 +37,11 @@ define(['angular', 'masonry', 'imagesLoaded'], function(angular, Masonry, images
 
 							//also needs to recall layout() everytime new elements come in
 							//from infinite scroll!
+							scope.$watch(scope.appIdeas, function(){
+								masonry.layout();
+							});
+
+							console.log(scope);
 
 						}, 0);
 

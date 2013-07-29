@@ -1,3 +1,6 @@
+//Scrollbar Media Query Compensation
+@scrollbar: 35px;
+
 //Containers
 @container_padding: 1.2%;
 
@@ -7,9 +10,11 @@
 //Control Panel's width when it's reduced to simply icons
 @control_panel_icon_width: 40px;
 
-@5_wall_cols: (5 * @panel_width);
-@4_wall_cols: (4 * @panel_width);
+//Wall
 @3_wall_cols: (3 * @panel_width);
+@4_wall_cols: (4 * @panel_width);
+@5_wall_cols: (5 * @panel_width);
+@6_wall_cols: (6 * @panel_width);
 //at 500 or below, our wall width changes, because only the icons are left in the control panel
 @smallest_wall_width: @panel_width + @control_panel_icon_width;
 

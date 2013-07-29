@@ -11,18 +11,21 @@
 	display: none;
 }
 
-a{
-	cursor: pointer;
-}
-
+/*
+	CONTAINERS AND RANDOM
+ */
 body{
 	font-family: arial, sans-serif;
 	font-size: 14px;
 	background: @colour_generic_white_bg;
 }
 
+a{
+	cursor: pointer;
+}
+
 .container{
-	padding: 0 @container_padding 0;
+	padding: 0 @container_padding;
 }
 
 /*
@@ -111,6 +114,7 @@ header.navbar{
 	.wall{
 		background: @colour_bright_clouds;
 		.item_panel{
+			background: @colour_bright_clouds;
 			width: (@panel_width - 1); //minus 1 for the border
 			border-left: 1px solid @colour_green_highlight;
 			border-bottom: 1px solid @colour_green_highlight;
