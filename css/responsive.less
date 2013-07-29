@@ -8,7 +8,7 @@ body{
 /*
 	At 600px the header's logo and links should center and stack.
  */
-@media (max-width: 600px) {
+@media(max-width: 600px){
 	
 	header.navbar{
 		.logo{
@@ -33,10 +33,96 @@ body{
 
 }
 
-@media (max-width: 320px) {
+@media(max-width: 320px){
 
 	header.navbar .nav{
 		font-size: 22px;
+	}
+
+}
+
+/*
+	Responsive Wall Widths
+ */
+@media(max-width: 1440px) and (min-width: 1440px){
+
+	//1440px will be the highest we go, beyond 1440px, it will remain at 5 columns
+	.main{
+		.wall_container{
+			width: (@1440_wall_cols * @panel_width);
+			.wall{
+				width: ((@1440_wall_cols - 1) * @panel_width)
+			}
+		}
+	}
+
+}
+
+@media(max-width: 1280px){
+
+	.main{
+		.wall_container{
+			width: (@1280_wall_cols * @panel_width);
+			.wall{
+				width: ((@1280_wall_cols - 1) * @panel_width)
+			}
+		}
+	}
+
+}
+
+@media(max-width: 1024px){
+
+	.main{
+		.wall_container{
+			width: (@1024_wall_cols * @panel_width);
+			.wall{
+				width: ((@1024_wall_cols - 1) * @panel_width)
+			}
+		}
+	}
+
+}
+
+@media(max-width: 800px){
+
+	.main{
+		.wall_container{
+			width: (@800_wall_cols * @panel_width);
+			.wall{
+				width: ((@800_wall_cols - 1) * @panel_width)
+			}
+		}
+	}
+
+}
+
+@media(max-width: 640px){
+
+	.main{
+		.wall_container{
+			width: (@640_wall_cols * @panel_width);
+			.wall{
+				width: ((@640_wall_cols - 1) * @panel_width)
+			}
+		}
+	}
+
+}
+
+@media(max-width: 500px){
+
+	.main{
+		.wall_container{
+			width: @smallest_wall_width;
+			.wall{
+				width: @panel_width;
+			}
+			.control_panel{
+				width: @control_panel_icon_width;
+				//also the text needs to have display: none; DO IT LATER
+			}
+		}
 	}
 
 }

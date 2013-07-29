@@ -5534,12 +5534,25 @@ header.navbar .nav li a {
   background: linear-gradient(to right, #fafaf7 0%, #fafaf7 50%, #2c3e50 51%, #2c3e50 100%);
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fafaf7', endColorstr='#2c3e50', GradientType=1);
 }
-.main .wallideas_wrapper {
-  margin-left: 0;
+.main .wall_container {
+  margin: 0 auto;
 }
-.main .wallideas_wrapper .wall,
-.main .wallideas_wrapper .control_panel {
-  margin-left: 0;
+.main .wall_container:before,
+.main .wall_container:after {
+  content: "";
+  display: table;
+  line-height: 0;
+}
+.main .wall_container:after {
+  clear: both;
+}
+.main .wall_container .wall,
+.main .wall_container .control_panel {
+  float: left;
+  min-height: 1px;
+}
+.main .wall_container .control_panel {
+  width: 240px;
 }
 .main .wall {
   background: #f7f2f2;
@@ -5567,7 +5580,7 @@ header.navbar .nav li a {
   top: 0;
   bottom: 0;
   z-index: 100;
-  width: 239px;
+  width: 100%;
   height: auto;
   -moz-transition-duration: 1s;
   -webkit-transition-duration: 1s;
@@ -6837,5 +6850,59 @@ body {
 @media (max-width: 320px) {
   header.navbar .nav {
     font-size: 22px;
+  }
+}
+/*
+	Responsive Wall Widths
+ */
+@media (max-width: 1440px) and (min-width: 1440px) {
+  .main .wall_container {
+    width: 1200px;
+  }
+  .main .wall_container .wall {
+    width: 960px;
+  }
+}
+@media (max-width: 1280px) {
+  .main .wall_container {
+    width: 960px;
+  }
+  .main .wall_container .wall {
+    width: 720px;
+  }
+}
+@media (max-width: 1024px) {
+  .main .wall_container {
+    width: 960px;
+  }
+  .main .wall_container .wall {
+    width: 720px;
+  }
+}
+@media (max-width: 800px) {
+  .main .wall_container {
+    width: 720px;
+  }
+  .main .wall_container .wall {
+    width: 480px;
+  }
+}
+@media (max-width: 640px) {
+  .main .wall_container {
+    width: 480px;
+  }
+  .main .wall_container .wall {
+    width: 240px;
+  }
+}
+@media (max-width: 500px) {
+  .main .wall_container {
+    width: 240px + 40px;
+  }
+  .main .wall_container .wall {
+    width: 240px;
+  }
+  .main .wall_container .control_panel {
+    width: 40px;
   }
 }
