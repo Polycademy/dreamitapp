@@ -42,87 +42,62 @@ body{
 }
 
 /*
-	Responsive Wall Widths
+	Responsive Wall Widths. Smallest to largest. The min-widths overwrite each other.
  */
-@media(max-width: 1440px) and (min-width: 1440px){
+@media(min-width: @3_wall_cols){
 
-	//1440px will be the highest we go, beyond 1440px, it will remain at 5 columns
 	.main{
 		.wall_container{
-			width: (@1440_wall_cols * @panel_width);
+			width: @3_wall_cols;
 			.wall{
-				width: ((@1440_wall_cols - 1) * @panel_width)
+				width: (@3_wall_cols - @panel_width);
 			}
 		}
 	}
 
 }
 
-@media(max-width: 1280px){
+@media(min-width: @4_wall_cols){
 
 	.main{
 		.wall_container{
-			width: (@1280_wall_cols * @panel_width);
+			width: @4_wall_cols;
 			.wall{
-				width: ((@1280_wall_cols - 1) * @panel_width)
+				width: (@4_wall_cols - @panel_width);
 			}
 		}
 	}
 
 }
 
-@media(max-width: 1024px){
+@media(min-width: @5_wall_cols){
 
 	.main{
 		.wall_container{
-			width: (@1024_wall_cols * @panel_width);
+			width: @5_wall_cols;
 			.wall{
-				width: ((@1024_wall_cols - 1) * @panel_width)
+				width: (@5_wall_cols - @panel_width);
 			}
 		}
 	}
 
 }
 
-@media(max-width: 800px){
 
-	.main{
-		.wall_container{
-			width: (@800_wall_cols * @panel_width);
-			.wall{
-				width: ((@800_wall_cols - 1) * @panel_width)
-			}
-		}
-	}
 
-}
+// @media(max-width: 500px){
 
-@media(max-width: 640px){
+// 	.main{
+// 		.wall_container{
+// 			width: @smallest_wall_width;
+// 			.wall{
+// 				width: @panel_width;
+// 			}
+// 			.control_panel{
+// 				width: @control_panel_icon_width;
+// 				//also the text needs to have display: none; DO IT LATER
+// 			}
+// 		}
+// 	}
 
-	.main{
-		.wall_container{
-			width: (@640_wall_cols * @panel_width);
-			.wall{
-				width: ((@640_wall_cols - 1) * @panel_width)
-			}
-		}
-	}
-
-}
-
-@media(max-width: 500px){
-
-	.main{
-		.wall_container{
-			width: @smallest_wall_width;
-			.wall{
-				width: @panel_width;
-			}
-			.control_panel{
-				width: @control_panel_icon_width;
-				//also the text needs to have display: none; DO IT LATER
-			}
-		}
-	}
-
-}
+// }

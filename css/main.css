@@ -6853,56 +6853,29 @@ body {
   }
 }
 /*
-	Responsive Wall Widths
+	Responsive Wall Widths. Smallest to largest. The min-widths overwrite each other.
  */
-@media (max-width: 1440px) and (min-width: 1440px) {
+@media (min-width: 720px) {
+  .main .wall_container {
+    width: 720px;
+  }
+  .main .wall_container .wall {
+    width: 480px;
+  }
+}
+@media (min-width: 960px) {
+  .main .wall_container {
+    width: 960px;
+  }
+  .main .wall_container .wall {
+    width: 720px;
+  }
+}
+@media (min-width: 1200px) {
   .main .wall_container {
     width: 1200px;
   }
   .main .wall_container .wall {
     width: 960px;
-  }
-}
-@media (max-width: 1280px) {
-  .main .wall_container {
-    width: 960px;
-  }
-  .main .wall_container .wall {
-    width: 720px;
-  }
-}
-@media (max-width: 1024px) {
-  .main .wall_container {
-    width: 960px;
-  }
-  .main .wall_container .wall {
-    width: 720px;
-  }
-}
-@media (max-width: 800px) {
-  .main .wall_container {
-    width: 720px;
-  }
-  .main .wall_container .wall {
-    width: 480px;
-  }
-}
-@media (max-width: 640px) {
-  .main .wall_container {
-    width: 480px;
-  }
-  .main .wall_container .wall {
-    width: 240px;
-  }
-}
-@media (max-width: 500px) {
-  .main .wall_container {
-    width: 240px + 40px;
-  }
-  .main .wall_container .wall {
-    width: 240px;
-  }
-  .main .wall_container .control_panel {
-    width: 40px;
   }
 }
