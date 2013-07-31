@@ -17,7 +17,7 @@ define(['angular', 'lodash'], function(angular, _){
 				/**
 				 * Compares and returns the difference between arrays based on their values.
 				 * It will subtract the duplicate values from subsequent arrays from the first array.
-				 * It operates similarly to array_diff in PHP, but works for arrays of objects
+				 * It operates similarly to array_diff in PHP, but works for arrays of objects.
 				 * An optional compare function callback is allowed, make sure to prebind a context if required.
 				 * This only works on the first dimension, not multidimensional arrays.
 				 * @param  function compare Optional compare callback called with func(a, b), where "a" 
@@ -47,7 +47,7 @@ define(['angular', 'lodash'], function(angular, _){
 
 						//reverse iteration to prevent splicing from affecting the iterative index
 						var j = firstArray.length;
-						while(j--){ //for(var j = 0; j < firstArray.length; j++){
+						while(j--){
 
 							var primaryValue = firstArray[j];
 
