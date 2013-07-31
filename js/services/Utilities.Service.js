@@ -38,7 +38,8 @@ define(['angular', 'lodash'], function(angular, _){
 					}
 
 					//we're subtracting the other values off the first array, this array will therefore be modified
-					var firstArray = arrays.shift();
+					//also we're cloning it to prevent affecting a potential pass by reference
+					var firstArray = _.cloneDeep(arrays.shift());
 
 					//i is the iteration of arrays
 					//j is the iteration of the firstArray

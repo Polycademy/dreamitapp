@@ -8,7 +8,8 @@ define(['angular', 'masonry', 'imagesLoaded', 'lodash'], function(angular, Mason
 	angular.module('Directives')
 		.directive('masonryWallDir', [
 			'$timeout',
-			function($timeout){
+			'UtilitiesServ',
+			function($timeout, UtilitiesServ){
 				return {
 					scope: true,
 					link: function(scope, element, attributes){
@@ -35,18 +36,32 @@ define(['angular', 'masonry', 'imagesLoaded', 'lodash'], function(angular, Mason
 							//bind to window resize
 							masonry.bindResize();
 
-							//also needs to recall layout() everytime new elements come in or when elements change
-							//from infinite scroll!
 							scope.$watch(
 								'appIdeas', 
 								function(newValue, oldValue){
 
-									console.dir(newValue);
-									console.dir(oldValue);
+									//this is very important, we don't want to pass by reference
+									//there these objects are cloned and then passed in
+									//var newArray = angular.copy(newValue);
+									//var oldArray = angular.copy(oldValue);
 
-									//difference between newValue and oldValue based on their individual ids
-									//the internal may be different, we just want to know if there is newer item objects added
-									//and get those differences
+									console.log(newValue);
+									console.log(oldValue);
+
+									//difference between items based on their ids
+									//we just want to know if there is newer item objects added
+									var difference = UtilitiesServ.arrayDifference(function(a, b){
+
+										//a and b will be the actual objects values from the array to compare
+										if(a.id === b.id){
+											return true;
+										}else{
+											return false;
+										}
+
+									}, newValue, oldValue);
+
+									console.log(difference);
 
 									//find the difference between newValue and oldValue
 									//get the differentiated's element's id
@@ -55,10 +70,10 @@ define(['angular', 'masonry', 'imagesLoaded', 'lodash'], function(angular, Mason
 									//PROBLEMS: the id may not yet be intepolated on the DOM
 
 									// console.log(element.children('.item_panel').last()[0]);
-									imagesLoaded(element, function(){
-										masonry.reloadItems();
-										masonry.layout();
-									});
+									// imagesLoaded(element, function(){
+									// 	masonry.reloadItems();
+									// 	masonry.layout();
+									// });
 									// masonry.appended(element.children('.item_panel').last()[0]);
 								}, 
 								true
