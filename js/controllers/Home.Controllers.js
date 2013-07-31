@@ -13,8 +13,36 @@ define(['angular'], function(angular){
 				//which extracts from appideas model
 				//also take into account error responses, like no ideas found
 
-				//this is required by the add this to have the proper link becuase it does auto recognise the base tag
+				//this is required by the addthis plugin to have the proper link becuase it does auto recognise the base tag
 				$scope.baseUrl = angular.element('base')[0].href;
+
+				//this will increase the like amount on the item, and update the like click
+				$scope.likeAction = function(ideaId){
+					var userId = 'ANONYMOUS???';
+					//id will be the id of the item to be clicked
+					//and the current user will be filled on the userId
+					//only logged in users can "like"
+					//also prevent multiple likes (could be done on server side and client side, but server side first!)
+				};
+
+				//sets the tag as a query parameter ?tag=wacky+lol+crazy (actual pluses are )
+				$scope.tagAction = function(tag){
+					//tag needs to be uri encoded! (then decoded when used!)
+					$location.search({'tag': encodeURIComponent(tag)});
+				};
+
+				//boolean function for whether the app ideas has an image
+				$scope.ideaHasImage = function(index){
+
+					//it is possible that image may be "false"
+					if('image' in $scope.appIdeas[index]){
+						return $scope.appIdeas[index].image;
+					}else{
+						return false;
+					}
+
+				};
+				
 
 				$scope.appIdeas = [
 					{
@@ -108,56 +136,12 @@ define(['angular'], function(angular){
 					}
 				];
 
-				//this will increase the like amount on the item, and update the like click
-				$scope.likeAction = function(ideaId){
-					var userId = 'ANONYMOUS???';
-					//id will be the id of the item to be clicked
-					//and the current user will be filled on the userId
-					//only logged in users can "like"
-					//also prevent multiple likes (could be done on server side and client side, but server side first!)
-
-					//dummy function right now
-					$scope.appIdeas.push(
-						{
-							id: 6,
-							link: 'hacker_news_app1-idea',
-							title: 'Hacker News App',
-							image: 'img/2exampleimg.png',
-							description: '<p>An app to help read Hacker News on the mobile phone or ipad.</p>',
-							authorId: 1,
-							authorLink: 'roger_qiu1',
-							author: 'Roger Qiu',
-							feedback: 32,
-							likes: 40,
-							tags: [
-								'iphone',
-								'ipad',
-								'android',
-								'programming'
-							]
-						}
-					);
-
+				$scope.getImages = function(){
 
 				};
 
-				//sets the tag as a query parameter ?tag=wacky+lol+crazy (actual pluses are )
-				$scope.tagAction = function(tag){
-					//tag needs to be uri encoded! (then decoded when used!)
-					$location.search({'tag': encodeURIComponent(tag)});
-				};
-
-				//boolean function for whether the app ideas has an image
-				$scope.ideaHasImage = function(index){
-
-					//it is possible that image may be "false"
-					if('image' in $scope.appIdeas[index]){
-						return $scope.appIdeas[index].image;
-					}else{
-						return false;
-					}
-
-				};
+				//get the initial images
+				//$scope.getImages();
 
 			}
 		]);

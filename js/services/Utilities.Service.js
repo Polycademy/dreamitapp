@@ -15,6 +15,41 @@ define(['angular', 'lodash'], function(angular, _){
 				};
 
 				/**
+				 * Determines whether a variable is empty. Works just like PHP's empty!
+				 * @param  {mixed}   mixedVar
+				 * @param  {boolean} ownProperty Boolean for whether you want to check for own properties in objects
+				 * @return {boolean}
+				 */
+				this.empty = function(mixedVar, ownProperty){
+
+					ownProperty = (typeof ownProperty === 'undefined') ? false : ownProperty;
+
+					var undef, key, i, len;
+					var emptyValues = [undef, null, false, 0, "", "0"];
+					for(i = 0, len = emptyValues.length; i < len; i++){
+						if(mixedVar === emptyValues[i]){
+							return true;
+						}
+					}
+
+					if(typeof mixedVar === "object"){
+						for (key in mixedVar) {
+							if(ownProperty){
+								if(mixedVar.hasOwnProperty(key)){
+									return false;
+								}
+							}else{
+								return false;
+							}
+						}
+						return true;
+					}
+
+					return false;
+
+				};
+
+				/**
 				 * Compares and returns the difference between arrays based on their values.
 				 * It will subtract the duplicate values from subsequent arrays from the first array.
 				 * It operates similarly to array_diff in PHP, but works for arrays of objects.

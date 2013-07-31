@@ -4,6 +4,8 @@ define(['angular', 'masonry', 'imagesLoaded', 'lodash'], function(angular, Mason
 
 	/**
 	 * Masonry Directive for the Wall of items
+	 * 
+	 * @param string CSS selector of the ideas. For example: ideas_* where * will be replaced by the idea id.
 	 */
 	angular.module('Directives')
 		.directive('masonryWallDir', [
@@ -13,10 +15,16 @@ define(['angular', 'masonry', 'imagesLoaded', 'lodash'], function(angular, Mason
 				return {
 					scope: true,
 					link: function(scope, element, attributes){
+
+						//$timeout hacks are used for convenience
+						//later they can be replaced by directive controllers
+
+						//this will be used to find specific idea panels, the new appended ones to be positioned
+						var ideaSelector = attributes.masonryWallDir;
 						
 						//ng-repeat runs too slow (it runs after the masonry)
 						//we need to wait for ng-repeat too finish, then apply masonry (by putting at the end of the exe loop)
-						//another method is to put this on the ng-repeat at a lower priority, then running this once
+						//another method is to put this on the same element as the ng-repeat but at a lower priority, then running this once
 						//via a class designation (see: http://jsfiddle.net/Dz5uT/14/)
 						$timeout(function(){
 
@@ -40,51 +48,47 @@ define(['angular', 'masonry', 'imagesLoaded', 'lodash'], function(angular, Mason
 								'appIdeas', 
 								function(newValue, oldValue){
 
-									//this is very important, we don't want to pass by reference
-									//there these objects are cloned and then passed in
-									//var newArray = angular.copy(newValue);
-									//var oldArray = angular.copy(oldValue);
+									$timeout(function(){
 
-									console.log(newValue);
-									console.log(oldValue);
+										//find the difference between items based on their ids
+										//we just want to know if there is newer item objects added
+										var difference = UtilitiesServ.arrayDifference(function(a, b){
 
-									//difference between items based on their ids
-									//we just want to know if there is newer item objects added
-									var difference = UtilitiesServ.arrayDifference(function(a, b){
+											//a and b will be the actual objects values from the array to compare
+											if(a.id === b.id){
+												return true;
+											}else{
+												return false;
+											}
 
-										//a and b will be the actual objects values from the array to compare
-										if(a.id === b.id){
-											return true;
-										}else{
-											return false;
+										}, newValue, oldValue);
+
+										if(!UtilitiesServ.empty(difference)){
+
+											var newElements = [];
+
+											for(var i = 0; i < difference.length; i++){
+
+												//get the differentiated's element's id
+												var ideaClassToLookFor = ideaSelector.replace(/\*/, difference[i].id);
+
+												//find the DOM elements that correspond with those ids and add them to the list
+												newElements.push(angular.element(ideaClassToLookFor)[0]);
+
+											}
+
+											//appended those elements to Masonry
+											imagesLoaded(newElements, function(){
+												masonry.appended(newElements);
+											});
+
 										}
 
-									}, newValue, oldValue);
+									}, 0);
 
-									console.log(difference);
-
-									//find the difference between newValue and oldValue
-									//get the differentiated's element's id
-									//use the ids, and find the DOM elements that correspond with those ids
-									//appended those elements to Masonry
-									//PROBLEMS: the id may not yet be intepolated on the DOM
-
-									// console.log(element.children('.item_panel').last()[0]);
-									// imagesLoaded(element, function(){
-									// 	masonry.reloadItems();
-									// 	masonry.layout();
-									// });
-									// masonry.appended(element.children('.item_panel').last()[0]);
 								}, 
 								true
 							);
-
-							// var lol = $timeout(function myFunction() {
-							// 	console.log('Muahaha');
-							// 	masonry.reloadItems();
-							// 	masonry.layout();
-							// 	lol = $timeout(myFunction, 4000);
-							// },4000);
 
 						}, 0);
 
