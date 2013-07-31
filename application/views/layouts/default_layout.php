@@ -61,9 +61,9 @@
 		<!-- Pass in PHP variables to Javascript -->
 		<script>
 			var serverVars = {
-				baseUrl: '<?= base_url() ?>',
-				csrfCookieName: '<?= $this->config->item('cookie_prefix') . $this->config->item('csrf_cookie_name') ?>',
-				sessCookieName: '<?= $this->config->item('cookie_prefix') . $this->config->item('sess_cookie_name') ?>'
+				baseUrl: "<?= base_url() ?>",
+				csrfCookieName: "<?= $this->config->item('cookie_prefix') . $this->config->item('csrf_cookie_name') ?>",
+				sessCookieName: "<?= $this->config->item('cookie_prefix') . $this->config->item('sess_cookie_name') ?>"
 			};
 		</script>
 

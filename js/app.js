@@ -66,6 +66,7 @@ define([
 				//FILTERS
 				'filters/StripHtml.Filter',
 				//SERVICES
+				'services/Utilities.Service',
 				'services/Accounts.Service',
 				'services/Sessions.Service',
 				'services/Users.Service',

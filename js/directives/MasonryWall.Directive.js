@@ -44,9 +44,9 @@ define(['angular', 'masonry', 'imagesLoaded', 'lodash'], function(angular, Mason
 									console.dir(newValue);
 									console.dir(oldValue);
 
-									var difference = _.difference(newValue, oldValue);
-
-									console.dir(difference);
+									//difference between newValue and oldValue based on their individual ids
+									//the internal may be different, we just want to know if there is newer item objects added
+									//and get those differences
 
 									//find the difference between newValue and oldValue
 									//get the differentiated's element's id
