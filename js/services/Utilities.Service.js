@@ -14,6 +14,10 @@ define(['angular', 'lodash'], function(angular, _){
 					return Object.prototype.toString.call(value).slice(8, -1);
 				};
 
+				this.isInteger = function(mixedVar){
+					return (typeof(mixedVar) === 'number' || typeof(mixedVar) === 'string') && mixedVar !== '' && !isNaN(mixedVar);
+				};
+
 				/**
 				 * Determines whether a variable is empty. Works just like PHP's empty!
 				 * @param  {mixed}   mixedVar
