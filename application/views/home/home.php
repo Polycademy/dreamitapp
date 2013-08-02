@@ -2,7 +2,7 @@
 	<!-- This splits the background in half -->
 	<div class="background_splitter">
 		<!-- This centers the content, and responsively adjusts the width. It also provides a row functionality. -->
-		<div class="wall_container">
+		<div class="wall_container" ng-click="tagAction('blah')">
 			<div class="wall" masonry-wall-dir=".idea_*">
 				<div class="item_panel idea_{{idea.id}}" ng-repeat="idea in appIdeas">
 					<h3 class="item_header"><a ng-href="{{idea.link}}">{{idea.title}}</a></h3>

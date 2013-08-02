@@ -70,6 +70,7 @@ define([
 				'services/Accounts.Service',
 				'services/Sessions.Service',
 				'services/Users.Service',
+				'services/Ideas.Service'
 			], function(){
 
 				/* ==========================================================================
@@ -99,7 +100,7 @@ define([
 								.state(
 									'home',
 									{
-										url: '/',
+										url: '/?limit&tags',
 										templateUrl: 'home.html',
 										controller: 'HomeCtrl'
 									}
