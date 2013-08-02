@@ -21,20 +21,25 @@ class Ideas_model extends CI_Model{
 
 	}
 
-	public function read_all($limit = false, $offset = false){
+	public function read_all($limit = false, $offset = false, $tags = false){
 
 		$limit = ($limit) ? $limit : 20;
 		
-		$this->db->select('*');
+		$this->db->select('i.*');
+		$this->db->from('ideas AS i');
+		if(is_array($tags)){
+			$this->db->join('tags AS t', 'i.id = t.ideaId');
+			$this->db->or_where_in('t.tag', $tags);
+		}
 		$this->db->limit($limit, $offset);
-		$query = $this->db->get('ideas');
+		$query = $this->db->get();
 
 		if($query->num_rows() > 0){
 		
 			foreach($query->result() as $row){
 
+				$idea_id = $row->id;
 				$author_id = $row->authorId;
-				$feedback_id = $row->feedbackId;
 
 				//get author information (currently hardcoded)
 				$author = 'Roger Qiu';
@@ -42,7 +47,15 @@ class Ideas_model extends CI_Model{
 				
 				//get number of feedback (currently hardcoded)
 				$feedback = 32;
-			
+
+				//get an array of tags (currently hardcoded)
+				$tags = array(
+					'iphone',
+					'ipad',
+					'android',
+					'programming',
+				);
+
 				$data[] = array(
 					'id'			=> $row->id,
 					'title'			=> $row->title,
@@ -54,7 +67,7 @@ class Ideas_model extends CI_Model{
 					'author'		=> $author;
 					'likes'			=> $row->likes,
 					'feedback'		=> $feedback;
-					'tags'			=> $row->tags,
+					'tags'			=> $tags,
 				);
 			
 			}

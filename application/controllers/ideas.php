@@ -20,8 +20,16 @@ class Ideas extends CI_Controller{
 		
 		$limit = $this->input->get('limit', true);
 		$offset = $this->input->get('offset', true);
+		$tags = $this->input->get('tags', true);
+
+		//tags are already decoded from $_GET, the + gets turned into spaces
+		if(!empty($tags)){
+			$tags = explode(' ', $tags);
+		}else{
+			$tags = false;
+		}
 		
-		$query = $this->Ideas_model->read_all($limit, $offset);
+		$query = $this->Ideas_model->read_all($limit, $offset, $tags);
 		
 		if($query){
 			

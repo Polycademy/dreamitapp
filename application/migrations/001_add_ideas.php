@@ -24,14 +24,8 @@ class Migration_add_ideas extends CI_Migration {
 			'authorId' => array(	//linked to user accounts table
 				'type'			=> 'INT',
 			),
-			'feedbackId' => array(	//this is linked to a feedback table
-				'type'			=> 'INT',
-			),
 			'likes'	=> array(
 				'type'			=> 'INT',
-			),
-			'tags'	=> array(
-				'type'			=> 'TEXT',
 			),
 		));
 		

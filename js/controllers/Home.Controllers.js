@@ -1,4 +1,4 @@
-define(['angular'], function(angular){
+define(['angular', 'lodash'], function(angular, _){
 
 	'use strict';
 
@@ -9,6 +9,9 @@ define(['angular'], function(angular){
 			'UtilitiesServ',
 			'IdeasServ',
 			function($scope, $location, UtilitiesServ, IdeasServ){
+
+				//this might change depending on browser size
+				var defaultLimit = 20;
 
 				/**
 				 * This is the array of app ideas to be repeated across the wall.
@@ -69,38 +72,60 @@ define(['angular'], function(angular){
 
 				};
 
-				//Detect Query Parameters for tags
-				//$routeChangeStart
+				var limit = $scope.$stateParams.limit;
+				var tags = $scope.$stateParams.tags;
+
+				var setupLimit = function(limit){
+
+					if(!UtilitiesServ.empty(limit) && UtilitiesServ.isInteger(limit)){
+
+						//limit is now absolute valued and parsed as an integer
+						limit = Math.abs(_.parseInt(limit));
+
+					}else{
+
+						limit = defaultLimit;
+
+					}
+
+					return limit;
+
+				};
+
+				var executeTagsSearch = function(limit, tags){
+
+					if(!UtilitiesServ.empty(tags)){
+
+						//if we have tags, we need to wipe the appIdeas and reload it
+						$scope.appIdeas = [];
+
+						//if tags exist, we should load new ideas
+						//the tags will be passed to the service as the same string
+						$scope.getIdeas(limit, tags);
+
+					}
+
+				};
+
+				limit = setupLimit(limit);
+				executeTagSearch(limit, tags);
+
+				//Detect query parameters for tags and limit changes
+				//Could use $routeChangeStart
 				//or use function(){return $location.search()}?? or deep watch?
 				$scope.$on('$locationChangeStart', function(event, newLocation, oldLocation){
 
-					var tags = $scope.$stateParams.tags;
-					var limit = $scope.$stateParams.limit;
+					//get the potentially new ones
+					limit = $scope.$stateParams.limit;
+					tags = $scope.$stateParams.tags;
 
-					if(tags){
+					//if limit is the only thing that has changed, then the page doesn't reload
+					//it will just use that limit the next time we're scrolling
+					limit = setupLimit(limit);
 
-						tags = decodeUriComponent(tags);
-
-						//tags is decoded
-
-					}
-
-					if(limit && UtilitiesServ.isInteger(limit)){
-
-						limit = abs(parseInt(limit));
-
-						//limit is now absolute valued and parsed as an integer
-
-					}
+					executeTagSearch(limit, tags);
 
 				});
-
-				//we also need to execute this on startup, since the first page load there's no change of $locationChangeStart
-				if($scope.$stateParams.tags){
-
-				}
-
-				//Detect Query Parameters for limit
 
 
 				
