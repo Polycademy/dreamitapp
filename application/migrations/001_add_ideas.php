@@ -1,0 +1,47 @@
+<?php defined('BASEPATH') OR exit('No direct script access allowed');
+
+class Migration_add_ideas extends CI_Migration {
+
+	public function up(){
+	
+		$this->dbforge->add_field('id');
+		
+		$this->dbforge->add_field(array(
+			'title' => array(
+				'type' 			=> 'VARCHAR',
+				'constraint'	=> 50,
+			),
+			'link' => array(
+				'type'			=> 'VARCHAR',
+				'constraint'	=> 80,
+			),
+			'image' => array(
+				'type'			=> 'TEXT',
+			),
+			'description' => array(
+				'type'			=> 'TEXT',
+			),
+			'authorId' => array(	//linked to user accounts table
+				'type'			=> 'INT',
+			),
+			'feedbackId' => array(	//this is linked to a feedback table
+				'type'			=> 'INT',
+			),
+			'likes'	=> array(
+				'type'			=> 'INT',
+			),
+			'tags'	=> array(
+				'type'			=> 'TEXT',
+			),
+		));
+		
+		$this->dbforge->create_table('ideas');
+
+	}
+
+	public function down(){
+	
+		$this->dbforge->drop_table('ideas');
+	
+	}
+}

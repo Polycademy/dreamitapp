@@ -13,8 +13,8 @@ Pigeon::map(function($r){
 		$r->get('migrate/restart',  'migrate/restart');
 		$r->get('migrate/restart/(:num)',  'migrate/restart/$1');
 		
-		//generic CRUD demonstration
-		$r->resources('courses');
+		//services
+		$r->resources('ideas');
 		
 		//for user accounts
 		$r->resources('accounts');
@@ -34,6 +34,3 @@ $route = Pigeon::draw();
 $route['default_controller'] = 'home';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
-
-/* End of file routes.php */
-/* Location: ./application/config/routes.php */
