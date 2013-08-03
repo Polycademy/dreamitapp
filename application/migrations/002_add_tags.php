@@ -11,7 +11,7 @@ class Migration_add_tags extends CI_Migration {
 				'type' 			=> 'INT',
 			),
 			'tag' => array(
-				'type'			=> 'VARCHAR'
+				'type'			=> 'VARCHAR',
 				'constraint'	=> 60
 			),
 		));

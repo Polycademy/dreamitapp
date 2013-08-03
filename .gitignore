@@ -15,6 +15,7 @@ build/*
 .c9revisions/*
 .secrets/*
 !.secrets/*.example
+!.secrets/Secrets.php
 
 #################
 ## Eclipse
