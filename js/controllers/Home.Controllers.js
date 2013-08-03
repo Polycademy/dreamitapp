@@ -10,8 +10,21 @@ define(['angular', 'lodash'], function(angular, _){
 			'IdeasServ',
 			function($scope, $location, UtilitiesServ, IdeasServ){
 
-				//this might change depending on browser size
+				/**
+				 * The default limit of app ideas to load on each scroll iteration
+				 * and initial load. This may have to be changed in the future
+				 * depending on browser screen width so to accomodate mobile
+				 * screens and their connections
+				 * @type {integer}
+				 */
 				var defaultLimit = 20;
+
+				/**
+				 * This counter offsets the items to be queried on each iteration of getIdeas
+				 * If you reload based on new search criteria or tags, this needs to be reset to 0.
+				 * @type {Integer}
+				 */
+				var counterOffset = 0;
 
 				/**
 				 * This is the array of app ideas to be repeated across the wall.
@@ -20,18 +33,112 @@ define(['angular', 'lodash'], function(angular, _){
 				$scope.appIdeas = [];
 
 				/**
+				 * This is to throttle the retrieving of idea items due to infinite scroll pagination.
+				 * When set to true, the infinite scroll will stop activating the getIdeas.
+				 * It will only be reset to false, once a response comes back from the resource query.
+				 * @type {Boolean}
+				 */
+				$scope.ideasServiceBusy = false;
+
+				/**
 				 * Addthis plugin uses this to create links since it can't recognise the base tag.
-				 * @type {string}
+				 * @type {String}
 				 */
 				$scope.baseUrl = angular.element('base')[0].href;
+
+				/**
+				 * This grabs app idea items from the service. It accepts a limit
+				 * and tags parameter to filter the results. This will be passed
+				 * to ng-repeat. It will maintain the counter offset.
+				 * @param  {Integer} limit
+				 * @param  {String} tags
+				 * @return {Array}
+				 */
+				$scope.getIdeas = function(limit, tags){
+
+					if($scope.ideasServiceBusy){
+						return;
+					}
+
+					$scope.ideasServiceBusy = true;
+
+					var queryParameters = {
+						"limit": limit
+						"offset": counterOffset;
+					};
+
+					if(tags){
+						queryParameters.tags = tags;
+					}
+
+					IdeasServ.query(
+						queryParameters,
+						function(response){
+
+							console.log(response);
+
+							//on a successful request, we're going to increase the counterOffset
+							counterOffset = counterOffset + limit;
+							$scope.ideasServiceBusy = false;
+
+						},
+						function(response){
+
+							console.log(response);
+
+							//fail response, try again
+							//soft fail, there's nothing to do here (no need to fail hard)
+							//could inform user to scroll up and then down
+							//OR if this is the one thatr runs when there is no more results to be retrieved, then we need
+							//to represent that (perhaps we do need the little popup?)
+							
+							$scope.ideasServiceBusy = false;
+
+						}
+					);
+
+					// $scope.appIdeas.push({
+					// 	id: i,
+					// 	title: 'Hacker News App',
+					// 	link: 'hacker_news_app1-idea',
+					// 	image: 'img/2exampleimg.png', //'img/example_item_image.png',,
+					// 	description: '<p>An app to help read Hacker News on the mobile phone or ipad.</p>',
+					// 	authorId: 1,
+					// 	authorLink: 'roger_qiu1',
+					// 	author: 'Roger Qiu',
+					// 	feedback: 32,
+					// 	likes: 40,
+					// 	tags: [
+					// 		'iphone',
+					// 		'ipad',
+					// 		'android',
+					// 		'programming'
+					// 	]
+					// });
+
+
+
+				};
+
+				/**
+				 * Appends idea items to the appIdeas array. This is used by the infinite scroll directive.
+				 * @param  {Integer} limit
+				 * @param  {String} tags 
+				 * @return {Void}
+				 */
+				$scope.paginateIdeas = function(limit, tags){
+
+					$scope.appIdeas.concat($scope.getIdeas(limit, tags));
+
+				};
 
 				/**
 				 * Increase the amount of likes of an item by one.
 				 * A user is only allowed to like it once.
 				 * If this is executed again on the same item, the original like will be deducted.
 				 * It requires a user to be logged in before this will work.
-				 * @param  {integer} ideaId Id of the idea item
-				 * @return {void}
+				 * @param  {Integer} ideaId Id of the idea item
+				 * @return {Void}
 				 */
 				$scope.likeAction = function(ideaId){
 
@@ -42,8 +149,8 @@ define(['angular', 'lodash'], function(angular, _){
 				 * on the url, and then reload the items based on these tag parameters.
 				 * This function should be called when any query parameters are detected.
 				 * This only allows on tag to be used.
-				 * @param  {string} tag Name of the tag
-				 * @return {void}
+				 * @param  {String} tag Name of the tag
+				 * @return {Void}
 				 */
 				$scope.tagAction = function(tag){
 
@@ -58,8 +165,8 @@ define(['angular', 'lodash'], function(angular, _){
 				/**
 				 * Determine if an idea has an image or not. This is used for ng-show so that the HTML
 				 * that contains the images will not be displayed if there is no image for an item.
-				 * @param  {integer} index Ng-repeat's index of the item.
-				 * @return {boolean}
+				 * @param  {Integer} index Ng-repeat's index of the item.
+				 * @return {Boolean}
 				 */
 				$scope.ideaHasImage = function(index){
 
@@ -72,14 +179,18 @@ define(['angular', 'lodash'], function(angular, _){
 
 				};
 
-				var limit = $scope.$stateParams.limit;
-				var tags = $scope.$stateParams.tags;
+				/**
+				 * This gets the limit query parameter and validates it.
+				 * It then either sets the new limit, or defaults to the default limit.
+				 * @return {Integer}
+				 */
+				var setupLimit = function(){
 
-				var setupLimit = function(limit){
+					var limit = $scope.$stateParams.limit;
 
 					if(!UtilitiesServ.empty(limit) && UtilitiesServ.isInteger(limit)){
 
-						//limit is now absolute valued and parsed as an integer
+						//limit is absolute valued and parsed as an integer
 						limit = Math.abs(_.parseInt(limit));
 
 					}else{
@@ -92,100 +203,55 @@ define(['angular', 'lodash'], function(angular, _){
 
 				};
 
-				var executeTagsSearch = function(limit, tags){
+				/**
+				 * This gets the tag query parameter and validates it.
+				 * It resets the counter if there are proper tags.
+				 * @return {String}
+				 */
+				var setupTagsSearch = function(){
+
+					var tags = $scope.$stateParams.tags;
 
 					if(!UtilitiesServ.empty(tags)){
 
-						//if we have tags, we need to wipe the appIdeas and reload it
-						$scope.appIdeas = [];
+						counterOffset = 0;
 
-						//if tags exist, we should load new ideas
-						//the tags will be passed to the service as the same string
-						$scope.getIdeas(limit, tags);
+					}else{
+
+						tags = false;
 
 					}
 
+					return tags;
+
 				};
 
-				limit = setupLimit(limit);
-				executeTagSearch(limit, tags);
+				//grab the initial limit and tags
+				$scope.limit = setupLimit();
+				$scope.tags = setupTagsSearch();
 
-				//Detect query parameters for tags and limit changes
-				//Could use $routeChangeStart
-				//or use function(){return $location.search()}?? or deep watch?
-				$scope.$on('$locationChangeStart', function(event, newLocation, oldLocation){
+				//load up the ideas
+				$scope.appIdeas = $scope.getIdeas($scope.limit, $scope.tags);
 
-					//get the potentially new ones
-					limit = $scope.$stateParams.limit;
-					tags = $scope.$stateParams.tags;
+				//detect query parameter change, and reload the app ideas or adjust the limit
+				$scope.$on('$locationChangeStart', function(){
 
-					//if limit is the only thing that has changed, then the page doesn't reload
-					//it will just use that limit the next time we're scrolling
-					limit = setupLimit(limit);
+					//try $routeChangeStart
+					//or function(){return $location.search()} and deep watch
 
-					executeTagSearch(limit, tags);
+					//if the limit gets changed, this will be reflected in the next load iteration
+					$scope.limit = setupLimit();
+					$scope.tags = setupTagsSearch();
+
+					//if there tags, we should reload the ideas, otherwise we don't do anything
+					if(tags){
+						$scope.appIdeas = $scope.getIdeas($scope.limit, $scope.tags);
+					}
 
 				});
 
-
-				
-
-				// var i = 1;
-
-				//limit and offset may be optionally set on this page
-				//if it is then limit will determine how many items to load at each scroll iteration
-				//offset will be auto done based on the iterations!
-
-
-
-				// //we need to get images and process them with the correct limit and offset
-				// //limit offset
-				// //load 10 more elements at each iteration
-				// //the offset needs to kept track off, so we know what should be paginated to service
-				// $scope.getImages = function(limit){
-
-				// 	IdeasServ.query(
-				// 		{
-				// 			"limit": limit
-				// 		},
-				// 		function(response){
-
-				// 			console.log(response);
-
-				// 		},
-				// 		function(response){
-
-				// 			console.log(response);
-
-				// 		}
-				// 	);
-
-				// 	// i = i+1;
-
-				// 	// $scope.appIdeas.push({
-				// 	// 	id: i,
-				// 	// 	title: 'Hacker News App',
-				// 	// 	link: 'hacker_news_app1-idea',
-				// 	// 	image: 'img/2exampleimg.png', //'img/example_item_image.png',,
-				// 	// 	description: '<p>An app to help read Hacker News on the mobile phone or ipad.</p>',
-				// 	// 	authorId: 1,
-				// 	// 	authorLink: 'roger_qiu1',
-				// 	// 	author: 'Roger Qiu',
-				// 	// 	feedback: 32,
-				// 	// 	likes: 40,
-				// 	// 	tags: [
-				// 	// 		'iphone',
-				// 	// 		'ipad',
-				// 	// 		'android',
-				// 	// 		'programming'
-				// 	// 	]
-				// 	// });
-
-
-				// };
-
-				// //get the initial images
-				// $scope.getImages();
+				//infinite load directive needs to push ideas into it
+				//$scope.appIdeas.push($scope.getIdeas(limit));
 
 			}
 		]);

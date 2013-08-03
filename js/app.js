@@ -42,7 +42,8 @@ define([
 				'ngSanitize',
 				'ui',
 				'ui.bootstrap',
-				'ui.state'
+				'ui.state',
+				'infinite-scroll'
 			]);
 
 			//parent core modules for the registry, they have the [] allowing functions to be appended to them
@@ -63,6 +64,7 @@ define([
 				'directives/EqualiseHeights.Directive',
 				'directives/EqualiseHeightTo.Directive',
 				'directives/MasonryWall.Directive',
+				'directives/InfiniteScroll.Directive',
 				//FILTERS
 				'filters/StripHtml.Filter',
 				//SERVICES

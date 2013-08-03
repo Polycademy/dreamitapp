@@ -14,6 +14,12 @@ define(['angular', 'lodash'], function(angular, _){
 					return Object.prototype.toString.call(value).slice(8, -1);
 				};
 
+				/**
+				 * Determines whether a number is an integer. Javascript does not differentiate
+				 * between integers and numbers.
+				 * @param  {mixed} mixedVar
+				 * @return {boolean}
+				 */
 				this.isInteger = function(mixedVar){
 					return (typeof(mixedVar) === 'number' || typeof(mixedVar) === 'string') && mixedVar !== '' && !isNaN(mixedVar);
 				};
