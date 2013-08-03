@@ -68,7 +68,10 @@ requirejs.config({
 		'imagesLoaded': '../bower_components/imagesloaded/imagesloaded',
 		'masonry': '../bower_components/masonry/masonry',
 		//ADDTHIS
-		'addthis': '//s7.addthis.com/js/300/addthis_widget.js#' + dreamItAppConfig.apiKeys.addThis
+		'addthis': [
+			'//s7.addthis.com/js/300/addthis_widget.js#pubid=' + dreamItAppConfig.apiKeys.addThis,
+			'lib/addthis_widget.min'
+		]
 	},
 	shim: {
 		'bootstrap': {

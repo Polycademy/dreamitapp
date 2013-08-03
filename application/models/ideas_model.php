@@ -63,10 +63,10 @@ class Ideas_model extends CI_Model{
 					'image'			=> $row->image,
 					'description'	=> $row->description,
 					'authorId'		=> $author_id,
-					'authorLink'	=> $author_link;
-					'author'		=> $author;
+					'authorLink'	=> $author_link,
+					'author'		=> $author,
 					'likes'			=> $row->likes,
-					'feedback'		=> $feedback;
+					'feedback'		=> $feedback,
 					'tags'			=> $tags,
 				);
 			

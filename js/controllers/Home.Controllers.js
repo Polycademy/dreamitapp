@@ -63,8 +63,8 @@ define(['angular', 'lodash'], function(angular, _){
 					$scope.ideasServiceBusy = true;
 
 					var queryParameters = {
-						"limit": limit
-						"offset": counterOffset;
+						"limit": limit,
+						"offset": counterOffset
 					};
 
 					if(tags){
@@ -231,7 +231,7 @@ define(['angular', 'lodash'], function(angular, _){
 				$scope.tags = setupTagsSearch();
 
 				//load up the ideas
-				$scope.appIdeas = $scope.getIdeas($scope.limit, $scope.tags);
+				//$scope.appIdeas = $scope.getIdeas($scope.limit, $scope.tags);
 
 				//detect query parameter change, and reload the app ideas or adjust the limit
 				$scope.$on('$locationChangeStart', function(){
