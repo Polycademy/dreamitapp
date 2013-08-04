@@ -21,7 +21,7 @@
 						</span>
 						<div class="item_actions">
 							<a class="item_feedback" ng-href="{{idea.link}}#feedback">
-								<span class="item_number">{{idea.feedback}}</span>
+								<span class="item_number">{{idea.feedback}}</span> <!--This is incorrect, it needs to come from disqus -->
 								<span class="item_icon fui-chat"></span>
 							</a>
 							<a class="item_likes" ng-click="likeAction(idea.id)">
@@ -32,7 +32,7 @@
 						<div class="item_tags">
 							<ul>
 								<li ng-repeat="tag in idea.tags">
-									<a ng-click="tagAction(tag)">{{tag}}</a>
+									<a ng-href="?tags={{tag}}" ng-click="tagAction(tag)">{{tag}}</a>
 								</li>
 							</ul>
 						</div>

@@ -97,6 +97,8 @@ define(['angular', 'lodash'], function(angular, _){
 						}
 					);
 
+					//idea.feedback = some amount! (we need to take it differently!)
+
 					// $scope.appIdeas.push({
 					// 	id: i,
 					// 	title: 'Hacker News App',
@@ -106,7 +108,7 @@ define(['angular', 'lodash'], function(angular, _){
 					// 	authorId: 1,
 					// 	authorLink: 'roger_qiu1',
 					// 	author: 'Roger Qiu',
-					// 	feedback: 32,
+					// 	feedback: 32, //this is extracted from the disqus api
 					// 	likes: 40,
 					// 	tags: [
 					// 		'iphone',
