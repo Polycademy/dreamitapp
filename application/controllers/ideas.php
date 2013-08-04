@@ -12,8 +12,9 @@ class Ideas extends CI_Controller{
 	/**
 	 * Gets all Ideas
 	 *
-	 * @queryparam int Limit the number of courses
-	 * @queryparam int Offset the number of courses for pagination
+	 * @queryparam integer limit Limit the number of results
+	 * @queryparam integer offset Offset the limit
+	 * @queryparam string tags Tags in the form of "iphone+ipad"
 	 * @return JSON
 	 **/
 	public function index(){

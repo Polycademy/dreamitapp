@@ -25,11 +25,15 @@ class Ideas_model extends CI_Model{
 
 		$limit = ($limit) ? $limit : 20;
 		
+		//we're trying to get all the ideas, and if there are tags passed in, get only ideas which has one or more of the tags passed in
+		//we can either use a distinct join or use an IN subquery (semi join)
+		//see http://stackoverflow.com/q/9105427/582917
 		$this->db->select('i.*');
+		$this->db->distinct();
 		$this->db->from('ideas AS i');
 		if(is_array($tags)){
-			$this->db->join('tags AS t', 'i.id = t.ideaId');
-			$this->db->or_where_in('t.tag', $tags);
+			$this->db->join('tags AS t', 't.ideaId = i.id');
+			$this->db->where_in('t.tag', $tags);
 		}
 		$this->db->limit($limit, $offset);
 		$query = $this->db->get();
@@ -38,23 +42,24 @@ class Ideas_model extends CI_Model{
 		
 			foreach($query->result() as $row){
 
+				// FB::log($row);
+
 				$idea_id = $row->id;
 				$author_id = $row->authorId;
 
 				//get author information (currently hardcoded)
 				$author = 'Roger Qiu';
 				$author_link = 'roger_qiu1';
-				
-				//get number of feedback (currently hardcoded)
-				$feedback = 32;
 
-				//get an array of tags (currently hardcoded)
-				$tags = array(
-					'iphone',
-					'ipad',
-					'android',
-					'programming',
-				);
+				//tags for each idea
+				$tags = array();
+				$this->db->select('tag')->where('ideaId', $idea_id)->from('tags');
+				$tag_query = $this->db->get();
+				if($tag_query->num_rows() > 0){
+					foreach($tag_query->result() as $tag_row){
+						$tags[] = $tag_row->tag;
+					}
+				}
 
 				$data[] = array(
 					'id'			=> $row->id,
@@ -66,7 +71,6 @@ class Ideas_model extends CI_Model{
 					'authorLink'	=> $author_link,
 					'author'		=> $author,
 					'likes'			=> $row->likes,
-					'feedback'		=> $feedback,
 					'tags'			=> $tags,
 				);
 			
