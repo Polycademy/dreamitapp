@@ -6,7 +6,8 @@
 
 var dreamItAppConfig = {
 	apiKeys: {
-		addThis: 'ra-51f43b6702e72e9a'
+		addThis: 'ra-51f43b6702e72e9a',
+		disqusShortname: 'dreamitapp'
 	}
 };
 
