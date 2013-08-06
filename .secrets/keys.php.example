@@ -1,7 +1,7 @@
 <?php
 
 //encryption
-//
+
 $secrets['encryption_key'] = '################################';
 
 //api keys

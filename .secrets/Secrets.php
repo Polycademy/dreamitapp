@@ -16,16 +16,13 @@ class Secrets{
 			foreach(new DirectoryIterator($secrets_path) as $file){
 
 				//ignore dots and non-php extensions and this file itself
-				if($file->isDot() OR $file->getExtension() != 'php' OR $file->getFilename() == 'Secrets.php') continue;
+				if($file->isDot() OR $file->getExtension() != 'php' OR $file->getFilename() == __FILE__) continue;
 				
 				$secrets_loaded = true;
 
 				include_once($file->getPathname());
 
 			}
-
-			$_ENV['secrets'] = $secrets;
-			unset($secrets);
 
 		}
 
@@ -34,6 +31,14 @@ class Secrets{
 			die('Secrets have not been loaded! You may need to set at least the encryption secret.');
 
 		}
+
+		foreach($secrets as $key => $value){
+
+			$_ENV['secrets'][$key] = $value;
+
+		}
+
+		unset($secrets);
 
 	}
 
