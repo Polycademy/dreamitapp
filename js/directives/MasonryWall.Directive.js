@@ -96,12 +96,13 @@ define(['angular', 'masonry', 'imagesLoaded', 'lodash', 'jquery'], function(angu
 										//timeout hack to run this after ng-repeat has finished and the class attributes interpolated
 										$timeout(function(){
 
-											var newElements = [];
-											var currentElements = angular.element(masonryWallDirCtrl.itemSelector);
+											var newElements = [],
+												currentElements = angular.element(masonryWallDirCtrl.itemSelector),
+												index;
 
 											for(var i = 0; i < difference.length; i++){
 
-												var index = _.indexOf(newValue, difference[i], oldValue.length);
+												index = _.indexOf(newValue, difference[i], oldValue.length);
 												// var index = newValue.indexOf(difference[i]);
 												// console.log(currentElements[index]);
 												newElements.push(currentElements[index]);
