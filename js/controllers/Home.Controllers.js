@@ -30,7 +30,44 @@ define(['angular', 'lodash'], function(angular, _){
 				 * This is the array of app ideas to be repeated across the wall.
 				 * @type {Array}
 				 */
-				$scope.appIdeas = [];
+				$scope.appIdeas = [
+					{
+						id: 1,
+						title: 'Hacker News App',
+						link: 'hacker_news_app1-idea',
+						image: 'img/2exampleimg.png', //'img/example_item_image.png',,
+						description: '<p>An app to help read Hacker News on the mobile phone or ipad.</p>',
+						authorId: 1,
+						authorLink: 'roger_qiu1',
+						author: 'Roger Qiu',
+						feedback: 32, //this is extracted from the disqus api
+						likes: 40,
+						tags: [
+							'iphone',
+							'ipad',
+							'android',
+							'programming'
+						]
+					},
+					{
+						id: 2,
+						title: 'Hacker News App',
+						link: 'hacker_news_app1-idea',
+						image: 'img/2exampleimg.png', //'img/example_item_image.png',,
+						description: '<p>An app to help read Hacker News on the mobile phone or ipad.</p>',
+						authorId: 1,
+						authorLink: 'roger_qiu1',
+						author: 'Roger Qiu',
+						feedback: 32, //this is extracted from the disqus api
+						likes: 40,
+						tags: [
+							'iphone',
+							'ipad',
+							'android',
+							'programming'
+						]
+					}
+				];
 
 				/**
 				 * This is to throttle the retrieving of idea items due to infinite scroll pagination.
@@ -144,6 +181,25 @@ define(['angular', 'lodash'], function(angular, _){
 				 */
 				$scope.likeAction = function(ideaId){
 
+					$scope.appIdeas.push({
+						id: 3,
+						title: 'Hacker News App',
+						link: 'hacker_news_app1-idea',
+						image: 'img/2exampleimg.png', //'img/example_item_image.png',,
+						description: '<p>An app to help read Hacker News on the mobile phone or ipad.</p>',
+						authorId: 1,
+						authorLink: 'roger_qiu1',
+						author: 'Roger Qiu',
+						feedback: 32, //this is extracted from the disqus api
+						likes: 40,
+						tags: [
+							'iphone',
+							'ipad',
+							'android',
+							'programming'
+						]
+					});
+
 				};
 
 				/**
@@ -236,21 +292,21 @@ define(['angular', 'lodash'], function(angular, _){
 				//$scope.appIdeas = $scope.getIdeas($scope.limit, $scope.tags);
 
 				//detect query parameter change, and reload the app ideas or adjust the limit
-				$scope.$on('$locationChangeStart', function(){
+				// $scope.$on('$locationChangeStart', function(){
 
-					//try $routeChangeStart
-					//or function(){return $location.search()} and deep watch
+				// 	//try $routeChangeStart
+				// 	//or function(){return $location.search()} and deep watch
 
-					//if the limit gets changed, this will be reflected in the next load iteration
-					$scope.limit = setupLimit();
-					$scope.tags = setupTagsSearch();
+				// 	//if the limit gets changed, this will be reflected in the next load iteration
+				// 	$scope.limit = setupLimit();
+				// 	$scope.tags = setupTagsSearch();
 
-					//if there tags, we should reload the ideas, otherwise we don't do anything
-					if(tags){
-						$scope.appIdeas = $scope.getIdeas($scope.limit, $scope.tags);
-					}
+				// 	//if there tags, we should reload the ideas, otherwise we don't do anything
+				// 	if(tags){
+				// 		$scope.appIdeas = $scope.getIdeas($scope.limit, $scope.tags);
+				// 	}
 
-				});
+				// });
 
 				//infinite load directive needs to push ideas into it
 				//$scope.appIdeas.push($scope.getIdeas(limit));

@@ -1,96 +1,134 @@
-define(['angular', 'masonry', 'imagesLoaded', 'lodash'], function(angular, Masonry, imagesLoaded, _){
+define(['angular', 'masonry', 'imagesLoaded', 'lodash', 'jquery'], function(angular, Masonry, imagesLoaded, _){
 
 	'use strict';
 
 	/**
-	 * Masonry Directive for the Wall of items
+	 * Masonry Directive for a wall of item.
+	 * This directive is intended to be used along with ng-repeat directive.
+	 * This directive should be on each item of the ng-repeat, and hence is on the same scope as the ng-repeat.
+	 * You have to pass in a CSS selector parameter into the directive. This parameter has to include a wildcard
+	 * that is unique to each item's id. The CSS selector needs to be a class.
+	 * For example: ideas_* where * will be replaced by the idea id. 
+	 * Then in the class you need class="idea_{{idea.id}}"
 	 * 
-	 * @param string CSS selector of the ideas. For example: ideas_* where * will be replaced by the idea id.
+	 * @param {String} masonryWallDir              Reference to collection
+	 * @param {String} masonryWallSelector         Class selector of each item
+	 * @param {String} masonryWallAppendedSelector Class selector of each item with a unique wildcard
+	 * @param {Object} masonryWallOptions          Optional options that are directly passed into Masonry
 	 */
 	angular.module('Directives')
-		.directive('masonryWallDir', [
+		.directive('masonryWallDir', function(){
+			return {
+				controller: [
+					'$scope',
+					'$element',
+					'$attrs', 
+					function($scope, $element, $attrs){
+
+						this.wallContainer = $element;
+						this.collection = $attrs.masonryWallDir;
+						this.itemSelector = $attrs.masonryWallSelector;
+						// this.appendedItemSelector = $attrs.masonryWallAppendedSelector;
+						this.masonryOptions = _.assign(
+							{
+								itemSelector: this.itemSelector,
+								gutter: 0,
+								isInitLayout: false,
+								transitionDuration: '0.3s'
+							}, 
+							$scope.$eval($attrs.masonryWallOptions)
+						);
+						this.masonryInitialised = false;
+
+					}
+				]
+			};
+		})
+		.directive('masonryItemDir', [
 			'$timeout',
 			'UtilitiesServ',
 			function($timeout, UtilitiesServ){
 				return {
 					scope: true,
-					link: function(scope, element, attributes){
+					require: '^masonryWallDir',
+					link: function(scope, element, attributes, masonryWallDirCtrl){
 
-						//$timeout hacks are used for convenience
-						//later they can be replaced by directive controllers
+						//we only run this once we are in the "last" element of the first iteration
+						if(!masonryWallDirCtrl.masonryInitialised && scope.$last){
 
-						//this will be used to find specific idea panels, the new appended ones to be positioned
-						var ideaSelector = attributes.masonryWallDir;
-						
-						//ng-repeat runs too slow (it runs after the masonry)
-						//we need to wait for ng-repeat too finish, then apply masonry (by putting at the end of the exe loop)
-						//another method is to put this on the same element as the ng-repeat but at a lower priority, then running this once
-						//via a class designation (see: http://jsfiddle.net/Dz5uT/14/)
-						$timeout(function(){
+							//masonry is designed for the parent container
+							var masonry = new Masonry(
+								masonryWallDirCtrl.wallContainer[0], 
+								masonryWallDirCtrl.masonryOptions
+							);
 
-							//masonry requires the raw element
-							var masonry = new Masonry(element[0], {
-								itemSelector: '.item_panel',
-								gutter: 0,
-								isInitLayout: false,
-								transitionDuration: '0.3s'
-							});
-
-							//waits for images to load fully
-							imagesLoaded(element, function(){
+							//wait for all the images to load before laying out all the items
+							imagesLoaded(masonryWallDirCtrl.wallContainer, function(){
 								masonry.layout();
 							});
 
-							//bind to window resize
+							//bind masonry to window resizing
 							masonry.bindResize();
 
+							//ok the initial setup is done, we don't want redo this
+							masonryWallDirCtrl.masonryInitialised = true;
+
+							//now we register a watch onto the collection
 							scope.$watch(
-								'appIdeas', 
+								masonryWallDirCtrl.collection, 
 								function(newValue, oldValue){
 
-									$timeout(function(){
+									//a simple subtraction of the oldValue from the newValue
+									//this will give us any potential new elements that have been added to the collection
+									var difference = newValue.slice(oldValue.length, newValue.length);									
 
-										//find the difference between items based on their ids
-										//we just want to know if there is newer item objects added
-										var difference = UtilitiesServ.arrayDifference(function(a, b){
+									//we'll use the difference's id to extract the corresponding DOM element
+									//this is because ng-repeat has already added the element to the DOM
+									//we just need masonry to redo its layout
+									if(!UtilitiesServ.empty(difference)){
 
-											//a and b will be the actual objects values from the array to compare
-											if(a.id === b.id){
-												return true;
-											}else{
-												return false;
-											}
+										//just a test to see if we could acquire the index of each difference in the newValue
+										// console.log(newValue.indexOf(difference[0])); //YES IT WORKS
+										//now we can just use the index! And go through all of em!
 
-										}, newValue, oldValue);
+										//console.log(angular.element(masonryWallDirCtrl.itemSelector));
 
-										if(!UtilitiesServ.empty(difference)){
+										//timeout hack to run this after ng-repeat has finished and the class attributes interpolated
+										$timeout(function(){
 
 											var newElements = [];
+											var currentElements = angular.element(masonryWallDirCtrl.itemSelector);
 
 											for(var i = 0; i < difference.length; i++){
 
-												//get the differentiated's element's id
-												var ideaClassToLookFor = ideaSelector.replace(/\*/, difference[i].id);
+												var index = _.indexOf(newValue, difference[i], oldValue.length);
+												// var index = newValue.indexOf(difference[i]);
+												// console.log(currentElements[index]);
+												newElements.push(currentElements[index]);
 
-												//find the DOM elements that correspond with those ids and add them to the list
-												newElements.push(angular.element(ideaClassToLookFor)[0]);
+
+												// //get the differentiated's element's id
+												// var itemClassToLookFor = masonryWallDirCtrl.appendedItemSelector.replace(/\*/, difference[i].id);
+
+												// //find the DOM elements that correspond with those ids and add them to the list
+												// newElements.push(angular.element(itemClassToLookFor)[0]);
 
 											}
 
-											//appended those elements to Masonry
+											//append these elements to Masonry
 											imagesLoaded(newElements, function(){
 												masonry.appended(newElements);
 											});
 
-										}
+										}, 0);
 
-									}, 0);
+									}
 
-								}, 
+								},
 								true
 							);
 
-						}, 0);
+						}
 
 					}
 				};

@@ -14,7 +14,10 @@ define(['angular', 'jquery-resize'], function(angular){
 					scope: true,
 					link: function(scope, element, attributes){
 
-						var target = angular.element(attributes.equaliseHeightToDir);
+						var target;
+						attributes.$observe('equaliseHeightToDir', function(value){
+							target = angular.element(value);
+						});
 
 						var equaliseHeightToTarget = function(){
 							element.height(target.height());

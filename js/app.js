@@ -43,7 +43,7 @@ define([
 				'ui',
 				'ui.bootstrap',
 				'ui.state',
-				'infinite-scroll'
+				//'infinite-scroll'
 			]);
 
 			//parent core modules for the registry, they have the [] allowing functions to be appended to them
@@ -64,7 +64,7 @@ define([
 				'directives/EqualiseHeights.Directive',
 				'directives/EqualiseHeightTo.Directive',
 				'directives/MasonryWall.Directive',
-				'directives/InfiniteScroll.Directive',
+				//'directives/InfiniteScroll.Directive',
 				//FILTERS
 				'filters/StripHtml.Filter',
 				//SERVICES
