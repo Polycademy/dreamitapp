@@ -45,9 +45,9 @@ define(['angular', 'masonry', 'imagesLoaded', 'lodash', 'jquery'], function(angu
 			};
 		})
 		.directive('masonryItemDir', [
-			'$timeout',
+			//'$timeout',
 			'UtilitiesServ',
-			function($timeout, UtilitiesServ){
+			function(UtilitiesServ){
 				return {
 					scope: true,
 					require: '^masonryWallDir',
@@ -94,7 +94,7 @@ define(['angular', 'masonry', 'imagesLoaded', 'lodash', 'jquery'], function(angu
 										//console.log(angular.element(masonryWallDirCtrl.itemSelector));
 
 										//timeout hack to run this after ng-repeat has finished and the class attributes interpolated
-										$timeout(function(){
+										// $timeout(function(){
 
 											var newElements = [],
 												currentElements = angular.element(masonryWallDirCtrl.itemSelector),
@@ -121,7 +121,7 @@ define(['angular', 'masonry', 'imagesLoaded', 'lodash', 'jquery'], function(angu
 												masonry.appended(newElements);
 											});
 
-										}, 0);
+										// }, 0);
 
 									}
 
