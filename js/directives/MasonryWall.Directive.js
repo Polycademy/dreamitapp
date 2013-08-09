@@ -62,11 +62,7 @@ define(['angular', 'masonry', 'imagesLoaded', 'lodash'], function(angular, Mason
 					require: '^masonryWallDir',
 					link: function(scope, element, attributes, masonryWallDirCtrl){
 
-						//WILL THIS WORK WITH EMPTY initial elements, because I hope scope.$last works
-
 						//we only run this once when we are in the "last" element of the first iteration
-						//this works so that if there are initial elements, it will only setup masonry at the end of 
-						//the ng-repeat
 						if(!masonryWallDirCtrl.masonryInitialised && scope.$last){
 
 							//masonry is designed for the parent container
