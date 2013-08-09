@@ -18,6 +18,6 @@ var dreamItAppConfig = {
 //ADD THIS
 var addthis_config = {
 	ui_click: true,
-	ui_hover_direction: -1
-	//ui_use_css: true
+	ui_hover_direction: -1,
+	services_exclude: 'print'
 };

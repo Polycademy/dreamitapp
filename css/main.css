@@ -5630,6 +5630,19 @@ header.navbar .nav li a {
   -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=argb(rgba(@red, @green, @blue, @alpha)), endColorstr=argb(rgba(@red, @green, @blue, @alpha)))";
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#33ffffff, endColorstr=#33ffffff);
 }
+.main .wall_masonry_container .item_panel .item_image_container .item_rollover .share_button {
+  background: #16a085;
+  color: #fff;
+  margin: 10px;
+  padding: 6px 2px;
+  font-size: 14px;
+  position: absolute;
+  border-radius: 4px;
+  text-decoration: none;
+  -webkit-box-shadow: 0 0 2px rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: 0 0 2px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.1);
+}
 .main .wall_masonry_container .item_panel .item_desc {
   padding: 18px 10px 10px;
   font-family: 'source_sans_proregular', arial, sans-serif;
