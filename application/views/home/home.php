@@ -5,8 +5,7 @@
 		<div class="wall_container">
 			<div 
 				class="wall" 
-				masonry-wall-dir="appIdeas" 
-				masonry-wall-selector=".item_panel" 
+				masonry-wall-dir=".item_panel" 
 				infinite-scroll="paginateIdeas(limit, tags)" 
 				infinite-scroll-disabled="ideasServiceBusy" 
 				infinite-scroll-distance="2"

@@ -8,7 +8,8 @@ define(['angular', 'lodash'], function(angular, _){
 			'$location',
 			'UtilitiesServ',
 			'IdeasServ',
-			function($scope, $location, UtilitiesServ, IdeasServ){
+			'$timeout',
+			function($scope, $location, UtilitiesServ, IdeasServ, $timeout){
 
 				/**
 				 * The default limit of app ideas to load on each scroll iteration
@@ -30,44 +31,11 @@ define(['angular', 'lodash'], function(angular, _){
 				 * This is the array of app ideas to be repeated across the wall.
 				 * @type {Array}
 				 */
-				$scope.appIdeas = [
-					{
-						id: 1,
-						title: 'Hacker News App',
-						link: 'hacker_news_app1-idea',
-						image: 'img/2exampleimg.png', //'img/example_item_image.png',,
-						description: '<p>An app to help read Hacker News on the mobile phone or ipad.</p>',
-						authorId: 1,
-						authorLink: 'roger_qiu1',
-						author: 'Roger Qiu',
-						feedback: 32, //this is extracted from the disqus api
-						likes: 40,
-						tags: [
-							'iphone',
-							'ipad',
-							'android',
-							'programming'
-						]
-					},
-					{
-						id: 2,
-						title: 'Hacker News App',
-						link: 'hacker_news_app1-idea',
-						image: 'img/2exampleimg.png', //'img/example_item_image.png',,
-						description: '<p>An app to help read Hacker News on the mobile phone or ipad.</p>',
-						authorId: 1,
-						authorLink: 'roger_qiu1',
-						author: 'Roger Qiu',
-						feedback: 32, //this is extracted from the disqus api
-						likes: 40,
-						tags: [
-							'iphone',
-							'ipad',
-							'android',
-							'programming'
-						]
-					}
-				];
+				$scope.appIdeas = [];
+
+				$timeout(function(){
+					$scope.likeAction();
+				}, 2000);
 
 				/**
 				 * This is to throttle the retrieving of idea items due to infinite scroll pagination.
@@ -183,6 +151,24 @@ define(['angular', 'lodash'], function(angular, _){
 
 					$scope.appIdeas.push({
 						id: 3,
+						title: 'Hacker News App',
+						link: 'hacker_news_app1-idea',
+						image: 'img/2exampleimg.png', //'img/example_item_image.png',,
+						description: '<p>An app to help read Hacker News on the mobile phone or ipad.</p>',
+						authorId: 1,
+						authorLink: 'roger_qiu1',
+						author: 'Roger Qiu',
+						feedback: 32, //this is extracted from the disqus api
+						likes: 40,
+						tags: [
+							'iphone',
+							'ipad',
+							'android',
+							'programming'
+						]
+					},
+					{
+						id: 4,
 						title: 'Hacker News App',
 						link: 'hacker_news_app1-idea',
 						image: 'img/2exampleimg.png', //'img/example_item_image.png',,
