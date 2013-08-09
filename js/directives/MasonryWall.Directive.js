@@ -5,14 +5,13 @@ define(['angular', 'masonry', 'imagesLoaded', 'lodash'], function(angular, Mason
 	/**
 	 * Masonry Directive for a wall of item.
 	 * This directive is intended to be used along with ng-repeat directive.
-	 * This directive should be on each item of the ng-repeat, and hence is on the same scope as the ng-repeat.
-	 * You have to pass in a CSS selector parameter into the directive. This parameter has to include a wildcard
-	 * that is unique to each item's id. The CSS selector needs to be a class.
-	 * For example: ideas_* where * will be replaced by the idea id. 
-	 * Then in the class you need class="idea_{{idea.id}}"
+	 * Put masonryWallDir on the container element and pass in a class selector for each item to be layed out.
+	 * Put the masonryItemDir next to ng-repeat directive on the item to be repeated.
+	 * Pass in optional options via masonryWallOptions.
+	 * You're done!
 	 * 
-	 * @param {String} masonryWallDir              Class selector of each item
-	 * @param {Object} masonryWallOptions          Optional options that are directly passed into Masonry
+	 * @param {String} masonryWallDir     Class selector of each item
+	 * @param {Object} masonryWallOptions Optional options that are directly passed into Masonry
 	 */
 	angular.module('Directives')
 		.directive('masonryWallDir', function(){
@@ -23,8 +22,13 @@ define(['angular', 'masonry', 'imagesLoaded', 'lodash'], function(angular, Mason
 					'$attrs', 
 					function($scope, $element, $attrs){
 
-						var itemSelector = $attrs.masonryWallDir;
-						var masonryOptions = $scope.$eval($attrs.masonryWallOptions);
+						var itemSelector,
+							masonryOptions;
+
+						$attrs.$observe('masonryWallDir', function(value){
+							itemSelector = value;
+						});
+						masonryOptions = $scope.$eval($attrs.masonryWallOptions);
 
 						//place holder for masonry to be setup and shared across all ng-repeat directive scopes
 						this.masonry = {};
