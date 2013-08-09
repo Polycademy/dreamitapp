@@ -33,10 +33,6 @@ define(['angular', 'lodash'], function(angular, _){
 				 */
 				$scope.appIdeas = [];
 
-				$timeout(function(){
-					$scope.likeAction();
-				}, 2000);
-
 				/**
 				 * This is to throttle the retrieving of idea items due to infinite scroll pagination.
 				 * When set to true, the infinite scroll will stop activating the getIdeas.
@@ -44,6 +40,14 @@ define(['angular', 'lodash'], function(angular, _){
 				 * @type {Boolean}
 				 */
 				$scope.ideasServiceBusy = false;
+
+				/**
+				 * Boolean for whether to show an error.
+				 * This could happen if there are no more ideas to show.
+				 * But it's also going to store the error message.
+				 * @type {Boolean}
+				 */
+				$scope.ideasServiceError = false;
 
 				/**
 				 * Addthis plugin uses this to create links since it can't recognise the base tag.
@@ -61,9 +65,7 @@ define(['angular', 'lodash'], function(angular, _){
 				 */
 				$scope.getIdeas = function(limit, tags){
 
-					if($scope.ideasServiceBusy){
-						return;
-					}
+					var returnedIdeas = [];
 
 					$scope.ideasServiceBusy = true;
 
@@ -76,11 +78,14 @@ define(['angular', 'lodash'], function(angular, _){
 						queryParameters.tags = tags;
 					}
 
-					IdeasServ.query(
+					console.log(queryParameters);
+
+					IdeasServ.get(
 						queryParameters,
 						function(response){
 
-							console.log(response);
+							console.log(response.content);
+							console.log(response.code);
 
 							//on a successful request, we're going to increase the counterOffset
 							counterOffset = counterOffset + limit;
@@ -89,14 +94,7 @@ define(['angular', 'lodash'], function(angular, _){
 						},
 						function(response){
 
-							console.log(response);
-
-							//fail response, try again
-							//soft fail, there's nothing to do here (no need to fail hard)
-							//could inform user to scroll up and then down
-							//OR if this is the one thatr runs when there is no more results to be retrieved, then we need
-							//to represent that (perhaps we do need the little popup?)
-							
+							$scope.ideasServiceError = response.data.content;
 							$scope.ideasServiceBusy = false;
 
 						}
@@ -149,42 +147,42 @@ define(['angular', 'lodash'], function(angular, _){
 				 */
 				$scope.likeAction = function(ideaId){
 
-					$scope.appIdeas.push({
-						id: 3,
-						title: 'Hacker News App',
-						link: 'hacker_news_app1-idea',
-						image: 'img/2exampleimg.png', //'img/example_item_image.png',,
-						description: '<p>An app to help read Hacker News on the mobile phone or ipad.</p>',
-						authorId: 1,
-						authorLink: 'roger_qiu1',
-						author: 'Roger Qiu',
-						feedback: 32, //this is extracted from the disqus api
-						likes: 40,
-						tags: [
-							'iphone',
-							'ipad',
-							'android',
-							'programming'
-						]
-					},
-					{
-						id: 4,
-						title: 'Hacker News App',
-						link: 'hacker_news_app1-idea',
-						image: 'img/2exampleimg.png', //'img/example_item_image.png',,
-						description: '<p>An app to help read Hacker News on the mobile phone or ipad.</p>',
-						authorId: 1,
-						authorLink: 'roger_qiu1',
-						author: 'Roger Qiu',
-						feedback: 32, //this is extracted from the disqus api
-						likes: 40,
-						tags: [
-							'iphone',
-							'ipad',
-							'android',
-							'programming'
-						]
-					});
+					// $scope.appIdeas.push({
+					// 	id: 3,
+					// 	title: 'Hacker News App',
+					// 	link: 'hacker_news_app1-idea',
+					// 	image: 'img/2exampleimg.png', //'img/example_item_image.png',,
+					// 	description: '<p>An app to help read Hacker News on the mobile phone or ipad.</p>',
+					// 	authorId: 1,
+					// 	authorLink: 'roger_qiu1',
+					// 	author: 'Roger Qiu',
+					// 	feedback: 32, //this is extracted from the disqus api
+					// 	likes: 40,
+					// 	tags: [
+					// 		'iphone',
+					// 		'ipad',
+					// 		'android',
+					// 		'programming'
+					// 	]
+					// },
+					// {
+					// 	id: 4,
+					// 	title: 'Hacker News App',
+					// 	link: 'hacker_news_app1-idea',
+					// 	image: 'img/2exampleimg.png', //'img/example_item_image.png',,
+					// 	description: '<p>An app to help read Hacker News on the mobile phone or ipad.</p>',
+					// 	authorId: 1,
+					// 	authorLink: 'roger_qiu1',
+					// 	author: 'Roger Qiu',
+					// 	feedback: 32, //this is extracted from the disqus api
+					// 	likes: 40,
+					// 	tags: [
+					// 		'iphone',
+					// 		'ipad',
+					// 		'android',
+					// 		'programming'
+					// 	]
+					// });
 
 				};
 
@@ -275,7 +273,7 @@ define(['angular', 'lodash'], function(angular, _){
 				$scope.tags = setupTagsSearch();
 
 				//load up the ideas
-				//$scope.appIdeas = $scope.getIdeas($scope.limit, $scope.tags);
+				$scope.getIdeas($scope.limit, $scope.tags);
 
 				//detect query parameter change, and reload the app ideas or adjust the limit
 				// $scope.$on('$locationChangeStart', function(){

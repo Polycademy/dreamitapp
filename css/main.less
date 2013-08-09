@@ -90,9 +90,6 @@ header.navbar{
 		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fafaf7', endColorstr='#2c3e50',GradientType=1 );
 	}
 	.wall_container{
-		//.wallcontainer is basically the bootstrap container & row
-		//However we are determining the widths based on number of panel columns.
-		//These are inside the responsive.less
 		margin: 0 auto;
 		&:before, &:after{
 			content: "";
@@ -104,15 +101,28 @@ header.navbar{
 		};
 		.wall, .control_panel{
 			float: left;
-			min-height: 1px;
 		}
-		//the wall width is also in the responsive.less
 		.control_panel{
 			width: @panel_width;
 		}
 	}
+	.alert{
+		.box-sizing;
+		margin: 0;
+		border-radius: 0;
+		border: none;
+	}
+	.alert.affix{
+		z-index: 150; //above the wall and the wall items but below any overlay
+		width: inherit; //this inherits the width from the parent, this is freaking amazing
+		top: 0;
+	}
 	.wall{
+		//the width is based on number of panel columns.
+		//these are inside the responsive.less
 		background: @colour_bright_clouds;
+	}
+	.wall_masonry_container{
 		.item_panel{
 			background: @colour_bright_clouds;
 			width: (@panel_width - 1); //minus 1 for the border

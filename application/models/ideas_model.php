@@ -81,7 +81,7 @@ class Ideas_model extends CI_Model{
 		}else{
 		
 			$this->errors = array(
-				'error' => 'No ideas found at all!'
+				'error' => 'No more ideas to load!'
 			);
 			
 			return false;
