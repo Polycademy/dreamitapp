@@ -11,7 +11,7 @@
 				<div 
 					class="wall_masonry_container"
 					masonry-wall-dir=".item_panel" 
-					infinite-scroll="paginateIdeas(limit, tags)" 
+					infinite-scroll="getIdeas(limit, tags)" 
 					infinite-scroll-disabled="ideasServiceBusy" 
 					infinite-scroll-distance="2"
 				>
@@ -33,11 +33,11 @@
 							</span>
 							<div class="item_actions">
 								<a class="item_feedback" ng-href="{{idea.link}}#feedback">
-									<span class="item_number">{{idea.feedback}}</span> <!--This is incorrect, it needs to come from disqus -->
+									<span class="item_number">{{idea.feedback | NumCounter:2}}</span> <!--This is incorrect, it needs to come from disqus -->
 									<span class="item_icon fui-chat"></span>
 								</a>
 								<a class="item_likes" ng-click="likeAction(idea.id)">
-									<span class="item_number">{{idea.likes}}</span>
+									<span class="item_number">{{idea.likes | NumCounter:2}}</span>
 									<span class="item_icon fui-heart"></span>
 								</a>
 							</div>

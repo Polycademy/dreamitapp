@@ -67,6 +67,7 @@ define([
 				//'directives/InfiniteScroll.Directive',
 				//FILTERS
 				'filters/StripHtml.Filter',
+				'filters/NumCounter.Filter',
 				//SERVICES
 				'services/Utilities.Service',
 				'services/Accounts.Service',

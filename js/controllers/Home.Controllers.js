@@ -27,6 +27,25 @@ define(['angular', 'lodash'], function(angular, _){
 				 */
 				var counterOffset = 0;
 
+				// $scope.appIdeas.push({
+				// 	id: i,
+				// 	title: 'Hacker News App',
+				// 	link: 'hacker_news_app1-idea',
+				// 	image: 'img/2exampleimg.png', //'img/example_item_image.png',,
+				// 	description: '<p>An app to help read Hacker News on the mobile phone or ipad.</p>',
+				// 	authorId: 1,
+				// 	authorLink: 'roger_qiu1',
+				// 	author: 'Roger Qiu',
+				// 	feedback: 32, //this is extracted from the disqus api
+				// 	likes: 40,
+				// 	tags: [
+				// 		'iphone',
+				// 		'ipad',
+				// 		'android',
+				// 		'programming'
+				// 	]
+				// });
+
 				/**
 				 * This is the array of app ideas to be repeated across the wall.
 				 * @type {Array}
@@ -78,17 +97,13 @@ define(['angular', 'lodash'], function(angular, _){
 						queryParameters.tags = tags;
 					}
 
-					console.log(queryParameters);
-
 					IdeasServ.get(
 						queryParameters,
 						function(response){
 
-							console.log(response.content);
-							console.log(response.code);
-
-							//on a successful request, we're going to increase the counterOffset
+							//increase the counterOffset
 							counterOffset = counterOffset + limit;
+							$scope.appIdeas = $scope.appIdeas.concat(response.content);
 							$scope.ideasServiceBusy = false;
 
 						},
@@ -99,41 +114,6 @@ define(['angular', 'lodash'], function(angular, _){
 
 						}
 					);
-
-					//idea.feedback = some amount! (we need to take it differently!)
-
-					// $scope.appIdeas.push({
-					// 	id: i,
-					// 	title: 'Hacker News App',
-					// 	link: 'hacker_news_app1-idea',
-					// 	image: 'img/2exampleimg.png', //'img/example_item_image.png',,
-					// 	description: '<p>An app to help read Hacker News on the mobile phone or ipad.</p>',
-					// 	authorId: 1,
-					// 	authorLink: 'roger_qiu1',
-					// 	author: 'Roger Qiu',
-					// 	feedback: 32, //this is extracted from the disqus api
-					// 	likes: 40,
-					// 	tags: [
-					// 		'iphone',
-					// 		'ipad',
-					// 		'android',
-					// 		'programming'
-					// 	]
-					// });
-
-
-
-				};
-
-				/**
-				 * Appends idea items to the appIdeas array. This is used by the infinite scroll directive.
-				 * @param  {Integer} limit
-				 * @param  {String} tags 
-				 * @return {Void}
-				 */
-				$scope.paginateIdeas = function(limit, tags){
-
-					$scope.appIdeas.concat($scope.getIdeas(limit, tags));
 
 				};
 
