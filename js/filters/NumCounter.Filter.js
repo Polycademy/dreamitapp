@@ -1,11 +1,11 @@
-/**
- * NumCounter filters out integers so integers greater than a certain number of characters will be
- * limited with a '+' sign.
- */
 define(['angular'], function(angular){
 
 	'use strict';
 
+	/**
+	 * NumCounter filters out integers so integers greater than a certain number of characters will be
+	 * limited with a '+' sign.
+	 */
 	angular.module('Filters')
 		.filter('NumCounter', [
 			function(){
