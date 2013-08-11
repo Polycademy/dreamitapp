@@ -10,14 +10,3 @@ var dreamItAppConfig = {
 		disqusShortname: 'dreamitapp'
 	}
 };
-
-/*
-	Global config
- */
-
-//ADD THIS
-var addthis_config = {
-	ui_click: true,
-	ui_hover_direction: -1,
-	services_exclude: 'print'
-};

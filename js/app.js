@@ -6,8 +6,6 @@ define([
 	'require',
 	'angular',
 	'domReady', 
-	//addthis will be used across the site
-	'addthis',
 	//shims!
 	'es5-shim', 
 	'es6-shim', 
@@ -65,6 +63,7 @@ define([
 				'directives/EqualiseHeightTo.Directive',
 				'directives/MasonryWall.Directive',
 				//'directives/InfiniteScroll.Directive',
+				'directives/AddThis.Directive',
 				//FILTERS
 				'filters/StripHtml.Filter',
 				'filters/NumCounter.Filter',

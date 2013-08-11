@@ -19,7 +19,21 @@
 						<h3 class="item_header"><a ng-href="{{idea.link}}">{{idea.title}}</a></h3>
 						<div class="item_image_container" ng-show="ideaHasImage($index)">
 							<div class="item_rollover">
-								<a class="share_button addthis_button" ng-href="http://www.addthis.com/bookmark.php?v=300&pubid={{dreamItAppConfig.apiKeys.addThis}}" addthis:url="{{baseUrl + idea.link}}" addthis:title="{{idea.title}}" addthis:description="{{idea.description | StripHtml}}">
+								<a 
+									class="share_button" 
+									ng-href="http://www.addthis.com/bookmark.php?v=300&pubid={{dreamItAppConfig.apiKeys.addThis}}" 
+									add-this-dir 
+									add-this-config="{
+										ui_click: true,
+										ui_hover_direction: -1,
+										services_exclude: 'print'
+									}" 
+									add-this-share="{
+										url: baseUrl + idea.link,
+										title: idea.title,
+										description: idea.description
+									}"
+								>
 									Share
 									<span class="fui-plus"></span>
 								</a>
