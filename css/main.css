@@ -5573,6 +5573,7 @@ header.navbar .nav li a {
 }
 .main .wall {
   background: #f7f2f2;
+  min-height: 100%;
 }
 .main .wall_masonry_container .item_panel {
   background: #f7f2f2;

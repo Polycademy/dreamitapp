@@ -9,7 +9,8 @@ define(['angular', 'lodash'], function(angular, _){
 			'$filter',
 			'UtilitiesServ',
 			'IdeasServ',
-			function($scope, $location, $filter, UtilitiesServ, IdeasServ){
+			'SearchServ',
+			function($scope, $location, $filter, UtilitiesServ, IdeasServ, SearchServ){
 
 				/**
 				 * The default limit of app ideas to load on each scroll iteration
@@ -131,7 +132,7 @@ define(['angular', 'lodash'], function(angular, _){
 				 */
 				$scope.likeAction = function(ideaId){
 
-					
+
 				};
 
 				/**
@@ -144,11 +145,7 @@ define(['angular', 'lodash'], function(angular, _){
 				 */
 				$scope.tagAction = function(tag){
 
-					//this function needs to be moved to a service (because the control_panel controller would use this too)
-					//we also need to write something that watches the query parameters (on the home controller)
-					//multiple tags are possible with "+" while spaces (%20) are part of the tag itself
-					//tag needs to be uri encoded, (then decoded when used!)
-					$location.search({'tags': encodeURIComponent(tag)});
+					SearchServ.searchTag(tag);
 				
 				};
 

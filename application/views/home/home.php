@@ -3,8 +3,8 @@
 	<div class="background_splitter">
 		<!-- This centers the content, and responsively adjusts the width. It also provides a row functionality. -->
 		<div class="wall_container">
-			<div class="wall">
-				<div class="alert" ng-show="ideasServiceError" affix="143">
+			<div class="wall" pull-down-to-window-dir>
+				<div class="alert" ng-show="ideasServiceError" affix="133">
 					<button class="close" type="button" data-dismiss="alert">&times;</button>
 					{{ideasServiceError}}
 				</div>
@@ -66,9 +66,31 @@
 					</div>
 				</div>
 			</div>
-			<aside class="control_panel" equalise-height-to-dir=".wall">
+			<aside class="control_panel" equalise-height-to-dir=".wall" ng-controller="ControlPanelCtrl">
 				<div class="affixed_controls">
-					<h3>Search</h3>
+					<form class="search_form form-inline" ng-submit="submitSearch()">
+						<label for="search"><span class="fui-search"></span></label>
+						<input id="search" name="search" type="text" ng-model="search" placeholder="Search"></input>
+					</form>
+					<div class="control_menu" ng-switch="loggedIn">
+						<ul ng-switch-when="true">
+							<li>Add Idea</li>
+							<li>My Ideas</li>
+							<li>Profile</li>
+							<li>Sign out</li>
+						</ul>
+						<ul ng-switch-default>
+							<li>Sign In</li>
+							<li>Sign Up</li>
+						</ul>
+					</div>
+					<div class="popular_tags">
+						<ul>
+							<li ng-repeat="tag in popularTags">
+								<a ng-href="?tags={{tag}}" ng-click="tagAction(tag)">{{tag}}</a>
+							</li>
+						</ul>
+					</div>
 				</div>
 			</aside>
 		</div>

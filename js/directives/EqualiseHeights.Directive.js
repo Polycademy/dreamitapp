@@ -1,4 +1,4 @@
-define(['angular'], function(angular){
+define(['angular', 'jquery'], function(angular){
 
 	'use strict';
 

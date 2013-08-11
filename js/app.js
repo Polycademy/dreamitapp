@@ -57,6 +57,7 @@ define([
 				//CONTROLLERS
 				'controllers/Header.Controllers',
 				'controllers/Home.Controllers',
+				'controllers/ControlPanel.Controllers',
 				//DIRECTIVES
 				'directives/EqualiseHeights.Directive',
 				'directives/EqualiseHeightTo.Directive',
@@ -64,6 +65,7 @@ define([
 				'directives/InfiniteScroll.Directive',
 				'directives/AddThis.Directive',
 				'directives/Affix.Directive',
+				'directives/PullDownToWindow.Directive',
 				//FILTERS
 				'filters/StripHtml.Filter',
 				'filters/NumCounter.Filter',
@@ -72,7 +74,8 @@ define([
 				'services/Accounts.Service',
 				'services/Sessions.Service',
 				'services/Users.Service',
-				'services/Ideas.Service'
+				'services/Ideas.Service',
+				'services/Search.Service'
 			], function(){
 
 				/* ==========================================================================
