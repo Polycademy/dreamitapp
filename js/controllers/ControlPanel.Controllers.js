@@ -8,9 +8,22 @@ define(['angular'], function(angular){
 			'SearchServ',
 			function($scope, SearchServ){
 
+				$scope.searchTag = '';
+
 				$scope.submitSearch = function(){
+					console.log($scope.searchTag);
 					SearchServ.searchTag($scope.search);
 				};
+
+				$scope.popularTags = [
+					'popular',
+					'tags',
+					'are',
+					'listed',
+					'here'
+				];
+
+				$scope.loggedIn = true;
 
 			}
 		]);

@@ -58,7 +58,7 @@
 							<div class="item_tags">
 								<ul>
 									<li ng-repeat="tag in idea.tags">
-										<a ng-href="?tags={{tag}}" ng-click="tagAction(tag)">{{tag}}</a>
+										<a ng-href="?tags={{tag}}" ng-click="tagAction(tag)">#{{tag}}</a>
 									</li>
 								</ul>
 							</div>
@@ -67,27 +67,28 @@
 				</div>
 			</div>
 			<aside class="control_panel" equalise-height-to-dir=".wall" ng-controller="ControlPanelCtrl">
-				<div class="affixed_controls">
-					<form class="search_form form-inline" ng-submit="submitSearch()">
+				<div class="affixed_controls" affix="133">
+					<form class="search_form form-inline" ng-submit="submitSearch()" name="searchForm">
 						<label for="search"><span class="fui-search"></span></label>
-						<input id="search" name="search" type="text" ng-model="search" placeholder="Search"></input>
+						<input id="search" name="search" type="text" ng-model="searchTag" placeholder="Search"></input>
 					</form>
+					<p>{{searchTag}}</p>
 					<div class="control_menu" ng-switch="loggedIn">
 						<ul ng-switch-when="true">
-							<li>Add Idea</li>
-							<li>My Ideas</li>
-							<li>Profile</li>
-							<li>Sign out</li>
+							<li><a ng-click="addIdea()"><span class="fui-radio-unchecked"></span>Add Idea</a></li>
+							<li><a ng-click="myIdeas()"><span class="fui-radio-checked"></span>My Ideas</a></li>
+							<li><a ng-click="profile()"><span class="fui-gear"></span>Profile</a></li>
+							<li><a ng-click="signOut()"><span class="logout_icon"></span>Sign out</a></li>
 						</ul>
 						<ul ng-switch-default>
-							<li>Sign In</li>
-							<li>Sign Up</li>
+							<li><a ng-click="signIn()"><span class="login_icon"></span>Sign In</a></li>
+							<li><a ng-click="signOut()"><span class="fui-user"></span>Sign Up</a></li>
 						</ul>
 					</div>
 					<div class="popular_tags">
 						<ul>
 							<li ng-repeat="tag in popularTags">
-								<a ng-href="?tags={{tag}}" ng-click="tagAction(tag)">{{tag}}</a>
+								<a ng-href="?tags={{tag}}" ng-click="tagAction(tag)">#{{tag}}</a>
 							</li>
 						</ul>
 					</div>

@@ -5462,6 +5462,21 @@ a.badge:focus {
   display: none;
 }
 /*
+	CUSTOM ICONS
+ */
+.login_icon {
+  display: inline-block;
+  width: 23px;
+  height: 18px;
+  background: url('../img/login.png') no-repeat center center;
+}
+.logout_icon {
+  display: inline-block;
+  width: 23px;
+  height: 18px;
+  background: url('../img/logout.png') no-repeat center center;
+}
+/*
 	CONTAINERS AND RANDOM
  */
 body {
@@ -5752,12 +5767,67 @@ header.navbar .nav li a {
   color: #333;
 }
 .main .control_panel {
+  font-family: 'source_sans_prosemibold', arial, sans-serif;
   color: #16a085;
+  border-left: 1px solid #53677a;
   -ms-box-sizing: border-box;
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
-  border-left: 1px solid #53677a;
+}
+.main .control_panel .search_form {
+  padding: 20px;
+  margin: 0;
+}
+.main .control_panel .search_form label {
+  font-size: 20px;
+  margin-bottom: 0;
+}
+.main .control_panel .search_form #search {
+  background: none;
+  border: none;
+  box-shadow: none;
+  transition: none;
+  border-radius: 0;
+  color: #16a085;
+  font-size: 20px;
+  width: 140px;
+  height: 26px;
+  margin-bottom: 10px;
+}
+.main .control_panel .control_menu {
+  padding: 20px;
+  font-size: 22px;
+  background: #2980b9;
+}
+.main .control_panel .control_menu ul {
+  margin: 0;
+  list-style: none;
+}
+.main .control_panel .control_menu ul li {
+  margin: 15px 0;
+}
+.main .control_panel .control_menu ul a {
+  color: #2c3e50;
+  text-decoration: none;
+}
+.main .control_panel .control_menu ul a span {
+  margin-right: 10px;
+}
+.main .control_panel .popular_tags {
+  font-size: 18px;
+  padding: 20px;
+}
+.main .control_panel .popular_tags ul {
+  list-style: none;
+  margin: 0;
+}
+.main .control_panel .popular_tags ul li {
+  display: inline-block;
+  margin: 4px;
+}
+.main .control_panel .popular_tags ul a {
+  color: #16a085;
 }
 /*
 	RESPONSIVE
