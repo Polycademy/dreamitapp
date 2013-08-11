@@ -6,10 +6,10 @@ define(['angular', 'lodash'], function(angular, _){
 		.controller('HomeCtrl', [
 			'$scope',
 			'$location',
+			'$filter',
 			'UtilitiesServ',
 			'IdeasServ',
-			'$timeout',
-			function($scope, $location, UtilitiesServ, IdeasServ, $timeout){
+			function($scope, $location, $filter, UtilitiesServ, IdeasServ){
 
 				/**
 				 * The default limit of app ideas to load on each scroll iteration
@@ -84,13 +84,11 @@ define(['angular', 'lodash'], function(angular, _){
 				 */
 				$scope.getIdeas = function(limit, tags){
 
-					var returnedIdeas = [];
-
 					$scope.ideasServiceBusy = true;
 
 					var queryParameters = {
-						"limit": limit,
-						"offset": counterOffset
+						limit: limit,
+						offset: counterOffset
 					};
 
 					if(tags){
@@ -103,6 +101,12 @@ define(['angular', 'lodash'], function(angular, _){
 
 							//increase the counterOffset
 							counterOffset = counterOffset + limit;
+
+							//adding in a filtered decription property for addThis
+							for(var i = 0; i < response.content.length; i++){
+								response.content[i].descriptionFiltered = $filter('StripHtml')(response.content[i].description);
+							}
+
 							$scope.appIdeas = $scope.appIdeas.concat(response.content);
 							$scope.ideasServiceBusy = false;
 
@@ -127,43 +131,7 @@ define(['angular', 'lodash'], function(angular, _){
 				 */
 				$scope.likeAction = function(ideaId){
 
-					// $scope.appIdeas.push({
-					// 	id: 3,
-					// 	title: 'Hacker News App',
-					// 	link: 'hacker_news_app1-idea',
-					// 	image: 'img/2exampleimg.png', //'img/example_item_image.png',,
-					// 	description: '<p>An app to help read Hacker News on the mobile phone or ipad.</p>',
-					// 	authorId: 1,
-					// 	authorLink: 'roger_qiu1',
-					// 	author: 'Roger Qiu',
-					// 	feedback: 32, //this is extracted from the disqus api
-					// 	likes: 40,
-					// 	tags: [
-					// 		'iphone',
-					// 		'ipad',
-					// 		'android',
-					// 		'programming'
-					// 	]
-					// },
-					// {
-					// 	id: 4,
-					// 	title: 'Hacker News App',
-					// 	link: 'hacker_news_app1-idea',
-					// 	image: 'img/2exampleimg.png', //'img/example_item_image.png',,
-					// 	description: '<p>An app to help read Hacker News on the mobile phone or ipad.</p>',
-					// 	authorId: 1,
-					// 	authorLink: 'roger_qiu1',
-					// 	author: 'Roger Qiu',
-					// 	feedback: 32, //this is extracted from the disqus api
-					// 	likes: 40,
-					// 	tags: [
-					// 		'iphone',
-					// 		'ipad',
-					// 		'android',
-					// 		'programming'
-					// 	]
-					// });
-
+					
 				};
 
 				/**

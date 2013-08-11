@@ -4,7 +4,7 @@
 		<!-- This centers the content, and responsively adjusts the width. It also provides a row functionality. -->
 		<div class="wall_container">
 			<div class="wall">
-				<div class="alert" ng-show="ideasServiceError" data-spy="affix" data-offset-top="143">
+				<div class="alert" ng-show="ideasServiceError" affix="143">
 					<button class="close" type="button" data-dismiss="alert">&times;</button>
 					{{ideasServiceError}}
 				</div>
@@ -31,7 +31,7 @@
 									add-this-share="{
 										url: baseUrl + idea.link,
 										title: idea.title,
-										description: idea.description
+										description: idea.descriptionFiltered
 									}"
 								>
 									Share
