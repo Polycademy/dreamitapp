@@ -5826,8 +5826,11 @@ header.navbar .nav li a {
   display: inline-block;
   margin: 4px;
 }
-.main .control_panel .popular_tags ul a {
+.main .control_panel .popular_tags ul li a {
   color: #16a085;
+}
+.main .control_panel .popular_tags ul li a:before {
+  content: '\0023';
 }
 /*
 	RESPONSIVE

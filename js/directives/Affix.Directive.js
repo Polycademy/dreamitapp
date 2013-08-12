@@ -9,7 +9,6 @@ define(['angular', 'lodash', 'jquery'], function(angular, _){
 			'$timeout',
 			function($window, $document, $timeout){
 				return {
-					scope: true,
 					link: function(scope, element, attributes){
 
 						var win = angular.element($window),

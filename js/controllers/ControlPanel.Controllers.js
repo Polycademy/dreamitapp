@@ -1,4 +1,4 @@
-define(['angular'], function(angular){
+define(['angular', 'lodash'], function(angular, _){
 
 	'use strict';
 
@@ -8,12 +8,14 @@ define(['angular'], function(angular){
 			'SearchServ',
 			function($scope, SearchServ){
 
-				$scope.searchTag = '';
-
 				$scope.submitSearch = function(){
-					console.log($scope.searchTag);
-					SearchServ.searchTag($scope.search);
+					SearchServ.searchTag($scope.searchTag);
 				};
+
+				//we want to run this only after someone has finished typing
+				//we can't use debounce because ng-change doesn't trigger the debounce after typing stopped
+				//but throttle only delays the function execution, it doesn't ignore it
+				$scope.submitSearchThrottled = _.throttle($scope.submitSearch, 600);
 
 				$scope.popularTags = [
 					'popular',

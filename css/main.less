@@ -336,9 +336,12 @@ header.navbar{
 				li{
 					display: inline-block;
 					margin: 4px;
-				}
-				a{
-					color: @colour_green_sea;
+					a{
+						color: @colour_green_sea;
+						&:before{
+							content: '\0023';
+						};
+					}
 				}
 			}
 		}

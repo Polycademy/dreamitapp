@@ -8,7 +8,7 @@ define(['angular'], function(angular){
 			function($location){
 
 				this.searchTag = function(tag){
-					$location.search({'tags': encodeURIComponent(tag)});
+					$location.search({'tags': tag});
 				};
 
 			}

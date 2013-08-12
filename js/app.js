@@ -58,6 +58,7 @@ define([
 				'controllers/Header.Controllers',
 				'controllers/Home.Controllers',
 				'controllers/ControlPanel.Controllers',
+				'controllers/About.Controllers',
 				//DIRECTIVES
 				'directives/EqualiseHeights.Directive',
 				'directives/EqualiseHeightTo.Directive',
@@ -105,7 +106,7 @@ define([
 								.state(
 									'home',
 									{
-										url: '/?limit&tags',
+										url: '/', //not implementing the query parameters, as this makes ui-router refresh the entire view, and clearing any form inputs! This means we need to implement our own watch!
 										templateUrl: 'home.html',
 										controller: 'HomeCtrl'
 									}

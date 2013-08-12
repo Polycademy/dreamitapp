@@ -173,7 +173,7 @@ define(['angular', 'lodash'], function(angular, _){
 				 */
 				var setupLimit = function(){
 
-					var limit = $scope.$stateParams.limit;
+					var limit = $location.search().limit;
 
 					if(!UtilitiesServ.empty(limit) && UtilitiesServ.isInteger(limit)){
 
@@ -197,17 +197,7 @@ define(['angular', 'lodash'], function(angular, _){
 				 */
 				var setupTagsSearch = function(){
 
-					var tags = $scope.$stateParams.tags;
-
-					if(!UtilitiesServ.empty(tags)){
-
-						counterOffset = 0;
-
-					}else{
-
-						tags = false;
-
-					}
+					var tags = $location.search().tags;
 
 					return tags;
 
@@ -217,28 +207,32 @@ define(['angular', 'lodash'], function(angular, _){
 				$scope.limit = setupLimit();
 				$scope.tags = setupTagsSearch();
 
-				//load up the ideas
-				$scope.getIdeas($scope.limit, $scope.tags);
+				//watch for changes to the tags and limit and adjust accordingly
+				$scope.$watch(
+					function(){
 
-				//detect query parameter change, and reload the app ideas or adjust the limit
-				// $scope.$on('$locationChangeStart', function(){
+						return $location.search();
 
-				// 	//try $routeChangeStart
-				// 	//or function(){return $location.search()} and deep watch
+					}, 
+					function(){
 
-				// 	//if the limit gets changed, this will be reflected in the next load iteration
-				// 	$scope.limit = setupLimit();
-				// 	$scope.tags = setupTagsSearch();
+						$scope.limit = setupLimit();
+						$scope.tags = setupTagsSearch();
+						//we only reload if there tags
+						//the new limit will only take hold on the next pagination
+						//we will refresh the ideas even if the tags is empty but not undefined
+						if($scope.tags || $scope.tags == ''){
+							//reset masonry, appIdeas and offset
+							$scope.appIdeas = [];
+							counterOffset = 0;
+							$scope.getIdeas($scope.limit, $scope.tags);
+						}
 
-				// 	//if there tags, we should reload the ideas, otherwise we don't do anything
-				// 	if(tags){
-				// 		$scope.appIdeas = $scope.getIdeas($scope.limit, $scope.tags);
-				// 	}
+					}, 
+					true
+				);
 
-				// });
-
-				//infinite load directive needs to push ideas into it
-				//$scope.appIdeas.push($scope.getIdeas(limit));
+				//infinite scroll will automatically load the first batch
 
 			}
 		]);

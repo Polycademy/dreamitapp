@@ -10,8 +10,8 @@ define(['angular', 'masonry', 'imagesLoaded', 'lodash'], function(angular, Mason
 	 * Pass in optional options via masonryWallOptions.
 	 * You're done!
 	 * 
-	 * @param {String} masonryWallDir     Class selector of each item
-	 * @param {Object} masonryWallOptions Optional options that are directly passed into Masonry
+	 * @param {String} masonryWallDir        Class selector of each item
+	 * @param {Object} masonryWallOptions    Optional options that are directly passed into Masonry
 	 */
 	angular.module('Directives')
 		.directive('masonryWallDir', function(){
@@ -28,7 +28,6 @@ define(['angular', 'masonry', 'imagesLoaded', 'lodash'], function(angular, Mason
 						$attrs.$observe('masonryWallDir', function(value){
 							itemSelector = value;
 						});
-						masonryOptions = $scope.$eval($attrs.masonryWallOptions);
 
 						//place holder for masonry to be setup and shared across all ng-repeat directive scopes
 						this.masonry = {};
@@ -39,6 +38,7 @@ define(['angular', 'masonry', 'imagesLoaded', 'lodash'], function(angular, Mason
 						//we have some default options
 						//then overwrite with passed in options
 						//then overwrite with the necessary options
+						masonryOptions = $scope.$eval($attrs.masonryWallOptions);
 						this.masonryOptions = _.assign(
 							{
 								gutter: 0,
@@ -58,9 +58,8 @@ define(['angular', 'masonry', 'imagesLoaded', 'lodash'], function(angular, Mason
 				]
 			};
 		})
-		.directive('masonryItemDir', [
-			'UtilitiesServ',
-			function(UtilitiesServ){
+		.directive('masonryItemDir', 
+			function(){
 				return {
 					scope: true,
 					require: '^masonryWallDir',
@@ -91,7 +90,21 @@ define(['angular', 'masonry', 'imagesLoaded', 'lodash'], function(angular, Mason
 							//this runs on each subsequent iteration of the ng-repeat
 							//and only after masonry has been initialised
 							imagesLoaded(element, function(){
-								masonryWallDirCtrl.masonry.appended(element);
+
+								console.log(scope.$index);
+								console.log(scope.$first);
+
+								//prevent ghosting
+								if(scope.$first){
+									//this only currently works for the first item
+									//but it fails upon items being appended the ghost remains
+									//and the size of the div remains
+									masonryWallDirCtrl.masonry.reloadItems();
+									masonryWallDirCtrl.masonry.layout();
+								}else{
+									masonryWallDirCtrl.masonry.appended(element);
+								}
+							
 							});
 
 						}
@@ -99,6 +112,6 @@ define(['angular', 'masonry', 'imagesLoaded', 'lodash'], function(angular, Mason
 					}
 				};
 			}
-		]);
+		);
 
 });
