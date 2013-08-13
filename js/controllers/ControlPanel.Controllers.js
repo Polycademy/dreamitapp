@@ -12,10 +12,29 @@ define(['angular', 'lodash'], function(angular, _){
 					SearchServ.searchTag($scope.searchTag);
 				};
 
-				//we want to run this only after someone has finished typing
-				//we can't use debounce because ng-change doesn't trigger the debounce after typing stopped
-				//but throttle only delays the function execution, it doesn't ignore it
-				$scope.submitSearchThrottled = _.throttle($scope.submitSearch, 600);
+				//adds an idea, this shows an overlay with a form the ability to add an idea
+				//after the form is submitted and validated, it will close and send the request to the server
+				//once that is done, it will prepend the item object to the masonry list
+				$scope.addIdea = function(){
+
+				};
+
+				//we need the current author, this simply changes the wall's list and offers editing options
+				//this is toggleable!
+				$scope.myIdeas = function(){
+
+					//hardcoded author id, can only be used once we are "logged in"
+					var authorId = 1;
+
+					SearchServ.searchAuthor(authorId);
+
+				};
+
+				//bring up an overlay of their profile, (and potentially a change of the link similar to the idea overlay)
+				//allow them to change their options!
+				$scope.profile = function(){
+
+				};
 
 				$scope.popularTags = [
 					'popular',

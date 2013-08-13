@@ -4,14 +4,14 @@
 		<!-- This centers the content, and responsively adjusts the width. It also provides a row functionality. -->
 		<div class="wall_container">
 			<div class="wall" pull-down-to-window-dir>
-				<div class="alert" ng-show="ideasServiceError" affix="133">
-					<button class="close" type="button" data-dismiss="alert">&times;</button>
-					{{ideasServiceError}}
-				</div>
 				<div 
 					class="wall_masonry_container"
 					masonry-wall-dir=".item_panel" 
-					infinite-scroll="getIdeas(limit, tags)" 
+					masonry-wall-options="{
+						gutter: 0,
+						transitionDuration: '0.3s'
+					}" 
+					infinite-scroll="getIdeas(limit, tags, author)" 
 					infinite-scroll-disabled="ideasServiceBusy" 
 					infinite-scroll-distance="2"
 				>
@@ -43,7 +43,7 @@
 						<div class="item_desc" ng-bind-html="idea.description"></div>
 						<div class="item_meta">
 							<span class="item_author">
-								<a ng-href="{{'users/' + idea.authorLink}}">{{idea.author}}</a>
+								<a ng-href="{{'users/' + idea.authorId + '/' + idea.authorLink}}">{{idea.author}}</a>
 							</span>
 							<div class="item_actions">
 								<a class="item_feedback" ng-href="{{idea.link}}#feedback">
@@ -70,7 +70,7 @@
 				<div class="affixed_controls" affix="133">
 					<form class="search_form form-inline" ng-submit="submitSearch()">
 						<label for="search"><span class="fui-search"></span></label>
-						<input id="search" name="search" type="text" ng-model="searchTag" ng-change="submitSearchThrottled()" placeholder="Search"></input>
+						<input id="search" name="search" type="text" ng-model="searchTag" ng-change="submitSearch()" placeholder="Search"></input>
 					</form>
 					<div class="control_menu" ng-switch="loggedIn">
 						<ul ng-switch-when="true">

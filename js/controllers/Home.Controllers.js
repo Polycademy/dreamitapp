@@ -28,25 +28,6 @@ define(['angular', 'lodash'], function(angular, _){
 				 */
 				var counterOffset = 0;
 
-				// $scope.appIdeas.push({
-				// 	id: i,
-				// 	title: 'Hacker News App',
-				// 	link: 'hacker_news_app1-idea',
-				// 	image: 'img/2exampleimg.png', //'img/example_item_image.png',,
-				// 	description: '<p>An app to help read Hacker News on the mobile phone or ipad.</p>',
-				// 	authorId: 1,
-				// 	authorLink: 'roger_qiu1',
-				// 	author: 'Roger Qiu',
-				// 	feedback: 32, //this is extracted from the disqus api
-				// 	likes: 40,
-				// 	tags: [
-				// 		'iphone',
-				// 		'ipad',
-				// 		'android',
-				// 		'programming'
-				// 	]
-				// });
-
 				/**
 				 * This is the array of app ideas to be repeated across the wall.
 				 * @type {Array}
@@ -62,14 +43,6 @@ define(['angular', 'lodash'], function(angular, _){
 				$scope.ideasServiceBusy = false;
 
 				/**
-				 * Boolean for whether to show an error.
-				 * This could happen if there are no more ideas to show.
-				 * But it's also going to store the error message.
-				 * @type {Boolean}
-				 */
-				$scope.ideasServiceError = false;
-
-				/**
 				 * Addthis plugin uses this to create links since it can't recognise the base tag.
 				 * @type {String}
 				 */
@@ -83,7 +56,7 @@ define(['angular', 'lodash'], function(angular, _){
 				 * @param  {String} tags
 				 * @return {Array}
 				 */
-				$scope.getIdeas = function(limit, tags){
+				$scope.getIdeas = function(limit, tags, author){
 
 					$scope.ideasServiceBusy = true;
 
@@ -94,6 +67,10 @@ define(['angular', 'lodash'], function(angular, _){
 
 					if(tags){
 						queryParameters.tags = tags;
+					}
+
+					if(author){
+						queryParameters.author = author;
 					}
 
 					IdeasServ.get(
@@ -114,7 +91,6 @@ define(['angular', 'lodash'], function(angular, _){
 						},
 						function(response){
 
-							$scope.ideasServiceError = response.data.content;
 							$scope.ideasServiceBusy = false;
 
 						}
@@ -197,15 +173,20 @@ define(['angular', 'lodash'], function(angular, _){
 				 */
 				var setupTagsSearch = function(){
 
-					var tags = $location.search().tags;
+					return $location.search().tags;
 
-					return tags;
+				};
+
+				var setupAuthorSearch = function(){
+
+					return $location.search().author;
 
 				};
 
 				//grab the initial limit and tags
 				$scope.limit = setupLimit();
 				$scope.tags = setupTagsSearch();
+				$scope.author = setupAuthorSearch();
 
 				//watch for changes to the tags and limit and adjust accordingly
 				$scope.$watch(
@@ -218,21 +199,19 @@ define(['angular', 'lodash'], function(angular, _){
 
 						$scope.limit = setupLimit();
 						$scope.tags = setupTagsSearch();
-						//we only reload if there tags
-						//the new limit will only take hold on the next pagination
-						//we will refresh the ideas even if the tags is empty but not undefined
-						if($scope.tags || $scope.tags == ''){
+						$scope.author = setupAuthorSearch();
+
+						//only reload if there are tags or author
+						if($scope.tags || $scope.tags == '' || $scope.author || $scope.author == ''){
 							//reset masonry, appIdeas and offset
 							$scope.appIdeas = [];
 							counterOffset = 0;
-							$scope.getIdeas($scope.limit, $scope.tags);
+							$scope.getIdeas($scope.limit, $scope.tags, $scope.author);
 						}
 
 					}, 
 					true
 				);
-
-				//infinite scroll will automatically load the first batch
 
 			}
 		]);
