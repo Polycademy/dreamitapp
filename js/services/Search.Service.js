@@ -11,6 +11,10 @@ define(['angular'], function(angular){
 					$location.search({'tags': tag});
 				};
 
+				this.searchAuthor = function(authorId){
+					$location.search({'author': authorId});
+				};
+
 			}
 		]);
 

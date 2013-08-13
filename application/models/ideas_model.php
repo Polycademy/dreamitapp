@@ -35,7 +35,7 @@ class Ideas_model extends CI_Model{
 			$this->db->join('tags AS t', 't.ideaId = i.id');
 			$this->db->where_in('t.tag', $tags);
 		}
-		if(is_integer($author)){
+		if(is_numeric($author)){
 			$this->db->where('authorId', $author);
 		}
 		$this->db->limit($limit, $offset);
