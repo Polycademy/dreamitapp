@@ -16,6 +16,14 @@ define(['angular', 'lodash'], function(angular, _){
 					SearchServ.searchTag($scope.searchTag);
 				};
 
+				/**
+				 * Throttled version of submit search. To reduce load and to prevent ng-repeat from overheating.
+				 * @return {Void}
+				 */
+				$scope.submitSearchThrottled = _.throttle(function(){
+					SearchServ.searchTag($scope.searchTag);
+				}, 500);
+
 				//adds an idea, this shows an overlay with a form the ability to add an idea
 				//after the form is submitted and validated, it will close and send the request to the server
 				//once that is done, it will prepend the item object to the masonry list

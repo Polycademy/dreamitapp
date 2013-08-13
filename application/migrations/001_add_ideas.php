@@ -34,6 +34,8 @@ class Migration_add_ideas extends CI_Migration {
 		
 		$this->dbforge->create_table('ideas');
 
+		$this->db->query('ALTER TABLE `ideas` ADD FULLTEXT (`description`)');
+
 	}
 
 	public function down(){

@@ -23,11 +23,13 @@ class Ideas_model extends CI_Model{
 
 	public function read_all($limit = false, $offset = false, $tags = false, $author = false){
 
-		$limit = ($limit) ? $limit : 20;
-		
-		//we're trying to get all the ideas, and if there are tags passed in, get only ideas which has one or more of the tags passed in
-		//we can either use a distinct join or use an IN subquery (semi join)
-		//see http://stackoverflow.com/q/9105427/582917
+		//we need to validate data here!
+
+		//typecast to help the binding
+		$limit = ($limit) ? (int) $limit : 20;
+		$offset = ($offset) ? (int) $offset : 0;
+
+		//search tags
 		$this->db->select('i.*');
 		$this->db->distinct();
 		$this->db->from('ideas AS i');
@@ -35,12 +37,49 @@ class Ideas_model extends CI_Model{
 			$this->db->join('tags AS t', 't.ideaId = i.id');
 			$this->db->where_in('t.tag', $tags);
 		}
-		if(is_numeric($author)){
-			$this->db->where('authorId', $author);
+		$tag_subquery = $this->db->get_compiled_select();
+
+		//optionally do a full text search on the description column and a like search on the title column
+		$search_subquery = '';
+		if(is_array($tags)){
+			$this->db->select('i.*');
+			$this->db->from('ideas AS i');
+			$this->db->where('MATCH (`i`.`description`) AGAINST (' . $this->db->escape(implode(' ', $tags)) . ')', null, false);
+			$this->db->or_like('i.title', implode($tags));
+			$search_subquery = $this->db->get_compiled_select();
 		}
-		$this->db->limit($limit, $offset);
-		$this->db->order_by('date', 'desc');
-		$query = $this->db->get();
+
+		//author filter will be added in optionally
+		$author_filter = ' WHERE `authorId` = ' . $this->db->escape_str($author);
+		$limit_sort = ' ORDER BY `date` DESC' . ' LIMIT ?, ?';
+
+		//union automatically makes the results are distinct
+		if(empty($search_subquery)){
+			$query = $tag_subquery;
+			if(is_numeric($author)){
+				$query .= $author_filter;
+			}
+			$query .= $limit_sort;
+		}else{
+			$query = "
+				SELECT * FROM (
+					($tag_subquery) 
+					UNION 
+					($search_subquery)
+				) AS `u`
+			";
+			if(is_numeric($author)){
+				$query .= $author_filter;
+			}
+			$query .= $limit_sort;
+			//SELECT * FROM ((' . $tag_subquery . ') UNION (' . $search_subquery . ')' . $limit_sort;
+		}
+
+		FB::log($query);
+
+		$query = $this->db->query($query, array($offset, $limit));
+
+		FB::log($this->db->last_query());
 
 		if($query->num_rows() > 0){
 		
