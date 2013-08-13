@@ -58,7 +58,9 @@ define([
 				'controllers/Header.Controllers',
 				'controllers/Home.Controllers',
 				'controllers/ControlPanel.Controllers',
+				'controllers/Users.Controllers',
 				'controllers/About.Controllers',
+				'controllers/Blog.Controllers',
 				//DIRECTIVES
 				'directives/EqualiseHeights.Directive',
 				'directives/EqualiseHeightTo.Directive',
@@ -112,6 +114,22 @@ define([
 									}
 								)
 								.state(
+									'users',
+									{
+										url: '/users',
+										templateUrl: 'users.html',
+										controller: 'UsersCtrl'
+									}
+								)
+								.state(
+									'user',
+									{
+										url: '/users/{userId:[0-9]+}/{userLink}',
+										templateUrl: 'user.html',
+										controller: 'UserCtrl'
+									}
+								)
+								.state(
 									'about',
 									{
 										url: '/about',
@@ -125,6 +143,14 @@ define([
 										url: '/blog',
 										templateUrl: 'blog.html',
 										controller: 'BlogCtrl'
+									}
+								)
+								.state(
+									'post',
+									{
+										url: '/blog/{blogId:[0-9]+}/{blogLink}',
+										templateUrl: 'post.html',
+										controller: 'PostCtrl'
 									}
 								);
 							
