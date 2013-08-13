@@ -22,6 +22,7 @@ class Ideas extends CI_Controller{
 		$limit = $this->input->get('limit', true);
 		$offset = $this->input->get('offset', true);
 		$tags = $this->input->get('tags', true);
+		$author = $this->input->get('author', true);
 
 		//tags are already decoded from $_GET, the + gets turned into spaces
 		if(!empty($tags)){
@@ -30,7 +31,7 @@ class Ideas extends CI_Controller{
 			$tags = false;
 		}
 		
-		$query = $this->Ideas_model->read_all($limit, $offset, $tags);
+		$query = $this->Ideas_model->read_all($limit, $offset, $tags, $author);
 		
 		if($query){
 			

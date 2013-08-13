@@ -21,7 +21,7 @@ class Ideas_model extends CI_Model{
 
 	}
 
-	public function read_all($limit = false, $offset = false, $tags = false){
+	public function read_all($limit = false, $offset = false, $tags = false, $author = false){
 
 		$limit = ($limit) ? $limit : 20;
 		
@@ -35,7 +35,11 @@ class Ideas_model extends CI_Model{
 			$this->db->join('tags AS t', 't.ideaId = i.id');
 			$this->db->where_in('t.tag', $tags);
 		}
+		if(is_integer($author)){
+			$this->db->where('authorId', $author);
+		}
 		$this->db->limit($limit, $offset);
+		$this->db->order_by('date', 'desc');
 		$query = $this->db->get();
 
 		if($query->num_rows() > 0){

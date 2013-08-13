@@ -27,6 +27,9 @@ class Migration_add_ideas extends CI_Migration {
 			'likes'	=> array(
 				'type'			=> 'INT',
 			),
+			'date' => array(
+				'type'			=> 'DATETIME'
+			)
 		));
 		
 		$this->dbforge->create_table('ideas');
