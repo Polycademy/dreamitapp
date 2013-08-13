@@ -45,7 +45,7 @@ class Ideas_model extends CI_Model{
 			$this->db->select('i.*');
 			$this->db->from('ideas AS i');
 			$this->db->where('MATCH (`i`.`description`) AGAINST (' . $this->db->escape(implode(' ', $tags)) . ')', null, false);
-			$this->db->or_like('i.title', implode($tags));
+			$this->db->or_like('i.title', implode(' ', $tags));
 			$search_subquery = $this->db->get_compiled_select();
 		}
 
@@ -72,14 +72,9 @@ class Ideas_model extends CI_Model{
 				$query .= $author_filter;
 			}
 			$query .= $limit_sort;
-			//SELECT * FROM ((' . $tag_subquery . ') UNION (' . $search_subquery . ')' . $limit_sort;
 		}
 
-		FB::log($query);
-
 		$query = $this->db->query($query, array($offset, $limit));
-
-		FB::log($this->db->last_query());
 
 		if($query->num_rows() > 0){
 		
