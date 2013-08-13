@@ -5468,6 +5468,7 @@ body {
   font-family: arial, sans-serif;
   font-size: 14px;
   background: #fafaf7;
+  overflow-y: scroll;
 }
 a {
   cursor: pointer;
@@ -5794,6 +5795,9 @@ header.navbar .nav li a {
 }
 .main .control_panel .control_menu ul li {
   margin: 15px 0;
+}
+.main .control_panel .control_menu ul li.viewing_my_ideas {
+  background: #16a085;
 }
 .main .control_panel .control_menu ul a {
   color: #2c3e50;

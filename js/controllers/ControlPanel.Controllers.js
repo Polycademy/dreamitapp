@@ -8,6 +8,10 @@ define(['angular', 'lodash'], function(angular, _){
 			'SearchServ',
 			function($scope, SearchServ){
 
+				/**
+				 * Submits a tag query parameter to be searched in real time
+				 * @return {Void}
+				 */
 				$scope.submitSearch = function(){
 					SearchServ.searchTag($scope.searchTag);
 				};
@@ -19,14 +23,28 @@ define(['angular', 'lodash'], function(angular, _){
 
 				};
 
-				//we need the current author, this simply changes the wall's list and offers editing options
-				//this is toggleable!
+				/**
+				 * Determines whether we are showing my ideas or not.
+				 * @type {Boolean}
+				 */
+				$scope.viewingMyIdeas = false;
+
+				/**
+				 * Toggles whether to show logged in user's own ideas.
+				 * This is done via the author query parameter.
+				 * @return {Void}
+				 */
 				$scope.myIdeas = function(){
 
-					//hardcoded author id, can only be used once we are "logged in"
-					var authorId = 1;
+					$scope.viewingMyIdeas = !$scope.viewingMyIdeas;
 
-					SearchServ.searchAuthor(authorId);
+					if($scope.viewingMyIdeas){
+						//hardcoded author id, can only be used once we are "logged in"
+						var authorId = 1;
+						SearchServ.searchAuthor(authorId);
+					}else{
+						SearchServ.searchAuthor('');
+					}
 
 				};
 

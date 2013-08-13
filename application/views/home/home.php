@@ -75,7 +75,7 @@
 					<div class="control_menu" ng-switch="loggedIn">
 						<ul ng-switch-when="true">
 							<li><a ng-click="addIdea()"><span class="fui-radio-unchecked"></span>Add Idea</a></li>
-							<li><a ng-click="myIdeas()"><span class="fui-radio-checked"></span>My Ideas</a></li>
+							<li ng-class="{true: 'viewing_my_ideas'}[viewingMyIdeas]"><a ng-click="myIdeas()"><span class="fui-radio-checked"></span>My Ideas</a></li>
 							<li><a ng-click="profile()"><span class="fui-gear"></span>Profile</a></li>
 							<li><a ng-click="signOut()"><span class="logout_icon"></span>Sign out</a></li>
 						</ul>
