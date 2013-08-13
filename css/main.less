@@ -7,8 +7,28 @@
 @import "mixins";
 @import "fonts";
 
+/*
+	CONTAINERS AND RANDOM
+ */
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
 	display: none;
+}
+
+body{
+	font-family: arial, sans-serif;
+	font-size: 14px;
+	background: @colour_generic_white_bg;
+}
+
+a{
+	cursor: pointer;
+	&:focus{
+		outline: none;
+	};
+}
+
+.container{
+	padding: 0 @container_padding;
 }
 
 /*
@@ -26,23 +46,6 @@
 	width: 23px;
 	height: 18px;
 	background: url('../img/logout.png') no-repeat center center;
-}
-
-/*
-	CONTAINERS AND RANDOM
- */
-body{
-	font-family: arial, sans-serif;
-	font-size: 14px;
-	background: @colour_generic_white_bg;
-}
-
-a{
-	cursor: pointer;
-}
-
-.container{
-	padding: 0 @container_padding;
 }
 
 /*
@@ -122,18 +125,6 @@ header.navbar{
 		.control_panel{
 			width: @panel_width;
 		}
-	}
-	.alert{
-		.box-sizing;
-		margin: 0;
-		border-radius: 0;
-		border: none;
-		opacity: 0.9;
-	}
-	.alert.affix{
-		z-index: 150; //above the wall and the wall items but below any overlay
-		width: inherit; //this inherits the width from the parent, this is freaking amazing
-		top: 0;
 	}
 	.wall{
 		//the width is based on number of panel columns.

@@ -5453,6 +5453,9 @@ a.badge:focus {
 .fui-check-inverted-2:before {
   content: "\e000";
 }
+/*
+	CONTAINERS AND RANDOM
+ */
 [ng\:cloak],
 [ng-cloak],
 [data-ng-cloak],
@@ -5460,6 +5463,20 @@ a.badge:focus {
 .ng-cloak,
 .x-ng-cloak {
   display: none;
+}
+body {
+  font-family: arial, sans-serif;
+  font-size: 14px;
+  background: #fafaf7;
+}
+a {
+  cursor: pointer;
+}
+a:focus {
+  outline: none;
+}
+.container {
+  padding: 0 1.2%;
 }
 /*
 	CUSTOM ICONS
@@ -5475,20 +5492,6 @@ a.badge:focus {
   width: 23px;
   height: 18px;
   background: url('../img/logout.png') no-repeat center center;
-}
-/*
-	CONTAINERS AND RANDOM
- */
-body {
-  font-family: arial, sans-serif;
-  font-size: 14px;
-  background: #fafaf7;
-}
-a {
-  cursor: pointer;
-}
-.container {
-  padding: 0 1.2%;
 }
 /*
 	HEADINGS
@@ -5570,21 +5573,6 @@ header.navbar .nav li a {
 }
 .main .wall_container .control_panel {
   width: 240px;
-}
-.main .alert {
-  -ms-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-  margin: 0;
-  border-radius: 0;
-  border: none;
-  opacity: 0.9;
-}
-.main .alert.affix {
-  z-index: 150;
-  width: inherit;
-  top: 0;
 }
 .main .wall {
   background: #f7f2f2;
