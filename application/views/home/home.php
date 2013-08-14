@@ -16,28 +16,28 @@
 					infinite-scroll-distance="2"
 				>
 					<div class="item_panel" ng-repeat="idea in appIdeas" masonry-item-dir>
-						<h3 class="item_header"><a ng-href="{{idea.link}}">{{idea.title}}</a></h3>
+						<h3 class="item_header"><a ng-href="{{idea.link}}" ng-click="openIdeaOverlay()">{{idea.title}}</a></h3>
 						<div class="item_image_container" ng-show="ideaHasImage($index)">
-							<div class="item_rollover">
-								<a 
-									class="share_button" 
-									ng-href="http://www.addthis.com/bookmark.php?v=300&pubid={{dreamItAppConfig.apiKeys.addThis}}" 
-									add-this-dir 
-									add-this-config="{
-										ui_click: true,
-										ui_hover_direction: -1,
-										services_exclude: 'print'
-									}" 
-									add-this-share="{
-										url: baseUrl + idea.link,
-										title: idea.title,
-										description: idea.descriptionFiltered
-									}"
-								>
-									Share
-									<span class="fui-plus"></span>
-								</a>
-							</div>
+							<a 
+								class="share_button" 
+								ng-href="http://www.addthis.com/bookmark.php?v=300&pubid={{dreamItAppConfig.apiKeys.addThis}}" 
+								share-button-dir 
+								add-this-dir 
+								add-this-config="{
+									ui_click: true,
+									ui_hover_direction: -1,
+									services_exclude: 'print'
+								}" 
+								add-this-share="{
+									url: baseUrl + idea.link,
+									title: idea.title,
+									description: idea.descriptionFiltered
+								}"
+							>
+								Share
+								<span class="fui-plus"></span>
+							</a>
+							<div class="item_rollover" ng-click="openIdeaOverlay()"></div>
 							<img ng-src="{{idea.image}}" />
 						</div>
 						<div class="item_desc" ng-bind-html="idea.description"></div>
@@ -74,9 +74,9 @@
 					</form>
 					<div class="control_menu" ng-switch="loggedIn">
 						<ul ng-switch-when="true">
-							<li><a ng-click="addIdea()"><span class="fui-radio-unchecked"></span>Add Idea</a></li>
+							<li><a ng-click="openAddIdeaOverlay()"><span class="fui-radio-unchecked"></span>Add Idea</a></li>
 							<li ng-class="{true: 'viewing_my_ideas'}[viewingMyIdeas]"><a ng-click="myIdeas()"><span class="fui-radio-checked"></span>My Ideas</a></li>
-							<li><a ng-click="profile()"><span class="fui-gear"></span>Profile</a></li>
+							<li><a ng-click="openProfileOverlay()"><span class="fui-gear"></span>Profile</a></li>
 							<li><a ng-click="signOut()"><span class="logout_icon"></span>Sign out</a></li>
 						</ul>
 						<ul ng-switch-default>

@@ -7,10 +7,11 @@ define(['angular', 'lodash'], function(angular, _){
 			'$scope',
 			'$location',
 			'$filter',
+			'$dialog',
 			'UtilitiesServ',
 			'IdeasServ',
 			'SearchServ',
-			function($scope, $location, $filter, UtilitiesServ, IdeasServ, SearchServ){
+			function($scope, $location, $filter, $dialog, UtilitiesServ, IdeasServ, SearchServ){
 
 				/**
 				 * The default limit of app ideas to load on each scroll iteration
@@ -142,6 +143,12 @@ define(['angular', 'lodash'], function(angular, _){
 
 				};
 
+				$scope.openIdeaOverlay = function(){
+
+					console.log('I am being clicked');
+
+				};
+
 				/**
 				 * This gets the limit query parameter and validates it.
 				 * It then either sets the new limit, or defaults to the default limit.
@@ -212,6 +219,15 @@ define(['angular', 'lodash'], function(angular, _){
 					}, 
 					true
 				);
+
+			}
+		])
+		.controller('IdeaOverlayCtrl', [
+			'$scope',
+			function($scope){
+
+				//this controller is a child controller of HomeCtrl and will maintain the overlay by itself
+				//no need of ui-router
 
 			}
 		]);

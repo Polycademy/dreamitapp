@@ -5598,6 +5598,20 @@ header.navbar .nav li a {
 .main .wall_masonry_container .item_panel .item_image_container {
   position: relative;
 }
+.main .wall_masonry_container .item_panel .item_image_container .share_button {
+  position: absolute;
+  background: #16a085;
+  color: #fff;
+  margin: 10px;
+  padding: 6px 2px;
+  font-size: 14px;
+  border-radius: 4px;
+  text-decoration: none;
+  -webkit-box-shadow: 0 0 2px rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: 0 0 2px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.1);
+  z-index: 150;
+}
 .main .wall_masonry_container .item_panel .item_image_container .item_rollover {
   position: absolute;
   top: 0;
@@ -5635,19 +5649,7 @@ header.navbar .nav li a {
   background: rgba(255, 255, 255, 0.2);
   -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=argb(rgba(@red, @green, @blue, @alpha)), endColorstr=argb(rgba(@red, @green, @blue, @alpha)))";
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#33ffffff, endColorstr=#33ffffff);
-}
-.main .wall_masonry_container .item_panel .item_image_container .item_rollover .share_button {
-  background: #16a085;
-  color: #fff;
-  margin: 10px;
-  padding: 6px 2px;
-  font-size: 14px;
-  position: absolute;
-  border-radius: 4px;
-  text-decoration: none;
-  -webkit-box-shadow: 0 0 2px rgba(0, 0, 0, 0.1);
-  -moz-box-shadow: 0 0 2px rgba(0, 0, 0, 0.1);
-  box-shadow: 0 0 2px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
 }
 .main .wall_masonry_container .item_panel .item_desc {
   padding: 18px 10px 10px;

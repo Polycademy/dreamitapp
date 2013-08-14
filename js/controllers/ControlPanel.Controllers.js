@@ -5,8 +5,9 @@ define(['angular', 'lodash'], function(angular, _){
 	angular.module('Controllers')
 		.controller('ControlPanelCtrl', [
 			'$scope',
+			'$dialog',
 			'SearchServ',
-			function($scope, SearchServ){
+			function($scope, $dialog, SearchServ){
 
 				/**
 				 * Submits a tag query parameter to be searched in real time
@@ -23,13 +24,6 @@ define(['angular', 'lodash'], function(angular, _){
 				$scope.submitSearchThrottled = _.throttle(function(){
 					SearchServ.searchTag($scope.searchTag);
 				}, 500);
-
-				//adds an idea, this shows an overlay with a form the ability to add an idea
-				//after the form is submitted and validated, it will close and send the request to the server
-				//once that is done, it will prepend the item object to the masonry list
-				$scope.addIdea = function(){
-
-				};
 
 				/**
 				 * Determines whether we are showing my ideas or not.
@@ -56,12 +50,29 @@ define(['angular', 'lodash'], function(angular, _){
 
 				};
 
-				//bring up an overlay of their profile, (and potentially a change of the link similar to the idea overlay)
-				//allow them to change their options!
-				$scope.profile = function(){
+				//these are the overlays
+				$scope.openAddIdeaOverlay = function(){
 
 				};
 
+				$scope.openProfileOverlay = function(){
+
+				};
+
+				//should start false
+				$scope.loggedIn = true;
+
+				//this will bring up an overlay as well
+				$scope.signIn = function(){
+
+				};
+
+				//this does not bring up an overlay
+				$scope.signOut = function(){
+
+				};
+
+				//we need some way of getting popular tags
 				$scope.popularTags = [
 					'popular',
 					'tags',
@@ -69,8 +80,6 @@ define(['angular', 'lodash'], function(angular, _){
 					'listed',
 					'here'
 				];
-
-				$scope.loggedIn = true;
 
 			}
 		]);

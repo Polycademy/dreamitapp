@@ -10,7 +10,6 @@ define(['angular', 'addthis'], function(angular, addthis){
 		.directive('addThisDir', 
 			function(){
 				return {
-					scope: true,
 					link: function(scope, element, attributes){
 
 						var addThisConfig = scope.$eval(attributes.addThisConfig),

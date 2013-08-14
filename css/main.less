@@ -151,6 +151,18 @@ header.navbar{
 			}
 			.item_image_container{
 				position: relative;
+				.share_button{
+					position: absolute;
+					background: @colour_green_sea;
+					color: #fff;
+					margin: 10px;
+					padding: 6px 2px;
+					font-size: 14px;
+					border-radius: 4px;
+					text-decoration: none;
+					.drop-shadow(0, 0);
+					z-index: 150;
+				}
 				.item_rollover{
 					position: absolute;
 					top: 0;
@@ -165,17 +177,7 @@ header.navbar{
 						.transition-duration(1s);
 						.opacity(1);
 						.transparent-background(255, 255, 255, 0.2);
-					}
-					.share_button{
-						background: @colour_green_sea;
-						color: #fff;
-						margin: 10px;
-						padding: 6px 2px;
-						font-size: 14px;
-						position: absolute;
-						border-radius: 4px;
-						text-decoration: none;
-						.drop-shadow(0, 0);
+						cursor: pointer;
 					}
 				}
 			}

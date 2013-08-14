@@ -69,6 +69,7 @@ define([
 				'directives/AddThis.Directive',
 				'directives/Affix.Directive',
 				'directives/PullDownToWindow.Directive',
+				'directives/ShareButton.Directive',
 				//FILTERS
 				'filters/StripHtml.Filter',
 				'filters/NumCounter.Filter',
