@@ -28,7 +28,7 @@ class Secrets{
 
 		if(!$secrets_loaded){
 
-			die('Secrets have not been loaded! You may need to set at least the encryption secret.');
+			echo 'Secrets have not been loaded! You may need to set at least the encryption secret.';
 
 		}
 
