@@ -4,12 +4,9 @@ global:
 web1:
   name: dreamitapp
   php_version: 5.4.14
-  php_extensions: [curl, json, mysqli, openssl, pdo_mysql, session]
   php_date_timezone: "Australia/ACT"
   php_upload_max_filesize: "8M"
   php_short_open_tag: "1"
-  shared_writable_dirs:
-    - .secrets
 db1:
   name: dreamitapp
   type: mysql
