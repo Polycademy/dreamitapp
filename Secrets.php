@@ -7,7 +7,7 @@ class Secrets{
 
 	public static function load(){
 		
-		$secrets_path = FCPATH . '/.secrets';
+		$secrets_path = FCPATH . '/secrets';
 		$secrets_loaded = false;
 
 		//see if "secrets folder" exists
