@@ -34,19 +34,27 @@ module.exports = function(grunt){
 		8. change index.php to use 'production' constant (inside the build directory)
 	*/
 
-    var releaseBranchOptions = {
-    	main:{
-			options: {
-				releaseBranch: 'pagoda-release',
-				distDir: 'build',
-				commitMessage: 'RELEASE',
-				commit: true
-				push: false,
-				blacklist: [
-					'.git'
-				]
-			}
-    	}
+	var releaseBranchOptions = {
+		options: {
+			//the name of the orphan branch. Default is gh-pages
+			releaseBranch: 'pagoda-release',
+			//the name of the remote repository. Default is origin
+			remoteRepository: 'origin',
+			//the name of the output directory. Default is dist
+			distDir: 'build',
+			//the commit message to be used for the optional commit
+			commitMessage: 'RELEASE',
+			//should files be automatically commited on the orphan branch
+			commit: false,
+			//should the orphan branch be pushed to the remote repository
+			//default is false
+			push: false,
+			//a blacklist of things to keep on the root level. By default only
+			//the .git folder will be kept.
+			blacklist: [
+				'.git'
+			]
+		}
 	};
 
 	//project configuration
