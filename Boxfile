@@ -10,8 +10,6 @@ web1:
   php_short_open_tag: "1"
   shared_writable_dirs:
     - .secrets
-  before_deploy:
-    - "php index.php cli migrate restart"
 db1:
   name: dreamitapp
   type: mysql
