@@ -6,8 +6,8 @@ Pigeon::map(function($r){
 	$r->route('api', false, function($r){
 	
 		// //for migrations, these should be commented out when you've done your migration!
-		// $r->get('migrate', 'migrate/index');
-		// $r->get('migrate/latest', 'migrate/latest');
+		$r->get('migrate', 'migrate/index');
+		$r->get('migrate/latest', 'migrate/latest');
 		// $r->get('migrate/current', 'migrate/current');
 		// $r->get('migrate/version/(:num)', 'migrate/version/$1');
 		// $r->get('migrate/restart',  'migrate/restart');
