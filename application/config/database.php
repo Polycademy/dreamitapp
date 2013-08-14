@@ -108,6 +108,36 @@ if(ENVIRONMENT == 'development'){
 
 }elseif(ENVIRONMENT == 'production'){
 
+	$db_host = $_SERVER['DB1_HOST'];
+	$db_name = $_SERVER['DB1_NAME'];
+	$db_user = $_SERVER['DB1_USER'];
+	$db_pass = $_SERVER['DB1_PASS'];
+	$db_port = $_SERVER['DB1_PORT'];
+
+	//for pagodabox
+	$db['default'] = array(
+		'dsn'		=> 'mysql:host=' . $db_host . ';dbname=' . $db_name,
+		'hostname'	=> $db_host,
+		'username'	=> $db_user,
+		'password'	=> $db_pass,
+		'database'	=> $db_name,
+		'dbdriver'	=> 'pdo',
+		'dbprefix'	=> '',
+		'pconnect'	=> TRUE,
+		'db_debug'	=> TRUE,
+		'cache_on'	=> FALSE,
+		'cachedir'	=> '',
+		'char_set'	=> 'utf8',
+		'dbcollat'	=> 'utf8_general_ci',
+		'swap_pre'	=> '',
+		'autoinit'	=> TRUE,
+		'encrypt'	=> FALSE,
+		'compress'	=> FALSE,
+		'stricton'	=> FALSE,
+		'failover'	=> array(),
+		'port'		=> $db_port,
+	);
+
 }
 
 /* End of file database.php */

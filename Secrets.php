@@ -16,7 +16,7 @@ class Secrets{
 			foreach(new DirectoryIterator($secrets_path) as $file){
 
 				//ignore dots and non-php extensions and this file itself
-				if($file->isDot() OR $file->getExtension() != 'php' OR $file->getFilename() == __FILE__) continue;
+				if($file->isDot() OR $file->getExtension() != 'php') continue;
 				
 				$secrets_loaded = true;
 
