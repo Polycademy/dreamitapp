@@ -37,13 +37,13 @@ module.exports = function(grunt){
 	//project configuration
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json'), //get the package.json to load dependencies!
-		less:{
-			main: {
+		cssmin: {
+			main:{
 				options: {
-					yuicompress: true
+					keepSpecialComments: 0
 				},
 				files: {
-					"css/main.css": "css/main.less" //target -> source
+					'css/main.css': 'css/main.css'
 				}
 			}
 		},
@@ -118,14 +118,14 @@ module.exports = function(grunt){
 	});
 		
 	grunt.loadNpmTasks('grunt-shell'); //for random shell commands later on
-	grunt.loadNpmTasks('grunt-contrib-less');
 	grunt.loadNpmTasks('grunt-contrib-concat');
 	grunt.loadNpmTasks('grunt-contrib-uglify');
 	grunt.loadNpmTasks('grunt-contrib-clean');
 	grunt.loadNpmTasks('grunt-contrib-copy');
 	grunt.loadNpmTasks('grunt-text-replace');
 	grunt.loadNpmTasks('grunt-contrib-jshint');
+	grunt.loadNpmTasks('grunt-contrib-cssmin');
 	
-	grunt.registerTask('default', ['less', 'clean', 'copy', 'replace']);
+	grunt.registerTask('default', ['cssmin', 'clean', 'copy', 'replace']);
 
 };
