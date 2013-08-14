@@ -4,5 +4,5 @@
 
 $config['polyauth'] = array(
 	'email'				=> true,
-	'session_handler'	=> new PolyAuth\Sessions\EncryptedSessionHandler($_ENV['secrets']['encryption_key']),
+	'session_handler'	=> new PolyAuth\Sessions\EncryptedSessionHandler($this->config['encryption_key']),
 );
