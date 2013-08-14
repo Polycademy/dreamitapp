@@ -34,9 +34,25 @@ module.exports = function(grunt){
 		8. change index.php to use 'production' constant (inside the build directory)
 	*/
 
+    var releaseBranchOptions = {
+    	main:{
+			options: {
+				releaseBranch: 'pagoda-release',
+				distDir: 'build',
+				commitMessage: 'RELEASE',
+				commit: true
+				push: false,
+				blacklist: [
+					'.git'
+				]
+			}
+    	}
+	};
+
 	//project configuration
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json'), //get the package.json to load dependencies!
+		releaseBranchPre: releaseBranchOptions,
 		cssmin: {
 			main:{
 				options: {
@@ -114,7 +130,8 @@ module.exports = function(grunt){
 					to: "define('ENVIRONMENT', isset($_SERVER['CI_ENV']) ? $_SERVER['CI_ENV'] : 'production');"
 				}]
 			}
-		}
+		},
+		releaseBranch: releaseBranchOptions
 	});
 		
 	grunt.loadNpmTasks('grunt-shell'); //for random shell commands later on
@@ -125,7 +142,8 @@ module.exports = function(grunt){
 	grunt.loadNpmTasks('grunt-text-replace');
 	grunt.loadNpmTasks('grunt-contrib-jshint');
 	grunt.loadNpmTasks('grunt-contrib-cssmin');
+	grunt.loadNpmTasks('grunt-release-branch');
 	
-	grunt.registerTask('default', ['cssmin', 'clean', 'copy', 'replace']);
+	grunt.registerTask('default', ['releaseBranchPre', 'cssmin', 'clean', 'copy', 'replace', 'releaseBranch']);
 
 };
