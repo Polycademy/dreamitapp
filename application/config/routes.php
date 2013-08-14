@@ -5,13 +5,13 @@ Pigeon::map(function($r){
 	//RESOURCES ROUTING
 	$r->route('api', false, function($r){
 	
-		//for migrations, these should be commented out when you've done your migration!
-		$r->get('migrate', 'migrate/index');
-		$r->get('migrate/latest', 'migrate/latest');
-		$r->get('migrate/current', 'migrate/current');
-		$r->get('migrate/version/(:num)', 'migrate/version/$1');
-		$r->get('migrate/restart',  'migrate/restart');
-		$r->get('migrate/restart/(:num)',  'migrate/restart/$1');
+		// //for migrations, these should be commented out when you've done your migration!
+		// $r->get('migrate', 'migrate/index');
+		// $r->get('migrate/latest', 'migrate/latest');
+		// $r->get('migrate/current', 'migrate/current');
+		// $r->get('migrate/version/(:num)', 'migrate/version/$1');
+		// $r->get('migrate/restart',  'migrate/restart');
+		// $r->get('migrate/restart/(:num)',  'migrate/restart/$1');
 		
 		//services
 		$r->resources('ideas');
@@ -21,6 +21,21 @@ Pigeon::map(function($r){
 		
 		//for logging in and out
 		$r->resources('sessions');
+		
+	});
+
+	//CLI ROUTING
+	$r->route('cli', false , function($r){
+
+		//cli requests go through route
+		
+		//php index.php cli migrate restart
+		$r->route('migrate', 'migrate/index');
+		$r->route('migrate/latest', 'migrate/latest');
+		$r->route('migrate/current', 'migrate/current');
+		$r->route('migrate/version/(:num)', 'migrate/version/$1');
+		$r->route('migrate/restart',  'migrate/restart');
+		$r->route('migrate/restart/(:num)',  'migrate/restart/$1');
 		
 	});
 	

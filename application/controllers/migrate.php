@@ -1,12 +1,13 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 
-//VERY IMPORTANT, if your are using codeigniter session tables, you need to switch off sess_use_tables before running migrations! Or else, this controller may try to access the sessions tables when it hasn't been created yet.
-//Switch it back on after you've migrated, then you don't need to worry about it later
 class Migrate extends CI_Controller {
  
 	public function __construct(){
  
 		parent::__construct();
+		if(!$this->input->is_cli_request()){
+			exit;
+		}
 		$this->load->library('migration');
  
 	}
