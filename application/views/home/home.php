@@ -16,7 +16,7 @@
 					infinite-scroll-distance="2"
 				>
 					<div class="item_panel" ng-repeat="idea in appIdeas" masonry-item-dir>
-						<h3 class="item_header"><a ng-href="{{idea.link}}" ng-click="openIdeaOverlay()">{{idea.title}}</a></h3>
+						<h3 class="item_header"><a ng-href="{{idea.link}}" ng-click="openIdeaOverlay(idea.id)">{{idea.title}}</a></h3>
 						<div class="item_image_container" ng-show="ideaHasImage($index)">
 							<a 
 								class="share_button" 
@@ -37,7 +37,7 @@
 								Share
 								<span class="fui-plus"></span>
 							</a>
-							<div class="item_rollover" ng-click="openIdeaOverlay()"></div>
+							<div class="item_rollover" ng-click="openIdeaOverlay(idea.id)"></div>
 							<img ng-src="{{idea.image}}" />
 						</div>
 						<div class="item_desc" ng-bind-html="idea.description"></div>

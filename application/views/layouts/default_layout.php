@@ -26,7 +26,7 @@
 		<script src="js/config.js"></script>
 		<script data-main="js/bootstrap" src="js/lib/require.min.js"></script>
 	</head>
-	<body class="ng-cloak" ng-cloak>
+	<body class="ng-cloak" ng-class="{true: 'no_scroll'}[viewingOverlay]" ng-cloak>
 
 		<!--[if lt IE 7]>
 			<p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>

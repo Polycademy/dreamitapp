@@ -70,6 +70,7 @@ define([
 				'directives/Affix.Directive',
 				'directives/PullDownToWindow.Directive',
 				'directives/ShareButton.Directive',
+				'directives/Overlay.Directive',
 				//FILTERS
 				'filters/StripHtml.Filter',
 				'filters/NumCounter.Filter',

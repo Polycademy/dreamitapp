@@ -5,13 +5,14 @@ define(['angular', 'lodash'], function(angular, _){
 	angular.module('Controllers')
 		.controller('HomeCtrl', [
 			'$scope',
+			'$rootScope',
 			'$location',
 			'$filter',
 			'$dialog',
 			'UtilitiesServ',
 			'IdeasServ',
 			'SearchServ',
-			function($scope, $location, $filter, $dialog, UtilitiesServ, IdeasServ, SearchServ){
+			function($scope, $rootScope, $location, $filter, $dialog, UtilitiesServ, IdeasServ, SearchServ){
 
 				/**
 				 * The default limit of app ideas to load on each scroll iteration
@@ -143,12 +144,6 @@ define(['angular', 'lodash'], function(angular, _){
 
 				};
 
-				$scope.openIdeaOverlay = function(){
-
-					console.log('I am being clicked');
-
-				};
-
 				/**
 				 * This gets the limit query parameter and validates it.
 				 * It then either sets the new limit, or defaults to the default limit.
@@ -220,14 +215,45 @@ define(['angular', 'lodash'], function(angular, _){
 					true
 				);
 
+				//setting up the overlay options
+				var dialog = $dialog.dialog({
+					backdrop: false,
+					keyboard: true,
+					dialogClass: 'modal idea_overlay',
+					templateUrl: 'idea_overlay.html',
+					controller: 'IdeaOverlayCtrl'
+				});
+
+				$scope.openIdeaOverlay = function(ideaId){
+
+					//you might want to see if you can remember the URL parameters
+
+					//we need to pass in the ideaId to the modal controller
+					//and it has to use resolved functions
+					dialog.options.resolve = {
+						ideaId: function(){ return ideaId }
+					};
+					
+					dialog.open().then(function(){
+						$rootScope.viewingOverlay = false;
+					});
+
+				};
+
 			}
 		])
 		.controller('IdeaOverlayCtrl', [
 			'$scope',
-			function($scope){
+			'$rootScope',
+			'dialog',
+			'ideaId',
+			function($scope, $rootScope, dialog, ideaId){
 
-				//this controller is a child controller of HomeCtrl and will maintain the overlay by itself
-				//no need of ui-router
+				$rootScope.viewingOverlay = true;
+
+				$scope.closeOverlay = function(){
+					dialog.close();
+				};
 
 			}
 		]);

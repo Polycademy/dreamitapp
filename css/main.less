@@ -32,6 +32,10 @@ a{
 	padding: 0 @container_padding;
 }
 
+.no_scroll{
+	overflow: hidden;
+}
+
 /*
 	CUSTOM ICONS
  */
@@ -345,6 +349,55 @@ header.navbar{
 	}
 }
 
+/*
+	OVERLAY
+*/
+.idea_overlay{
+	.transparent-background(59, 77, 79, 0.7);
+	border: none;
+	border-radius: 0;
+	box-shadow: none;
+	width: 100%;
+	margin: 0;
+	top: 0 !important; //need to overwrite this
+	bottom: 0;
+	left: 0;
+	right: 0;
+	overflow-y: scroll;
+	.idea_overlay_container{
+		background: @colour_bright_clouds;
+		width: 780px;
+		margin: 0 auto;
+		padding: 20px;
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		.overlay_header{
+			.overlay_heading{
+				float: left;
+			}
+			.overlay_close{
+				float: right;
+				background: @colour_grey_clouds;
+				border: 1px solid @colour_greyer_clouds;
+				.rounded(8px);
+				color: @colour_wet_asphalt;
+				font-size: 34px;
+				width: 54px;
+				height: 54px;
+				line-height: 50px;
+				&:hover{
+					background: @colour_clouds;
+					color: @colour_midnight_blue;
+				};
+			}
+		}
+		.overlay_content{
+			clear: both;
+		}
+	}
+}
 
 /*
 	RESPONSIVE

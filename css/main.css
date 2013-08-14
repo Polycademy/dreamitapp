@@ -5479,6 +5479,9 @@ a:focus {
 .container {
   padding: 0 1.2%;
 }
+.no_scroll {
+  overflow: hidden;
+}
 /*
 	CUSTOM ICONS
  */
@@ -5825,6 +5828,58 @@ header.navbar .nav li a {
 }
 .main .control_panel .popular_tags ul li a:before {
   content: '\0023';
+}
+/*
+	OVERLAY
+*/
+.idea_overlay {
+  background: transparent;
+  background: rgba(59, 77, 79, 0.7);
+  -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=argb(rgba(@red, @green, @blue, @alpha)), endColorstr=argb(rgba(@red, @green, @blue, @alpha)))";
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#b33b4d4f, endColorstr=#b33b4d4f);
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  width: 100%;
+  margin: 0;
+  top: 0 !important;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  overflow-y: scroll;
+}
+.idea_overlay .idea_overlay_container {
+  background: #f7f2f2;
+  width: 780px;
+  margin: 0 auto;
+  padding: 20px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+.idea_overlay .idea_overlay_container .overlay_header .overlay_heading {
+  float: left;
+}
+.idea_overlay .idea_overlay_container .overlay_header .overlay_close {
+  float: right;
+  background: #efebe7;
+  border: 1px solid #e2dddd;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  border-radius: 8px;
+  color: #34495e;
+  font-size: 34px;
+  width: 54px;
+  height: 54px;
+  line-height: 50px;
+}
+.idea_overlay .idea_overlay_container .overlay_header .overlay_close:hover {
+  background: #ecf0f1;
+  color: #2c3e50;
+}
+.idea_overlay .idea_overlay_container .overlay_content {
+  clear: both;
 }
 /*
 	RESPONSIVE
