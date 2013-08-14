@@ -247,13 +247,36 @@ define(['angular', 'lodash'], function(angular, _){
 			'$rootScope',
 			'dialog',
 			'ideaId',
-			function($scope, $rootScope, dialog, ideaId){
+			'IdeasServ',
+			function($scope, $rootScope, dialog, ideaId, IdeasServ){
 
 				$rootScope.viewingOverlay = true;
 
 				$scope.closeOverlay = function(){
 					dialog.close();
 				};
+
+				//ok let's update the URL
+
+				//and load in the appropriate data
+				$scope.idea = {};
+				IdeasServ.get(
+					{
+						id: ideaId
+					},
+					function(response){
+
+						console.log(response.content);
+						$scope.idea = response.content;
+
+					},
+					function(response){
+
+						//error message
+						console.log(response.data);
+
+					}
+				);
 
 			}
 		]);

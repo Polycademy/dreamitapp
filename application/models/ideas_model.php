@@ -19,6 +19,56 @@ class Ideas_model extends CI_Model{
 
 	public function read($id){
 
+		$query = $this->db->get_where('ideas', array('id' => $id));
+
+		if($query->num_rows() > 0){
+			
+			$row = $query->row();
+
+			//get author information (currently hardcoded)
+			$author = 'Roger Qiu';
+			$author_link = 'roger_qiu1';
+			$author_avatar = 'http://gravatar.com/avatar/' . md5(trim('roger.qiu@polycademy.com'));
+			$author_type = 'Developer';
+			$author_profile_links = array('http://polycademy.com');
+
+			$tags = array();
+			$this->db->select('tag')->where('ideaId', $id)->from('tags');
+			$tag_query = $this->db->get();
+			if($tag_query->num_rows() > 0){
+				foreach($tag_query->result() as $tag_row){
+					$tags[] = $tag_row->tag;
+				}
+			}
+
+			$data = array(
+				'id'			=> $id,
+				'title'			=> $row->title,
+				'link'			=> $row->link,
+				'image'			=> $row->image,
+				'description'	=> $row->description,
+				'authorId'		=> $row->authorId,
+				'authorLink'	=> $author_link,
+				'author'		=> $author,
+				'authorAvatar'			=> $author_avatar,
+				'authorType'			=> $author_type,
+				'authorProfileLinks'	=> $author_profile_links,
+				'likes'			=> $row->likes,
+				'tags'			=> $tags,
+				'date'			=> $row->date,
+			);
+			return $data;
+			
+		}else{
+		
+			$this->errors = array(
+				'error' => 'Could not find specified idea.'
+			);
+			return false;
+		
+		}
+
+
 	}
 
 	public function read_all($limit = false, $offset = false, $tags = false, $author = false){
@@ -88,6 +138,9 @@ class Ideas_model extends CI_Model{
 				//get author information (currently hardcoded)
 				$author = 'Roger Qiu';
 				$author_link = 'roger_qiu1';
+				$author_avatar = 'http://gravatar.com/avatar/' . md5(trim('roger.qiu@polycademy.com')) . '?s=184&d=mm';
+				$author_type = 'Developer';
+				$author_profile_links = array('http://polycademy.com');
 
 				//tags for each idea
 				$tags = array();
@@ -100,16 +153,20 @@ class Ideas_model extends CI_Model{
 				}
 
 				$data[] = array(
-					'id'			=> $row->id,
-					'title'			=> $row->title,
-					'link'			=> $row->link,
-					'image'			=> $row->image,
-					'description'	=> $row->description,
-					'authorId'		=> $author_id,
-					'authorLink'	=> $author_link,
-					'author'		=> $author,
-					'likes'			=> $row->likes,
-					'tags'			=> $tags,
+					'id'					=> $row->id,
+					'title'					=> $row->title,
+					'link'					=> $row->link,
+					'image'					=> $row->image,
+					'description'			=> $row->description,
+					'authorId'				=> $author_id,
+					'authorLink'			=> $author_link,
+					'author'				=> $author,
+					'authorAvatar'			=> $author_avatar,
+					'authorType'			=> $author_type,
+					'authorProfileLinks'	=> $author_profile_links,
+					'likes'					=> $row->likes,
+					'tags'					=> $tags,
+					'date'					=> $row->date,
 				);
 			
 			}
