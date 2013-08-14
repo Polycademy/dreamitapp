@@ -26,19 +26,17 @@ class Secrets{
 
 		}
 
-		if(!$secrets_loaded){
+		if($secrets_loaded){
 
-			echo 'Secrets have not been loaded! You may need to set at least the encryption secret.';
+			foreach($secrets as $key => $value){
+
+				$_ENV['secrets'][$key] = $value;
+
+			}
+
+			unset($secrets);
 
 		}
-
-		foreach($secrets as $key => $value){
-
-			$_ENV['secrets'][$key] = $value;
-
-		}
-
-		unset($secrets);
 
 	}
 
