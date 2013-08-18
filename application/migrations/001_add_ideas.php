@@ -26,6 +26,7 @@ class Migration_add_ideas extends CI_Migration {
 			),
 			'likes'	=> array(
 				'type'			=> 'INT',
+				'default'		=> '0',
 			),
 			'date' => array(
 				'type'			=> 'DATETIME'
