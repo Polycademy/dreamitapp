@@ -11,7 +11,6 @@ vendor/*
 bin/*
 node_modules/*
 bower_components/*
-build/*
 .c9revisions/*
 secrets/*
 !secrets/*.example
@@ -64,7 +63,6 @@ local.properties
 [Dd]ebug/
 [Rr]elease/
 x64/
-build/
 [Bb]in/
 [Oo]bj/
 

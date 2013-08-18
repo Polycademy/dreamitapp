@@ -5,10 +5,11 @@ class Migrate extends CI_Controller {
 	public function __construct(){
  
 		parent::__construct();
-		//Using build currently...
-		// if(!$this->input->is_cli_request()){
-		// 	exit;
-		// }
+
+		if(!$this->input->is_cli_request()){
+			exit;
+		}
+		
 		$this->load->library('migration');
  
 	}

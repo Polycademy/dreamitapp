@@ -1,38 +1,9 @@
 module.exports = function(grunt){
 
 	/*
-		These steps are required because PAGODABOX does not support NPM or BOWER to install dependencies.
-		Therefore all of our dependencies needs to be packaged up and send to as the build folder using FTP instead of GIT.
-		Finally the BoxFile cannot run any of it's deploy hooks properly. In fact upon changing to FTP.
-		We will need to manually run the migration. One way would be to access it via the Web, then deleting the file.
-		Another would be accessing via ssh to cli.
-		In the future, when node and npm is supported you can move to a proper automatic deploy process via the deploy hooks.
-		You would set document root as build/ and download all dependencies in after_build and run migration at before_deploy.
-		See this: http://help.pagodabox.com/customer/portal/articles/356925
-		STEPS:
-		1. compile main.less to main.css (and compress)
-		2. delete the old build directory
-		3. copy over everything to the build directory (we keep all dependencies)
-			a) Except:
-				css (except main.css)
-				bin, 
-				tests, 
-				tools, 
-				node_modules, 
-				.git,
-				.c9revisions,
-				"application/logs/*", 
-				"application/cache/*", 
-				"application/config/development/*",
-				Gruntfile.js, 
-				package.json, 
-				README.md, 
-				composer.lock
-				composer.json
-				.gitignore, 
-				.gitattributes, 
-		8. change index.php to use 'production' constant (inside the build directory)
-	*/
+		The build directory should be tracked by Git, as PagodaBox relies on Git to host your files.
+		Make sure to make your git repository private as there may be secrets.
+	 */
 
 	//project configuration
 	grunt.initConfig({
@@ -43,7 +14,8 @@ module.exports = function(grunt){
 					keepSpecialComments: 0
 				},
 				files: {
-					'css/main.css': 'css/main.css'
+					src: 'css/*.css',
+					dest: 'css/*.css'
 				}
 			}
 		},
@@ -56,11 +28,14 @@ module.exports = function(grunt){
 						//directory separator
 						var dir = require('path').sep;
 						
-						// ignoring "css/" except css/main.css
+						// ignoring "css/" except *.css
 						var cssPattern = new RegExp('^css\\'+dir);
-						if(cssPattern.test(filepath) && filepath != 'css'+dir+'main.css'){
-							grunt.log.writeln('Not copying: ' + filepath);
-							return false;
+						var cssExtensionPattern = new RegExp('css$');
+						if(cssPattern.test(filepath)){
+							if(!cssExtensionPattern.test(filepath)){
+								grunt.log.writeln('Not copying: ' + filepath);
+								return false;
+							}
 						}
 						
 						// ignoring various directories
@@ -87,11 +62,12 @@ module.exports = function(grunt){
 						
 						//ignoring various files
 						if(
-							filepath === 'README.md' ||
-							filepath === 'composer.json' ||
-							filepath === 'composer.lock' ||
+							filepath === 'README.md' || 
+							filepath === 'composer.json' || 
+							filepath === 'composer.lock' || 
 							filepath === 'Gruntfile.js' || 
 							filepath === 'package.json' || 
+							filepath === 'bower.json' || 
 							filepath === '.gitignore' || 
 							filepath === '.gitattributes'
 						){
@@ -117,7 +93,7 @@ module.exports = function(grunt){
 		}
 	});
 		
-	grunt.loadNpmTasks('grunt-shell'); //for random shell commands later on
+	grunt.loadNpmTasks('grunt-shell');
 	grunt.loadNpmTasks('grunt-contrib-concat');
 	grunt.loadNpmTasks('grunt-contrib-uglify');
 	grunt.loadNpmTasks('grunt-contrib-clean');
