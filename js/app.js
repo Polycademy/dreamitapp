@@ -74,6 +74,7 @@ define([
 				//FILTERS
 				'filters/StripHtml.Filter',
 				'filters/NumCounter.Filter',
+				'filters/Truncate.Filter',
 				//SERVICES
 				'services/Utilities.Service',
 				'services/Accounts.Service',
@@ -191,6 +192,9 @@ define([
 
 						//ADDING DREAM IT APP CONFIG TO ROOTSCOPE
 						$rootScope.dreamItAppConfig = dreamItAppConfig;
+
+						//PROVIDING BASE URL IN CASE IT ISN'T AUTOMATIC (such as addthis)
+						$rootScope.baseUrl = serverVars.baseUrl;
 						
 					}
 				]);
