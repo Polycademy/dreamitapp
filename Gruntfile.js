@@ -1,7 +1,7 @@
 module.exports = function(grunt){
 
 	/*
-		The build directory should be tracked by Git, as PagodaBox relies on Git to host your files.
+		The distribution directory should be tracked by Git, as PagodaBox relies on Git to host your files.
 		Make sure to make your git repository private as there may be secrets.
 	 */
 
@@ -14,16 +14,33 @@ module.exports = function(grunt){
 					keepSpecialComments: 0
 				},
 				files: {
-					src: 'css/*.css',
-					dest: 'css/*.css'
+					'css/main.css': 'css/main.css',
+					'css/ie9.css': 'css/ie9.css'
 				}
 			}
 		},
-		clean: ['build/**'],
+		clean: {
+			pre:{
+				files: [
+					{
+						src: ['distribution/**'],
+						dot: true
+					}
+				]
+			},
+			post:{
+				files: [
+					{
+						src: ['distribution/!(build.tar.gz)'],
+						dot: true
+					}
+				]
+			}
+		},
 		copy:{
 			main:{
 				files:[
-					{src: ['**'], dest: 'build/', dot: true, filter: function(filepath){
+					{src: ['**'], dest: 'distribution/', dot: true, filter: function(filepath){
 					
 						//directory separator
 						var dir = require('path').sep;
@@ -83,12 +100,26 @@ module.exports = function(grunt){
 		},
 		replace:{
 			main:{
-				src: ['build/index.php'],
+				src: ['distribution/index.php'],
 				overwrite: true,
 				replacements: [{
 					from: /((?:[a-z][a-z]+)\(\'ENVIRONMENT\', isset\(\$_SERVER\[\'CI_ENV\'\]\) \? \$_SERVER\[\'CI_ENV\'\] : \'development\'\).)/g,
 					to: "define('ENVIRONMENT', isset($_SERVER['CI_ENV']) ? $_SERVER['CI_ENV'] : 'production');"
 				}]
+			}
+		},
+		compress:{
+			main:{
+				options:{
+					archive: 'distribution/build.tar.gz',
+					mode: 'tgz'
+				},
+				files:[
+					{
+						flatten: true,
+						src: 'distribution/**'
+					}
+				]
 			}
 		}
 	});
@@ -101,7 +132,8 @@ module.exports = function(grunt){
 	grunt.loadNpmTasks('grunt-text-replace');
 	grunt.loadNpmTasks('grunt-contrib-jshint');
 	grunt.loadNpmTasks('grunt-contrib-cssmin');
+	grunt.loadNpmTasks('grunt-contrib-compress');
 	
-	grunt.registerTask('default', ['cssmin', 'clean', 'copy', 'replace']);
+	grunt.registerTask('default', ['cssmin', 'clean:pre', 'copy', 'replace', 'compress', 'clean:post']);
 
 };
