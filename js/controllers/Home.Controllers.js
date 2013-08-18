@@ -7,12 +7,11 @@ define(['angular', 'lodash'], function(angular, _){
 			'$scope',
 			'$rootScope',
 			'$location',
-			'$filter',
 			'$dialog',
 			'UtilitiesServ',
 			'IdeasServ',
 			'SearchServ',
-			function($scope, $rootScope, $location, $filter, $dialog, UtilitiesServ, IdeasServ, SearchServ){
+			function($scope, $rootScope, $location, $dialog, UtilitiesServ, IdeasServ, SearchServ){
 
 				/**
 				 * The default limit of app ideas to load on each scroll iteration
@@ -45,12 +44,6 @@ define(['angular', 'lodash'], function(angular, _){
 				$scope.ideasServiceBusy = false;
 
 				/**
-				 * Addthis plugin uses this to create links since it can't recognise the base tag.
-				 * @type {String}
-				 */
-				$scope.baseUrl = angular.element('base')[0].href;
-
-				/**
 				 * This grabs app idea items from the service. It accepts a limit
 				 * and tags parameter to filter the results. This will be passed
 				 * to ng-repeat. It will maintain the counter offset.
@@ -81,11 +74,6 @@ define(['angular', 'lodash'], function(angular, _){
 
 							//increase the counterOffset
 							counterOffset = counterOffset + limit;
-
-							//adding in a filtered decription property for addThis
-							for(var i = 0; i < response.content.length; i++){
-								response.content[i].descriptionFiltered = $filter('StripHtml')(response.content[i].description);
-							}
 
 							$scope.appIdeas = $scope.appIdeas.concat(response.content);
 							$scope.ideasServiceBusy = false;
