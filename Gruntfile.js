@@ -120,13 +120,7 @@ module.exports = function(grunt){
 					{
 						flatten: true,
 						dot: true,
-						src: 'distribution/**',
-						filter: function(filepath){
-							if(/build\.tar\.gz/.test(filepath)){
-								grunt.log.writeln('Not compressing: ' + filepath);
-								return false;
-							}
-						}
+						src: 'distribution/**'
 					}
 				]
 			}
