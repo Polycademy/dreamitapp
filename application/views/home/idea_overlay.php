@@ -5,9 +5,9 @@
 			<button class="overlay_close" ng-click="closeOverlay()"><span class="fui-cross"></span></button>
 		</header>
 		<div class="overlay_content">
-			<img ng-src="{{idea.image}}" />
-			<div class="overlay_description">
-				{{idea.description}}
+			<div class="overlay_inner_content">
+				<img class="overlay_main_image" ng-src="{{idea.image}}" />
+				<div class="overlay_description" ng-bind-html="idea.description"></div>
 			</div>
 			<aside class="overlay_meta">
 				<div class="overlay_author">
