@@ -9,6 +9,7 @@
 */cache/!index.html
 vendor/*
 bin/*
+build/*
 node_modules/*
 bower_components/*
 .c9revisions/*
@@ -63,6 +64,7 @@ local.properties
 [Dd]ebug/
 [Rr]elease/
 x64/
+build/
 [Bb]in/
 [Oo]bj/
 
