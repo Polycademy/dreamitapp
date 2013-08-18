@@ -3,6 +3,8 @@ module.exports = function(grunt){
 	/*
 		The distribution directory should be tracked by Git, as PagodaBox relies on Git to host your files.
 		Make sure to make your git repository private as there may be secrets.
+		Once the repo is uploaded to Dream it App, you will need to gunzip + untar the build.tar.gz inside the distribution folder.
+		Extract it to the distribution folder, remember to remove the initial parent container.
 	 */
 
 	//project configuration
