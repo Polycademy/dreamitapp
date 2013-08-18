@@ -47,6 +47,7 @@ class Ideas_model extends CI_Model{
 				'link'			=> $row->link,
 				'image'			=> $row->image,
 				'description'	=> $row->description,
+				'descriptionFiltered'	=> strip_tags($row->description),
 				'authorId'		=> $row->authorId,
 				'authorLink'	=> $author_link,
 				'author'		=> $author,
