@@ -1,6 +1,6 @@
 <script type="text/ng-template" id="home.html">
 	<!-- This splits the background in half -->
-	<div class="background_splitter">
+	<div class="background_splitter gradient">
 		<!-- This centers the content, and responsively adjusts the width. It also provides a row functionality. -->
 		<div class="wall_container">
 			<div class="wall" pull-down-to-window-dir>
@@ -18,6 +18,8 @@
 					<div class="item_panel" ng-repeat="idea in appIdeas" masonry-item-dir>
 						<h3 class="item_header"><a ng-href="{{idea.link}}" ng-click="openIdeaOverlay(idea.id)">{{idea.title}}</a></h3>
 						<div class="item_image_container" ng-show="ideaHasImage($index)">
+							<img ng-src="{{idea.image}}" />
+							<div class="item_rollover" ng-click="openIdeaOverlay(idea.id)"></div>
 							<a 
 								class="share_button" 
 								ng-href="http://www.addthis.com/bookmark.php?v=300&pubid={{dreamItAppConfig.apiKeys.addThis}}" 
@@ -37,22 +39,22 @@
 								Share
 								<span class="fui-plus"></span>
 							</a>
-							<div class="item_rollover" ng-click="openIdeaOverlay(idea.id)"></div>
-							<img ng-src="{{idea.image}}" />
 						</div>
-						<div class="item_desc" ng-bind-html="idea.description"></div>
+						<div class="item_desc" ng-bind-html="idea.description | TruncateWords:40"></div>
 						<div class="item_meta">
 							<span class="item_author">
 								<a ng-href="{{'users/' + idea.authorId + '/' + idea.authorLink}}">{{idea.author}}</a>
 							</span>
 							<div class="item_actions">
 								<a class="item_feedback" ng-href="{{idea.link}}#feedback">
-									<span class="item_number">{{idea.feedback | NumCounter:2}}</span> <!--This is incorrect, it needs to come from disqus -->
-									<span class="item_icon fui-chat"></span>
+									<div class="item_icon fui-chat">
+										<span class="item_number">{{idea.feedback | NumCounter:2}}</span> <!--This is incorrect, it needs to come from disqus -->
+									</div>
 								</a>
 								<a class="item_likes" ng-click="likeAction(idea.id)">
-									<span class="item_number">{{idea.likes | NumCounter:2}}</span>
-									<span class="item_icon fui-heart"></span>
+									<div class="item_icon fui-heart">
+										<span class="item_number">{{idea.likes | NumCounter:2}}</span>
+									</div>
 								</a>
 							</div>
 							<div class="item_tags">
