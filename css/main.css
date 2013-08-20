@@ -7143,3 +7143,9 @@ body {
     width: 1200px;
   }
 }
+/*
+	BROWSER SPECIFIC
+ */
+.ie9 .gradient {
+  filter: none;
+}

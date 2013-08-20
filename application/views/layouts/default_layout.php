@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<!--[if lt IE 7]>      <html class="no-js lt-ie10 lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie10 lt-ie9 lt-ie8 ie7"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie10 lt-ie9 ie8"> <![endif]-->
+<!--[if IE 9]>         <html class="no-js lt-ie10 ie9"> <![endif]-->
+<!--[if gt IE 9]><!--> <html class="no-js"> <!--<![endif]-->
 	<head>
 		<base href="<?= base_url() ?>" />
 		<meta charset="utf-8">
@@ -19,9 +20,6 @@
 		<link rel="apple-touch-icon-precomposed" sizes="72x72" href="img/apple-touch-icon-72x72-precomposed.png">
 		<link rel="apple-touch-icon-precomposed" href="img/apple-touch-icon-57x57-precomposed.png">
 		<link rel="stylesheet" href="css/main.css">
-		<!--[if gte IE 9]>
-			<link rel="stylesheet" href="css/ie9.css">
-		<![endif]-->
 		<script src="js/lib/modernizr-2.6.2-respond-1.1.0.min.js"></script>
 		<script src="js/config.js"></script>
 		<script data-main="js/bootstrap" src="js/lib/require.min.js"></script>
