@@ -72,7 +72,7 @@
 				<div class="affixed_controls" affix="133">
 					<form class="search_form form-inline" ng-submit="submitSearch()">
 						<label for="search"><span class="fui-search"></span></label>
-						<input id="search" name="search" type="text" ng-model="searchTag" ng-change="submitSearchThrottled()" placeholder="Search"></input>
+						<input id="search" name="search" type="text" ng-model="searchTag" ng-change="submitSearchDebounced()" placeholder="Search"></input>
 					</form>
 					<div class="control_menu" ng-switch="loggedIn">
 						<ul ng-switch-when="true">

@@ -4,7 +4,8 @@ define(['angular', 'lodash'], function(angular, _){
 
 	angular.module('Services')
 		.service('UtilitiesServ', [
-			function(){
+			'$timeout',
+			function($timeout){
 
 				/**
 				 * Finds out what the true type is, giving back capitalised "Array" or "Object" or "Function"... etc
@@ -114,6 +115,37 @@ define(['angular', 'lodash'], function(angular, _){
 					}
 
 					return firstArray;
+
+				};
+
+				/**
+				 * This creates a trailing debounced function. The callback will only be executed at the end
+				 * of the specified delay. Repeated calls to the debounced function will cancel the previous
+				 * call, and restart the delay. This is perfect for form inputs that you only want to act upon
+				 * after the user stops entering characters. 
+				 * @param  {Function} callback Callback to be executed when there is no more repeated calls to 
+				 *                             the debounced function and when the delay has counted down
+				 * @param  {Integer}  delay    Delay in milliseconds. This delay will be refreshed each time 
+				 *                             there is a repeated call to the throttled function
+				 * @return {Function}          Debounced function
+				 */
+				this.createDebouncedFunction = function(callback, delay){
+
+					var listOfIterations = [];
+					var prevIteration;
+
+					return function(){
+
+						prevIteration = listOfIterations.shift();
+						if(prevIteration){
+							$timeout.cancel(prevIteration);
+						}
+
+						listOfIterations.push($timeout(function(){
+							callback();
+						}, delay));
+
+					};
 
 				};
 
