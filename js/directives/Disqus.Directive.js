@@ -14,12 +14,11 @@ define(['angular'], function(angular){
 
 	angular.module('Directives')
 		.service('DisqusServ', [
-			'$location',
 			'$window',
-			function($location, $window){
+			'$location',
+			function($window, $location){
 
-				var disqusLoaded = false,
-					disqusCountLoaded = false;
+				var disqusLoaded = false;
 
 				/**
 				 * Setup the global configuration for Disqus.
@@ -38,8 +37,6 @@ define(['angular'], function(angular){
 				 */
 				this.setupInitialConfig = function(disqusShortname, disqusIdentifier, disqusTitle, disqusUrl, disqusCategoryId, disqusContainerId){
 
-					disqusContainerId = (typeof disqusContainerId === "undefined") ? 'disqus_thread' : disqusContainerId;
-
 					$window.disqus_shortname = disqusShortname;
 
 					if(disqusIdentifier){
@@ -47,18 +44,22 @@ define(['angular'], function(angular){
 					}
 
 					if(disqusTitle){
-						$window.disqus_title = disqusIdentifier;
+						$window.disqus_title = disqusTitle;
 					}
 
 					if(disqusUrl){
 						$window.disqus_url = disqusUrl;
+					}else{
+						$window.disqus_url = $location.absUrl();
 					}
 
 					if(disqusCategoryId){
 						$window.disqus_category_id = disqusCategoryId;
 					}
 
-					$window.disqus_container_id = disqusContainerId;
+					if(disqusContainerId){
+						$window.disqus_container_id = disqusContainerId;
+					}
 
 				};
 
@@ -71,63 +72,103 @@ define(['angular'], function(angular){
 				 */
 				this.loadDisqusScript = function(disqusShortname){
 
+					var disqus = document.createElement('script');
+					disqus.type = 'text/javascript';
+					disqus.async = true;
+					disqus.src = '//' + disqusShortname + '.disqus.com/embed.js';
+					(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(disqus);
+					disqusLoaded = true;
+
+				};
+
+				//we're going to assume that category_id and container_id cannot be changed...
+				this.resetDisqus = function(disqusIdentifier, disqusTitle, disqusUrl){
+
+					if(!disqusUrl){
+						disqusUrl = $location.absUrl();
+					}
+
+					$window.DISQUS.reset({
+						reload: true,
+						config: function(){
+							this.page.identifier = disqusIdentifier;
+							this.page.title = disqusTitle;
+							this.page.url = disqusUrl;
+						}
+					});
+
+				};
+
+				this.implementDisqus = function(disqusShortname, disqusIdentifier, disqusTitle, disqusUrl, disqusCategoryId, disqusContainerId){
+
 					if(!disqusLoaded){
-						var disqus = document.createElement('script');
-						disqus.type = 'text/javascript';
-						disqus.async = true;
-						disqus.src = '//' + disqusShortname + '.disqus.com/embed.js';
-						(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(disqus);
-						disqusLoaded = true;
+						this.setupInitialConfig(
+							disqusShortname,
+							disqusIdentifier,
+							disqusTitle,
+							disqusUrl,
+							disqusCategoryId,
+							disqusContainerId
+						);
+						this.loadDisqusScript(disqusShortname);
+					}else if(disqusLoaded){
+						this.resetDisqus(
+							disqusIdentifier,
+							disqusTitle,
+							disqusUrl
+						);
 					}
 
 				};
-
-				/**
-				 * Loads the Disqus Count script. Embeds it into the head or body.
-				 * This should only be loaded once for a particular page.
-				 * @param  {String} disqusShortname
-				 * @return {Void}
-				 */
-				this.loadDisqusCountScript = function(disqusShortname){
-
-					if(!disqusCountLoaded){
-						var disqus = document.createElement('script');
-						disqus.type = 'text/javascript';
-						disqus.async = true;
-						disqus.src = '//' + disqusShortname + '.disqus.com/count.js';
-						(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(disqus);
-						disqusCountLoaded = true;
-					}
-
-				};
-
-				this.resetDisqus
-
-
-
-
 
 			}
 		])
-		.directive('disqusThread', [
+		.directive('disqusThreadDir', [
 			'DisqusServ',
 			function(DisqusServ){
 				return {
-					scope: true,
+					replace: true,
+					template: '<div id=""></div>',
 					link: function(scope, element, attributes){
+
+						//THIS HAS A PROBLEM. The attributes have been loaded yet.
+						//So they come in as undefined. Try some solutions.
+
+						attributes.$observe('disqusThreadDir', function(value){
+							console.log(scope.$eval(value));
+						});
+
+						//console.log(scope.$eval(attributes.disqusThreadDir));
+
+						//we should setup a default for the disqusContainerId...
+						//or else we might end up with NOTHING on the id in the template
 					
-						//show the disqus thread, and reshow it everytime it is called
-						//that is to reset it!
-					
+						// var disqusConfig = scope.$eval(attributes.disqusThreadDir);
+
+						// if(!disqusConfig.containerId){
+						// 	disqusConfig.containerId = 'disqus_thread';
+						// }
+
+						// scope.disqusContainerId = disqusConfig.containerId;
+
+						// //does the replace happen before or after the template is replaced
+						// DisqusServ.implementDisqus(
+						// 	disqusConfig.shortname,
+						// 	disqusConfig.identifier,
+						// 	disqusConfig.title,
+						// 	disqusConfig.url,
+						// 	disqusConfig.categoryId,
+						// 	disqusConfig.containerId
+						// );
+
 					}
 				};
 			}
 		])
-		.directive('disqusCommentsCount', [
+		.directive('disqusCommentsCountDir', [
 			'DisqusServ',
 			function(DisqusServ){
 				return {
-					scope: true,
 					link: function(scope, element, attributes){
 					
 						//show comment count

@@ -71,6 +71,8 @@ define([
 				'directives/PullDownToWindow.Directive',
 				'directives/ShareButton.Directive',
 				'directives/Overlay.Directive',
+				'directives/AnchorScroll.Directive',
+				'directives/Disqus.Directive',
 				//FILTERS
 				'filters/StripHtml.Filter',
 				'filters/NumCounter.Filter',

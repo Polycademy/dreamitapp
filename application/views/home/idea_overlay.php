@@ -42,24 +42,39 @@
 				</div>
 				<hr />
 				<div class="overlay_actions overlay_aside_text">
-					<a ng-click="likeAction(idea.id)">Like</a>
-					<a ng-click="contactAuthor(idea.id)">Contact</a>
-					<a 
-						ng-href="http://www.addthis.com/bookmark.php?v=300&pubid={{dreamItAppConfig.apiKeys.addThis}}" 
-						add-this-dir 
-						add-this-config="{
-							ui_click: true,
-							services_exclude: 'print'
-						}" 
-						add-this-share="{
-							url: baseUrl + idea.link,
-							title: idea.title,
-							description: idea.descriptionFiltered
-						}"
-					>Share</a>
-					<a href="#">Give Feedback</a>
+					<ul>
+						<li><a ng-click="likeAction(idea.id)"><span class="fui-heart"></span>Like</a></li>
+						<li><a ng-click="contactAuthor(idea.id)"><span class="fui-mail"></span>Contact</a></li>
+						<li>
+							<a 
+							ng-href="http://www.addthis.com/bookmark.php?v=300&pubid={{dreamItAppConfig.apiKeys.addThis}}" 
+							add-this-dir 
+							add-this-config="{
+								ui_click: true,
+								services_exclude: 'print'
+							}" 
+							add-this-share="{
+								url: baseUrl + idea.link,
+								title: idea.title,
+								description: idea.descriptionFiltered
+							}"
+							><span class="fui-plus"></span>Share</a>
+						</li>
+						<li><a anchor-scroll-dir="feedback"><span class="fui-chat"></span>Give Feedback</a></li>
+					</ul>
 				</div>
 			</aside>
 		</div>
+		<section id="feedback" class="overlay_comments" >
+			<h2>Feedback</h2>
+			<div 
+				disqus-thread-dir="{
+					shortname: dreamItAppConfig.apiKeys.disqusShortname,
+					identifier: idea.id,
+					title: idea.title,
+					url: idea.link
+				}"
+			></div>
+		</section>
 	</article>
 </script>
