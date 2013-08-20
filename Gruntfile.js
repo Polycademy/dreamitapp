@@ -16,8 +16,7 @@ module.exports = function(grunt){
 					keepSpecialComments: 0
 				},
 				files: {
-					'css/main.css': 'css/main.css',
-					'css/ie9.css': 'css/ie9.css'
+					'css/main.css': 'css/main.css'
 				}
 			}
 		},
