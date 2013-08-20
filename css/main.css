@@ -5975,10 +5975,11 @@ header.navbar .nav li a {
   display: inline;
 }
 .idea_overlay .idea_overlay_container .overlay_content .overlay_meta .overlay_actions {
-  text-align: center;
+  font-weight: bold;
 }
-.idea_overlay .idea_overlay_container .overlay_content .overlay_meta .overlay_actions a {
-  display: inline-block;
+.idea_overlay .idea_overlay_container .overlay_content .overlay_meta .overlay_actions span {
+  padding: 6px 8px;
+  font-size: 16px;
 }
 /*
 	RESPONSIVE
