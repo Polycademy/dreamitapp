@@ -5,9 +5,11 @@ define(['angular', 'lodash'], function(angular, _){
 	angular.module('Controllers')
 		.controller('ControlPanelCtrl', [
 			'$scope',
+			'$timeout',
 			'$dialog',
 			'SearchServ',
-			function($scope, $dialog, SearchServ){
+			'UtilitiesServ',
+			function($scope, $timeout, $dialog, SearchServ, UtilitiesServ){
 
 				/**
 				 * Submits a tag query parameter to be searched in real time
@@ -18,12 +20,18 @@ define(['angular', 'lodash'], function(angular, _){
 				};
 
 				/**
-				 * Throttled version of submit search. To reduce load and to prevent ng-repeat from overheating.
+				 * Debounced version of submit search. To reduce load and to prevent ng-repeat from overheating.
+				 * This is not using lodash because lodash's debounce is somewhat buggy with interacting with 
+				 * ng-change
 				 * @return {Void}
 				 */
-				$scope.submitSearchThrottled = _.throttle(function(){
-					SearchServ.searchTag($scope.searchTag);
-				}, 500);
+				$scope.submitSearchDebounced = UtilitiesServ.createDebouncedFunction(
+					function(){
+						SearchServ.searchTag($scope.searchTag);
+					},
+					400
+				);
+
 
 				/**
 				 * Determines whether we are showing my ideas or not.
