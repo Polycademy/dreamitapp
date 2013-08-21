@@ -67,13 +67,13 @@
 		</div>
 		<section id="feedback" class="overlay_comments" >
 			<h2>Feedback</h2>
-			<div id="{{'fgdfg fdhfgh fghfgh gfhfgh'|UrlTitle}}"></div>
 			<div 
 				disqus-thread-dir 
 				disqus-shortname="{{dreamItAppConfig.apiKeys.disqusShortname}}"
 				disqus-identifier="{{idea.id}}" 
 				disqus-title="{{idea.title}}" 
 				disqus-url="{{baseUrl + 'ideas/' + idea.id + '/' + idea.titleUrl}}" 
+				disqus-developer="true"
 			></div>
 		</section>
 	</article>
