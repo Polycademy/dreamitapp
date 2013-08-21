@@ -131,7 +131,7 @@ define(['angular'], function(angular){
 							disqusDeveloper
 						);
 						this.loadDisqusScript(disqusShortname);
-					}else if(disqusLoaded){
+					}else{
 						this.resetDisqus(
 							disqusIdentifier,
 							disqusTitle,
@@ -145,8 +145,9 @@ define(['angular'], function(angular){
 		])
 		.directive('disqusThreadDir', [
 			'$location', 
+			'$timeout', 
 			'DisqusServ',
-			function($location, DisqusServ){
+			function($location, $timeout, DisqusServ){
 				return {
 					replace: true,
 					template: '<div id="{{disqusContainerId}}"></div>',
@@ -157,7 +158,7 @@ define(['angular'], function(angular){
 						disqusUrl: '@',
 						disqusCategoryId: '@',
 						disqusContainerId: '@',
-						diqusDeveloper: '@'
+						disqusDeveloper: '@'
 					},
 					link: function(scope, element, attributes){
 
@@ -170,7 +171,7 @@ define(['angular'], function(angular){
 								if(!scope.disqusUrl){
 									scope.disqusUrl = $location.absUrl();
 								}
-								
+
 								//default container id
 								if(!scope.disqusContainerId){
 									scope.disqusContainerId = 'disqus_thread';
@@ -190,21 +191,24 @@ define(['angular'], function(angular){
 							function(disqusConfig){
 
 								if(disqusConfig){
-									
+
 									//run disqus!
-									DisqusServ.implementDisqus(
-										disqusConfig.shortname,
-										disqusConfig.identifier,
-										disqusConfig.title,
-										disqusConfig.url,
-										disqusConfig.categoryId,
-										disqusConfig.containerId,
-										disqusConfig.developer
-									);
+									$timeout(function(){
+										DisqusServ.implementDisqus(
+											disqusConfig.shortname,
+											disqusConfig.identifier,
+											disqusConfig.title,
+											disqusConfig.url,
+											disqusConfig.categoryId,
+											disqusConfig.containerId,
+											disqusConfig.developer
+										);
+									}, 0);
 
 								}
 
-							}
+							},
+							true
 						);
 
 					}
