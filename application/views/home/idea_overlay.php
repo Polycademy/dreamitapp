@@ -60,7 +60,7 @@
 							}"
 							><span class="fui-plus"></span>Share</a>
 						</li>
-						<li><a anchor-scroll-dir="disqus_thread"><span class="fui-chat"></span>Give Feedback</a></li>
+						<li><a anchor-scroll-dir="feedback"><span class="fui-chat"></span>Give Feedback</a></li>
 					</ul>
 				</div>
 			</aside>

@@ -46,7 +46,7 @@
 								<a ng-href="{{'users/' + idea.authorId + '/' + idea.authorLink}}">{{idea.author}}</a>
 							</span>
 							<div class="item_actions">
-								<a class="item_feedback" ng-href="ideas/{{idea.id}}/{{idea.titleUrl}}#disqus_thread">
+								<a class="item_feedback" ng-href="ideas/{{idea.id}}/{{idea.titleUrl}}#feedback">
 									<div class="item_icon fui-chat">
 										<span class="item_number">{{idea.feedback | NumCounter:2}}</span> <!--This is incorrect, it needs to come from disqus -->
 									</div>
