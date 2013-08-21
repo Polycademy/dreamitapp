@@ -28,7 +28,7 @@ define(['angular'], function(angular){
 				 * Note that if you set these at the start, they will be replicated
 				 * across every disqus modules whether they are on the same page or elsewhere.
 				 * @param  {String}  disqusShortname   Forum name
-				 * @param  {String}  disqusIdentifier  Thread id, this is not optional if you want comment counts using data-disqus-identifier
+				 * @param  {String}  disqusIdentifier  Thread id
 				 * @param  {String}  disqusTitle       Title of the thread
 				 * @param  {String}  disqusUrl         Absolute URL of the thread
 				 * @param  {Integer} disqusCategoryId  Optional category ID.
@@ -85,11 +85,14 @@ define(['angular'], function(angular){
 				};
 
 				/**
-				 * Resets disqus upon each iteration of the disqus directive executing. Thus allowing 
-				 * @param  {[type]} disqusIdentifier [description]
-				 * @param  {[type]} disqusTitle      [description]
-				 * @param  {[type]} disqusUrl        [description]
-				 * @return {[type]}                  [description]
+				 * Resets disqus upon each iteration of the disqus directive executing. Thus allowing dynamic disqus 
+				 * changing in a single page application. Note that it is currently impossible to have more than
+				 * one disqus comments thread run at the same page. Currently it seems only identifier, title and
+				 * url can be refreshed. The other parameters will stay permanent across the application.
+				 * @param  {String} disqusIdentifier Thread id
+				 * @param  {String} disqusTitle      Thread title
+				 * @param  {String} disqusUrl        Absolute url to the thread
+				 * @return {Void}
 				 */
 				this.resetDisqus = function(disqusIdentifier, disqusTitle, disqusUrl){
 
@@ -104,6 +107,17 @@ define(['angular'], function(angular){
 
 				};
 
+				/**
+				 * Implements the disqus thread. Recall this whenever you need to change to a different disqus thread.
+				 * @param  {String}  disqusShortname   Forum name
+				 * @param  {String}  disqusIdentifier  Thread id
+				 * @param  {String}  disqusTitle       Title of the thread
+				 * @param  {String}  disqusUrl         Absolute URL of the thread
+				 * @param  {Integer} disqusCategoryId  Optional category ID.
+				 * @param  {String}  disqusContainerId Optional container CSS id, defaults to disqus_thread. Not documented.
+				 * @param  {Boolean} disqusDeveloper   Optional boolean to allow the usage of disqus when working on localhost
+				 * @return {Void}
+				 */
 				this.implementDisqus = function(disqusShortname, disqusIdentifier, disqusTitle, disqusUrl, disqusCategoryId, disqusContainerId, disqusDeveloper){
 
 					if(!disqusLoaded){
