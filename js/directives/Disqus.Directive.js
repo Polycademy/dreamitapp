@@ -49,8 +49,6 @@ define(['angular'], function(angular){
 
 					if(disqusUrl){
 						$window.disqus_url = disqusUrl;
-					}else{
-						$window.disqus_url = $location.absUrl();
 					}
 
 					if(disqusCategoryId){
@@ -81,12 +79,14 @@ define(['angular'], function(angular){
 
 				};
 
-				//we're going to assume that category_id and container_id cannot be changed...
+				/**
+				 * Resets disqus upon each iteration of the disqus directive executing. Thus allowing 
+				 * @param  {[type]} disqusIdentifier [description]
+				 * @param  {[type]} disqusTitle      [description]
+				 * @param  {[type]} disqusUrl        [description]
+				 * @return {[type]}                  [description]
+				 */
 				this.resetDisqus = function(disqusIdentifier, disqusTitle, disqusUrl){
-
-					if(!disqusUrl){
-						disqusUrl = $location.absUrl();
-					}
 
 					$window.DISQUS.reset({
 						reload: true,
@@ -124,42 +124,64 @@ define(['angular'], function(angular){
 			}
 		])
 		.directive('disqusThreadDir', [
+			'$location', 
 			'DisqusServ',
-			function(DisqusServ){
+			function($location, DisqusServ){
 				return {
 					replace: true,
-					template: '<div id=""></div>',
+					template: '<div id="{{disqusContainerId}}"></div>',
+					scope:{
+						disqusShortname: '@',
+						disqusIdentifier: '@',
+						disqusTitle: '@',
+						disqusUrl: '@',
+						disqusCategoryId: '@',
+						disqusContainerId: '@'
+					},
 					link: function(scope, element, attributes){
 
-						//THIS HAS A PROBLEM. The attributes have been loaded yet.
-						//So they come in as undefined. Try some solutions.
+						var disqusConfig = {};
 
-						attributes.$observe('disqusThreadDir', function(value){
-							console.log(scope.$eval(value));
-						});
+						scope.$watch(
+							function(){
+								//default url
+								if(!scope.disqusUrl){
+									scope.disqusUrl = $location.absUrl();
+								}
+								//default container id
+								if(!scope.disqusContainerId){
+									scope.disqusContainerId = 'disqus_thread';
+								}
+								disqusConfig.shortname = scope.disqusShortname;
+								disqusConfig.identifier = scope.disqusIdentifier;
+								disqusConfig.title = scope.disqusTitle;
+								disqusConfig.url = scope.disqusUrl;
+								disqusConfig.categoryId = scope.disqusCategoryId;
+								disqusConfig.containerId = scope.disqusContainerId;
+								return disqusConfig;
+							}, 
+							function(disqusConfig){
+								if(disqusConfig){
 
-						//console.log(scope.$eval(attributes.disqusThreadDir));
+									console.log(disqusConfig);
 
-						//we should setup a default for the disqusContainerId...
-						//or else we might end up with NOTHING on the id in the template
-					
-						// var disqusConfig = scope.$eval(attributes.disqusThreadDir);
+									//link is incorrect (it should come from a permalink!)
+									//the server needs to generate a perma link
+									//also add in the option for disqus_developer
+									
+									//run disqus!
+									// DisqusServ.implementDisqus(
+									// 	disqusConfig.shortname,
+									// 	disqusConfig.identifier,
+									// 	disqusConfig.title,
+									// 	disqusConfig.url,
+									// 	disqusConfig.categoryId,
+									// 	disqusConfig.containerId
+									// );
 
-						// if(!disqusConfig.containerId){
-						// 	disqusConfig.containerId = 'disqus_thread';
-						// }
-
-						// scope.disqusContainerId = disqusConfig.containerId;
-
-						// //does the replace happen before or after the template is replaced
-						// DisqusServ.implementDisqus(
-						// 	disqusConfig.shortname,
-						// 	disqusConfig.identifier,
-						// 	disqusConfig.title,
-						// 	disqusConfig.url,
-						// 	disqusConfig.categoryId,
-						// 	disqusConfig.containerId
-						// );
+								}
+							}
+						);
 
 					}
 				};
