@@ -33,9 +33,10 @@ define(['angular'], function(angular){
 				 * @param  {String}  disqusUrl         Absolute URL of the thread
 				 * @param  {Integer} disqusCategoryId  Optional category ID.
 				 * @param  {String}  disqusContainerId Optional container CSS id, defaults to disqus_thread. Not documented.
+				 * @param  {Boolean} disqusDeveloper   Optional boolean to allow the usage of disqus when working on localhost
 				 * @return {Void}
 				 */
-				this.setupInitialConfig = function(disqusShortname, disqusIdentifier, disqusTitle, disqusUrl, disqusCategoryId, disqusContainerId){
+				this.setupInitialConfig = function(disqusShortname, disqusIdentifier, disqusTitle, disqusUrl, disqusCategoryId, disqusContainerId, disqusDeveloper){
 
 					$window.disqus_shortname = disqusShortname;
 
@@ -57,6 +58,10 @@ define(['angular'], function(angular){
 
 					if(disqusContainerId){
 						$window.disqus_container_id = disqusContainerId;
+					}
+
+					if(disqusDeveloper){
+						$window.disqus_developer = 1;
 					}
 
 				};
@@ -99,7 +104,7 @@ define(['angular'], function(angular){
 
 				};
 
-				this.implementDisqus = function(disqusShortname, disqusIdentifier, disqusTitle, disqusUrl, disqusCategoryId, disqusContainerId){
+				this.implementDisqus = function(disqusShortname, disqusIdentifier, disqusTitle, disqusUrl, disqusCategoryId, disqusContainerId, disqusDeveloper){
 
 					if(!disqusLoaded){
 						this.setupInitialConfig(
@@ -108,7 +113,8 @@ define(['angular'], function(angular){
 							disqusTitle,
 							disqusUrl,
 							disqusCategoryId,
-							disqusContainerId
+							disqusContainerId,
+							disqusDeveloper
 						);
 						this.loadDisqusScript(disqusShortname);
 					}else if(disqusLoaded){
@@ -136,7 +142,8 @@ define(['angular'], function(angular){
 						disqusTitle: '@',
 						disqusUrl: '@',
 						disqusCategoryId: '@',
-						disqusContainerId: '@'
+						disqusContainerId: '@',
+						diqusDeveloper: '@'
 					},
 					link: function(scope, element, attributes){
 
@@ -158,6 +165,7 @@ define(['angular'], function(angular){
 								disqusConfig.url = scope.disqusUrl;
 								disqusConfig.categoryId = scope.disqusCategoryId;
 								disqusConfig.containerId = scope.disqusContainerId;
+								disqusConfig.developer = scope.disqusDeveloper;
 								return disqusConfig;
 							}, 
 							function(disqusConfig){
@@ -177,7 +185,8 @@ define(['angular'], function(angular){
 									// 	disqusConfig.title,
 									// 	disqusConfig.url,
 									// 	disqusConfig.categoryId,
-									// 	disqusConfig.containerId
+									// 	disqusConfig.containerId,
+									// 	disqusConfig.developer
 									// );
 
 								}
