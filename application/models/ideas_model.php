@@ -42,21 +42,21 @@ class Ideas_model extends CI_Model{
 			}
 
 			$data = array(
-				'id'			=> $id,
-				'title'			=> $row->title,
-				'link'			=> $row->link,
-				'image'			=> $row->image,
-				'description'	=> $row->description,
+				'id'					=> $id,
+				'title'					=> $row->title,
+				'titleUrl'				=> url_title($row->title, '_', true),
+				'image'					=> $row->image,
+				'description'			=> $row->description,
 				'descriptionFiltered'	=> strip_tags($row->description),
-				'authorId'		=> $row->authorId,
-				'authorLink'	=> $author_link,
-				'author'		=> $author,
+				'authorId'				=> $row->authorId,
+				'authorLink'			=> $author_link,
+				'author'				=> $author,
 				'authorAvatar'			=> $author_avatar,
 				'authorType'			=> $author_type,
 				'authorProfileLinks'	=> $author_profile_links,
-				'likes'			=> $row->likes,
-				'tags'			=> $tags,
-				'date'			=> $row->date,
+				'likes'					=> $row->likes,
+				'tags'					=> $tags,
+				'date'					=> $row->date,
 			);
 			return $data;
 			
@@ -156,7 +156,7 @@ class Ideas_model extends CI_Model{
 				$data[] = array(
 					'id'					=> $row->id,
 					'title'					=> $row->title,
-					'link'					=> $row->link,
+					'titleUrl'				=> url_title($row->title, '_', true),
 					'image'					=> $row->image,
 					'description'			=> $row->description,
 					'authorId'				=> $author_id,
