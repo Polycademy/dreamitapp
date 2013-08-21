@@ -3,14 +3,15 @@ define(['angular'], function(angular){
 	'use strict';
 
 	angular.module('Filters')
-		.filter('UrlTitle', [
-			'$filter',
-			function($filter){
+		.filter('UrlFriendly', [
+			function(){
 				return function(text, separator, lowercase){
 
 					var output,
 						q_separator,
 						translation = {},
+						tags,
+						commentsAndPhpTags,
 						key,
 						replacement,
 						leadingTrailingSeparators;
@@ -24,26 +25,25 @@ define(['angular'], function(angular){
 					//equivalent to preg_quote in php
 					q_separator = (separator + '').replace(new RegExp('[.\\\\+*?\\[\\^\\]$(){}=!<>|:\\-]', 'g'), '\\$&');
 
-					console.log(separator);
-					console.log(lowercase);
-					console.log(q_separator);
-
-					//these keys are meant to be regexes
-					translation['&.+?;'] = '';
-					translation['[^a-z0-9 _-]'] = '';
-					translation['\s+'] = separator;
-					translation['(' + q_separator + ')+'] = separator;
-
-					console.log(translation);
+					//regex to replacement object
+					translation['&.+?;'] = ''; //remove html entities
+					translation['[^a-z0-9 _-]'] = ''; //remove anything other than alphanumeric, spaces, underscores and dashes
+					translation['\\s+'] = separator; //change whitespace to separator (regexp requires extra escaping of backslashes)
+					translation['(' + q_separator + ')+'] = separator; //change escaped separator to separator
 
 					//strip html tags from the title
-					output = $filter('StripHtml')(text);
+					tags = /<\/?([a-z][a-z0-9]*)\b[^>]*>/gi;
+					commentsAndPhpTags = /<!--[\s\S]*?-->|<\?(?:php)?[\s\S]*?\?>/gi;
+					output = text.replace(commentsAndPhpTags, '').replace(tags, '');
 
+					//change!
 					for(key in translation){
 						replacement = translation[key];
-						output = output.replace(new RegExp(key, 'i'), replacement);
+						key = new RegExp(key, 'ig');
+						output = output.replace(key, replacement);
 					}
 
+					//lowercase the title if necessary
 					if(lowercase){
 						output = output.toLowerCase();
 					}
