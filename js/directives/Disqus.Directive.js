@@ -1,13 +1,3 @@
-//this directive needs to be able to maintain multiple disqus elements here!
-//also requires support of comments
-//http://help.disqus.com/customer/portal/articles/565624
-//http://dreamitapp.disqus.com/admin/universalcode/
-//http://help.disqus.com/customer/portal/articles/472098#disqus_shortname
-//http://stackoverflow.com/questions/4963505/several-disqus-threads-on-one-page
-//https://github.com/kirstein/angular-disqus/blob/master/angular-disqus.js
-//https://github.com/kirstein/angular-disqus
-//http://stackoverflow.com/questions/15823047/what-is-the-best-approach-to-use-disqus-in-a-single-page-application
-
 define(['angular'], function(angular){
 
 	'use strict';
@@ -15,8 +5,7 @@ define(['angular'], function(angular){
 	angular.module('Directives')
 		.service('DisqusServ', [
 			'$window',
-			'$location',
-			function($window, $location){
+			function($window){
 
 				var disqusLoaded = false;
 
@@ -164,6 +153,22 @@ define(['angular'], function(angular){
 
 						var disqusConfig = {};
 
+						//this will check if any of the config object's properties are empty strings
+						//if any of them are, the config object is therefore not ready
+						//this is to allow for asynchronous configuration from AJAX loaded data or deferred data
+						//of course you have to make sure all your directive properties are loaded with some value
+						//or else disqus will never be implemented
+						var isConfigObjectReady = function(object){
+
+							for(var key in object){
+								if(object[key] === ''){
+									return false;
+								}
+							}
+							return true;
+
+						};
+
 						scope.$watch(
 							function(){
 
@@ -190,9 +195,12 @@ define(['angular'], function(angular){
 							}, 
 							function(disqusConfig){
 
-								if(disqusConfig){
+								//make sure the config object is populated
+								if(isConfigObjectReady(disqusConfig)){
 
-									//run disqus!
+									//run disqus after the template has been replaced
+									//or else the container id would not have been rendered
+									//by the time disqus executes
 									$timeout(function(){
 										DisqusServ.implementDisqus(
 											disqusConfig.shortname,
@@ -203,7 +211,7 @@ define(['angular'], function(angular){
 											disqusConfig.containerId,
 											disqusConfig.developer
 										);
-									}, 0);
+									}, 0, false);
 
 								}
 
@@ -221,25 +229,10 @@ define(['angular'], function(angular){
 				return {
 					link: function(scope, element, attributes){
 					
-						//show comment count
-						//this might be a problem if the count.js is loaded and ran, and then these #disqus_thread and data-disqus-identifier is loaded afterwards through client side templating and AJAX.
-						//in that case, either count.js works (which i dont think it will)
-						//or you will need reload the count.js script (by adding in the script to the head, and removing it)
-						//use this: http://stackoverflow.com/questions/9642205/how-to-force-a-script-reload-and-re-execute
-						//or jQuery.getScript
-						//inserting than removing the script may be more useful than using Eval because Eval is sandboxed in chrome
-						//Also this may result in some burden, due to the fact that this is being removed and added constantly on each load
-						//Oh well.
-						//Also I think caching can be used.
-						//Also make sure to add in data-disqus-identifier and #disqus_thread to the end of the URL
-						//Well actually, perhaps these both can be passed in as parameters to the directive.
-						//Like
-						//disqus-comments-count: "url" data-disqus-identifier: "blahblah"
-						//or just a ng-href="{url}" disqus-comments-count: "thread id" (this would allow the url to be anything)
-						//If the url already has #disqus_thread, then we're using something else
-						//Also perhaps the container will require different id
-						//http://stackoverflow.com/questions/15823047/what-is-the-best-approach-to-use-disqus-in-a-single-page-application
-						//#disqus_thread OR #{disqus_container_id}
+						//either this uses the API
+						//we won't be using the comment count scrip
+						//have to use the API
+						//this can also be done on the server side (perhaps that is a better place to provide it?)
 					
 					}
 				};
