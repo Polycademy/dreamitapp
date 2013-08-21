@@ -166,6 +166,7 @@ define(['angular'], function(angular){
 									console.log(disqusConfig);
 
 									//link is incorrect (it should come from a permalink!)
+									//we need a link creator (hostname/state/substate/id/url_friendly_title)
 									//the server needs to generate a perma link
 									//also add in the option for disqus_developer
 									

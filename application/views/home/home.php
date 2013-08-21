@@ -16,7 +16,7 @@
 					infinite-scroll-distance="2"
 				>
 					<div class="item_panel" ng-repeat="idea in appIdeas" masonry-item-dir>
-						<h3 class="item_header"><a ng-href="{{idea.link}}" ng-click="openIdeaOverlay(idea.id)">{{idea.title}}</a></h3>
+						<h3 class="item_header"><a ng-href="ideas/{{idea.id}}/{{idea.titleUrl}}" ng-click="openIdeaOverlay(idea.id)">{{idea.title}}</a></h3>
 						<div class="item_image_container" ng-show="ideaHasImage($index)">
 							<img ng-src="{{idea.image}}" />
 							<div class="item_rollover" ng-click="openIdeaOverlay(idea.id)"></div>
@@ -31,7 +31,7 @@
 									services_exclude: 'print'
 								}" 
 								add-this-share="{
-									url: baseUrl + idea.link,
+									url: baseUrl + 'ideas/' + idea.id + '/' + idea.titleUrl,
 									title: idea.title,
 									description: idea.descriptionFiltered
 								}"
@@ -46,7 +46,7 @@
 								<a ng-href="{{'users/' + idea.authorId + '/' + idea.authorLink}}">{{idea.author}}</a>
 							</span>
 							<div class="item_actions">
-								<a class="item_feedback" ng-href="{{idea.link}}#feedback">
+								<a class="item_feedback" ng-href="ideas/{{idea.id}}/{{idea.titleUrl}}#disqus_thread">
 									<div class="item_icon fui-chat">
 										<span class="item_number">{{idea.feedback | NumCounter:2}}</span> <!--This is incorrect, it needs to come from disqus -->
 									</div>

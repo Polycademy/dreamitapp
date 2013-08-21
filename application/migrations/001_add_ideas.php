@@ -11,10 +11,6 @@ class Migration_add_ideas extends CI_Migration {
 				'type' 			=> 'VARCHAR',
 				'constraint'	=> 50,
 			),
-			'link' => array(
-				'type'			=> 'VARCHAR',
-				'constraint'	=> 80,
-			),
 			'image' => array(
 				'type'			=> 'TEXT',
 			),

@@ -7,11 +7,12 @@ define(['angular', 'lodash'], function(angular, _){
 			'$scope',
 			'$rootScope',
 			'$location',
+			'$filter',
 			'$dialog',
 			'UtilitiesServ',
 			'IdeasServ',
 			'SearchServ',
-			function($scope, $rootScope, $location, $dialog, UtilitiesServ, IdeasServ, SearchServ){
+			function($scope, $rootScope, $location, $filter, $dialog, UtilitiesServ, IdeasServ, SearchServ){
 
 				/**
 				 * The default limit of app ideas to load on each scroll iteration
@@ -74,7 +75,6 @@ define(['angular', 'lodash'], function(angular, _){
 
 							//increase the counterOffset
 							counterOffset = counterOffset + limit;
-
 							$scope.appIdeas = $scope.appIdeas.concat(response.content);
 							$scope.ideasServiceBusy = false;
 
@@ -254,7 +254,7 @@ define(['angular', 'lodash'], function(angular, _){
 					},
 					function(response){
 
-						console.log(response.content);
+						//console.log(response.content);
 						$scope.idea = response.content;
 
 					},

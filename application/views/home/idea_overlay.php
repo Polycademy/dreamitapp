@@ -1,7 +1,7 @@
 <script type="text/ng-template" id="idea_overlay.html">
 	<article class="idea_overlay_container" overlay-dir pull-down-to-window-dir>
 		<header class="overlay_header">
-			<h1 class="overlay_heading"><a ng-href="{{idea.link}}">{{idea.title}}</a></h1>
+			<h1 class="overlay_heading"><a ng-href="ideas/{{idea.id}}/{{idea.titleUrl}}">{{idea.title}}</a></h1>
 			<button class="overlay_close" ng-click="closeOverlay()"><span class="fui-cross"></span></button>
 		</header>
 		<div class="overlay_content">
@@ -54,26 +54,26 @@
 								services_exclude: 'print'
 							}" 
 							add-this-share="{
-								url: baseUrl + idea.link,
+								url: baseUrl + 'ideas/' + idea.id + '/' + idea.titleUrl,
 								title: idea.title,
 								description: idea.descriptionFiltered
 							}"
 							><span class="fui-plus"></span>Share</a>
 						</li>
-						<li><a anchor-scroll-dir="feedback"><span class="fui-chat"></span>Give Feedback</a></li>
+						<li><a anchor-scroll-dir="disqus_thread"><span class="fui-chat"></span>Give Feedback</a></li>
 					</ul>
 				</div>
 			</aside>
 		</div>
 		<section id="feedback" class="overlay_comments" >
 			<h2>Feedback</h2>
+			<div id="{{'fgdfg fdhfgh fghfgh gfhfgh'|UrlTitle}}"></div>
 			<div 
-				disqus-thread-dir="{
-					shortname: dreamItAppConfig.apiKeys.disqusShortname,
-					identifier: idea.id,
-					title: idea.title,
-					url: idea.link
-				}"
+				disqus-thread-dir 
+				disqus-shortname="{{dreamItAppConfig.apiKeys.disqusShortname}}"
+				disqus-identifier="{{idea.id}}" 
+				disqus-title="{{idea.title}}" 
+				disqus-url="{{baseUrl + 'ideas/' + idea.id + '/' + idea.titleUrl}}" 
 			></div>
 		</section>
 	</article>
