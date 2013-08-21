@@ -5866,7 +5866,9 @@ header.navbar .nav li a {
 }
 .idea_overlay .idea_overlay_container .overlay_header .overlay_heading {
   float: left;
-  font-size: 30px;
+  font-size: 36px;
+  font-family: 'source_sans_prosemibold', arial, sans-serif;
+  font-weight: normal;
   padding: 60px;
   margin: 0;
 }
@@ -5980,6 +5982,15 @@ header.navbar .nav li a {
 .idea_overlay .idea_overlay_container .overlay_content .overlay_meta .overlay_actions span {
   padding: 6px 8px;
   font-size: 16px;
+}
+.idea_overlay .idea_overlay_container .overlay_comments {
+  padding: 0 24px 24px;
+}
+.idea_overlay .idea_overlay_container .overlay_comments > h2 {
+  font-size: 24px;
+  font-family: 'source_sans_prosemibold', arial, sans-serif;
+  font-weight: normal;
+  color: #34495e;
 }
 /*
 	RESPONSIVE
