@@ -73,7 +73,7 @@
 				disqus-identifier="{{idea.id}}" 
 				disqus-title="{{idea.title}}" 
 				disqus-url="{{baseUrl + 'ideas/' + idea.id + '/' + idea.titleUrl}}" 
-				disqus-developer="fghfghg"
+				disqus-developer="true"
 			></div>
 		</section>
 	</article>
