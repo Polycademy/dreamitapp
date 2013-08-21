@@ -75,7 +75,7 @@ define([
 				'directives/Disqus.Directive',
 				//FILTERS
 				'filters/StripHtml.Filter',
-				'filters/UrlTitle.Filter',
+				'filters/UrlFriendly.Filter',
 				'filters/NumCounter.Filter',
 				'filters/Truncate.Filter',
 				//SERVICES

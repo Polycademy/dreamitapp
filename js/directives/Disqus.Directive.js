@@ -165,14 +165,17 @@ define(['angular'], function(angular){
 
 						scope.$watch(
 							function(){
+
 								//default url
 								if(!scope.disqusUrl){
 									scope.disqusUrl = $location.absUrl();
 								}
+								
 								//default container id
 								if(!scope.disqusContainerId){
 									scope.disqusContainerId = 'disqus_thread';
 								}
+
 								disqusConfig.shortname = scope.disqusShortname;
 								disqusConfig.identifier = scope.disqusIdentifier;
 								disqusConfig.title = scope.disqusTitle;
@@ -180,30 +183,27 @@ define(['angular'], function(angular){
 								disqusConfig.categoryId = scope.disqusCategoryId;
 								disqusConfig.containerId = scope.disqusContainerId;
 								disqusConfig.developer = scope.disqusDeveloper;
+
 								return disqusConfig;
+
 							}, 
 							function(disqusConfig){
+
 								if(disqusConfig){
-
-									console.log(disqusConfig);
-
-									//link is incorrect (it should come from a permalink!)
-									//we need a link creator (hostname/state/substate/id/url_friendly_title)
-									//the server needs to generate a perma link
-									//also add in the option for disqus_developer
 									
 									//run disqus!
-									// DisqusServ.implementDisqus(
-									// 	disqusConfig.shortname,
-									// 	disqusConfig.identifier,
-									// 	disqusConfig.title,
-									// 	disqusConfig.url,
-									// 	disqusConfig.categoryId,
-									// 	disqusConfig.containerId,
-									// 	disqusConfig.developer
-									// );
+									DisqusServ.implementDisqus(
+										disqusConfig.shortname,
+										disqusConfig.identifier,
+										disqusConfig.title,
+										disqusConfig.url,
+										disqusConfig.categoryId,
+										disqusConfig.containerId,
+										disqusConfig.developer
+									);
 
 								}
+
 							}
 						);
 
