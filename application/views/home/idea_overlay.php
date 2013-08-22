@@ -65,11 +65,18 @@
 				</div>
 			</aside>
 		</div>
+		<p 
+			disqus-comments-count-dir 
+			disqus-shortname="{{dreamItAppConfig.apiKeys.disqusShortname}}" 
+			disqus-api-key="{{dreamItAppConfig.apiKeys.disqusApiKey}}" 
+			disqus-ident="{{idea.id}}" 
+			>
+		</p>
 		<section id="feedback" class="overlay_comments" >
 			<h2>Feedback</h2>
 			<div 
 				disqus-thread-dir 
-				disqus-shortname="{{dreamItAppConfig.apiKeys.disqusShortname}}"
+				disqus-shortname="{{dreamItAppConfig.apiKeys.disqusShortname}}" 
 				disqus-identifier="{{idea.id}}" 
 				disqus-title="{{idea.title}}" 
 				disqus-url="{{baseUrl + 'ideas/' + idea.id + '/' + idea.titleUrl}}" 
