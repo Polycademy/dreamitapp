@@ -43,6 +43,10 @@ requirejs.config({
 			// '//cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.0.1/angular-ui-router.min',
 			'../bower_components/angular-ui-router/release/angular-ui-router.min'
 		],
+		'angular-cache': [
+			// 'https://raw.github.com/jmdobry/angular-cache/master/dist/angular-cache-1.0.0-rc.1.min',
+			'../bower_components/angular-cache/src/angular-cache'
+		],
 		//SHIMS AND UTILITIES
 		'domReady': 'lib/domReady.min',
 		'lodash': [
@@ -103,6 +107,10 @@ requirejs.config({
 			exports: "angular"
 		},
 		'angular-ui-router': {
+			deps: ['angular'],
+			exports: "angular"
+		},
+		'angular-cache': {
 			deps: ['angular'],
 			exports: "angular"
 		},

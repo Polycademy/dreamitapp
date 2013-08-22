@@ -341,6 +341,7 @@ define(['angular'], function(angular){
 		 * Disqus Comment Count Directive.
 		 * You can use either link or ident, don't use both.
 		 * This makes use of caching since Disqus limits their rate use to 1000 requests/hour.
+		 * I recommend using angular-cache (http://jmdobry.github.io/angular-cache/)
 		 * However it is up to you to pass in a cache object that fulfills the API requirements
 		 * of: get(key, callback(key, value)) AND put(key, value)
 		 * The callback function should be called with the key and value of whatever object is currently
@@ -353,6 +354,7 @@ define(['angular'], function(angular){
 		 * @attribute {String}            disqus-link              Link to be used as the thread identifier
 		 * @attribute {String}            disqus-ident             ID to be used as the thread identifier
 		 * @attribute {Object Expression} disqus-cache             Expression bound cache object
+		 * @attribute {String}            disqus-log               Determine whether directive should log status messages (string true or false)
 		 */
 		.directive('disqusCommentCountDir', [
 			'$log',
@@ -378,6 +380,7 @@ define(['angular'], function(angular){
 								identifierConfig.link = scope.disqusLink;
 								identifierConfig.ident = scope.disqusIdent;
 								identifierConfig.cache = scope.disqusCache;
+								identifierConfig.logging = attributes.disqusLog;
 
 								return identifierConfig;
 
@@ -389,21 +392,33 @@ define(['angular'], function(angular){
 
 								if(DisqusServ.isConfigObjectReady(identifierConfig)){
 
+									//cancel logging if log was not passed as 'true'
+									if(!identifierConfig.logging || identifierConfig.logging === 'false'){
+										$log = {
+											info: angular.noop,
+											error: angular.noop
+										};
+									}
+
 									DisqusServ.setupApi(identifierConfig.shortname, identifierConfig.apiKey);
 									DisqusServ.setupDisqusCache(identifierConfig.cache());
 
 									//if the cache exists, we're going to try to get the comment count from cache first
 									if(DisqusServ.disqusCache){
-										cacheKey = (identifierConfig.link || identifier.ident);
+										cacheKey = (identifierConfig.link || identifierConfig.ident);
+										//CALLBACK HAS NOT YET BEEN IMPLEMENTED
 										//assign the comment count and provide a callback that can be optionally 
 										//called in order to allow the previously cached item
 										//to be remembered in case we need it even though it expired
 										scope.commentCount = DisqusServ.disqusCache.get(cacheKey, function(oldKey, oldValue){
 											previousCachedCommentCount = oldValue;
 										});
+
 									}
 
-									if(!scope.commentCount){
+									//if comment count was not extracted from the cache, we're going to call Disqus
+									//commentCount may be 0 falsy value, so we're checking for undefined instead
+									if(typeof scope.commentCount === 'undefined'){
 
 										var successResponse = function(response){
 											scope.commentCount = response.response.posts;

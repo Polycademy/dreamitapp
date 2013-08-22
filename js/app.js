@@ -26,7 +26,8 @@ define([
 			'angular-sanitize',
 			'angular-ui',
 			'angular-bootstrap',
-			'angular-ui-router'
+			'angular-ui-router',
+			'angular-cache'
 		], function(){
 
 			//app is an module that is dependent on several top level modules
@@ -40,7 +41,8 @@ define([
 				'ngSanitize',
 				'ui',
 				'ui.bootstrap',
-				'ui.state'
+				'ui.state',
+				'angular-cache'
 			]);
 
 			//parent core modules for the registry, they have the [] allowing functions to be appended to them
@@ -84,7 +86,8 @@ define([
 				'services/Sessions.Service',
 				'services/Users.Service',
 				'services/Ideas.Service',
-				'services/Search.Service'
+				'services/Search.Service',
+				'services/Cache.Service'
 			], function(){
 
 				/* ==========================================================================

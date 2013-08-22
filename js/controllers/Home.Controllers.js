@@ -12,7 +12,8 @@ define(['angular', 'lodash'], function(angular, _){
 			'UtilitiesServ',
 			'IdeasServ',
 			'SearchServ',
-			function($scope, $rootScope, $location, $filter, $dialog, UtilitiesServ, IdeasServ, SearchServ){
+			'CachServ',
+			function($scope, $rootScope, $location, $filter, $dialog, UtilitiesServ, IdeasServ, SearchServ, CachServ){
 
 				/**
 				 * The default limit of app ideas to load on each scroll iteration
@@ -35,6 +36,9 @@ define(['angular', 'lodash'], function(angular, _){
 				 * @type {Array}
 				 */
 				$scope.appIdeas = [];
+
+				//setup the comment cache
+				$scope.commentCache = CachServ.commentCache;
 
 				/**
 				 * This is to throttle the retrieving of idea items due to infinite scroll pagination.

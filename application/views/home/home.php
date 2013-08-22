@@ -54,6 +54,7 @@
 											disqus-shortname="{{dreamItAppConfig.apiKeys.disqusShortname}}" 
 											disqus-api-key="{{dreamItAppConfig.apiKeys.disqusApiKey}}" 
 											disqus-ident="{{idea.id}}" 
+											disqus-cache="commentCache"
 										>{{commentCount | NumCounter:2}}</span>
 									</div>
 								</a>
