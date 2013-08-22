@@ -194,7 +194,8 @@ define(['angular'], function(angular){
 						/**
 						 * Object container for the Disqus Cache. You can use any cache service 
 						 * you want as long as the object contains 2 methods:
-						 * 1. get(key)
+						 * 1. get(key, callback(key, value)) - where callback should be passed in with the (key, value) 
+						 * of whatever that is being extracted from the cache, this is optional but recommended
 						 * 2. put(key, value) - where value can be an object
 						 * This directive does not set any expiry time on the cache, your cache
 						 * service should either set a global expiry time for this particular
@@ -204,6 +205,12 @@ define(['angular'], function(angular){
 						 */
 						disqusCache: null,
 
+						/**
+						 * Sets up the cache object. Only one cache object will be used.
+						 * So the cached object can be shared across all directive instances.
+						 * @param  {Object} cache Cache object
+						 * @return {Void}
+						 */
 						setupDisqusCache: function(cache){
 
 							if(typeof cache === 'undefined') cache = disqusGlobalConfig.cache;
@@ -241,6 +248,20 @@ define(['angular'], function(angular){
 			];
 
 		})
+		/**
+		 * Disqus Thread Directive
+		 * Just declare this directive whenever you want a disqus thread.
+		 * Only one is allowed to exist at any point in the page.
+		 * Intelligently resets this for single page applications.
+		 * @attribute {Void}   disqus-thread-dir   Initialise Directive
+		 * @attribute {String} disqus-shortname    Forum name
+		 * @attribute {String} disqus-identifier   Thread identifier
+		 * @attribute {String} disqus-title        Thread title
+		 * @attribute {String} disqus-url          Thread url
+		 * @attribute {String} disqus-category-id  Thread category - not changeable across disqus instances
+		 * @attribute {String} disqus-container-id CSS container id - not changeable across disqus instances
+		 * @attribute {String} disqus-developer    For localhost development - not changeable across disqus instances
+		 */
 		.directive('disqusThreadDir', [
 			'$location', 
 			'$timeout', 
@@ -316,11 +337,28 @@ define(['angular'], function(angular){
 				};
 			}
 		])
-		.directive('disqusCommentsCountDir', [
+		/**
+		 * Disqus Comment Count Directive.
+		 * You can use either link or ident, don't use both.
+		 * This makes use of caching since Disqus limits their rate use to 1000 requests/hour.
+		 * However it is up to you to pass in a cache object that fulfills the API requirements
+		 * of: get(key, callback(key, value)) AND put(key, value)
+		 * The callback function should be called with the key and value of whatever object is currently
+		 * being requested. The cache is of course optional.
+		 * Also make sure to write {{commentCount}} inside the template for the directive so you'll get
+		 * an actual number.
+		 * @attribute {Void}              disqus-comment-count-dir Initialise Directive
+		 * @attribute {String}            disqus-shortname         Forum name
+		 * @attribute {String}            disqus-api-key           Public API Disqus Key
+		 * @attribute {String}            disqus-link              Link to be used as the thread identifier
+		 * @attribute {String}            disqus-ident             ID to be used as the thread identifier
+		 * @attribute {Object Expression} disqus-cache             Expression bound cache object
+		 */
+		.directive('disqusCommentCountDir', [
+			'$log',
 			'DisqusServ',
-			function(DisqusServ){
+			function($log, DisqusServ){
 				return {
-					template: '{{commentCount}}',
 					scope: {
 						disqusShortname: '@',
 						disqusApiKey: '@',
@@ -346,72 +384,79 @@ define(['angular'], function(angular){
 							}, 
 							function(identifierConfig){
 
+								var cacheKey,
+									previousCachedCommentCount;
+
 								if(DisqusServ.isConfigObjectReady(identifierConfig)){
 
 									DisqusServ.setupApi(identifierConfig.shortname, identifierConfig.apiKey);
 									DisqusServ.setupDisqusCache(identifierConfig.cache());
 
-									//if there was a cache!
+									//if the cache exists, we're going to try to get the comment count from cache first
 									if(DisqusServ.disqusCache){
-
-										console.log(DisqusServ.disqusCache);
-
+										cacheKey = (identifierConfig.link || identifier.ident);
+										//assign the comment count and provide a callback that can be optionally 
+										//called in order to allow the previously cached item
+										//to be remembered in case we need it even though it expired
+										scope.commentCount = DisqusServ.disqusCache.get(cacheKey, function(oldKey, oldValue){
+											previousCachedCommentCount = oldValue;
+										});
 									}
 
-									//DISQUS cache needs to be an object with these properties:
-									//get(key)
-									//put(key, value)
-									//the expiry time should be determined globally for this particular cache object...
+									if(!scope.commentCount){
 
-									//get the cached comment count
-									//if the comment count is invalidated (do not delete previous), proceed with the request
-									//if request succeeds, cache the comment count
-									//if the request fails, get the previous cached comment count
+										var successResponse = function(response){
+											scope.commentCount = response.response.posts;
+											//cache the comment
+											if(DisqusServ.disqusCache){
+												DisqusServ.disqusCache.put(cacheKey, response.response.posts);
+											}
+										};
 
+										var failResponse = function(response){
 
-									var successResponse = function(response){
-										scope.commentCount = response.response.posts;
-										//cache the comment
-									};
+											if(response.data.code == 2){
+												$log.info('Disqus thread or forum has not yet been created. Therefore there are zero comment.');
+												scope.commentCount = 0;
+											}else if(response.data.code == 13 || response.data.code == 14){
+												$log.info('Exceeded Disqus rate limit for comment count. Showing zero instead.');
+												if(previousCachedCommentCount){
+													scope.commentCount = previousCachedCommentCount;
+												}else{
+													scope.commentCount = 0;
+												}
+											}else if(response.data.code == 5){
+												$log.error('Invalid Disqus API Key');
+											}
 
-									var failResponse = function(response){
+										};
 
-										console.log(response);
-										if(response.data.code == 2){
-											console.log('Disqus thread or forum has not yet been created. Therefore there are zero comments.');
-											scope.commentCount = 0;
-										}else if(response.data.code == 13 || response.data.code == 14){
-											console.log('Exceeded Disqus rate limit for comments count. Retrieving from cache instead.');
-											//retrieve cached comment count
-										}else if(response.data.code == 5){
-											console.log('Invalid Disqus API Key');
+										//it is possible to use the link or ident, but don't use both
+										if(identifierConfig.link){
+
+											DisqusServ.disqusApi.get(
+												{
+													resource: 'threads',
+													action: 'details',
+													thread: 'link:' + identifierConfig.link
+												},
+												successResponse,
+												failResponse
+											);
+
+										}else if(identifierConfig.ident){
+
+											DisqusServ.disqusApi.get(
+												{
+													resource: 'threads',
+													action: 'details',
+													thread: 'ident:' + identifierConfig.ident
+												},
+												successResponse,
+												failResponse
+											);
+
 										}
-
-									};
-
-									if(identifierConfig.link){
-
-										DisqusServ.disqusApi.get(
-											{
-												resource: 'threads',
-												action: 'details',
-												thread: 'link:' + identifierConfig.link
-											},
-											successResponse,
-											failResponse
-										);
-
-									}else if(identifierConfig.ident){
-
-										DisqusServ.disqusApi.get(
-											{
-												resource: 'threads',
-												action: 'details',
-												thread: 'ident:' + identifierConfig.ident
-											},
-											successResponse,
-											failResponse
-										);
 
 									}
 

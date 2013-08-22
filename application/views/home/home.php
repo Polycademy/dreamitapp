@@ -48,7 +48,13 @@
 							<div class="item_actions">
 								<a class="item_feedback" ng-href="ideas/{{idea.id}}/{{idea.titleUrl}}#feedback">
 									<div class="item_icon fui-chat">
-										<span class="item_number">{{idea.feedback | NumCounter:2}}</span> <!--This is incorrect, it needs to come from disqus -->
+										<span 
+											class="item_number" 
+											disqus-comment-count-dir 
+											disqus-shortname="{{dreamItAppConfig.apiKeys.disqusShortname}}" 
+											disqus-api-key="{{dreamItAppConfig.apiKeys.disqusApiKey}}" 
+											disqus-ident="{{idea.id}}" 
+										>{{commentCount | NumCounter:2}}</span>
 									</div>
 								</a>
 								<a class="item_likes" ng-click="likeAction(idea.id)">
