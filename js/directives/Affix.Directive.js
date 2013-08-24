@@ -3,7 +3,7 @@ define(['angular', 'lodash', 'jquery'], function(angular, _){
 	'use strict';
 
 	angular.module('Directives')
-		.directive('affix', [
+		.directive('affixDir', [
 			'$window',
 			'$document',
 			'$timeout',
