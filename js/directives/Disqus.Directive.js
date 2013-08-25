@@ -3,17 +3,6 @@ define(['angular'], function(angular){
 	'use strict';
 
 	angular.module('Directives')
-		.config([
-			'$httpProvider',
-			function($httpProvider){
-
-				//relying CORS in $resource requests
-				//otherwise the GET request will turn into an OPTIONS request
-				$httpProvider.defaults.useXDomain = true;
-				delete $httpProvider.defaults.headers.common['X-Requested-With'];
-
-			}
-		])
 		.provider('DisqusServ', function(){
 
 			var disqusGlobalConfig = {};

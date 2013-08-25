@@ -181,10 +181,6 @@ define([
 					'$state',
 					'$stateParams',
 					function($rootScope, $cookies, $http, $state, $stateParams){
-
-						//CORS FOR $RESOURCE OR $HTTP
-						$http.defaults.useXDomain = true;
-						delete $http.defaults.headers.common['X-Requested-With'];
 					
 						//XSRF INTEGRATION
 						$rootScope.$watch(

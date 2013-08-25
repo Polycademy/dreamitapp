@@ -1,8 +1,8 @@
 module.exports = function(grunt){
 
 	/*
-		The distribution directory is not tracked by git, but PagodaBox relies on Git to host your files.
-		So once you have the distribution. Copy it.
+		The build directory is not tracked by git, but PagodaBox relies on Git to host your files.
+		So once you have the build. Copy it.
 		Create a new orphan branch.
 		Untar it into the orphan branch using git checkout branch_name --orphan
 		Push that branch to the Pagodabox
@@ -25,7 +25,7 @@ module.exports = function(grunt){
 			pre:{
 				files: [
 					{
-						src: ['distribution/**'],
+						src: ['build/**'],
 						dot: true
 					}
 				]
@@ -33,7 +33,7 @@ module.exports = function(grunt){
 			post:{
 				files: [
 					{
-						src: ['distribution/!(distribution.tar.gz)'],
+						src: ['build/!(build.tar.gz)'],
 						dot: true
 					}
 				]
@@ -42,7 +42,7 @@ module.exports = function(grunt){
 		copy:{
 			main:{
 				files:[
-					{src: ['**'], dest: 'distribution/', dot: true, filter: function(filepath){
+					{src: ['**'], dest: 'build/', dot: true, filter: function(filepath){
 					
 						//directory separator
 						var dir = require('path').sep;
@@ -104,9 +104,9 @@ module.exports = function(grunt){
 		replace:{
 			main:{
 				src: [
-					'distribution/index.php', 
-					'distribution/application/views/layouts/default_layout.php', 
-					'distribution/js/bootstrap.js'],
+					'build/index.php', 
+					'build/application/views/layouts/default_layout.php', 
+					'build/js/bootstrap.js'],
 				overwrite: true,
 				replacements: [{
 					from: /((?:[a-z][a-z]+)\(\'ENVIRONMENT\', isset\(\$_SERVER\[\'CI_ENV\'\]\) \? \$_SERVER\[\'CI_ENV\'\] : \'development\'\).)/g,
@@ -126,14 +126,14 @@ module.exports = function(grunt){
 		compress:{
 			main:{
 				options:{
-					archive: 'distribution/distribution.tar.gz',
+					archive: 'build/build.tar.gz',
 					mode: 'tgz'
 				},
 				files:[
 					{
 						flatten: true,
 						dot: true,
-						src: 'distribution/**'
+						src: 'build/**'
 					}
 				]
 			}
