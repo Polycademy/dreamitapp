@@ -64,7 +64,8 @@ module.exports = function(grunt){
 							/^tools/.test(filepath) || 
 							/^node_modules/.test(filepath) || 
 							/^\.git/.test(filepath) ||
-							/^\.c9revisions/.test(filepath)
+							/^\.c9revisions/.test(filepath) ||
+							/^project_design/.test(filepath)
 						){
 							grunt.log.writeln('Not copying: ' + filepath);
 							return false;
