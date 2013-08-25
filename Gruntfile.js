@@ -103,11 +103,23 @@ module.exports = function(grunt){
 		},
 		replace:{
 			main:{
-				src: ['build/index.php'],
+				src: [
+					'build/index.php', 
+					'build/application/views/layouts/default_layout.php', 
+					'build/js/bootstrap.js'],
 				overwrite: true,
 				replacements: [{
 					from: /((?:[a-z][a-z]+)\(\'ENVIRONMENT\', isset\(\$_SERVER\[\'CI_ENV\'\]\) \? \$_SERVER\[\'CI_ENV\'\] : \'development\'\).)/g,
 					to: "define('ENVIRONMENT', isset($_SERVER['CI_ENV']) ? $_SERVER['CI_ENV'] : 'production');"
+				},{
+					from: /<link rel="stylesheet" href="css\/main.css">/g,
+					to: '<link rel="stylesheet" href="css/main.' + (new Date()).getTime() + '.css">'
+				},{
+					from: /<script src="js\/config.js"><\/script>/g,
+					to: '<script src="js/config.' + (new Date()).getTime() + '.js"></script>'
+				},{
+					from: /urlArgs: 'bust=' \+  \(new Date\(\)\).getTime\(\)/g,
+					to: "urlArgs: 'bust=" + (new Date()).getTime() + "'"
 				}]
 			}
 		},
@@ -138,6 +150,6 @@ module.exports = function(grunt){
 	grunt.loadNpmTasks('grunt-contrib-cssmin');
 	grunt.loadNpmTasks('grunt-contrib-compress');
 	
-	grunt.registerTask('default', ['cssmin', 'clean:pre', 'copy', 'replace', 'compress', 'clean:post']);
+	grunt.registerTask('default', ['cssmin', 'clean:pre', 'copy', 'replace']);
 
 };
