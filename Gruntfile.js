@@ -1,10 +1,11 @@
 module.exports = function(grunt){
 
 	/*
-		The distribution directory should be tracked by Git, as PagodaBox relies on Git to host your files.
-		Make sure to make your git repository private as there may be secrets.
-		Once the repo is uploaded to Dream it App, you will need to gunzip + untar the build.tar.gz inside the distribution folder.
-		Extract it to the distribution folder, remember to remove the initial parent container.
+		The build directory is not tracked by git, but PagodaBox relies on Git to host your files.
+		So once you have the build. Copy it.
+		Create a new orphan branch.
+		Untar it into the orphan branch using git checkout branch_name --orphan
+		Push that branch to the Pagodabox
 	 */
 
 	//project configuration
@@ -24,7 +25,7 @@ module.exports = function(grunt){
 			pre:{
 				files: [
 					{
-						src: ['distribution/**'],
+						src: ['build/**'],
 						dot: true
 					}
 				]
@@ -32,7 +33,7 @@ module.exports = function(grunt){
 			post:{
 				files: [
 					{
-						src: ['distribution/!(build.tar.gz)'],
+						src: ['build/!(build.tar.gz)'],
 						dot: true
 					}
 				]
@@ -41,7 +42,7 @@ module.exports = function(grunt){
 		copy:{
 			main:{
 				files:[
-					{src: ['**'], dest: 'distribution/', dot: true, filter: function(filepath){
+					{src: ['**'], dest: 'build/', dot: true, filter: function(filepath){
 					
 						//directory separator
 						var dir = require('path').sep;
@@ -101,7 +102,7 @@ module.exports = function(grunt){
 		},
 		replace:{
 			main:{
-				src: ['distribution/index.php'],
+				src: ['build/index.php'],
 				overwrite: true,
 				replacements: [{
 					from: /((?:[a-z][a-z]+)\(\'ENVIRONMENT\', isset\(\$_SERVER\[\'CI_ENV\'\]\) \? \$_SERVER\[\'CI_ENV\'\] : \'development\'\).)/g,
@@ -112,14 +113,14 @@ module.exports = function(grunt){
 		compress:{
 			main:{
 				options:{
-					archive: 'distribution/build.tar.gz',
+					archive: 'build/build.tar.gz',
 					mode: 'tgz'
 				},
 				files:[
 					{
 						flatten: true,
 						dot: true,
-						src: 'distribution/**'
+						src: 'build/**'
 					}
 				]
 			}
