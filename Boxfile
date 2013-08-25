@@ -25,10 +25,8 @@ web1:
     - zip
   zend_extensions:
     - xdebug
-  after_build:
-    - tar -xvf distribution/build.tar.gz
   before_deploy:
-    - php distribution/index.php cli migrate latest
+    - php index.php cli migrate latest
 db1:
   name: dreamitapp
   type: mysql
