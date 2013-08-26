@@ -11,16 +11,6 @@ module.exports = function(grunt){
 	//project configuration
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json'), //get the package.json to load dependencies!
-		cssmin: {
-			main:{
-				options: {
-					keepSpecialComments: 0
-				},
-				files: {
-					'css/main.css': 'css/main.css'
-				}
-			}
-		},
 		clean: {
 			pre:{
 				files: [
@@ -101,6 +91,16 @@ module.exports = function(grunt){
 				]
 			}
 		},
+		cssmin: {
+			main:{
+				options: {
+					keepSpecialComments: 0
+				},
+				files: {
+					'build/css/main.css': 'build/css/main.css'
+				}
+			}
+		},
 		replace:{
 			main:{
 				src: [
@@ -150,6 +150,6 @@ module.exports = function(grunt){
 	grunt.loadNpmTasks('grunt-contrib-cssmin');
 	grunt.loadNpmTasks('grunt-contrib-compress');
 	
-	grunt.registerTask('default', ['cssmin', 'clean:pre', 'copy', 'replace']);
+	grunt.registerTask('default', ['clean:pre', 'copy', 'cssmin', 'replace']);
 
 };
