@@ -181,7 +181,7 @@ define(['angular'], function(angular){
 							if(typeof disqusApiKey === 'undefined') disqusApiKey = disqusGlobalConfig.apiKey;
 
 							if(!this.disqusApi){
-								this.disqusApi = $resource('https://disqus.com/api/3.0/:resource/:action.json',
+								this.disqusApi = $resource('http://disqus.com/api/3.0/:resource/:action.json',
 									{
 										'api_key': disqusApiKey,
 										'forum': disqusShortname
