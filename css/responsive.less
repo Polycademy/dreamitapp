@@ -6,10 +6,23 @@ body{
 }
 
 /*
-	At 600px the header's logo and links should center and stack.
+	HEADER RESPONSIVE
  */
+@media(min-width: 1300px){
+
+	//At 1300px and above, the container for the header should be bigger so to match the number of horizontal items.
+	header .container, 
+	header.navbar-static-top .container,
+	header.navbar-fixed-top .container,
+	header.navbar-fixed-bottom .container{
+		width: 1240px;
+	}
+
+}
+
 @media(max-width: 600px){
 	
+	//At 600px and below the header's logo and links should center and stack.
 	header.navbar{
 		.logo{
 			float: none;
@@ -35,6 +48,7 @@ body{
 
 @media(max-width: 320px){
 
+	//Reduce the font size at 320px and below
 	header.navbar .nav{
 		font-size: 22px;
 	}
@@ -42,71 +56,19 @@ body{
 }
 
 /*
-	Responsive Wall Widths. Smallest to largest. The min-widths overwrite each other.
+	RESPONSIVE WALL. The min-widths overwrite each other from smallest to largest.
  */
-// @media(max-width: (@3_wall_cols + @scrollbar)){
-
-// 	//below 3 columns, we need to change the menu
-
-// }
-
-// @media(min-width: (@3_wall_cols + @scrollbar)){
-
-// 	.main{
-// 		.wall_container{
-// 			width: @3_wall_cols;
-// 			.wall{
-// 				width: (@3_wall_cols - @panel_width);
-// 			}
-// 		}
-// 	}
-
-// }
-
-// @media(min-width: (@4_wall_cols + @scrollbar)){
-
-// 	.main{
-// 		.wall_container{
-// 			width: @4_wall_cols;
-// 			.wall{
-// 				width: (@4_wall_cols - @panel_width);
-// 			}
-// 		}
-// 	}
-
-// }
-
-// @media(min-width: (@5_wall_cols + @scrollbar)){
-
-// 	.main{
-// 		.wall_container{
-// 			width: @5_wall_cols;
-// 			.wall{
-// 				width: (@5_wall_cols - @panel_width);
-// 			}
-// 		}
-// 	}
-
-// }
-
-// @media(min-width: (@6_wall_cols + @scrollbar)){
-
-// 	.main{
-// 		.wall_container{
-// 			width: @6_wall_cols;
-// 			.wall{
-// 				width: (@6_wall_cols - @panel_width);
-// 			}
-// 		}
-// 	}
-
-// }
-
 @media(min-width: (@3_wall_cols + @scrollbar)){
 
 	.main{
-		.wall{
-			//width: @2_wall_cols;
+		.wall_container{
+			width: 70%;
+			.wall{
+				width: @2_wall_cols;
+			}
+		}
+		.control_panel{
+			width: 30%;
 		}
 	}
 
@@ -115,8 +77,14 @@ body{
 @media(min-width: (@4_wall_cols + @scrollbar)){
 
 	.main{
-		.wall{
-			width: @3_wall_cols;
+		.wall_container{
+			width: 75%;
+			.wall{
+				width: @3_wall_cols;
+			}
+		}
+		.control_panel{
+			width: 25%;
 		}
 	}
 
@@ -125,38 +93,81 @@ body{
 @media(min-width: (@5_wall_cols + @scrollbar)){
 
 	.main{
-		.wall{
-			width: @4_wall_cols;
+		.wall_container{
+			width: 79%;
+			.wall{
+				width: @4_wall_cols;
+			}
+		}
+		.control_panel{
+			width: 21%;
 		}
 	}
 
 }
 
-@media(min-width: (@6_wall_cols + @scrollbar)){
+/*
+	MOBILE WALL. The max-widths overwite each other from largest to smallest.
+ */
+@media(max-width: (@3_wall_cols + @scrollbar - 1px)){
 
+	//below 2 columns, we need to change the menu to a small side bar
 	.main{
-		.wall{
-			width: @5_wall_cols;
+		.wall_container{
+			width: 100%;
+			margin: 0 auto;
+			.wall{
+				width: @2_wall_cols;
+				float: none;
+				margin: 0 auto;
+				border-right: 1px solid @colour_green_highlight;
+			}
+		}
+		.control_panel{
+			width: @control_panel_icon_width;
+			position: absolute;
+			right: 0;
+			.search_form, .control_menu, .popular_tags{
+				display: none;
+			}
+			.slider_menu{
+				display: block;
+			}
 		}
 	}
 
 }
 
+@media(max-width: 640px){
 
+	//any smaller, we need to only have 1 wall column
+	.main{
+		.wall_container{
+			.wall{
+				width: @1_wall_cols;
+			}
+		}
+	}
 
-// @media(max-width: 500px){
+}
 
-// 	.main{
-// 		.wall_container{
-// 			width: @smallest_wall_width;
-// 			.wall{
-// 				width: @panel_width;
-// 			}
-// 			.control_panel{
-// 				width: @control_panel_icon_width;
-// 				//also the text needs to have display: none; DO IT LATER
-// 			}
-// 		}
-// 	}
+@media(max-width: 390px){
 
-// }
+	//and for iphones at 320px, we need to remove padding and use percentages
+	.main{
+		.wall_container{
+			.wall{
+				margin: 0 4%;
+			}
+		}
+		.control_panel{
+			width: 12%;
+			.slider_menu{
+				ul li a{
+					padding: 0px;
+				}
+			}
+		}
+	}
+
+}
