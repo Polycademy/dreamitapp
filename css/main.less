@@ -267,6 +267,10 @@ header.navbar{
 		background: @colour_wet_asphalt;
 		border-left: 1px solid @colour_blue_highlight;
 		.box-sizing();
+		.affixed_controls.affix{
+			top: 0;
+			width: inherit; //fixed elements should inherit its parent's width
+		}
 		.affixed_controls{
 			width: 100%;
 			.search_form{

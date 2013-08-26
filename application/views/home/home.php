@@ -72,7 +72,7 @@
 		</div>
 	</div>
 	<aside class="control_panel" equalise-height-to-dir=".main" ng-controller="ControlPanelCtrl">
-		<div class="affixed_controls">
+		<div class="affixed_controls" affix-dir="133">
 			<form class="search_form form-inline" ng-submit="submitSearch()">
 				<label for="search"><span class="fui-search"></span></label>
 				<input id="search" name="search" type="text" ng-model="searchTag" ng-change="submitSearchDebounced()" placeholder="Search"></input>

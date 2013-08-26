@@ -16,7 +16,7 @@ define(['angular', 'lodash', 'jquery'], function(angular, _){
 
 						var affixPosition = function(){
 
-							var offset = scope.$eval(attributes.affix),
+							var offset = scope.$eval(attributes.affixDir),
 								affix = win.prop('pageYOffset') <= offset ? 'top' : false;
 
 							if(affixed === affix) return;
