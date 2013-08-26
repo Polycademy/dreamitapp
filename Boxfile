@@ -3,7 +3,6 @@ global:
     - CI_ENV: production
 web1:
   name: dreamitapp
-  document_root: build
   php_version: 5.4.14
   php_date_timezone: "Australia/ACT"
   php_upload_max_filesize: "8M"
@@ -26,7 +25,7 @@ web1:
   zend_extensions:
     - xdebug
   before_deploy:
-    - php build/index.php cli migrate latest
+    - php index.php cli migrate latest
 db1:
   name: dreamitapp
   type: mysql
