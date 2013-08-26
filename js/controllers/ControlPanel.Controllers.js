@@ -32,6 +32,17 @@ define(['angular', 'lodash'], function(angular, _){
 					400
 				);
 
+				/**
+				 * Determines whether we are showing popular ideas or not
+				 * @type {Boolean}
+				 */
+				$scope.viewingPopularIdeas = false;
+
+				$scope.viewPopularIdeas = function(){
+
+					$scope.viewingPopularIdeas = !$scope.viewingPopularIdeas;
+				
+				}
 
 				/**
 				 * Determines whether we are showing my ideas or not.

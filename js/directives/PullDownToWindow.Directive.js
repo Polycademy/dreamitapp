@@ -14,7 +14,7 @@ define(['angular', 'jquery'], function(angular){
 
 						var pullDown = function(){
 							var offsetTop = element.offset().top;
-							element.css('min-height', window.height() - offsetTop - 1);
+							element.css('min-height', window.height() - offsetTop);
 						};
 
 						pullDown();
