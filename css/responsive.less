@@ -5,6 +5,10 @@ body{
 	padding: 0; //Remove Side Paddings that Bootstrap adds by default to the body when the browser sizes down!
 }
 
+.input[type="password"]{
+	font-family: arial, sans-serif !important; //custom fonts may screw up with password inputs!
+}
+
 /*
 	HEADER RESPONSIVE
  */
@@ -127,6 +131,7 @@ body{
 			width: @control_panel_icon_width;
 			position: absolute;
 			right: 0;
+			float: none;
 			.search_form, .control_menu, .popular_tags{
 				display: none;
 			}
