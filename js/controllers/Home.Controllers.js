@@ -37,7 +37,10 @@ define(['angular', 'lodash'], function(angular, _){
 				 */
 				$scope.appIdeas = [];
 
-				//setup the comment cache
+				/**
+				 * Setup comment cache, this will be passed into the Disqus Directive
+				 * @type {Object}
+				 */
 				$scope.commentCache = CachServ.commentCache;
 
 				/**
@@ -56,7 +59,7 @@ define(['angular', 'lodash'], function(angular, _){
 				 * @param  {String} tags
 				 * @return {Array}
 				 */
-				$scope.getIdeas = function(limit, tags, author){
+				$scope.getIdeas = function(limit, tags, author, popular){
 
 					$scope.ideasServiceBusy = true;
 
@@ -71,6 +74,10 @@ define(['angular', 'lodash'], function(angular, _){
 
 					if(author){
 						queryParameters.author = author;
+					}
+
+					if(popular){
+						queryParameters.popular = popular;
 					}
 
 					IdeasServ.get(
@@ -101,6 +108,7 @@ define(['angular', 'lodash'], function(angular, _){
 				 * @return {Void}
 				 */
 				$scope.likeAction = function(ideaId){
+
 
 
 				};
@@ -136,76 +144,87 @@ define(['angular', 'lodash'], function(angular, _){
 
 				};
 
+				/////////////////////////////
+				//  SEARCH EVENT HANDLING  //
+				/////////////////////////////
+
+				/**
+				 * Gets a query parameter value according to the passed in type.
+				 * It will be used by tags, author and popular ideas.
+				 * @param  {String} type Query Parameter Key
+				 * @return {String}
+				 */
+				var getSearchParam = function(type){
+
+					return $location.search()[type];
+
+				};
+
 				/**
 				 * This gets the limit query parameter and validates it.
 				 * It then either sets the new limit, or defaults to the default limit.
 				 * @return {Integer}
 				 */
-				var setupLimit = function(){
-
-					var limit = $location.search().limit;
+				var parseLimit = function(limit){
 
 					if(!UtilitiesServ.empty(limit) && UtilitiesServ.isInteger(limit)){
-
 						//limit is absolute valued and parsed as an integer
 						limit = Math.abs(_.parseInt(limit));
-
 					}else{
-
 						limit = defaultLimit;
-
 					}
-
 					return limit;
 
 				};
 
-				/**
-				 * This gets the tag query parameter and validates it.
-				 * It resets the counter if there are proper tags.
-				 * @return {String}
-				 */
-				var setupTagsSearch = function(){
-
-					return $location.search().tags;
-
-				};
-
-				var setupAuthorSearch = function(){
-
-					return $location.search().author;
-
-				};
-
-				//grab the initial limit and tags
-				$scope.limit = setupLimit();
-				$scope.tags = setupTagsSearch();
-				$scope.author = setupAuthorSearch();
-
-				//watch for changes to the tags and limit and adjust accordingly
-				$scope.$watch(
-					function(){
+				$scope.$watch(function(){
 
 						return $location.search();
+					
+					}, function(queryObject){
 
-					}, 
-					function(){
+						//this sets up the initial parameters, but also reruns on each change of the $location.search()
+						$scope.limit = parseLimit(queryObject.limit);
+						$scope.tags = queryObject.tags;
+						$scope.author = queryObject.author;
+						$scope.popular = queryObject.popular;
 
-						$scope.limit = setupLimit();
-						$scope.tags = setupTagsSearch();
-						$scope.author = setupAuthorSearch();
-
-						//only reload if there are tags or author
-						if($scope.tags || $scope.tags == '' || $scope.author || $scope.author == ''){
+						//only reload if there are tags or author or popular, but not limit
+						//limit gets activated on the next scroll load
+						if(
+							$scope.tags 
+							|| $scope.tags == '' 
+							|| $scope.author 
+							|| $scope.author == ''
+							|| $scope.popular 
+							|| $scope.popular == ''
+						){
 							//reset masonry, appIdeas and offset
 							$scope.appIdeas = [];
 							counterOffset = 0;
-							$scope.getIdeas($scope.limit, $scope.tags, $scope.author);
+							$scope.getIdeas($scope.limit, $scope.tags, $scope.author, $scope.popular);
 						}
 
 					}, 
 					true
 				);
+
+				//when this event is captured, we're forcing a total reload of the wall on default parameters
+				$scope.$on('reloadWall', function(){
+
+					$scope.limit = parseLimit();
+					$scope.tags = undefined;
+					$scope.author = undefined;
+					$scope.popular = undefined;
+					$scope.appIdeas = [];
+					counterOffset = 0;
+					$scope.getIdeas($scope.limit);
+					
+				});
+
+				////////////////////////
+				//  OVERLAY HANDLING  //
+				////////////////////////
 
 				//setting up the overlay options
 				var dialog = $dialog.dialog({
@@ -216,18 +235,47 @@ define(['angular', 'lodash'], function(angular, _){
 					controller: 'IdeaOverlayCtrl'
 				});
 
+				//we want to cancel the state change to ideas, and instead launch an overlay
+				//however we must keep the URL to the idea
+				$scope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){
+					//state change is prevented from home to ideas
+					//but the URL is preserved
+					if(fromState.name === 'home' && toState.name === 'ideas'){
+						event.preventDefault();
+					}
+				});
+
+				/**
+				 * Opens the overlay. This modifies the dialog options just as it is
+				 * opening to inject the ideaId and locationParams. This also registers
+				 * a closing callback when the overlay closes.
+				 * @param  {Number} ideaId Id of the Idea
+				 * @return {Void}
+				 */
 				$scope.openIdeaOverlay = function(ideaId){
 
-					//you might want to see if you can remember the URL parameters
-
-					//we need to pass in the ideaId to the modal controller
-					//and it has to use resolved functions
+					//ideaId is to be injected to the overlay controller to get the correct idea
+					//locationParamsAndHash is the current URL state before the overlay launches
+					//it will be used when the overlay closes, and we want to return to original URL state
 					dialog.options.resolve = {
-						ideaId: function(){ return ideaId }
+						ideaId: function(){ return ideaId },
+						locationParamsAndHash: function(){ 
+							return {
+								path: $location.path(),
+								search: $location.search(),
+								hash: $location.hash()
+							};
+						}
 					};
 					
-					dialog.open().then(function(){
+					//closing callback will receive the previous locationParams through the overlay
+					dialog.open().then(function(locationParamsAndHash){
+
 						$rootScope.viewingOverlay = false;
+						$location.path(locationParamsAndHash.path);
+						$location.search(locationParamsAndHash.search);
+						$location.hash(locationParamsAndHash.hash);
+
 					});
 
 				};
@@ -239,16 +287,16 @@ define(['angular', 'lodash'], function(angular, _){
 			'$rootScope',
 			'dialog',
 			'ideaId',
+			'locationParamsAndHash',
 			'IdeasServ',
-			function($scope, $rootScope, dialog, ideaId, IdeasServ){
+			function($scope, $rootScope, dialog, ideaId, locationParamsAndHash, IdeasServ){
 
 				$rootScope.viewingOverlay = true;
 
 				$scope.closeOverlay = function(){
-					dialog.close();
+					//this can only pass in a single param
+					dialog.close(locationParamsAndHash);
 				};
-
-				//ok let's update the URL
 
 				//and load in the appropriate data
 				$scope.idea = {};
