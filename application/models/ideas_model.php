@@ -27,7 +27,7 @@ class Ideas_model extends CI_Model{
 
 			//get author information (currently hardcoded)
 			$author = 'Roger Qiu';
-			$author_link = 'roger_qiu1';
+			$author_url = 'roger_qiu';
 			$author_avatar = 'http://gravatar.com/avatar/' . md5(trim('roger.qiu@polycademy.com'));
 			$author_type = 'Developer';
 			$author_profile_links = array('http://polycademy.com');
@@ -49,7 +49,7 @@ class Ideas_model extends CI_Model{
 				'description'			=> $row->description,
 				'descriptionFiltered'	=> strip_tags($row->description),
 				'authorId'				=> $row->authorId,
-				'authorLink'			=> $author_link,
+				'authorUrl'			=> $author_url,
 				'author'				=> $author,
 				'authorAvatar'			=> $author_avatar,
 				'authorType'			=> $author_type,
@@ -138,7 +138,7 @@ class Ideas_model extends CI_Model{
 
 				//get author information (currently hardcoded)
 				$author = 'Roger Qiu';
-				$author_link = 'roger_qiu1';
+				$author_url = 'roger_qiu1';
 				$author_avatar = 'http://gravatar.com/avatar/' . md5(trim('roger.qiu@polycademy.com')) . '?s=184&d=mm';
 				$author_type = 'Developer';
 				$author_profile_links = array('http://polycademy.com');
@@ -160,7 +160,7 @@ class Ideas_model extends CI_Model{
 					'image'					=> $row->image,
 					'description'			=> $row->description,
 					'authorId'				=> $author_id,
-					'authorLink'			=> $author_link,
+					'authorUrl'			=> $author_url,
 					'author'				=> $author,
 					'authorAvatar'			=> $author_avatar,
 					'authorType'			=> $author_type,
