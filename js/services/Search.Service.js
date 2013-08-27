@@ -4,16 +4,35 @@ define(['angular'], function(angular){
 
 	angular.module('Services')
 		.service('SearchServ', [
-			'$location',
-			function($location){
+			'LocationSearchServ',
+			function(LocationSearchServ){
+
+				//you can't delete the query's keys because that will prevent the watch from happening
+
+				this.searchPopular = function(toggle){
+
+					if(typeof toggle === 'undefined') toggle = true;
+
+					if(!toggle){
+						LocationSearchServ.setQuery({popular: ''});
+					}else{
+						LocationSearchServ.setQuery({popular: 'true'});
+					}
+
+				};
 
 				this.searchTag = function(tag){
-					$location.search({'tags': tag});
+
+					LocationSearchServ.setQuery({tags: tag});
+
 				};
 
 				this.searchAuthor = function(authorId){
-					$location.search({'author': authorId});
+
+					LocationSearchServ.setQuery({author: authorId});
+
 				};
+
 
 			}
 		]);
