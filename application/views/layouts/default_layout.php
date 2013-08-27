@@ -33,7 +33,7 @@
         <header class="navbar navbar-static-top" ng-controller="HeaderCtrl">
 			<div class="container">
 				<div class="navbar-inner">
-					<a class="logo" href="<?php echo site_url() ?>" title="Go back to Home">
+					<a class="logo" href="<?php echo site_url() ?>" ng-click="reloadWall()" title="Home">
 						<img src="img/logo.png" />
 					</a>
 					<ul class="nav">
