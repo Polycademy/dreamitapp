@@ -7,7 +7,7 @@
 				gutter: 0,
 				transitionDuration: '0.3s'
 			}" 
-			infinite-scroll="getIdeas(limit, tags, author)" 
+			infinite-scroll="getIdeas(limit, tags, author, popular)" 
 			infinite-scroll-disabled="ideasServiceBusy" 
 			infinite-scroll-distance="2"
 		>
@@ -15,7 +15,7 @@
 				<h3 class="item_header"><a ng-href="ideas/{{idea.id}}/{{idea.titleUrl}}" ng-click="openIdeaOverlay(idea.id)">{{idea.title}}</a></h3>
 				<div class="item_image_container" ng-show="ideaHasImage($index)">
 					<img ng-src="{{idea.image}}" />
-					<div class="item_rollover" ng-click="openIdeaOverlay(idea.id)"></div>
+					<a ng-href="ideas/{{idea.id}}/{{idea.titleUrl}}" ng-click="openIdeaOverlay(idea.id)"><div class="item_rollover"></div></a>
 					<a 
 						class="share_button" 
 						ng-href="http://www.addthis.com/bookmark.php?v=300&pubid={{dreamItAppConfig.apiKeys.addThis}}" 
@@ -39,10 +39,16 @@
 				<div class="item_desc" ng-bind-html="idea.description | TruncateWords:40"></div>
 				<div class="item_meta">
 					<span class="item_author">
-						<a ng-href="{{'users/' + idea.authorId + '/' + idea.authorLink}}">{{idea.author}}</a>
+						<a ng-href="{{'users/' + idea.authorId + '/' + idea.authorUrl}}">{{idea.author}}</a>
 					</span>
 					<div class="item_actions">
-						<a class="item_feedback" ng-href="ideas/{{idea.id}}/{{idea.titleUrl}}#feedback">
+						<a 
+							class="item_feedback" 
+							ng-href="ideas/{{idea.id}}/{{idea.titleUrl}}" 
+							ng-click="openIdeaOverlay(idea.id)" 
+							anchor-scroll-dir="feedback" 
+							anchor-scroll-delay="3000"
+						>
 							<div class="item_icon fui-chat">
 								<span 
 									class="item_number" 
