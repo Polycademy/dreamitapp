@@ -5,8 +5,13 @@ define(['angular'], function(angular){
 	angular.module('Controllers')
 		.controller('HeaderCtrl', [
 			'$scope',
-			function($scope){
+			'$rootScope',
+			'$location',
+			function($scope, $rootScope, $location){
 
+				$scope.reloadWall = function(){
+					$rootScope.$broadcast('reloadWall');
+				};
 
 			}
 		]);
