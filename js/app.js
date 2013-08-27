@@ -63,6 +63,7 @@ define([
 				'controllers/Users.Controllers',
 				'controllers/About.Controllers',
 				'controllers/Blog.Controllers',
+				'controllers/Idea.Controllers',
 				//DIRECTIVES
 				'directives/EqualiseHeights.Directive',
 				'directives/EqualiseHeightTo.Directive',
@@ -87,7 +88,8 @@ define([
 				'services/Users.Service',
 				'services/Ideas.Service',
 				'services/Search.Service',
-				'services/Cache.Service'
+				'services/Cache.Service',
+				'services/LocationSearch.Service'
 			], function(){
 
 				/* ==========================================================================
@@ -123,6 +125,14 @@ define([
 									}
 								)
 								.state(
+									'ideas',
+									{
+										url: '/ideas/{ideaId:[0-9]+}/{ideaUrl}',
+										templateUrl: 'idea.html',
+										controller: 'IdeaCtrl'
+									}
+								)
+								.state(
 									'users',
 									{
 										url: '/users',
@@ -133,7 +143,7 @@ define([
 								.state(
 									'user',
 									{
-										url: '/users/{userId:[0-9]+}/{userLink}',
+										url: '/users/{userId:[0-9]+}/{userUrl}',
 										templateUrl: 'user.html',
 										controller: 'UserCtrl'
 									}
@@ -157,7 +167,7 @@ define([
 								.state(
 									'post',
 									{
-										url: '/blog/{blogId:[0-9]+}/{blogLink}',
+										url: '/blog/{blogId:[0-9]+}/{blogUrl}',
 										templateUrl: 'post.html',
 										controller: 'PostCtrl'
 									}
