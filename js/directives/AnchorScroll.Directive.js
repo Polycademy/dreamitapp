@@ -12,17 +12,29 @@ define(['angular', 'jquery'], function(angular){
 	 */
 	angular.module('Directives')
 		.directive('anchorScrollDir', [
-			'$location',
-			'$anchorScroll',
-			function($location, $anchorScroll){
+			'$document',
+			'$timeout',
+			function($document, $timeout){
 				return {
 					link: function(scope, element, attributes){
 
-						var id = scope.$eval(attributes.anchorScrollDir);
+						var id = attributes.anchorScrollDir;
+						var delay = attributes.anchorScrollDelay;
+
+						var scrollTo = function(id){
+							$document[0].location.hash = '#' + id;
+						};
 
 						element.bind('click', function(){
-							$location.hash(id);
-							$anchorScroll();
+
+							if(typeof delay !== 'undefined'){
+								$timeout(function(){
+									scrollTo(id);
+								}, delay);
+							}else{
+								scrollTo(id);
+							}
+
 						});
 
 					}
