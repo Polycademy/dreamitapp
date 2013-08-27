@@ -14,7 +14,7 @@
 					<img class="overlay_author_image" ng-src="{{idea.authorAvatar + '?s=184&d=mm'}}" />
 					<div class="overlay_aside_text">
 						<span class="overlay_author_name">
-							<a ng-href="{{'users/' + idea.authorId + '/' + idea.authorLink}}">{{idea.author}}</a>
+							<a ng-href="{{'users/' + idea.authorId + '/' + idea.authorUrl}}">{{idea.author}}</a>
 						</span>
 						<ul class="overlay_author_additonal_information">
 							<li>{{idea.authorType}}</li>
@@ -65,7 +65,7 @@
 				</div>
 			</aside>
 		</div>
-		<section id="feedback" class="overlay_comments" >
+		<section id="feedback" class="overlay_comments">
 			<h2>Feedback</h2>
 			<div 
 				disqus-thread-dir 
