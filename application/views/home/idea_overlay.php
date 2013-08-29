@@ -1,22 +1,22 @@
 <script type="text/ng-template" id="idea_overlay.html">
-	<article class="idea_overlay_container" overlay-dir pull-down-to-window-dir>
-		<header class="overlay_header">
-			<h1 class="overlay_heading"><a ng-href="ideas/{{idea.id}}/{{idea.titleUrl}}">{{idea.title}}</a></h1>
-			<button class="overlay_close" ng-click="closeOverlay()"><span class="fui-cross"></span></button>
+	<article class="idea_container" overlay-dir pull-down-to-window-dir ng-show="!idea.errorMessage">
+		<header class="idea_header">
+			<h1 class="idea_heading"><a ng-href="ideas/{{idea.id}}/{{idea.titleUrl}}">{{idea.title}}</a></h1>
+			<button class="idea_close" ng-click="closeOverlay()"><span class="fui-cross"></span></button>
 		</header>
-		<div class="overlay_content">
-			<div class="overlay_inner_content">
-				<img class="overlay_main_image" ng-src="{{idea.image}}" />
-				<div class="overlay_description" ng-bind-html="idea.description"></div>
+		<div class="idea_content">
+			<div class="idea_inner_content">
+				<img class="idea_main_image" ng-src="{{idea.image}}" image-centering-dir image-centering-limit="40px" />
+				<div class="idea_description" ng-bind-html="idea.description"></div>
 			</div>
-			<aside class="overlay_meta gradient">
-				<div class="overlay_author">
-					<img class="overlay_author_image" ng-src="{{idea.authorAvatar + '?s=184&d=mm'}}" />
-					<div class="overlay_aside_text">
-						<span class="overlay_author_name">
+			<aside class="idea_meta gradient">
+				<div class="idea_author">
+					<img class="idea_author_image" ng-src="{{idea.authorAvatar + '?s=184&d=mm'}}" />
+					<div class="idea_aside_text">
+						<span class="idea_author_name">
 							<a ng-href="{{'users/' + idea.authorId + '/' + idea.authorUrl}}">{{idea.author}}</a>
 						</span>
-						<ul class="overlay_author_additonal_information">
+						<ul class="idea_author_additonal_information">
 							<li>{{idea.authorType}}</li>
 							<li>Links:</li>
 							<li ng-repeat="link in idea.authorProfileLinks">
@@ -26,13 +26,13 @@
 					</div>
 				</div>
 				<hr />
-				<div class="overlay_idea_data overlay_aside_text">
+				<div class="idea_idea_data idea_aside_text">
 					<ul>
 						<li>Submitted: {{idea.date}}</li>
 						<li>Feedback: 42</li>
 						<li>Likes: {{idea.likes}}</li>
 						<li>Tags: 
-							<ul class="overlay_tags_list">
+							<ul class="idea_tags_list">
 								<li ng-repeat="tag in idea.tags">
 									<a ng-href="?tags={{tag}}" ng-click="tagAction(tag)">{{tag}}</a>
 								</li>
@@ -41,7 +41,7 @@
 					</ul>
 				</div>
 				<hr />
-				<div class="overlay_actions overlay_aside_text">
+				<div class="idea_actions idea_aside_text">
 					<ul>
 						<li><a ng-click="likeAction(idea.id)"><span class="fui-heart"></span>Like</a></li>
 						<li><a ng-click="contactAuthor(idea.id)"><span class="fui-mail"></span>Contact</a></li>
@@ -65,7 +65,7 @@
 				</div>
 			</aside>
 		</div>
-		<section id="feedback" class="overlay_comments">
+		<section id="feedback" class="idea_comments">
 			<h2>Feedback</h2>
 			<div 
 				disqus-thread-dir 
@@ -76,5 +76,13 @@
 				disqus-developer="true"
 			></div>
 		</section>
+	</article>
+	<article class="idea_container" overlay-dir pull-down-to-window-dir ng-show="idea.errorMessage">
+		<header class="page-header">
+			<div class="alert alert-error alert-block">
+				<h1>404 Error!</h1>
+				{{idea.errorMessage}}
+			</div>
+		</header>
 	</article>
 </script>

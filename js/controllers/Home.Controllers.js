@@ -306,14 +306,12 @@ define(['angular', 'lodash'], function(angular, _){
 					},
 					function(response){
 
-						//console.log(response.content);
 						$scope.idea = response.content;
 
 					},
 					function(response){
 
-						//error message
-						console.log(response.data);
+						$scope.idea.errorMessage = response.data.content;
 
 					}
 				);

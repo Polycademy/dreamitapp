@@ -76,6 +76,7 @@ define([
 				'directives/Overlay.Directive',
 				'directives/AnchorScroll.Directive',
 				'directives/Disqus.Directive',
+				'directives/ImageCentering.Directive',
 				//FILTERS
 				'filters/StripHtml.Filter',
 				'filters/UrlFriendly.Filter',
@@ -127,9 +128,10 @@ define([
 								.state(
 									'ideas',
 									{
-										url: '/ideas/{ideaId:[0-9]+}/{ideaUrl}',
+										url: '/ideas/{ideaId:[0-9]+}/{ideaUrl:.+}',
 										templateUrl: 'idea.html',
-										controller: 'IdeaCtrl'
+										controller: 'IdeaCtrl',
+										reloadOnSearch: false
 									}
 								)
 								.state(
@@ -143,7 +145,7 @@ define([
 								.state(
 									'user',
 									{
-										url: '/users/{userId:[0-9]+}/{userUrl}',
+										url: '/users/{userId:[0-9]+}/{userUrl:.+}',
 										templateUrl: 'user.html',
 										controller: 'UserCtrl'
 									}
@@ -167,7 +169,7 @@ define([
 								.state(
 									'post',
 									{
-										url: '/blog/{blogId:[0-9]+}/{blogUrl}',
+										url: '/blog/{blogId:[0-9]+}/{blogUrl:.+}',
 										templateUrl: 'post.html',
 										controller: 'PostCtrl'
 									}

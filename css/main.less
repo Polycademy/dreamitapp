@@ -34,7 +34,15 @@ a{
 }
 
 .no_scroll{
-	overflow: hidden;
+	overflow: hidden; //when viewing overlay, remove the body's scroll bar
+}
+
+.alert{
+	border-radius: 0; //flat ui style, no need for round borders
+}
+
+.page-header{
+	border: none; //this is for the error message in ideas
 }
 
 /*
@@ -370,7 +378,135 @@ header.navbar{
 }
 
 /*
-	OVERLAY
+	IDEA
+*/
+.idea_container{
+	margin: 0 auto;
+	border-left: 1px solid @colour_green_highlight;
+	border-right: 1px solid @colour_green_highlight;
+	padding: 0;
+	.idea_header{
+		overflow: auto;
+		border-bottom: 1px solid @colour_green_highlight;
+		.idea_heading{
+			float: left;
+			font-size: 36px;
+			font-family: 'source_sans_prosemibold', arial, sans-serif;
+			font-weight: normal;
+			padding: 30px 60px;
+			margin: 0;
+			a{
+				color: @colour_wet_asphalt;
+			}
+		}
+		.idea_close{
+			margin: 30px;
+			float: right;
+			background: @colour_grey_clouds;
+			border: 1px solid @colour_greyer_clouds;
+			.rounded(8px);
+			color: @colour_wet_asphalt;
+			font-size: 34px;
+			width: 54px;
+			height: 54px;
+			line-height: 50px;
+			&:hover{
+				background: @colour_clouds;
+				color: @colour_midnight_blue;
+			};
+		}
+	}
+	.idea_content{
+		clear: both;
+		overflow: auto;
+		.idea_inner_content{
+			float: left;
+			width: 70%;
+			.idea_main_image{
+				margin: 0 auto;
+				display: block;
+			}
+			.idea_description{
+				font-family: arial, sans-serif;
+				font-size: 15px;
+				padding: 30px;
+				color: @colour_dark_asphalt;
+				text-shadow: 0 0 1px rgba(0, 0, 0, 0.1);
+			}
+		}
+		.idea_meta{
+			float: right;
+			font-family: 'source_sans_proregular', arial, sans-serif;
+			width: 30%;
+			border-left: 1px solid @colour_green_highlight;
+			.box-sizing();
+			.overlay-meta-gradient();
+			hr{
+				width: 60%;
+				border-top-color: @colour_green_highlight;
+				border-bottom: none;
+				margin: 0 auto;
+			}
+			ul{
+				list-style: none;
+				margin: 0;
+			}
+			.idea_aside_text{
+				padding: 22px;
+			}
+			.idea_author{
+				color: @colour_midnight_blue;
+				.idea_author_image{
+					display: block;
+					margin: 0 auto;
+					margin-top: 20px;
+					margin-bottom: 20px;
+					border: 1px solid @colour_green_highlight;
+					.rounded(10px);
+				}
+				.idea_author_name{
+					font-size: 20px;
+					font-family: 'source_sans_prosemibold', arial, sans-serif;
+					margin-bottom: 8px;
+					display: block;
+					a{
+						color: @colour_midnight_blue;
+					}
+				}
+			}
+			.idea_idea_data{
+				color: @colour_asbestos;
+				.idea_tags_list{
+					display: inline;
+					li{
+						display: inline;
+					}
+				}
+			}
+			.idea_actions{
+				font-weight: bold;
+				span{
+					padding: 6px 8px;
+					font-size: 16px;
+				}
+			}
+		}
+	}
+	.idea_comments{
+		padding: 0 24px 24px;
+		margin: 0 auto;
+		width: 90%;
+		> h2{
+			font-size: 24px;
+			font-family: 'source_sans_prosemibold', arial, sans-serif;
+			font-weight: normal;
+			color: @colour_wet_asphalt;
+		}
+	}
+}
+
+/*
+	IDEA OVERLAY
 */
 .idea_overlay{
 	.transparent-background(59, 77, 79, 0.7);
@@ -384,129 +520,19 @@ header.navbar{
 	left: 0;
 	right: 0;
 	overflow-y: scroll;
-	.idea_overlay_container{
-		background: @colour_bright_clouds;
-		width: 780px;
-		margin: 0 auto;
-		position: absolute;
-		top: 0;
-		left: 0;
-		right: 0;
-		.overlay_header{
-			overflow: auto;
-			.overlay_heading{
-				float: left;
-				font-size: 36px;
-				font-family: 'source_sans_prosemibold', arial, sans-serif;
-				font-weight: normal;
-				padding: 60px;
-				margin: 0;
-				a{
-					color: @colour_wet_asphalt;
-				}
-			}
-			.overlay_close{
-				margin: 30px;
-				float: right;
-				background: @colour_grey_clouds;
-				border: 1px solid @colour_greyer_clouds;
-				.rounded(8px);
-				color: @colour_wet_asphalt;
-				font-size: 34px;
-				width: 54px;
-				height: 54px;
-				line-height: 50px;
-				&:hover{
-					background: @colour_clouds;
-					color: @colour_midnight_blue;
-				};
-			}
-		}
-		.overlay_content{
-			clear: both;
-			overflow: auto;
-			border-top: 1px solid @colour_green_highlight;
-			.overlay_inner_content{
-				float: left;
-				width: 70%;
-				.overlay_main_image{
-					margin: 0 auto;
-					display: block;
-				}
-				.overlay_description{
-					font-family: arial, sans-serif;
-					font-size: 15px;
-					padding: 30px;
-					color: @colour_dark_asphalt;
-					text-shadow: 0 0 1px rgba(0, 0, 0, 0.1);
-				}
-			}
-			.overlay_meta{
-				float: right;
-				font-family: 'source_sans_proregular', arial, sans-serif;
-				width: 30%;
-				border-left: 1px solid @colour_green_highlight;
-				.box-sizing();
-				.overlay-meta-gradient();
-				hr{
-					width: 60%;
-					border-top-color: @colour_green_highlight;
-					border-bottom: none;
-					margin: 0 auto;
-				}
-				ul{
-					list-style: none;
-					margin: 0;
-				}
-				.overlay_aside_text{
-					padding: 22px;
-				}
-				.overlay_author{
-					color: @colour_midnight_blue;
-					.overlay_author_image{
-						display: block;
-						margin: 0 auto;
-						margin-top: 20px;
-						margin-bottom: 20px;
-						border: 1px solid @colour_green_highlight;
-						.rounded(10px);
-					}
-					.overlay_author_name{
-						font-size: 20px;
-						font-family: 'source_sans_prosemibold', arial, sans-serif;
-						margin-bottom: 8px;
-						display: block;
-						a{
-							color: @colour_midnight_blue;
-						}
-					}
-				}
-				.overlay_idea_data{
-					color: @colour_asbestos;
-					.overlay_tags_list{
-						display: inline;
-						li{
-							display: inline;
-						}
-					}
-				}
-				.overlay_actions{
-					font-weight: bold;
-					span{
-						padding: 6px 8px;
-						font-size: 16px;
-					}
-				}
-			}
-		}
-		.overlay_comments{
-			padding: 0 24px 24px;
-			> h2{
-				font-size: 24px;
-				font-family: 'source_sans_prosemibold', arial, sans-serif;
-				font-weight: normal;
-				color: @colour_wet_asphalt;
-			}
+}
+
+.idea_overlay > .idea_container{
+	width: 780px;
+	background: @colour_bright_clouds;
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	border: none;
+	.idea_header{
+		.idea_heading{
+			padding: 60px;
 		}
 	}
 }
