@@ -5,7 +5,8 @@ define(['angular', 'jquery'], function(angular){
 	angular.module('Directives')
 		.directive('pullDownToWindowDir', [
 			'$window',
-			function($window){
+			'$timeout',
+			function($window, $timeout){
 				return {
 					scope: true,
 					link: function(scope, element, attributes){
@@ -13,8 +14,10 @@ define(['angular', 'jquery'], function(angular){
 						var window = angular.element($window);
 
 						var pullDown = function(){
-							var offsetTop = element.offset().top;
-							element.css('min-height', window.height() - offsetTop);
+							$timeout(function(){
+								var offsetTop = element.offset().top;
+								element.css('min-height', window.height() - offsetTop);
+							}, 0);
 						};
 
 						pullDown();
