@@ -7,9 +7,10 @@ define(['angular', 'lodash'], function(angular, _){
 			'$scope',
 			'$location',
 			'$dialog',
+			'TagsServ',
 			'SearchServ',
 			'UtilitiesServ',
-			function($scope, $location, $dialog, SearchServ, UtilitiesServ){
+			function($scope, $location, $dialog, TagsServ, SearchServ, UtilitiesServ){
 
 				////////////////////////
 				// FILTERS AND SEARCH //
@@ -142,14 +143,19 @@ define(['angular', 'lodash'], function(angular, _){
 				// POPULAR TAGS //
 				//////////////////
 
-				//we need some way of getting popular tags
-				$scope.popularTags = [
-					'popular',
-					'tags',
-					'are',
-					'listed',
-					'here'
-				];
+				$scope.popularTags = [];
+
+				TagsServ.get({
+					popular: true,
+					trending: true,
+					limit: 10
+				}, function(response){
+
+					for(var i = 0; i < response.content.length; i++){
+						$scope.popularTags.push(response.content[i].tag);
+					}
+
+				});
 
 			}
 		]);

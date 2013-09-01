@@ -44,7 +44,7 @@ class Tags_model extends CI_Model{
 
 	}
 
-	public function read_all($limit = false, $offset = false, $idea = false, $author = false, $popular = false){
+	public function read_all($limit = false, $offset = false, $idea = false, $author = false, $popular = false, $trending = false){
 
 		//NEEDS VALIDATION
 
@@ -65,6 +65,13 @@ class Tags_model extends CI_Model{
 		}
 		if($author){
 			$this->db->where('i.authorId', $author);
+		}
+
+		//trending will select the most used (repeated) tags
+		if($trending){
+			$this->db->select('COUNT(t.tag) as tagCount');
+			$this->db->group_by('t.tag');
+			$this->db->order_by('tagCount', 'desc');
 		}
 
 		//this will implicitly get the most recent tags, since the tags table does not have a date column

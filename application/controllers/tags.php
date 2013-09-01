@@ -9,11 +9,12 @@ class Tags extends CI_Controller{
 	
 	/**
 	 * Get all tags
-	 * @queryparam Integer limit   Limit the number of results
-	 * @queryparam Integer offset  Offset the limit
-	 * @queryparam Integer idea    Filter by a particular idea id
-	 * @queryparam Integer author  Filter by a particular author id
-	 * @queryparam Boolean popular Order by likes
+	 * @queryparam Integer limit    Limit the number of results
+	 * @queryparam Integer offset   Offset the limit
+	 * @queryparam Integer idea     Filter by a particular idea id
+	 * @queryparam Integer author   Filter by a particular author id
+	 * @queryparam Boolean popular  Order by likes
+	 * @queryparam Boolean trending Select the most used tags
 	 * @return JSON
 	 */
 	public function index(){
@@ -23,8 +24,9 @@ class Tags extends CI_Controller{
 		$idea = $this->input->get('idea', true);
 		$author = $this->input->get('author', true);
 		$popular = $this->input->get('popular', true);
+		$trending = $this->input->get('trending', true);
 		
-		$query = $this->Tags_model->read_all($limit, $offset, $idea, $author, $popular);
+		$query = $this->Tags_model->read_all($limit, $offset, $idea, $author, $popular, $trending);
 		
 		if($query){
 			
