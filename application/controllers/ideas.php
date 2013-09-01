@@ -11,10 +11,11 @@ class Ideas extends CI_Controller{
 	
 	/**
 	 * Gets all Ideas
-	 *
-	 * @queryparam integer limit Limit the number of results
-	 * @queryparam integer offset Offset the limit
-	 * @queryparam string tags Tags in the form of "iphone+ipad"
+	 * @queryparam integer limit   Limit the number of results
+	 * @queryparam integer offset  Offset the limit
+	 * @queryparam string  tags    Tags in the form of "iphone+ipad"
+	 * @queryparam integer author  Filter by a particular author id
+	 * @queryparam boolean popular Order by likes
 	 * @return JSON
 	 **/
 	public function index(){
@@ -59,7 +60,7 @@ class Ideas extends CI_Controller{
 	/**
 	 * Gets one idea
 	 *
-	 * @param int Course ID
+	 * @param int Idea id
 	 * @return JSON
 	 **/
 	public function show($id){
@@ -91,7 +92,7 @@ class Ideas extends CI_Controller{
 	/**
 	 * Posts a new idea
 	 *
-	 * @postparam json Input data of the course
+	 * @postparam json Input data of the Idea
 	 * @return JSON
 	 **/
 	public function create(){
@@ -134,8 +135,8 @@ class Ideas extends CI_Controller{
 	/**
 	 * Updates a particular idea
 	 *
-	 * @param int Course ID
-	 * @putparam json Updated input data for the course
+	 * @param int Idea ID
+	 * @putparam json Updated input data for the Idea
 	 * @return JSON
 	 **/
 	public function update($id){
@@ -171,7 +172,7 @@ class Ideas extends CI_Controller{
 	/**
 	 * Deletes a particular idea
 	 *
-	 * @param int Course ID
+	 * @param int Idea ID
 	 * @return JSON
 	 **/
 	public function delete($id){

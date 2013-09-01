@@ -69,7 +69,6 @@ class Ideas_model extends CI_Model{
 		
 		}
 
-
 	}
 
 	public function read_all($limit = false, $offset = false, $tags = false, $author = false, $popular = false){

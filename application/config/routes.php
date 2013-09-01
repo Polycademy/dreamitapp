@@ -7,6 +7,7 @@ Pigeon::map(function($r){
 		
 		//services
 		$r->resources('ideas');
+		$r->resources('tags');
 		
 		//for user accounts
 		$r->resources('accounts');
