@@ -5788,6 +5788,22 @@ header.navbar .nav li a {
   height: 26px;
   margin-bottom: 10px;
 }
+.main .control_panel .affixed_controls .search_form #search:-moz-placeholder {
+  color: #16a085;
+  opacity: 1;
+}
+.main .control_panel .affixed_controls .search_form #search::-moz-placeholder {
+  color: #16a085;
+  opacity: 1;
+}
+.main .control_panel .affixed_controls .search_form #search:-ms-input-placeholder {
+  color: #16a085;
+  opacity: 1;
+}
+.main .control_panel .affixed_controls .search_form #search::-webkit-input-placeholder {
+  color: #16a085;
+  opacity: 1;
+}
 .main .control_panel .affixed_controls .control_menu {
   font-size: 22px;
   background: #2980b9;
