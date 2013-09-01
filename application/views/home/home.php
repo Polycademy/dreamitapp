@@ -98,6 +98,7 @@
 				</ul>
 			</div>
 			<div class="popular_tags">
+				<span class="popular_tags_title">Trending:</span>
 				<ul>
 					<li ng-repeat="tag in popularTags">
 						<a ng-href="?tags={{tag}}" ng-click="tagAction(tag)">{{tag}}</a>
