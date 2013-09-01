@@ -72,7 +72,7 @@ class Ideas_model extends CI_Model{
 
 	}
 
-	public function read_all($limit = false, $offset = false, $tags = false, $author = false){
+	public function read_all($limit = false, $offset = false, $tags = false, $author = false, $popular = false){
 
 		//we need to validate data here!
 
@@ -90,7 +90,7 @@ class Ideas_model extends CI_Model{
 		}
 		$tag_subquery = $this->db->get_compiled_select();
 
-		//optionally do a full text search on the description column and a like search on the title column
+		//search full text on description AND search "like" on the title
 		$search_subquery = '';
 		if(is_array($tags)){
 			$this->db->select('i.*');
@@ -100,9 +100,21 @@ class Ideas_model extends CI_Model{
 			$search_subquery = $this->db->get_compiled_select();
 		}
 
-		//author filter will be added in optionally
+		//optional author filter
 		$author_filter = ' WHERE `authorId` = ' . $this->db->escape_str($author);
-		$limit_sort = ' ORDER BY `date` DESC' . ' LIMIT ?, ?';
+
+		//popular sorting, date sorting and limits for pagination
+		$sort = ' ORDER BY';
+		$popular_sort = ' `likes` DESC';
+		$date_sort = ' `date` DESC';
+		$limit_sort = ' LIMIT ?, ?';
+
+		//popular sorting takes precedence over date sorting
+		if($popular){
+			$sort .= $popular_sort . ',';
+		}
+		$sort .= $date_sort;
+		$sort .= $limit_sort;
 
 		//union automatically makes the results are distinct
 		if(empty($search_subquery)){
@@ -110,7 +122,7 @@ class Ideas_model extends CI_Model{
 			if(is_numeric($author)){
 				$query .= $author_filter;
 			}
-			$query .= $limit_sort;
+			$query .= $sort;
 		}else{
 			$query = "
 				SELECT * FROM (
@@ -122,7 +134,7 @@ class Ideas_model extends CI_Model{
 			if(is_numeric($author)){
 				$query .= $author_filter;
 			}
-			$query .= $limit_sort;
+			$query .= $sort;
 		}
 
 		$query = $this->db->query($query, array($offset, $limit));
@@ -130,8 +142,6 @@ class Ideas_model extends CI_Model{
 		if($query->num_rows() > 0){
 		
 			foreach($query->result() as $row){
-
-				// FB::log($row);
 
 				$idea_id = $row->id;
 				$author_id = $row->authorId;
@@ -160,7 +170,7 @@ class Ideas_model extends CI_Model{
 					'image'					=> $row->image,
 					'description'			=> $row->description,
 					'authorId'				=> $author_id,
-					'authorUrl'			=> $author_url,
+					'authorUrl'				=> $author_url,
 					'author'				=> $author,
 					'authorAvatar'			=> $author_avatar,
 					'authorType'			=> $author_type,

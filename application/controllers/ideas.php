@@ -23,15 +23,16 @@ class Ideas extends CI_Controller{
 		$offset = $this->input->get('offset', true);
 		$tags = $this->input->get('tags', true);
 		$author = $this->input->get('author', true);
+		$popular = $this->input->get('popular', true);
 
-		//tags are already decoded from $_GET, the + gets turned into spaces
+		//tags are already decoded from $_GET, the "+" gets turned into spaces
 		if(!empty($tags)){
 			$tags = explode(' ', $tags);
 		}else{
 			$tags = false;
 		}
 		
-		$query = $this->Ideas_model->read_all($limit, $offset, $tags, $author);
+		$query = $this->Ideas_model->read_all($limit, $offset, $tags, $author, $popular);
 		
 		if($query){
 			
