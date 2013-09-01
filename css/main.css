@@ -5473,7 +5473,7 @@ blockquote {
 body {
   font-family: arial, sans-serif;
   font-size: 14px;
-  background: #fafaf7;
+  background: #f7f2f2;
   overflow-y: scroll;
 }
 a {
@@ -5568,7 +5568,6 @@ header.navbar .nav li a {
 }
 .main .wall_container {
   float: left;
-  background: #f7f2f2;
 }
 .main .wall_container .wall {
   min-height: 100%;
@@ -5834,6 +5833,10 @@ header.navbar .nav li a {
 .main .control_panel .affixed_controls .popular_tags {
   font-size: 18px;
   padding: 20px;
+}
+.main .control_panel .affixed_controls .popular_tags .popular_tags_title {
+  margin-left: 5px;
+  font-size: 17px;
 }
 .main .control_panel .affixed_controls .popular_tags ul {
   list-style: none;
