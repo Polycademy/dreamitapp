@@ -84,13 +84,15 @@ define([
 				'filters/Truncate.Filter',
 				//SERVICES
 				'services/Utilities.Service',
-				'services/Accounts.Service',
-				'services/Sessions.Service',
 				'services/Users.Service',
-				'services/Ideas.Service',
 				'services/Search.Service',
 				'services/Cache.Service',
-				'services/LocationSearch.Service'
+				'services/LocationSearch.Service',
+				//RESOURCES
+				'resources/Accounts.Service',
+				'resources/Sessions.Service',
+				'resources/Ideas.Service',
+				'resources/Tags.Service'
 			], function(){
 
 				/* ==========================================================================
