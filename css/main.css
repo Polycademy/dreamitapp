@@ -5789,7 +5789,6 @@ header.navbar .nav li a {
   margin-bottom: 10px;
 }
 .main .control_panel .affixed_controls .control_menu {
-  padding: 20px;
   font-size: 22px;
   background: #2980b9;
 }
@@ -5798,7 +5797,7 @@ header.navbar .nav li a {
   list-style: none;
 }
 .main .control_panel .affixed_controls .control_menu ul li {
-  margin: 15px 0;
+  padding: 15px 20px;
 }
 .main .control_panel .affixed_controls .control_menu ul li.viewing_my_ideas,
 .main .control_panel .affixed_controls .control_menu ul li.viewing_popular_ideas {
