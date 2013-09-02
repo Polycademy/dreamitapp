@@ -9,11 +9,13 @@ define(['angular', 'lodash'], function(angular, _){
 			'$location',
 			'$filter',
 			'$dialog',
+			'$window',
+			'$document',
 			'UtilitiesServ',
 			'IdeasServ',
 			'SearchServ',
 			'CachServ',
-			function($scope, $rootScope, $location, $filter, $dialog, UtilitiesServ, IdeasServ, SearchServ, CachServ){
+			function($scope, $rootScope, $location, $filter, $dialog, $window, $document, UtilitiesServ, IdeasServ, SearchServ, CachServ){
 
 				/**
 				 * The default limit of app ideas to load on each scroll iteration
@@ -235,14 +237,27 @@ define(['angular', 'lodash'], function(angular, _){
 					controller: 'IdeaOverlayCtrl'
 				});
 
+				//setting up viewport width, overlay handling should be put into non-reusable directive
+				var viewportWidth = '';
+				angular.element($window).resize(function(){
+					viewportWidth = $window.innerWidth || $document[0].documentElement.clientWidth || $document[0].getElementsByTagName('body')[0].clientWidth;
+				});
+
 				//we want to cancel the state change to ideas, and instead launch an overlay
 				//however we must keep the URL to the idea
 				$scope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){
+
+					//smaller screen sizes should directly transition
+					if(viewportWidth < 800){
+						return;
+					}
+
 					//state change is prevented from home to ideas
 					//but the URL is preserved
 					if(fromState.name === 'home' && toState.name === 'ideas'){
 						event.preventDefault();
 					}
+
 				});
 
 				/**
@@ -253,6 +268,11 @@ define(['angular', 'lodash'], function(angular, _){
 				 * @return {Void}
 				 */
 				$scope.openIdeaOverlay = function(ideaId){
+
+					//smaller screen sizes should directly transition
+					if(viewportWidth < 800){
+						return;
+					}
 
 					//ideaId is to be injected to the overlay controller to get the correct idea
 					//locationParamsAndHash is the current URL state before the overlay launches
