@@ -26,17 +26,17 @@ class Ideas_model extends CI_Model{
 
 		if(!$query){
 
-            $msg = $this->db->_error_message();
-            $num = $this->db->_error_number();
-            $last_query = $this->db->last_query();
+			$msg = $this->db->_error_message();
+			$num = $this->db->_error_number();
+			$last_query = $this->db->last_query();
 			
-            log_message('error', 'Problem inserting to ideas table: ' . $msg . ' (' . $num . '), using this query: "' . $last_query . '"');
+			log_message('error', 'Problem inserting to ideas table: ' . $msg . ' (' . $num . '), using this query: "' . $last_query . '"');
 			
 			$this->errors = array(
 				'system_error'	=> 'Problem inserting data to ideas table.',
 			);
 			
-            return false;
+			return false;
 
 		}
 
@@ -227,9 +227,43 @@ class Ideas_model extends CI_Model{
 
 	public function update($id, $data){
 
+		$this->db->where('id', $id);
+		$this->db->update('ideas', $data);
+
+		if($this->db->affected_rows() > 0){
+		
+			return true;
+		
+		}else{
+			
+			$this->errors = array(
+				'error'	=> 'Idea doesn\'t need to update.',
+			);
+
+            return false;
+		
+		}
+
 	}
 
 	public function delete($id){
+
+		$this->db->where('id', $id);
+		$this->db->delete('ideas'); 
+
+		if($this->db->affected_rows() > 0){
+		
+			return true;
+		
+		}else{
+			
+			$this->errors = array(
+				'error'	=> 'No idea to delete.',
+			);
+
+            return false;
+		
+		}
 
 	}
 

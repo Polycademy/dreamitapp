@@ -60,7 +60,6 @@ class Ideas extends CI_Controller{
 	
 	/**
 	 * Gets one idea
-	 *
 	 * @param int Idea id
 	 * @return JSON
 	 **/
@@ -92,7 +91,6 @@ class Ideas extends CI_Controller{
 	
 	/**
 	 * Posts a new idea
-	 *
 	 * @postparam json Input data of the Idea
 	 * @return JSON
 	 **/
@@ -133,7 +131,6 @@ class Ideas extends CI_Controller{
 	
 	/**
 	 * Updates a particular idea
-	 *
 	 * @param int Idea ID
 	 * @putparam json Updated input data for the Idea
 	 * @return JSON
@@ -151,9 +148,12 @@ class Ideas extends CI_Controller{
 			
 		}else{
 		
-			$this->output->set_status_header('200');
 			$content = current($this->Ideas_model->get_errors());
 			$code = key($this->Ideas_model->get_errors());
+
+			if($code == 'validation_error'){
+				$this->output->set_status_header(400);
+			}
 			
 		}
 		
@@ -168,18 +168,10 @@ class Ideas extends CI_Controller{
 	
 	/**
 	 * Deletes a particular idea
-	 *
 	 * @param int Idea ID
 	 * @return JSON
 	 **/
 	public function delete($id){
-
-		//authenticated needs to check for either:
-		//User is logged in and owns the object
-		//Or if the user has the authority to delete everything
-		//The Polyhack authenticated is all or nothing.
-		//The model could check if the current logged in user has these features
-		//This one just simply checks if it is logged in or what ever
 		
 		$query = $this->Ideas_model->delete($id);
 		
@@ -190,7 +182,6 @@ class Ideas extends CI_Controller{
 			
 		}else{
 		
-			$this->output->set_status_header('200');
 			$content = current($this->Ideas_model->get_errors());
 			$code = key($this->Ideas_model->get_errors());
 		
