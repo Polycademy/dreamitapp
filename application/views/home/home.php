@@ -26,17 +26,15 @@
 							ui_hover_direction: -1,
 							services_exclude: 'print'
 						}" 
-						add-this-share="{
-							url: baseUrl + 'ideas/' + idea.id + '/' + idea.titleUrl,
-							title: idea.title,
-							description: idea.descriptionFiltered
-						}"
+						add-this-url = "{{baseUrl + 'ideas/' + idea.id + '/' + idea.titleUrl}}" 
+						add-this-title = "{{idea.title}}" 
+						add-this-description = "{{idea.descriptionShort}}" 
 					>
 						Share
 						<span class="fui-plus"></span>
 					</a>
 				</div>
-				<div class="item_desc" ng-bind-html="idea.description | TruncateWords:40"></div>
+				<div class="item_desc" ng-bind-html="idea.descriptionShort"></div>
 				<div class="item_meta">
 					<span class="item_author">
 						<a ng-href="{{'users/' + idea.authorId + '/' + idea.authorUrl}}">{{idea.author}}</a>

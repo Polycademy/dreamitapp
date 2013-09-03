@@ -75,9 +75,9 @@ class Ideas_model extends CI_Model{
 				'image'					=> $row->image,
 				'description'			=> $row->description,
 				'descriptionParsed'		=> $this->parse_markdown($row->description),
-				'descriptionFiltered'	=> strip_tags($row->description),
+				'descriptionShort'		=> $row->descriptionShort,
 				'authorId'				=> $row->authorId,
-				'authorUrl'			=> $author_url,
+				'authorUrl'				=> $author_url,
 				'author'				=> $author,
 				'authorAvatar'			=> $author_avatar,
 				'authorType'			=> $author_type,
@@ -195,9 +195,9 @@ class Ideas_model extends CI_Model{
 					'title'					=> $row->title,
 					'titleUrl'				=> url_title($row->title, '_', true),
 					'image'					=> $row->image,
-					'description'			=> $row->description, //raw markdown
-					'descriptionParsed'		=> $this->parse_markdown($row->description), //processed html
-					'descriptionFiltered'	=> strip_tags($this->parse_markdown($row->description)), //processed but with no html
+					'description'			=> $row->description,
+					'descriptionParsed'		=> $this->parse_markdown($row->description),
+					'descriptionShort'		=> $row->descriptionShort,
 					'authorId'				=> $author_id,
 					'authorUrl'				=> $author_url,
 					'author'				=> $author,
@@ -246,7 +246,7 @@ class Ideas_model extends CI_Model{
 	 * @param  String $text Markdown String from the database
 	 * @return String       Processed and XSS cleaned HTML
 	 */
-	protected function process_markdown($text){
+	protected function parse_markdown($text){
 
 		$this->parser->no_markup = true;
 
