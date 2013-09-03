@@ -46,15 +46,12 @@
 						<li><a ng-click="contactAuthor(idea.id)"><span class="fui-mail"></span>Contact</a></li>
 						<li>
 							<a 
-								ng-href="http://www.addthis.com/bookmark.php?v=300&pubid={{dreamItAppConfig.apiKeys.addThis}}" 
-								add-this-dir 
-								add-this-config="{
-									ui_click: true,
-									services_exclude: 'print'
-								}" 
-								add-this-url = "{{baseUrl + 'ideas/' + idea.id + '/' + idea.titleUrl}}" 
-								add-this-title = "{{idea.title}}" 
-								add-this-description = "{{idea.descriptionShort}}" 
+								share-this-dir 
+								share-this-publisher-id="{{dreamItAppConfig.apiKeys.shareThis}}" 
+								share-this-url="{{baseUrl + 'ideas/' + idea.id + '/' + idea.titleUrl}}" 
+								share-this-title="{{idea.title}}" 
+								share-this-summary="{{idea.descriptionShort}}" 
+								share-this-image="{{idea.image}}"
 							>
 								<span class="fui-plus"></span>Share
 							</a>

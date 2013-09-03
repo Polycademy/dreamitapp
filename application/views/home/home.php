@@ -18,17 +18,13 @@
 					<a ng-href="ideas/{{idea.id}}/{{idea.titleUrl}}" ng-click="openIdeaOverlay(idea.id)"><div class="item_rollover"></div></a>
 					<a 
 						class="share_button" 
-						ng-href="http://www.addthis.com/bookmark.php?v=300&pubid={{dreamItAppConfig.apiKeys.addThis}}" 
 						share-button-dir 
-						add-this-dir 
-						add-this-config="{
-							ui_click: true,
-							ui_hover_direction: -1,
-							services_exclude: 'print'
-						}" 
-						add-this-url = "{{baseUrl + 'ideas/' + idea.id + '/' + idea.titleUrl}}" 
-						add-this-title = "{{idea.title}}" 
-						add-this-description = "{{idea.descriptionShort}}" 
+						share-this-dir 
+						share-this-publisher-id="{{dreamItAppConfig.apiKeys.shareThis}}" 
+						share-this-url="{{baseUrl + 'ideas/' + idea.id + '/' + idea.titleUrl}}" 
+						share-this-title="{{idea.title}}" 
+						share-this-summary="{{idea.descriptionShort}}" 
+						share-this-image="{{idea.image}}"
 					>
 						Share
 						<span class="fui-plus"></span>

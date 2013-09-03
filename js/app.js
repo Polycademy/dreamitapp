@@ -77,6 +77,7 @@ define([
 				'directives/AnchorScroll.Directive',
 				'directives/Disqus.Directive',
 				'directives/ImageCentering.Directive',
+				'directives/ShareThis.Directive',
 				//FILTERS
 				'filters/StripHtml.Filter',
 				'filters/UrlFriendly.Filter',

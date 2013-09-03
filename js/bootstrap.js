@@ -72,10 +72,15 @@ requirejs.config({
 		'outlayer': '../bower_components/outlayer',
 		'imagesLoaded': '../bower_components/imagesloaded/imagesloaded',
 		'masonry': '../bower_components/masonry/masonry',
-		//ADDTHIS
-		'addthis': [
-			'//s7.addthis.com/js/300/addthis_widget.js#pubid=' + dreamItAppConfig.apiKeys.addThis,
-			'lib/addthis_widget.min'
+		//ADDTHIS is no longer used due to URL state conflicts
+		// 'addthis': [
+		// 	'//s7.addthis.com/js/300/addthis_widget.js#pubid=' + dreamItAppConfig.apiKeys.addThis,
+		// 	'lib/addthis_widget.min'
+		// ],
+		//SHARETHIS
+		'sharethis': [
+			'http://w.sharethis.com/button/buttons',
+			'lib/buttons'
 		]
 	},
 	shim: {
@@ -119,8 +124,11 @@ requirejs.config({
 			deps: ['jquery'],
 			exports: "$"
 		},
-		'addthis': {
-			exports: "addthis"
+		// 'addthis': {
+		// 	exports: "addthis"
+		// },
+		'sharethis': {
+			exports: "stLight"
 		}
 	}
 });
