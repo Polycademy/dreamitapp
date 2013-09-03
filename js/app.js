@@ -69,7 +69,6 @@ define([
 				'directives/EqualiseHeightTo.Directive',
 				'directives/MasonryWall.Directive',
 				'directives/InfiniteScroll.Directive',
-				'directives/AddThis.Directive',
 				'directives/Affix.Directive',
 				'directives/PullDownToWindow.Directive',
 				'directives/ShareButton.Directive',
