@@ -5,9 +5,12 @@ Pigeon::map(function($r){
 	//RESOURCES ROUTING
 	$r->route('api', false, function($r){
 		
-		//services
+		//services (plural)
 		$r->resources('ideas');
 		$r->resources('tags');
+
+		//services (singular)
+		$r->resource('like');
 		
 		//for user accounts
 		$r->resources('accounts');
