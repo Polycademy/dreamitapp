@@ -7,7 +7,7 @@
 		<div class="idea_content">
 			<div class="idea_inner_content">
 				<img class="idea_main_image" ng-src="{{idea.image}}" image-centering-dir image-centering-limit="40px" />
-				<div class="idea_description" ng-bind-html="idea.description"></div>
+				<div class="idea_description" ng-bind-html="idea.descriptionParsed"></div>
 			</div>
 			<aside class="idea_meta gradient">
 				<div class="idea_author">
@@ -47,18 +47,18 @@
 						<li><a ng-click="contactAuthor(idea.id)"><span class="fui-mail"></span>Contact</a></li>
 						<li>
 							<a 
-							ng-href="http://www.addthis.com/bookmark.php?v=300&pubid={{dreamItAppConfig.apiKeys.addThis}}" 
-							add-this-dir 
-							add-this-config="{
-								ui_click: true,
-								services_exclude: 'print'
-							}" 
-							add-this-share="{
-								url: baseUrl + 'ideas/' + idea.id + '/' + idea.titleUrl,
-								title: idea.title,
-								description: idea.descriptionFiltered
-							}"
-							><span class="fui-plus"></span>Share</a>
+								ng-href="http://www.addthis.com/bookmark.php?v=300&pubid={{dreamItAppConfig.apiKeys.addThis}}" 
+								add-this-dir 
+								add-this-config="{
+									ui_click: true,
+									services_exclude: 'print'
+								}" 
+								add-this-url = "{{baseUrl + 'ideas/' + idea.id + '/' + idea.titleUrl}}" 
+								add-this-title = "{{idea.title}}" 
+								add-this-description = "{{idea.descriptionShort}}" 
+							>
+								<span class="fui-plus"></span>Share
+							</a>
 						</li>
 						<li><a anchor-scroll-dir="feedback"><span class="fui-chat"></span>Give Feedback</a></li>
 					</ul>

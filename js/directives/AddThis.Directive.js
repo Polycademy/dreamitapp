@@ -7,21 +7,52 @@ define(['angular', 'addthis'], function(angular, addthis){
 	 * You can provide addThisConfig and addThisShare as JSON or evaluated objects to configure the buttons
 	 */
 	angular.module('Directives')
-		.directive('addThisDir', 
+		.directive('addThisDir', [
 			function(){
 				return {
+					scope:{
+						addThisUrl: '@',
+						addThisTitle: '@',
+						addThisDescription: '@'
+					},
 					link: function(scope, element, attributes){
 
-						var addThisConfig = scope.$eval(attributes.addThisConfig),
-							addThisShare = scope.$eval(attributes.addThisShare);
+						var addThisConfig = scope.$eval(attributes.addThisConfig), 
+							addThisShare = {};
 
-						addthis.init();
+						var isObjectReady = function(object){
 
-						addthis.button(element[0], addThisConfig, addThisShare);
+							for(var key in object){
+								if(object[key] === ''){
+									return false;
+								}
+							}
+							return true;
+
+						};
+
+						scope.$watch(function(){
+
+							addThisShare.url = scope.addThisUrl;
+							addThisShare.title = scope.addThisTitle;
+							addThisShare.description = scope.addThisDescription;
+							
+							return addThisShare;
+
+						}, function(addThisShare){
+
+							if(isObjectReady(addThisShare)){
+
+								addthis.init();
+								addthis.button(element[0], addThisConfig, addThisShare);
+							
+							}
+						
+						}, true);
 
 					}
 				};
 			}
-		);
+		]);
 
 });
