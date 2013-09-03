@@ -30,7 +30,9 @@
 						<span class="fui-plus"></span>
 					</a>
 				</div>
-				<div class="item_desc" ng-bind-html="idea.descriptionShort"></div>
+				<div class="item_desc">
+					<p>{{idea.descriptionShort}}</p>
+				</div>
 				<div class="item_meta">
 					<span class="item_author">
 						<a ng-href="{{'users/' + idea.authorId + '/' + idea.authorUrl}}">{{idea.author}}</a>
