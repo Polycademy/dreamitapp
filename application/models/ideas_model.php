@@ -1,12 +1,17 @@
 <?php
 
+use Michelf\MarkdownExtra;
+
 class Ideas_model extends CI_Model{
 
+	protected $parser;
 	protected $errors;
 
 	public function __construct(){
 
 		parent::__construct();
+
+		$this->parser = new MarkdownExtra;
 
 		//use set_data and reset_validation (test it out)
 		$this->load->library('form_validation', false, 'validator');
@@ -14,6 +19,28 @@ class Ideas_model extends CI_Model{
 	}
 
 	public function create($data){
+
+		$data['date'] = date('Y-m-d H:i:s');
+
+		$query = $this->db->insert('ideas', $data);
+
+		if(!$query){
+
+            $msg = $this->db->_error_message();
+            $num = $this->db->_error_number();
+            $last_query = $this->db->last_query();
+			
+            log_message('error', 'Problem inserting to ideas table: ' . $msg . ' (' . $num . '), using this query: "' . $last_query . '"');
+			
+			$this->errors = array(
+				'system_error'	=> 'Problem inserting data to ideas table.',
+			);
+			
+            return false;
+
+		}
+
+		return $this->db->insert_id();
 
 	}
 
@@ -47,6 +74,7 @@ class Ideas_model extends CI_Model{
 				'titleUrl'				=> url_title($row->title, '_', true),
 				'image'					=> $row->image,
 				'description'			=> $row->description,
+				'descriptionParsed'		=> $this->parse_markdown($row->description),
 				'descriptionFiltered'	=> strip_tags($row->description),
 				'authorId'				=> $row->authorId,
 				'authorUrl'			=> $author_url,
@@ -167,7 +195,9 @@ class Ideas_model extends CI_Model{
 					'title'					=> $row->title,
 					'titleUrl'				=> url_title($row->title, '_', true),
 					'image'					=> $row->image,
-					'description'			=> $row->description,
+					'description'			=> $row->description, //raw markdown
+					'descriptionParsed'		=> $this->parse_markdown($row->description), //processed html
+					'descriptionFiltered'	=> strip_tags($this->parse_markdown($row->description)), //processed but with no html
 					'authorId'				=> $author_id,
 					'authorUrl'				=> $author_url,
 					'author'				=> $author,
@@ -206,6 +236,25 @@ class Ideas_model extends CI_Model{
 	public function get_errors(){
 
 		return $this->errors;
+
+	}
+
+	/**
+	 * Parse Markdown Description.
+	 * Markdown will be stored in the database to allow easy editing.
+	 * The resulting output will be xss cleaned.
+	 * @param  String $text Markdown String from the database
+	 * @return String       Processed and XSS cleaned HTML
+	 */
+	protected function process_markdown($text){
+
+		$this->parser->no_markup = true;
+
+		$html = $this->parser->transform($text);
+
+		$html = $this->security->xss_clean($html);
+
+		return $html;
 
 	}
 

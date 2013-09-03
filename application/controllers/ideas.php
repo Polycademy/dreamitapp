@@ -3,10 +3,11 @@
 class Ideas extends CI_Controller{
 
 	public function __construct(){
+
 		//THIS STILL REQUIRES the loading of the PolyAuth
-		//Also requires compliance with validation but not yet
 		parent::__construct();
 		$this->load->model('Ideas_model');
+
 	}
 	
 	/**
@@ -96,8 +97,6 @@ class Ideas extends CI_Controller{
 	 * @return JSON
 	 **/
 	public function create(){
-
-		$this->authenticated();
 		
 		$data = $this->input->json(false, true);
 		
@@ -140,8 +139,6 @@ class Ideas extends CI_Controller{
 	 * @return JSON
 	 **/
 	public function update($id){
-
-		$this->authenticated();
 		
 		$data = $this->input->json(false, true);
 		
@@ -183,7 +180,6 @@ class Ideas extends CI_Controller{
 		//The Polyhack authenticated is all or nothing.
 		//The model could check if the current logged in user has these features
 		//This one just simply checks if it is logged in or what ever
-		$this->authenticated();
 		
 		$query = $this->Ideas_model->delete($id);
 		
@@ -207,16 +203,6 @@ class Ideas extends CI_Controller{
 		
 		Template::compose(false, $output, 'json');
 		
-	}
-	
-	private function authenticated(){
-		//check if person was authenticated
-		/*
-			$output = array(
-				'content'	=> 'You need to login to do this action.',
-				'code'	=> 'error',
-			);
-		*/
 	}
 
 }
