@@ -399,7 +399,8 @@ $config['minify_output'] = FALSE;
 | helper' page of the user guide for information regarding date handling.
 |
 */
-$config['time_reference'] = 'local';
+$config['time_reference'] = 'Australia/ACT';
+date_default_timezone_set('Australia/ACT');
 
 
 /*
