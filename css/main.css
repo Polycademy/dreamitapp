@@ -7218,13 +7218,13 @@ body {
 }
 @media (min-width: 1235px) {
   .main .wall_container {
-    width: 79%;
+    width: 74%;
   }
   .main .wall_container .wall {
     width: 960px;
   }
   .main .control_panel {
-    width: 21%;
+    width: 26%;
   }
 }
 /*
