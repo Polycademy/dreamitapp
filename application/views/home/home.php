@@ -56,7 +56,7 @@
 								>{{commentCount | NumCounter:2}}</span>
 							</div>
 						</a>
-						<a class="item_likes" ng-click="likeAction(idea.id)">
+						<a class="item_likes" like-toggle-dir like-index="{{$index}}" like-id="{{idea.id}}">
 							<div class="item_icon fui-heart">
 								<span class="item_number">{{idea.likes | NumCounter:2}}</span>
 							</div>

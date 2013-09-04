@@ -8,7 +8,8 @@ define(['angular'], function(angular){
 			'$state',
 			'$location',
 			'IdeasServ',
-			function($scope, $state, $location, IdeasServ){
+			'LikeServ',
+			function($scope, $state, $location, IdeasServ, LikeServ){
 
 				var stateParams = $state.params;
 
@@ -40,6 +41,28 @@ define(['angular'], function(angular){
 
 					}
 				);
+
+				$scope.likeAction = function(ideaId){
+
+					LikeServ.update(
+						{
+							id: ideaId
+						},
+						false,
+						function(response){
+
+							LikeServ.get({
+								id: ideaId
+							}, function(response){
+
+								$scope.idea.likes = response.content.likes;
+
+							});
+
+						}
+					);
+
+				};
 
 			}
 		]);

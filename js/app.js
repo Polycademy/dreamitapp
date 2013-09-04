@@ -77,6 +77,7 @@ define([
 				'directives/Disqus.Directive',
 				'directives/ImageCentering.Directive',
 				'directives/ShareThis.Directive',
+				'directives/LikeToggle.Directive',
 				//FILTERS
 				'filters/StripHtml.Filter',
 				'filters/UrlFriendly.Filter',
@@ -92,7 +93,8 @@ define([
 				'resources/Accounts.Service',
 				'resources/Sessions.Service',
 				'resources/Ideas.Service',
-				'resources/Tags.Service'
+				'resources/Tags.Service',
+				'resources/Like.Service'
 			], function(){
 
 				/* ==========================================================================

@@ -102,20 +102,6 @@ define(['angular', 'lodash'], function(angular, _){
 				};
 
 				/**
-				 * Increase the amount of likes of an item by one.
-				 * A user is only allowed to like it once.
-				 * If this is executed again on the same item, the original like will be deducted.
-				 * It requires a user to be logged in before this will work.
-				 * @param  {Integer} ideaId Id of the idea item
-				 * @return {Void}
-				 */
-				$scope.likeAction = function(ideaId){
-
-
-
-				};
-
-				/**
 				 * When click on any tag links. This will set them as query parameters
 				 * on the url, and then reload the items based on these tag parameters.
 				 * This function should be called when any query parameters are detected.
@@ -309,7 +295,8 @@ define(['angular', 'lodash'], function(angular, _){
 			'ideaId',
 			'locationParamsAndHash',
 			'IdeasServ',
-			function($scope, $rootScope, dialog, ideaId, locationParamsAndHash, IdeasServ){
+			'LikeServ',
+			function($scope, $rootScope, dialog, ideaId, locationParamsAndHash, IdeasServ, LikeServ){
 
 				$rootScope.viewingOverlay = true;
 
@@ -335,6 +322,36 @@ define(['angular', 'lodash'], function(angular, _){
 
 					}
 				);
+
+				/**
+				 * Increase the amount of likes of an item by one.
+				 * A user is only allowed to like it once.
+				 * If this is executed again on the same item, the original like will be deducted.
+				 * It requires a user to be logged in before this will work.
+				 * @param  {Integer} ideaId Id of the idea item
+				 * @return {Void}
+				 */
+				$scope.likeAction = function(ideaId){
+
+					LikeServ.update(
+						{
+							id: ideaId
+						},
+						false,
+						function(response){
+
+							LikeServ.get({
+								id: ideaId
+							}, function(response){
+
+								$scope.idea.likes = response.content.likes;
+
+							});
+
+						}
+					);
+
+				};
 
 			}
 		]);
