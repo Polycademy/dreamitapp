@@ -5,12 +5,13 @@ Pigeon::map(function($r){
 	//RESOURCES ROUTING
 	$r->route('api', false, function($r){
 		
-		//services (plural)
+		//services
 		$r->resources('ideas');
 		$r->resources('tags');
 
-		//services (singular)
-		$r->resource('like');
+		//like resource only allows get and put (toggling)
+		$r->get('like/(:num)', 'like/show/$1');
+		$r->put('like/(:num)', 'like/update/$1');
 		
 		//for user accounts
 		$r->resources('accounts');

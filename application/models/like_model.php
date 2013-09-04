@@ -19,7 +19,8 @@ class Like_model extends CI_Model{
 
 		$this->db->select('likes');
 		$this->db->where('id', $id);
-		$this->db->get('ideas');
+		
+		$query = $this->db->get('ideas');
 
 		if($query->num_rows() > 0){
 			

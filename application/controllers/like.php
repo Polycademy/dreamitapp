@@ -5,7 +5,7 @@ class Like extends CI_Controller{
 	public function __construct(){
 
 		parent::__construct();
-		$this->load->model('Likes_model');
+		$this->load->model('Like_model');
 	
 	}
 
@@ -53,7 +53,7 @@ class Like extends CI_Controller{
 		//currently hardcoded
 		$author_id = 1;
 
-		$has_liked = $this->Like_model->has_liked($id, $author_id)p;
+		$has_liked = $this->Like_model->has_liked($id, $author_id);
 
 		if($has_liked){
 			$query = $this->Like_model->down_one($id, $author_id);
