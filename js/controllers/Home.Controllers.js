@@ -323,14 +323,6 @@ define(['angular', 'lodash'], function(angular, _){
 					}
 				);
 
-				/**
-				 * Increase the amount of likes of an item by one.
-				 * A user is only allowed to like it once.
-				 * If this is executed again on the same item, the original like will be deducted.
-				 * It requires a user to be logged in before this will work.
-				 * @param  {Integer} ideaId Id of the idea item
-				 * @return {Void}
-				 */
 				$scope.likeAction = function(ideaId){
 
 					LikeServ.update(
