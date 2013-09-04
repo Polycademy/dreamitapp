@@ -41,7 +41,7 @@ class Like extends CI_Controller{
 	}
 
 	/**
-	 * Updates a like for an idea. Basically +1 or -1. This toggles depending on if the user has liked it before.
+	 * Updates a like for an idea. Basically '1' or '-1'. This toggles depending on if the user has liked it before.
 	 * This may return validation errors (singular) if the author id or idea id is incorrect.
 	 * Otherwise it would return a system error.
 	 * @param  Integer $id Id of the idea to toggle likes

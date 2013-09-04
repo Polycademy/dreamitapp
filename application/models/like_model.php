@@ -19,7 +19,7 @@ class Like_model extends CI_Model{
 
 		$this->db->select('likes');
 		$this->db->where('id', $id);
-		
+
 		$query = $this->db->get('ideas');
 
 		if($query->num_rows() > 0){
@@ -85,7 +85,8 @@ class Like_model extends CI_Model{
 		));
 
 		//increase the like count for the idea
-		$this->db->set('likes', 'likes+1');
+		//false third parameter prevents backticking the "likes+1" which is a "formula" not a "value"
+		$this->db->set('likes', 'likes+1', false);
 		$this->db->where('id', $id);
 		$this->db->update('ideas');
 
@@ -107,7 +108,7 @@ class Like_model extends CI_Model{
 
 		}
 
-		return '+1';
+		return '1';
 
 	}
 
@@ -128,8 +129,9 @@ class Like_model extends CI_Model{
 		//delete like record
 		$this->db->delete('likes', array('ideaId' => $id, 'authorId' => $author_id));
 
-		//increase the like count for the idea
-		$this->db->set('likes', 'likes-1');
+		//decrease the like count for the idea
+		//false third parameter prevents backticking the likes-1 which is a "formula" not a "value"
+		$this->db->set('likes', 'likes-1', false);
 		$this->db->where('id', $id);
 		$this->db->update('ideas');
 
