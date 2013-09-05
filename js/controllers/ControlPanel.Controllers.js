@@ -244,7 +244,6 @@ define(['angular', 'lodash'], function(angular, _){
 								function(response){
 
 									//dont close the overlay, show the error via the validation errors, and allow resubmitting
-									//this is most likely a single message
 									$scope.validationErrors = ['Was not able to read the new idea. Try submitting again.'];
 
 								}
@@ -253,13 +252,13 @@ define(['angular', 'lodash'], function(angular, _){
 						},
 						function(response){
 
+							$scope.validationErrors = [];
 							if(response.data.code = 'validation_error'){
-
+								//the content would be an object of fields to errors
+								for(var key in response.data.content){
+									$scope.validationErrors.push(response.data.content[key]); 
+								}
 							}
-							console.log(response.data.content);
-							console.log(response.data.code);
-							//show validation messages (IF they are validation messages)
-							//$scope.validationErrors = response.data.content;
 
 						}
 					);
