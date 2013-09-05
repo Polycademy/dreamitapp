@@ -356,7 +356,8 @@ class Ideas_model extends CI_Model{
 
 		$html = $this->parser->transform($text);
 
-		$html = $this->security->xss_clean($html);
+		//get a better XSS filter
+		//$html = $this->security->xss_clean($html);
 
 		return $html;
 

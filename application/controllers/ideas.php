@@ -96,7 +96,8 @@ class Ideas extends CI_Controller{
 	 **/
 	public function create(){
 		
-		$data = $this->input->json(false, true);
+		//codeigniter's XSS clean would add a semicolon if "&" is used by itself
+		$data = $this->input->json(false);
 		
 		$query = $this->Ideas_model->create($data);
 		
