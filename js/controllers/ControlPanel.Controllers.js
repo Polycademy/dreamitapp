@@ -193,7 +193,15 @@ define(['angular', 'lodash'], function(angular, _){
 
 				$scope.validationErrors = false;
 
+				$scope.uploadImage = function(imageObject){
+					$scope.addIdeaImage = imageObject.url;
+					$scope.addIdeaImageBlob = imageObject.stringify();
+				};
+
 				$scope.submitIdea = function(){
+
+					//add everything from the form + the addIdeaImageBlob, because the blob string needs to be saved
+					//to be edited later on in the editing panel
 
 					console.log($scope);
 

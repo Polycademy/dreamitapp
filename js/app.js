@@ -78,6 +78,7 @@ define([
 				'directives/ImageCentering.Directive',
 				'directives/ShareThis.Directive',
 				'directives/LikeToggle.Directive',
+				'directives/FilePicker.Directive',
 				//FILTERS
 				'filters/StripHtml.Filter',
 				'filters/UrlFriendly.Filter',

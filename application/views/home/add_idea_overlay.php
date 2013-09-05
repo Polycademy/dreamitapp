@@ -42,7 +42,22 @@
 				<div class="control-group">
 					<label class="control-label">Add Image:</label>
 					<div class="controls">
-						<button class="add_idea_image_button btn btn-info" type="button">Upload</button>
+						<button 
+							class="add_idea_image_button btn btn-info" 
+							type="button" 
+							file-picker-store-dir 
+							file-picker-api-key="{{dreamItAppConfig.apiKeys.filePickerApiKey}}"
+							file-picker-options="{
+								mimetype: 'image/*',
+								maxSize: 500*1024
+							}" 
+							file-store-options="{
+								location: 'S3'
+							}"
+							file-picker-success="uploadImage(InkBlobs)"
+						>
+							Upload
+						</button>
 						<input 
 							type="text" 
 							disabled="disabled" 

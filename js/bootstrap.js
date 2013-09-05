@@ -79,8 +79,13 @@ requirejs.config({
 		// ],
 		//SHARETHIS
 		'sharethis': [
-			'http://w.sharethis.com/button/buttons',
+			'//w.sharethis.com/button/buttons',
 			'lib/buttons'
+		],
+		//FILEPICKER
+		'filepicker': [
+			'//api.filepicker.io/v1/filepicker',
+			'lib/filepicker'
 		]
 	},
 	shim: {
@@ -129,6 +134,9 @@ requirejs.config({
 		// },
 		'sharethis': {
 			exports: "stLight"
+		},
+		'filepicker': {
+			exports: "filepicker"
 		}
 	}
 });
