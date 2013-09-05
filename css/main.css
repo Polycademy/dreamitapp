@@ -6065,7 +6065,7 @@ header.navbar .nav li a {
   width: 780px;
   background: #f7f2f2;
   position: absolute;
-  top: 40px;
+  top: 0;
   left: 0;
   right: 0;
   border: none;

@@ -13,6 +13,7 @@
 						<input 
 							type="text" 
 							id="add_idea_title" 
+							class="input-xlarge" 
 							name="add_idea_title" 
 							ng-model="addIdeaTitle" 
 							ng-minlength="2" 
@@ -28,19 +29,23 @@
 					<div class="controls">
 						<textarea 
 							id="add_idea_short_description" 
+							class="input-block-level" 
 							name="add_idea_short_description" 
 							ng-model="addIdeaDescriptionShort" 
 							ng-minlength="10" 
 							ng-maxlength="280" 
 							required
 						></textarea>
-						<span class="help-inline error" ng-show="add_idea_form.add_idea_short_description.$error.minlength">Short description is too short.</span>
-						<span class="help-inline error" ng-show="add_idea_form.add_idea_short_description.$error.maxlength">Short description is too long.</span>
+						<span class="help-block error" ng-show="add_idea_form.add_idea_short_description.$error.minlength">Short description is too short.</span>
+						<span class="help-block error" ng-show="add_idea_form.add_idea_short_description.$error.maxlength">Short description is too long.</span>
 						<span class="help-block">This will be shown on the Home page wall. Write up to 280 characters.</span>
 					</div>
 				</div>
 				<div class="control-group">
 					<label class="control-label">Add Image:</label>
+					<div class="controls">
+						<span class="input-xlarge uneditable-input">{{addIdeaImage}}</span>
+					</div>
 					<div class="controls">
 						<button 
 							class="add_idea_image_button btn btn-info" 
@@ -58,11 +63,6 @@
 						>
 							Upload
 						</button>
-						<input 
-							type="text" 
-							disabled="disabled" 
-							ng-model="addIdeaImage"
-						></input>
 					</div>
 				</div>
 				<div class="control-group">
@@ -70,14 +70,16 @@
 					<div class="controls">
 						<textarea 
 							id="add_idea_description" 
+							class="input-block-level" 
 							name="add_idea_description" 
+							rows="10" 
 							ng-model="addIdeaDescription" 
 							ng-minlength="10" 
 							ng-maxlength="13500" 
 							required
 						></textarea>
-						<span class="help-inline error" ng-show="add_idea_form.add_idea_description.$error.minlength">Description is too short.</span>
-						<span class="help-inline error" ng-show="add_idea_form.add_idea_description.$error.maxlength">Description is too long.</span>
+						<span class="help-block error" ng-show="add_idea_form.add_idea_description.$error.minlength">Description is too short.</span>
+						<span class="help-block error" ng-show="add_idea_form.add_idea_description.$error.maxlength">Description is too long.</span>
 						<span class="help-block">You are welcome to use <a href="http://net.tutsplus.com/tutorials/tools-and-tips/markdown-the-ins-and-outs/" target="_blank">Markdown</a>. Write up to 2000 words.</span>
 					</div>
 				</div>
