@@ -179,17 +179,23 @@ define(['angular', 'lodash'], function(angular, _){
 		])
 		.controller('AddIdeaOverlayCtrl', [
 			'$scope',
+			'$rootScope',
 			'dialog',
 			'AppIdeasServ',
-			function($scope, dialog, AppIdeasServ){
+			function($scope, $rootScope, dialog, AppIdeasServ){
+
+				$rootScope.viewingOverlay = true;
 
 				$scope.closeOverlay = function(){
+					$rootScope.viewingOverlay = false;
 					dialog.close();
 				};
 
+				$scope.validationErrors = false;
+
 				$scope.submitIdea = function(){
 
-					console.log('Hello');
+					console.log($scope);
 
 					//once it finishes, we need to add the idea to the ng-repeat...
 					//unshift the product into ng-repeat
