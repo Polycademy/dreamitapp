@@ -10,7 +10,8 @@ define(['angular', 'lodash'], function(angular, _){
 			'TagsServ',
 			'SearchServ',
 			'UtilitiesServ',
-			function($scope, $location, $dialog, TagsServ, SearchServ, UtilitiesServ){
+			'UsersServ',
+			function($scope, $location, $dialog, TagsServ, SearchServ, UtilitiesServ, UsersServ){
 
 				////////////////////////
 				// FILTERS AND SEARCH //
@@ -116,11 +117,28 @@ define(['angular', 'lodash'], function(angular, _){
 				//these are the overlays
 				$scope.openAddIdeaOverlay = function(){
 
+					var dialog = $dialog.dialog({
+						backdrop: false,
+						keyboard: true,
+						dialogClass: 'modal overlay_backdrop small_overlay',
+						templateUrl: 'add_idea_overlay.html',
+						controller: 'AddIdeaOverlayCtrl'
+					});
+
+					dialog.open();
+
 				};
 
-				$scope.openProfileOverlay = function(){
+				//////////////////
+				// PROFILE LINK //
+				//////////////////
 
-				};
+				// wait until user data is working... also this depends on the person being logged in!
+				// var userData = UsersServ.getUserData();
+				// var $scope.authorId = userData.id;
+				// var $scope.authorUrl = userData.url;
+				$scope.authorId = 1;
+				$scope.authorUrl = 'roger_qiu';
 
 				////////////////////////
 				// SIGN IN & SIGN OUT //
@@ -156,6 +174,29 @@ define(['angular', 'lodash'], function(angular, _){
 					}
 
 				});
+
+			}
+		])
+		.controller('AddIdeaOverlayCtrl', [
+			'$scope',
+			'dialog',
+			'AppIdeasServ',
+			function($scope, dialog, AppIdeasServ){
+
+				$scope.closeOverlay = function(){
+					dialog.close();
+				};
+
+				$scope.submitIdea = function(){
+
+					//once it finishes, we need to add the idea to the ng-repeat...
+					//unshift the product into ng-repeat
+					//the appIdeas array will need to be put inside a service
+					//query the API for the date and author...?
+					//this won't be a close, but in the submit...
+					//which will then close it
+
+				};
 
 			}
 		]);

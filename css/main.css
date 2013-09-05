@@ -6025,9 +6025,9 @@ header.navbar .nav li a {
   color: #34495e;
 }
 /*
-	IDEA OVERLAY
+	OVERLAY BACKDROP
 */
-.idea_overlay {
+.overlay_backdrop {
   background: transparent;
   background: rgba(59, 77, 79, 0.7);
   -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=argb(rgba(@red, @green, @blue, @alpha)), endColorstr=argb(rgba(@red, @green, @blue, @alpha)))";
@@ -6043,7 +6043,13 @@ header.navbar .nav li a {
   right: 0;
   overflow-y: scroll;
 }
-.idea_overlay > .idea_container {
+.small_overlay {
+  overflow-y: hidden;
+}
+/*
+	IDEA OVERLAY
+*/
+.overlay_backdrop > .idea_container {
   width: 780px;
   background: #f7f2f2;
   position: absolute;
@@ -6052,8 +6058,23 @@ header.navbar .nav li a {
   right: 0;
   border: none;
 }
-.idea_overlay > .idea_container .idea_header .idea_heading {
+.overlay_backdrop > .idea_container .idea_header .idea_heading {
   padding: 60px;
+}
+/*
+	ADD IDEA OVERLAY
+ */
+.add_idea_container {
+  width: 780px;
+  background: #f7f2f2;
+  position: absolute;
+  top: 40px;
+  left: 0;
+  right: 0;
+  border: none;
+  margin: 0 auto;
+  border: 1px solid #b8e0d8;
+  padding: 20px;
 }
 /*
 	RESPONSIVE

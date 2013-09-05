@@ -509,9 +509,9 @@ header.navbar{
 }
 
 /*
-	IDEA OVERLAY
+	OVERLAY BACKDROP
 */
-.idea_overlay{
+.overlay_backdrop{
 	.transparent-background(59, 77, 79, 0.7);
 	border: none;
 	border-radius: 0;
@@ -525,7 +525,14 @@ header.navbar{
 	overflow-y: scroll;
 }
 
-.idea_overlay > .idea_container{
+.small_overlay{
+	overflow-y: hidden;
+}
+
+/*
+	IDEA OVERLAY
+*/
+.overlay_backdrop > .idea_container{
 	width: 780px;
 	background: @colour_bright_clouds;
 	position: absolute;
@@ -538,6 +545,22 @@ header.navbar{
 			padding: 60px;
 		}
 	}
+}
+
+/*
+	ADD IDEA OVERLAY
+ */
+.add_idea_container{
+	width: 780px;
+	background: @colour_bright_clouds;
+	position: absolute;
+	top: 40px;
+	left: 0;
+	right: 0;
+	border: none;
+	margin: 0 auto;
+	border: 1px solid @colour_green_highlight;
+	padding: 20px;
 }
 
 /*

@@ -11,11 +11,12 @@ define(['angular', 'lodash'], function(angular, _){
 			'$dialog',
 			'$window',
 			'$document',
+			'AppIdeasServ',
 			'UtilitiesServ',
 			'IdeasServ',
 			'SearchServ',
 			'CachServ',
-			function($scope, $rootScope, $location, $filter, $dialog, $window, $document, UtilitiesServ, IdeasServ, SearchServ, CachServ){
+			function($scope, $rootScope, $location, $filter, $dialog, $window, $document, AppIdeasServ, UtilitiesServ, IdeasServ, SearchServ, CachServ){
 
 				/**
 				 * The default limit of app ideas to load on each scroll iteration
@@ -34,10 +35,11 @@ define(['angular', 'lodash'], function(angular, _){
 				var counterOffset = 0;
 
 				/**
-				 * This is the array of app ideas to be repeated across the wall.
+				 * This is assigned a reference to an array of app ideas to be repeated across the wall.
+				 * Changes will to the array inside the service will be propagated across the application.
 				 * @type {Array}
 				 */
-				$scope.appIdeas = [];
+				$scope.appIdeas = AppIdeasServ.getAppIdeas();
 
 				/**
 				 * Setup comment cache, this will be passed into the Disqus Directive
@@ -218,15 +220,9 @@ define(['angular', 'lodash'], function(angular, _){
 				var dialog = $dialog.dialog({
 					backdrop: false,
 					keyboard: true,
-					dialogClass: 'modal idea_overlay',
+					dialogClass: 'modal overlay_backdrop',
 					templateUrl: 'idea_overlay.html',
 					controller: 'IdeaOverlayCtrl'
-				});
-
-				//setting up viewport width, overlay handling should be put into non-reusable directive
-				var viewportWidth = '';
-				angular.element($window).resize(function(){
-					viewportWidth = $window.innerWidth || $document[0].documentElement.clientWidth || $document[0].getElementsByTagName('body')[0].clientWidth;
 				});
 
 				//we want to cancel the state change to ideas, and instead launch an overlay
@@ -234,7 +230,7 @@ define(['angular', 'lodash'], function(angular, _){
 				$scope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){
 
 					//smaller screen sizes should directly transition
-					if(viewportWidth < 800){
+					if(UtilitiesServ.checkMinimumOverlayWidth()){
 						return;
 					}
 
@@ -256,7 +252,7 @@ define(['angular', 'lodash'], function(angular, _){
 				$scope.openIdeaOverlay = function(ideaId){
 
 					//smaller screen sizes should directly transition
-					if(viewportWidth < 800){
+					if(UtilitiesServ.checkMinimumOverlayWidth()){
 						return;
 					}
 
