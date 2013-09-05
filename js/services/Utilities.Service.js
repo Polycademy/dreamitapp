@@ -5,7 +5,10 @@ define(['angular', 'lodash'], function(angular, _){
 	angular.module('Services')
 		.service('UtilitiesServ', [
 			'$timeout',
-			function($timeout){
+			'$rootScope',
+			'$window',
+			'$document',
+			function($timeout, $rootScope, $window, $document){
 
 				/**
 				 * Finds out what the true type is, giving back capitalised "Array" or "Object" or "Function"... etc
@@ -146,6 +149,40 @@ define(['angular', 'lodash'], function(angular, _){
 						}, delay));
 
 					};
+
+				};
+
+				this.viewportWidth = '';
+
+				this.watchViewportWidth = function(){
+
+					var that = this;
+					angular.element($window).resize(function(){
+						that.viewportWidth = 
+							$window.innerWidth 
+							|| $document[0].documentElement.clientWidth 
+							|| $document[0].getElementsByTagName('body')[0].clientWidth;
+					});
+
+				};
+
+				this.watchViewportWidth();
+
+				/**
+				 * This checks if the window viewport width is below the minimum overlay width defined in the config.
+				 * If it is, it returns true, other returns false.
+				 * This is used for either cancelling the big overlays, or toggling the smaller overlays.
+				 * @return {Boolean} True it's below, false if it's above or equal
+				 */
+				this.checkMinimumOverlayWidth = function(){
+
+					var minimum = $rootScope.dreamItAppConfig.display.minimumOverlayWidth;
+
+					if(this.viewportWidth < minimum){
+						return true;
+					}
+
+					return false;
 
 				};
 

@@ -5,6 +5,9 @@
 'use strict';
 
 var dreamItAppConfig = {
+	display: {
+		minimumOverlayWidth: 800
+	},
 	apiKeys: {
 		addThis: 'ra-51f43b6702e72e9a',
 		shareThis: '44d5ce83-7ac1-447a-a5b2-6128182dab3a',
