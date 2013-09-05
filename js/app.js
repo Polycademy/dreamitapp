@@ -89,6 +89,7 @@ define([
 				'services/Search.Service',
 				'services/Cache.Service',
 				'services/LocationSearch.Service',
+				'services/AppIdeas.Service',
 				//RESOURCES
 				'resources/Accounts.Service',
 				'resources/Sessions.Service',
