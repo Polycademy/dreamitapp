@@ -4,6 +4,9 @@ use Michelf\MarkdownExtra;
 
 class Ideas_model extends CI_Model{
 
+	const PUBLIC_PRIVACY = 1;
+	const DEVELOPERS_PRIVACY = 2;
+
 	protected $parser;
 	protected $errors;
 
@@ -20,7 +23,13 @@ class Ideas_model extends CI_Model{
 
 	public function create($data){
 
+		//based on PolyAuth
+		//currently hardcoded
+		$data['authorId'] = 1;
 		$data['date'] = date('Y-m-d H:i:s');
+		if(isset($data['privacy'])){
+			$data['privacy'] = $this->assign_privacy($data['privacy']);
+		}
 
 		$query = $this->db->insert('ideas', $data);
 
@@ -51,6 +60,13 @@ class Ideas_model extends CI_Model{
 		if($query->num_rows() > 0){
 			
 			$row = $query->row();
+
+			if(!$this->check_privacy($row->privacy)){
+				$this->errors = array(
+					'error' => 'This idea is private to developers.'
+				);
+				return false;
+			}
 
 			//get author information (currently hardcoded)
 			$author = 'Roger Qiu';
@@ -85,6 +101,7 @@ class Ideas_model extends CI_Model{
 				'likes'					=> $row->likes,
 				'tags'					=> $tags,
 				'date'					=> $row->date,
+				'privacy'				=> $row->privacy //this is a binary number, to be used it needs to be reconverted
 			);
 			return $data;
 			
@@ -207,6 +224,7 @@ class Ideas_model extends CI_Model{
 					'likes'					=> $row->likes,
 					'tags'					=> $tags,
 					'date'					=> $row->date,
+					'privacy'				=> $row->privacy
 				);
 			
 			}
@@ -270,6 +288,51 @@ class Ideas_model extends CI_Model{
 	public function get_errors(){
 
 		return $this->errors;
+
+	}
+
+	protected function assign_privacy($privacy_selection){
+
+		$bitwise = '';
+
+		//cannot use '&' as CI's XSS clean auto adds a ';' after the string, breaking the input!
+		switch($privacy_selection){
+			case 'public':
+				$bitwise = decbin(self::PUBLIC_PRIVACY);
+				break;
+			case 'developers':
+				$bitwise = decbin(self::DEVELOPERS_PRIVACY);
+				break;
+			default:
+				$bitwise = decbin(self::PUBLIC_PRIVACY);
+		}
+
+		return $bitwise;
+
+	}
+
+	protected function check_privacy($privacy){
+
+		//this checks if privacy of the item
+		//if it is a public privacy, just return true
+		//if it isnt, we need to check if its a developers privacy
+		//if it is, then if the current user is not a developer, then we return false
+
+		//if not public privacy
+		if(!($privacy & self::PUBLIC_PRIVACY)){
+
+			if($privacy & self::DEVELOPERS_PRIVACY){
+
+				//current user must be a developer to see it
+				// if(!$user->developer){
+					// return false
+				// }
+			
+			}
+
+		}
+
+		return true;
 
 	}
 
