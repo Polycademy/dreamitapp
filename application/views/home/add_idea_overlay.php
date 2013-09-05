@@ -13,7 +13,7 @@
 						<input 
 							type="text" 
 							id="add_idea_title" 
-							class="input-xlarge" 
+							class="input-xxlarge" 
 							name="add_idea_title" 
 							ng-model="addIdeaTitle" 
 							ng-minlength="2" 
@@ -25,26 +25,9 @@
 					</div>
 				</div>
 				<div class="control-group">
-					<label class="control-label" for="add_idea_short_description">Short Description:</label>
-					<div class="controls">
-						<textarea 
-							id="add_idea_short_description" 
-							class="input-block-level" 
-							name="add_idea_short_description" 
-							ng-model="addIdeaDescriptionShort" 
-							ng-minlength="10" 
-							ng-maxlength="280" 
-							required
-						></textarea>
-						<span class="help-block error" ng-show="add_idea_form.add_idea_short_description.$error.minlength">Short description is too short.</span>
-						<span class="help-block error" ng-show="add_idea_form.add_idea_short_description.$error.maxlength">Short description is too long.</span>
-						<span class="help-block">This will be shown on the Home page wall. Write up to 280 characters.</span>
-					</div>
-				</div>
-				<div class="control-group">
 					<label class="control-label">Add Image:</label>
 					<div class="controls">
-						<span class="input-xlarge uneditable-input">{{addIdeaImage}}</span>
+						<span class="input-xxlarge uneditable-input">{{addIdeaImage}}</span>
 					</div>
 					<div class="controls">
 						<button 
@@ -63,6 +46,23 @@
 						>
 							Upload
 						</button>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="add_idea_short_description">Short Description:</label>
+					<div class="controls">
+						<textarea 
+							id="add_idea_short_description" 
+							class="input-block-level" 
+							name="add_idea_short_description" 
+							ng-model="addIdeaDescriptionShort" 
+							ng-minlength="10" 
+							ng-maxlength="280" 
+							required
+						></textarea>
+						<span class="help-block error" ng-show="add_idea_form.add_idea_short_description.$error.minlength">Short description is too short.</span>
+						<span class="help-block error" ng-show="add_idea_form.add_idea_short_description.$error.maxlength">Short description is too long.</span>
+						<span class="help-block">This will be shown on the Home page wall. Write up to 280 characters.</span>
 					</div>
 				</div>
 				<div class="control-group">

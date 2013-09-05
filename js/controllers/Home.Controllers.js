@@ -90,7 +90,8 @@ define(['angular', 'lodash'], function(angular, _){
 
 							//increase the counterOffset
 							counterOffset = counterOffset + limit;
-							$scope.appIdeas = $scope.appIdeas.concat(response.content);
+							//concat doesn't preserve the reference, this push.apply() will
+							$scope.appIdeas.push.apply($scope.appIdeas, response.content);
 							$scope.ideasServiceBusy = false;
 
 						},

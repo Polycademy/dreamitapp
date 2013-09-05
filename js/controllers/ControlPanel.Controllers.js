@@ -206,6 +206,7 @@ define(['angular', 'lodash'], function(angular, _){
 				};
 
 				$scope.validationErrors = false;
+				$scope.addIdeaPrivacy = 'privacy';
 
 				$scope.uploadImage = function(imageObject){
 					//imageObject is apparently an array, so we're only allowing one image
@@ -215,8 +216,6 @@ define(['angular', 'lodash'], function(angular, _){
 				};
 
 				$scope.submitIdea = function(){
-
-					console.log($scope);
 
 					var newIdea = {};
 
@@ -232,14 +231,31 @@ define(['angular', 'lodash'], function(angular, _){
 						newIdea,
 						function(response){
 
-							console.log(response.content);
-							//query the appIdeas to get the new idea
-							//add idea to the appIdeas
-							//$scope.closeOverlay();
+							IdeasServ.get(
+								{
+									id: response.content
+								},
+								function(response){
+
+									AppIdeasServ.prependIdeas(response.content);
+									$scope.closeOverlay();
+
+								},
+								function(response){
+
+									//dont close the overlay, show the error via the validation errors, and allow resubmitting
+									//this is most likely a single message
+									$scope.validationErrors = ['Was not able to read the new idea. Try submitting again.'];
+
+								}
+							);
 
 						},
 						function(response){
 
+							if(response.data.code = 'validation_error'){
+
+							}
 							console.log(response.data.content);
 							console.log(response.data.code);
 							//show validation messages (IF they are validation messages)
