@@ -22,7 +22,9 @@ define(['angular', 'lodash'], function(angular, _){
 				 * @return {Void}
 				 */
 				$scope.submitSearch = function(){
+
 					SearchServ.searchTag($scope.searchTag);
+
 				};
 
 				/**
@@ -53,7 +55,7 @@ define(['angular', 'lodash'], function(angular, _){
 
 					$scope.viewingPopularIdeas = !$scope.viewingPopularIdeas;
 					SearchServ.searchPopular($scope.viewingPopularIdeas);
-				
+
 				};
 
 				/**
@@ -70,7 +72,6 @@ define(['angular', 'lodash'], function(angular, _){
 				$scope.myIdeas = function(){
 
 					$scope.viewingMyIdeas = !$scope.viewingMyIdeas;
-
 					if($scope.viewingMyIdeas){
 						//hardcoded author id, can only be used once we are "logged in"
 						var authorId = 1;
@@ -81,9 +82,8 @@ define(['angular', 'lodash'], function(angular, _){
 
 				};
 
-				//this part is pretty awesome
 				//it watches the search query
-				//if they come in with the correct parameters
+				//if they come in with the correct query parameters
 				//it will show them in the page representation
 				//this is for the tags, popular toggling and author toggling
 				$scope.$watch(function(){
@@ -110,53 +110,6 @@ define(['angular', 'lodash'], function(angular, _){
 
 				});
 
-				////////////////////
-				// ACTION OVERLAY //
-				////////////////////
-
-				//these are the overlays
-				$scope.openAddIdeaOverlay = function(){
-
-					var dialog = $dialog.dialog({
-						backdrop: false,
-						keyboard: true,
-						dialogClass: 'modal overlay_backdrop small_overlay',
-						templateUrl: 'add_idea_overlay.html',
-						controller: 'AddIdeaOverlayCtrl'
-					});
-
-					dialog.open();
-
-				};
-
-				//////////////////
-				// PROFILE LINK //
-				//////////////////
-
-				// wait until user data is working... also this depends on the person being logged in!
-				// var userData = UsersServ.getUserData();
-				// var $scope.authorId = userData.id;
-				// var $scope.authorUrl = userData.url;
-				$scope.authorId = 1;
-				$scope.authorUrl = 'roger_qiu';
-
-				////////////////////////
-				// SIGN IN & SIGN OUT //
-				////////////////////////
-
-				//should start false
-				$scope.loggedIn = true;
-
-				//this will bring up an overlay as well
-				$scope.signIn = function(){
-
-				};
-
-				//this does not bring up an overlay
-				$scope.signOut = function(){
-
-				};
-
 				//////////////////
 				// POPULAR TAGS //
 				//////////////////
@@ -175,6 +128,66 @@ define(['angular', 'lodash'], function(angular, _){
 
 				});
 
+				//////////////////
+				// PROFILE LINK //
+				//////////////////
+
+				// wait until user data is working... also this depends on the person being logged in!
+				// var userData = UsersServ.getUserData();
+				// var $scope.authorId = userData.id;
+				// var $scope.authorUrl = userData.url;
+				$scope.authorId = 1;
+				$scope.authorUrl = 'roger_qiu';
+
+				////////////////////
+				// ACTION OVERLAY //
+				////////////////////
+
+				//these are the overlays
+				$scope.openAddIdeaOverlay = function(){
+
+					var dialog = $dialog.dialog({
+						backdrop: false,
+						keyboard: true,
+						dialogClass: 'modal overlay_backdrop',
+						templateUrl: 'add_idea_overlay.html',
+						controller: 'AddIdeaOverlayCtrl'
+					});
+
+					dialog.open();
+
+				};
+
+				////////////////////////
+				// SIGN IN & SIGN OUT //
+				////////////////////////
+
+				//should start false
+				$scope.loggedIn = true;
+
+				//this will bring up an overlay as well
+				$scope.signIn = function(){
+
+					var dialog = $dialog.dialog({
+						backdrop: false,
+						keyboard: true,
+						dialogClass: 'modal overlay_backdrop',
+						templateUrl: 'signin_overlay.html',
+						controller: 'SignInOverlayCtrl'
+					});
+
+					dialog.open().then(function(loggedIn){
+						$scope.loggedIn = loggedIn;
+					});
+
+				};
+
+				//this does not bring up an overlay
+				$scope.signOut = function(){
+					//do the logout stuff
+					$scope.loggedIn = false;
+				};
+
 			}
 		])
 		.controller('AddIdeaOverlayCtrl', [
@@ -182,7 +195,8 @@ define(['angular', 'lodash'], function(angular, _){
 			'$rootScope',
 			'dialog',
 			'AppIdeasServ',
-			function($scope, $rootScope, dialog, AppIdeasServ){
+			'IdeasServ',
+			function($scope, $rootScope, dialog, AppIdeasServ, IdeasServ){
 
 				$rootScope.viewingOverlay = true;
 
@@ -194,24 +208,68 @@ define(['angular', 'lodash'], function(angular, _){
 				$scope.validationErrors = false;
 
 				$scope.uploadImage = function(imageObject){
-					$scope.addIdeaImage = imageObject.url;
-					$scope.addIdeaImageBlob = imageObject.stringify();
+					//imageObject is apparently an array, so we're only allowing one image
+					$scope.addIdeaImage = imageObject[0].url;
+					$scope.addIdeaImageBlob = JSON.stringify(imageObject[0]);
+					$scope.$apply();
 				};
 
 				$scope.submitIdea = function(){
 
-					//add everything from the form + the addIdeaImageBlob, because the blob string needs to be saved
-					//to be edited later on in the editing panel
-
 					console.log($scope);
 
-					//once it finishes, we need to add the idea to the ng-repeat...
-					//unshift the product into ng-repeat
-					//the appIdeas array will need to be put inside a service
-					//query the API for the date and author...?
-					//this won't be a close, but in the submit...
-					//which will then close it
+					var newIdea = {};
 
+					newIdea.title = $scope.addIdeaTitle;
+					newIdea.descriptionShort = $scope.addIdeaDescriptionShort;
+					newIdea.image = $scope.addIdeaImage;
+					newIdea.imageBlob = $scope.addIdeaImageBlob;
+					newIdea.description = $scope.addIdeaDescription;
+					newIdea.privacy = $scope.addIdeaPrivacy;
+
+					IdeasServ.save(
+						{},
+						newIdea,
+						function(response){
+
+							console.log(response.content);
+							//query the appIdeas to get the new idea
+							//add idea to the appIdeas
+							//$scope.closeOverlay();
+
+						},
+						function(response){
+
+							console.log(response.data.content);
+							console.log(response.data.code);
+							//show validation messages (IF they are validation messages)
+							//$scope.validationErrors = response.data.content;
+
+						}
+					);
+
+				};
+
+			}
+		])
+		.controller('SignInOverlayCtrl', [
+			'$scope',
+			'$rootScope',
+			'dialog',
+			function($scope, $rootScope, dialog){
+
+				var loggedIn = false;
+
+				$rootScope.viewingOverlay = true;
+
+				$scope.closeOverlay = function(){
+					$rootScope.viewingOverlay = false;
+					dialog.close(loggedIn);
+				};
+
+				$scope.submitLogin = function(){
+					//if successful
+					loggedIn = true;
 				};
 
 			}
