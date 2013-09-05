@@ -189,6 +189,8 @@ define(['angular', 'lodash'], function(angular, _){
 
 				$scope.submitIdea = function(){
 
+					console.log('Hello');
+
 					//once it finishes, we need to add the idea to the ng-repeat...
 					//unshift the product into ng-repeat
 					//the appIdeas array will need to be put inside a service
