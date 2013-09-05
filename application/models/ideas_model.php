@@ -89,6 +89,7 @@ class Ideas_model extends CI_Model{
 				'title'					=> $row->title,
 				'titleUrl'				=> url_title($row->title, '_', true),
 				'image'					=> $row->image,
+				'imageBlob'				=> $row->imageBlob,
 				'description'			=> $row->description,
 				'descriptionParsed'		=> $this->parse_markdown($row->description),
 				'descriptionShort'		=> $row->descriptionShort,
@@ -101,7 +102,7 @@ class Ideas_model extends CI_Model{
 				'likes'					=> $row->likes,
 				'tags'					=> $tags,
 				'date'					=> $row->date,
-				'privacy'				=> $row->privacy //this is a binary number, to be used it needs to be reconverted
+				'privacy'				=> $row->privacy,
 			);
 			return $data;
 			
@@ -187,6 +188,11 @@ class Ideas_model extends CI_Model{
 		
 			foreach($query->result() as $row){
 
+				//if the idea didn't pass the privacy check, we just continue to the next idea
+				if(!$this->check_privacy($row->privacy)){
+					continue;
+				}
+
 				$idea_id = $row->id;
 				$author_id = $row->authorId;
 
@@ -212,6 +218,7 @@ class Ideas_model extends CI_Model{
 					'title'					=> $row->title,
 					'titleUrl'				=> url_title($row->title, '_', true),
 					'image'					=> $row->image,
+					'imageBlob'				=> $row->imageBlob,
 					'description'			=> $row->description,
 					'descriptionParsed'		=> $this->parse_markdown($row->description),
 					'descriptionShort'		=> $row->descriptionShort,
@@ -224,7 +231,7 @@ class Ideas_model extends CI_Model{
 					'likes'					=> $row->likes,
 					'tags'					=> $tags,
 					'date'					=> $row->date,
-					'privacy'				=> $row->privacy
+					'privacy'				=> $row->privacy,
 				);
 			
 			}
