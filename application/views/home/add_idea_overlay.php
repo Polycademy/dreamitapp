@@ -31,16 +31,8 @@
 						Public
 					</label>
 					<label class="radio inline">
-						<input type="radio" name="add_idea_privacy" value="developers&friends">
-						Developers & Friends
-					</label>
-					<label class="radio inline">
 						<input type="radio" name="add_idea_privacy" value="developers">
 						Developers Only
-					</label>
-					<label class="radio inline">
-						<input type="radio" name="add_idea_privacy" value="friends">
-						Friends Only
 					</label>
 				</div>
 			</fieldset>
