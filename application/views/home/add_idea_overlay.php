@@ -18,8 +18,8 @@
 							ng-model="addIdeaTitle" 
 							ng-minlength="2" 
 							ng-maxlength="30" 
-							required
-						></input>
+							required 
+						/>
 						<span class="help-inline error" ng-show="add_idea_form.add_idea_title.$error.minlength">Title is too short.</span>
 						<span class="help-inline error" ng-show="add_idea_form.add_idea_title.$error.maxlength">Title is too long.</span>
 					</div>
@@ -84,6 +84,19 @@
 					</div>
 				</div>
 				<div class="control-group">
+					<label class="control-label" for="add_idea_tags">Tags:</label>
+					<div class="controls">
+						<input 
+							type="text" 
+							id="add_idea_tags" 
+							class="input-xxlarge" 
+							name="add_idea_tags" 
+							ui-select2="addIdeaTagsOptions" 
+							ng-model="addIdeaTags" 
+						/>
+					</div>
+				</div>
+				<div class="control-group">
 					<p>Viewing Privacy:</p>
 					<label class="radio inline">
 						<input 
@@ -91,8 +104,8 @@
 							name="add_idea_privacy" 
 							ng-model="addIdeaPrivacy" 
 							value="public" 
-							ng-checked="true"
-						></input>
+							ng-checked="true" 
+						/>
 						Public
 					</label>
 					<label class="radio inline">
@@ -100,8 +113,8 @@
 							type="radio" 
 							name="add_idea_privacy" 
 							ng-model="addIdeaPrivacy" 
-							value="developers"
-						></input>
+							value="developers" 
+						/>
 						Developers Only
 					</label>
 				</div>

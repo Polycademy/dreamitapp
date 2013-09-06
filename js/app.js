@@ -27,6 +27,7 @@ define([
 			'angular-ui',
 			'angular-bootstrap',
 			'angular-ui-router',
+			'angular-ui-select2',
 			'angular-cache'
 		], function(){
 
@@ -42,6 +43,7 @@ define([
 				'ui',
 				'ui.bootstrap',
 				'ui.state',
+				'ui.select2',
 				'angular-cache'
 			]);
 

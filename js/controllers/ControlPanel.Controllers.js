@@ -215,6 +215,16 @@ define(['angular', 'lodash'], function(angular, _){
 					$scope.$apply();
 				};
 
+				$scope.addIdeaTagsOptions = {
+					tags: [], //get popular tags here
+					tokenSeparators: [",", " "],
+					simple_tags: true //from ui-select2, it will make the select2 return strings instead of objects
+				};
+
+				setInterval(function(){
+					console.log($scope.addIdeaTags);
+				}, 2000);
+
 				$scope.submitIdea = function(){
 
 					var newIdea = {};
@@ -225,6 +235,9 @@ define(['angular', 'lodash'], function(angular, _){
 					newIdea.imageBlob = $scope.addIdeaImageBlob;
 					newIdea.description = $scope.addIdeaDescription;
 					newIdea.privacy = $scope.addIdeaPrivacy;
+					// newIdea.tags = $scope.addIdeaTags;
+
+					console.log($scope.addIdeaTags);
 
 					IdeasServ.save(
 						{},

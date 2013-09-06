@@ -48,6 +48,12 @@ requirejs.config({
 			// 'https://raw.github.com/jmdobry/angular-cache/master/dist/angular-cache-1.0.0-rc.1.min',
 			'../bower_components/angular-cache/src/angular-cache'
 		],
+		//ANGULAR UI SELECT2
+		'select2': [
+			// '//cdn.jsdelivr.net/select2/3.4.2/select2.min',
+			'../bower_components/select2/select2.min'
+		],
+		'angular-ui-select2': '../bower_components/angular-ui-select2/src/select2',
 		//SHIMS AND UTILITIES
 		'domReady': 'lib/domReady.min',
 		'lodash': [
@@ -72,11 +78,6 @@ requirejs.config({
 		'outlayer': '../bower_components/outlayer',
 		'imagesLoaded': '../bower_components/imagesloaded/imagesloaded',
 		'masonry': '../bower_components/masonry/masonry',
-		//ADDTHIS is no longer used due to URL state conflicts
-		// 'addthis': [
-		// 	'//s7.addthis.com/js/300/addthis_widget.js#pubid=' + dreamItAppConfig.apiKeys.addThis,
-		// 	'lib/addthis_widget.min'
-		// ],
 		//SHARETHIS
 		'sharethis': [
 			'//w.sharethis.com/button/buttons',
@@ -125,13 +126,18 @@ requirejs.config({
 			deps: ['angular'],
 			exports: "angular"
 		},
+		'select2': {
+			deps: ['jquery'],
+			exports: "$"
+		},
+		'angular-ui-select2': {
+			deps: ['angular', 'select2'],
+			exports: "angular"
+		},
 		'jquery-resize': {
 			deps: ['jquery'],
 			exports: "$"
 		},
-		// 'addthis': {
-		// 	exports: "addthis"
-		// },
 		'sharethis': {
 			exports: "stLight"
 		},
