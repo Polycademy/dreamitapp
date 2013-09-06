@@ -14,7 +14,7 @@
 			<div class="item_panel" ng-repeat="idea in appIdeas" masonry-item-dir>
 				<h3 class="item_header"><a ng-href="ideas/{{idea.id}}/{{idea.titleUrl}}" ng-click="openIdeaOverlay(idea.id)">{{idea.title}}</a></h3>
 				<div class="item_image_container" ng-show="ideaHasImage($index)">
-					<img ng-src="{{idea.image}}" />
+					<img ng-src="{{idea.image}}/convert?w=239&h=1000&fit=max" />
 					<a ng-href="ideas/{{idea.id}}/{{idea.titleUrl}}" ng-click="openIdeaOverlay(idea.id)"><div class="item_rollover"></div></a>
 					<a 
 						class="share_button" 

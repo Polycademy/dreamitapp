@@ -13,6 +13,6 @@ var dreamItAppConfig = {
 		shareThis: '44d5ce83-7ac1-447a-a5b2-6128182dab3a',
 		disqusShortname: 'dreamitapp',
 		disqusApiKey: 'Daq487qR6b6lPJn9ThTE301tYFr8OSrLB35emaoGiphps5XD1869gJ2h0h60JdJ9',
-		filePickerApiKey: 'AaFOEqpVcRxiHd9edzvNNz'
+		filePickerApiKey: 'A2WwXj1SHkupfpXAI2wgOz'
 	}
 };

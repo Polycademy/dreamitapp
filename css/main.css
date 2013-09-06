@@ -5591,6 +5591,7 @@ header.navbar .nav li a {
 }
 .main .wall_container .wall .item_panel .item_image_container {
   position: relative;
+  width: 239px;
 }
 .main .wall_container .wall .item_panel .item_image_container .share_button {
   position: absolute;
@@ -5645,7 +5646,8 @@ header.navbar .nav li a {
   cursor: pointer;
 }
 .main .wall_container .wall .item_panel .item_image_container img {
-  width: 239px;
+  margin: 0 auto;
+  display: block;
 }
 .main .wall_container .wall .item_panel .item_desc {
   padding: 18px 10px 10px;
