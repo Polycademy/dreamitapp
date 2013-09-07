@@ -124,7 +124,7 @@ if(ENVIRONMENT == 'development'){
 		'dbdriver'	=> 'pdo',
 		'dbprefix'	=> '',
 		'pconnect'	=> TRUE,
-		'db_debug'	=> TRUE,
+		'db_debug'	=> FALSE, //for JSON error messages
 		'cache_on'	=> FALSE,
 		'cachedir'	=> '',
 		'char_set'	=> 'utf8',

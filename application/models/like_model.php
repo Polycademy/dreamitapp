@@ -94,8 +94,8 @@ class Like_model extends CI_Model{
 
 		if($this->db->trans_status() === FALSE){
 
-			$msg = $this->db->_error_message();
-			$num = $this->db->_error_number();
+			$msg = $this->db->error()['message'];
+			$num = $this->db->error()['code'];
 			$last_query = $this->db->last_query();
 			
 			log_message('error', 'Problem increasing like count by one: ' . $msg . ' (' . $num . '), using this query: "' . $last_query . '"');
@@ -139,8 +139,8 @@ class Like_model extends CI_Model{
 
 		if($this->db->trans_status() === FALSE){
 
-			$msg = $this->db->_error_message();
-			$num = $this->db->_error_number();
+			$msg = $this->db->error()['message'];
+			$num = $this->db->error()['code'];
 			$last_query = $this->db->last_query();
 			
 			log_message('error', 'Problem decreasing like count by one: ' . $msg . ' (' . $num . '), using this query: "' . $last_query . '"');
