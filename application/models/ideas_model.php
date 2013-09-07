@@ -34,14 +34,14 @@ class Ideas_model extends CI_Model{
 			'authorId',
 			'tags',
 			'privacy'
-		), $input_data, null);
+		), $input_data, null, true);
 
 		$data['date'] = date('Y-m-d H:i:s');
 
 		//VALIDATION
 
-		//$this->validator->set_rules()
 		//$this->validator->set_data()
+		//$this->validator->set_rules()
 		//$this->validator->run()
 		//$this->validator->error_array()
 		//return false
@@ -280,12 +280,12 @@ class Ideas_model extends CI_Model{
 			'descriptionShort',
 			'tags',
 			'privacy'
-		), $input_data, null);
+		), $input_data, null, true);
 
 		//VALIDATION
 
-		//$this->validator->set_rules()
 		//$this->validator->set_data()
+		//$this->validator->set_rules()
 		//$this->validator->run()
 		//$this->validator->error_array()
 		//return false
