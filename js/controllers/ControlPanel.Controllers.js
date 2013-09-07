@@ -218,7 +218,6 @@ define(['angular', 'lodash'], function(angular, _){
 				$scope.addIdeaTagsOptions = {
 					tags: [], //get popular tags here
 					tokenSeparators: [",", " "],
-					simple_tags: true //from ui-select2, it will make the select2 return strings instead of objects
 				};
 
 				setInterval(function(){
