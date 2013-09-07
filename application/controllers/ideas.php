@@ -98,6 +98,10 @@ class Ideas extends CI_Controller{
 		
 		//codeigniter's XSS clean would add a semicolon if "&" is used by itself
 		$data = $this->input->json(false);
+
+		//based on PolyAuth
+		//currently hardcoded
+		$data['authorId'] = 1;
 		
 		$query = $this->Ideas_model->create($data);
 		

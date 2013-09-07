@@ -21,13 +21,33 @@ class Ideas_model extends CI_Model{
 
 	}
 
-	public function create($data){
+	public function create($input_data){
 
-		//based on PolyAuth
-		//currently hardcoded
-		$data['authorId'] = 1;
+		//FILTERING
+
+		$data = elements(array(
+			'title',
+			'image',
+			'imageBlob',
+			'description',
+			'descriptionShort',
+			'authorId',
+			'tags',
+			'privacy'
+		), $input_data, null);
+
 		$data['date'] = date('Y-m-d H:i:s');
-		if(isset($data['privacy'])){
+
+		//VALIDATION
+
+		//$this->validator->set_rules()
+		//$this->validator->set_data()
+		//$this->validator->run()
+		//$this->validator->error_array()
+		//return false
+
+		//assign privacy
+		if($data['privacy']){
 			$data['privacy'] = $this->assign_privacy($data['privacy']);
 		}
 
