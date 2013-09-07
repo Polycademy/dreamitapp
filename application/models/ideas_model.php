@@ -270,7 +270,25 @@ class Ideas_model extends CI_Model{
 
 	}
 
-	public function update($id, $data){
+	public function update($id, $input_data){
+
+		$data = elements(array(
+			'title',
+			'image',
+			'imageBlob',
+			'description',
+			'descriptionShort',
+			'tags',
+			'privacy'
+		), $input_data, null);
+
+		//VALIDATION
+
+		//$this->validator->set_rules()
+		//$this->validator->set_data()
+		//$this->validator->run()
+		//$this->validator->error_array()
+		//return false
 
 		$this->db->where('id', $id);
 		$this->db->update('ideas', $data);
@@ -377,7 +395,6 @@ class Ideas_model extends CI_Model{
 		$html = $this->parser->transform($text);
 
 		//get a better XSS filter
-		//$html = $this->security->xss_clean($html);
 
 		return $html;
 

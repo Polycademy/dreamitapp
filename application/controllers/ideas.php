@@ -142,7 +142,7 @@ class Ideas extends CI_Controller{
 	 **/
 	public function update($id){
 		
-		$data = $this->input->json(false, true);
+		$data = $this->input->json(false);
 		
 		$query = $this->Ideas_model->update($id, $data);
 		
