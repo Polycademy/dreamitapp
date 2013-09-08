@@ -41,7 +41,7 @@ class Ideas_model extends CI_Model{
 
 		//VALIDATION
 
-		//validate the tags array
+		//validate the tags array //ONLY A LIMITED NUMBER TAGS IS ALLOWED!!
 		//$this->validator->set_data()
 		//$this->validator->set_rules()
 		//$this->validator->run()
