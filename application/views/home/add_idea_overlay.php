@@ -7,7 +7,12 @@
 				<ul class="validation_errors" ng-show="validationErrors">
 					<li ng-repeat="error in validationErrors">{{error}}</li>
 				</ul>
-				<div class="control-group">
+				<div 
+					class="control-group" 
+					ng-class="{error: 
+						add_idea_form.add_idea_title.$invalid 
+						&& add_idea_form.add_idea_title.$dirty}"
+				>
 					<label class="control-label" for="add_idea_title">Title:</label>
 					<div class="controls">
 						<input 
@@ -20,8 +25,9 @@
 							ng-maxlength="30" 
 							required 
 						/>
-						<span class="help-inline error" ng-show="add_idea_form.add_idea_title.$error.minlength">Title is too short.</span>
-						<span class="help-inline error" ng-show="add_idea_form.add_idea_title.$error.maxlength">Title is too long.</span>
+						<span class="help-inline" ng-show="add_idea_form.add_idea_title.$error.required">Required</span>
+						<span class="help-inline" ng-show="add_idea_form.add_idea_title.$error.minlength">Title is too short.</span>
+						<span class="help-inline" ng-show="add_idea_form.add_idea_title.$error.maxlength">Title is too long.</span>
 					</div>
 				</div>
 				<div class="control-group">
@@ -48,7 +54,12 @@
 						</button>
 					</div>
 				</div>
-				<div class="control-group">
+				<div 
+					class="control-group" 
+					ng-class="{error: 
+						add_idea_form.add_idea_short_description.$invalid 
+						&& add_idea_form.add_idea_short_description.$dirty}"
+				>
 					<label class="control-label" for="add_idea_short_description">Short Description:</label>
 					<div class="controls">
 						<textarea 
@@ -60,12 +71,18 @@
 							ng-maxlength="280" 
 							required
 						></textarea>
-						<span class="help-block error" ng-show="add_idea_form.add_idea_short_description.$error.minlength">Short description is too short.</span>
-						<span class="help-block error" ng-show="add_idea_form.add_idea_short_description.$error.maxlength">Short description is too long.</span>
+						<span class="help-block" ng-show="add_idea_form.add_idea_short_description.$error.required">Required</span>
+						<span class="help-block" ng-show="add_idea_form.add_idea_short_description.$error.minlength">Short description is too short.</span>
+						<span class="help-block" ng-show="add_idea_form.add_idea_short_description.$error.maxlength">Short description is too long.</span>
 						<span class="help-block">This will be shown on the Home page wall. Write up to 280 characters.</span>
 					</div>
 				</div>
-				<div class="control-group">
+				<div 
+					class="control-group" 
+					ng-class="{error: 
+						add_idea_form.add_idea_description.$invalid 
+						&& add_idea_form.add_idea_description.$dirty}"
+				>
 					<label class="control-label" for="add_idea_description">Description:</label>
 					<div class="controls">
 						<textarea 
@@ -78,8 +95,9 @@
 							ng-maxlength="13500" 
 							required
 						></textarea>
-						<span class="help-block error" ng-show="add_idea_form.add_idea_description.$error.minlength">Description is too short.</span>
-						<span class="help-block error" ng-show="add_idea_form.add_idea_description.$error.maxlength">Description is too long.</span>
+						<span class="help-block" ng-show="add_idea_form.add_idea_description.$error.required">Required</span>
+						<span class="help-block" ng-show="add_idea_form.add_idea_description.$error.minlength">Description is too short.</span>
+						<span class="help-block" ng-show="add_idea_form.add_idea_description.$error.maxlength">Description is too long.</span>
 						<span class="help-block">You are welcome to use <a href="http://net.tutsplus.com/tutorials/tools-and-tips/markdown-the-ins-and-outs/" target="_blank">Markdown</a>. Write up to 2000 words.</span>
 					</div>
 				</div>
