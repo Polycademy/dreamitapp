@@ -37,23 +37,41 @@ class Ideas_model extends CI_Model{
 		), $input_data, null, true);
 
 		$data['date'] = date('Y-m-d H:i:s');
+		$data['privacy'] = (isset($data['privacy'])) ? $this->assign_privacy($data['privacy']) : $this->assign_privacy();
 
 		//VALIDATION
 
+		//validate the tags array
 		//$this->validator->set_data()
 		//$this->validator->set_rules()
 		//$this->validator->run()
 		//$this->validator->error_array()
 		//return false
 
-		//assign privacy
-		if($data['privacy']){
-			$data['privacy'] = $this->assign_privacy($data['privacy']);
+		$this->db->trans_start();
+
+		if(isset($data['tags'])){
+			$tags_data = $data['tags'];
+			unset($data['tags']);
 		}
 
 		$query = $this->db->insert('ideas', $data);
+		$idea_id = $this->db->insert_id();
 
-		if(!$query){
+		if(isset($tags_data)){
+			foreach($tags_data as $tag){
+				$data = array(
+					'ideaId'	=> $idea_id,
+					'tag'		=> $tag,
+				);
+				FB::log($data);
+				$this->db->insert('tags', $data);
+			}
+		}
+
+		$this->db->trans_complete();
+
+		if($this->db->trans_status() === FALSE){
 
 			$msg = $this->db->error()['message'];
 			$num = $this->db->error()['code'];
@@ -69,7 +87,7 @@ class Ideas_model extends CI_Model{
 
 		}
 
-		return $this->db->insert_id();
+		return $idea_id;
 
 	}
 
@@ -282,6 +300,8 @@ class Ideas_model extends CI_Model{
 			'privacy'
 		), $input_data, null, true);
 
+		$data['privacy'] = (isset($data['privacy'])) ? $this->assign_privacy($data['privacy']) : $this->assign_privacy();
+
 		//VALIDATION
 
 		//$this->validator->set_data()
@@ -336,7 +356,8 @@ class Ideas_model extends CI_Model{
 
 	}
 
-	protected function assign_privacy($privacy_selection){
+	//PRIVACY needs to be reversed for output and updating
+	protected function assign_privacy($privacy_selection = false){
 
 		$bitwise = '';
 

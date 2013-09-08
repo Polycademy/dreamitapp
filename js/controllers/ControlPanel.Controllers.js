@@ -206,6 +206,7 @@ define(['angular', 'lodash'], function(angular, _){
 				};
 
 				$scope.validationErrors = false;
+				$scope.addIdeaTags = [];
 				$scope.addIdeaPrivacy = 'privacy';
 
 				$scope.uploadImage = function(imageObject){
@@ -220,10 +221,6 @@ define(['angular', 'lodash'], function(angular, _){
 					tokenSeparators: [",", " "],
 				};
 
-				setInterval(function(){
-					console.log($scope.addIdeaTags);
-				}, 2000);
-
 				$scope.submitIdea = function(){
 
 					var newIdea = {};
@@ -234,9 +231,12 @@ define(['angular', 'lodash'], function(angular, _){
 					newIdea.imageBlob = $scope.addIdeaImageBlob;
 					newIdea.description = $scope.addIdeaDescription;
 					newIdea.privacy = $scope.addIdeaPrivacy;
-					// newIdea.tags = $scope.addIdeaTags;
 
-					console.log($scope.addIdeaTags);
+					//addIdeaTags will be returned as an array of objects, and this object will contain "text" property
+					newIdea.tags = [];
+					for(var i=0; i<$scope.addIdeaTags.length; i++){
+						newIdea.tags.push($scope.addIdeaTags[i].text);
+					}
 
 					IdeasServ.save(
 						{},
