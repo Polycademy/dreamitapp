@@ -6656,6 +6656,15 @@ header.navbar .nav li a {
 .add_idea_container .add_idea_form .add_idea_form_internal .add_idea_image_button {
   margin-top: 10px;
 }
+.add_idea_container .add_idea_form .add_idea_form_internal .add_idea_image_preview {
+  margin-top: 10px;
+  border: 1px solid #b8e0d8;
+  padding: 10px;
+}
+.add_idea_container .add_idea_form .add_idea_form_internal .add_idea_image_preview img {
+  display: block;
+  margin: 0 auto;
+}
 .add_idea_container .add_idea_form .control-label {
   width: 120px;
 }
