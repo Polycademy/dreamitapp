@@ -24,6 +24,17 @@ body{
 
 }
 
+@media(min-width: 1500px){
+
+	header .container, 
+	header.navbar-static-top .container,
+	header.navbar-fixed-top .container,
+	header.navbar-fixed-bottom .container{
+		width: 1440px;
+	}
+
+}
+
 @media(max-width: 600px){
 	
 	//At 600px and below the header's logo and links should center and stack.
@@ -101,6 +112,22 @@ body{
 			width: 74%;
 			.wall{
 				width: @4_wall_cols;
+			}
+		}
+		.control_panel{
+			width: 26%;
+		}
+	}
+
+}
+
+@media(min-width: (@6_wall_cols + @scrollbar)){
+
+	.main{
+		.wall_container{
+			width: 74%;
+			.wall{
+				width: @5_wall_cols;
 			}
 		}
 		.control_panel{
