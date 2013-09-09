@@ -1,4 +1,4 @@
-<script type="text/ng-template" id="add_idea_overlay.html">
+<script type="text/ng-template" id="add_edit_idea.html">
 	<div class="add_idea_container overlay_container" overlay-dir>
 		<header class="add_idea_header">
 			<h1 class="add_idea_heading">Add a New Idea</h1>

@@ -66,6 +66,7 @@ define([
 				'controllers/About.Controllers',
 				'controllers/Blog.Controllers',
 				'controllers/Idea.Controllers',
+				'controllers/AddEditIdea.Controllers',
 				//DIRECTIVES
 				'directives/EqualiseHeights.Directive',
 				'directives/EqualiseHeightTo.Directive',
@@ -140,6 +141,28 @@ define([
 										templateUrl: 'idea.html',
 										controller: 'IdeaCtrl',
 										reloadOnSearch: false
+									}
+								)
+								.state(
+									'addIdea',
+									{
+										url: '/ideas/create',
+										templateUrl: 'add_edit_idea.html',
+										controller: 'AddEditIdeaCtrl',
+										data: {
+											action: 'create'
+										}
+									}
+								)
+								.state(
+									'editIdea',
+									{
+										url: '/ideas/edit/{ideaId:[0-9]+}',
+										templateUrl: 'add_edit_idea.html',
+										controller: 'AddEditIdeaCtrl',
+										data: {
+											action: 'edit'
+										}
 									}
 								)
 								.state(
