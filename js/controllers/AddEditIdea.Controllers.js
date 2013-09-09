@@ -5,21 +5,13 @@ define(['angular'], function(angular){
 	angular.module('Controllers')
 		.controller('AddEditIdeaCtrl', [
 			'$scope',
-			'$injector',
 			'$rootScope',
 			'$state',
 			'AppIdeasServ',
 			'IdeasServ',
 			'TagsServ',
-			function($scope, $injector, $rootScope, $state, AppIdeasServ, IdeasServ, TagsServ){
-
-				/** Dialog service is an optional dependency. This will determine if this controller is for an overlay or not */
-				var dialog;
-				try{
-					dialog = $injector.get('dialog');
-				}catch(e){
-					dialog = false;
-				}
+			'dialog',
+			function($scope, $rootScope, $state, AppIdeasServ, IdeasServ, TagsServ, dialog){
 
 				/** If dialog is available, switch on overlay and provide a closeOverlay function */
 				if(dialog){
@@ -31,6 +23,15 @@ define(['angular'], function(angular){
 				}else{
 					$rootScope.viewingOverlay = false;
 					$scope.closeOverlay = angular.noop;
+				}
+
+				/** Action of "edit" or "add" must either come from the state, or the dialog. */
+				var action = '';
+				try{
+					//this will cause a deep type error if the $state object does not exist
+					action = $state.current.data.action;
+				}catch(e){
+					action = dialog.options.customOptions.action;
 				}
 
 				/** Default field parameters */
@@ -94,7 +95,7 @@ define(['angular'], function(angular){
 
 				};
 
-				if($state.current.data.action === 'add'){
+				if(action === 'add'){
 
 					$scope.filePickerAction = 'pickAndStore';
 
@@ -146,7 +147,7 @@ define(['angular'], function(angular){
 					};
 
 
-				}else if($state.current.data.action === 'edit'){
+				}else if(action === 'edit'){
 
 					$scope.filePickerAction = 'update';
 

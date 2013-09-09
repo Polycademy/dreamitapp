@@ -157,7 +157,10 @@ define(['angular', 'lodash'], function(angular, _){
 						keyboard: true,
 						dialogClass: 'modal overlay_backdrop',
 						templateUrl: 'add_edit_idea.html',
-						controller: 'AddEditIdeaCtrl'
+						controller: 'AddEditIdeaCtrl',
+						customOptions: {
+							action: 'add'
+						}
 					});
 
 					dialog.open();

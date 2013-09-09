@@ -150,7 +150,12 @@ define([
 										templateUrl: 'add_edit_idea.html',
 										controller: 'AddEditIdeaCtrl',
 										data: {
-											action: 'create'
+											action: 'add'
+										},
+										resolve: {
+											dialog: function(){
+												return null;
+											}
 										}
 									}
 								)
@@ -162,6 +167,11 @@ define([
 										controller: 'AddEditIdeaCtrl',
 										data: {
 											action: 'edit'
+										},
+										resolve: {
+											dialog: function(){
+												return null;
+											}
 										}
 									}
 								)

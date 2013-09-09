@@ -45,8 +45,6 @@
 					<label class="control-label">Add Image:</label>
 					<div class="controls">
 						<span class="input-block-level uneditable-input">{{addIdeaImage}}</span>
-					</div>
-					<div class="controls">
 						<button 
 							class="add_idea_image_button btn btn-info" 
 							type="button" 
@@ -65,6 +63,9 @@
 						>
 							Upload
 						</button>
+						<div class="add_idea_image_preview" ng-show="addIdeaImage">
+							<img ng-src="{{addIdeaImage}}/convert?w=400&h=600&fit=max" />
+						</div>
 					</div>
 				</div>
 				<div 
