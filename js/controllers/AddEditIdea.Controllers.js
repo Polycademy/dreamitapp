@@ -60,14 +60,14 @@ define(['angular'], function(angular){
 				 * @param  {Array} imageObject Array of FilePicker InkBlob image objects
 				 * @return {Void}
 				 */
-				$scope.uploadImage = function(imageObject){
+				$scope.processImage = function(imageObject){
 					//we only want the first and only image uploaded
 					$scope.addIdeaImage = imageObject[0].url;
 					$scope.addIdeaImageBlob = JSON.stringify(imageObject[0]);
+					//once we have the new image, we're going to switch to updating in case the user decides to change the image while creating a new idea
+					$scope.filePickerAction = 'update';
 					$scope.$apply();
 				};
-
-				//need a corresponding replace image 
 
 				/**
 				 * Querys the fields and creates a payload object for creating or updating ideas.
@@ -95,6 +95,8 @@ define(['angular'], function(angular){
 				};
 
 				if($state.current.data.action === 'add'){
+
+					$scope.filePickerAction = 'pickAndStore';
 
 					$scope.submitIdea = function(){
 
@@ -145,6 +147,8 @@ define(['angular'], function(angular){
 
 
 				}else if($state.current.data.action === 'edit'){
+
+					$scope.filePickerAction = 'update';
 
 					//first we're going to try to get the idea's properties before 
 					var ideaId = $state.params.ideaId;

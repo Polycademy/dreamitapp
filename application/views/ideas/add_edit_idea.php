@@ -50,7 +50,7 @@
 						<button 
 							class="add_idea_image_button btn btn-info" 
 							type="button" 
-							file-picker-store-dir 
+							file-picker-dir 
 							file-picker-api-key="{{dreamItAppConfig.apiKeys.filePickerApiKey}}"
 							file-picker-options="{
 								mimetype: 'image/*',
@@ -58,8 +58,10 @@
 							}" 
 							file-store-options="{
 								location: 'S3'
-							}"
-							file-picker-success="uploadImage(InkBlobs)"
+							}" 
+							file-picker-original-blob="addIdeaImageBlob" 
+							file-picker-action="filePickerAction" 
+							file-picker-success="processImage(InkBlobs)"
 						>
 							Upload
 						</button>

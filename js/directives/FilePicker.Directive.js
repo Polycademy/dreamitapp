@@ -3,13 +3,15 @@ define(['angular', 'filepicker'], function(angular, filepicker){
 	'use strict';
 
 	angular.module('Directives')
-		.directive('filePickerStoreDir', [
+		.directive('filePickerDir', [
 			function(){
 				return {
 					scope:{
 						filePickerApiKey: '@',
 						filePickerOptions: '&',
-						fileStoreOptions: '&',
+						fileStoreOptions: '&', 
+						filePickerOriginalBlob: '=',
+						filePickerAction: '@', 
 						filePickerSuccess: '&',
 						filePickerFail: '&'
 					},
@@ -27,20 +29,54 @@ define(['angular', 'filepicker'], function(angular, filepicker){
 							if(typeof pickerOptions === 'undefined') pickerOptions = {};
 							if(typeof storeOptions === 'undefined') storeOptions = {};
 
-							filepicker.pickAndStore(
-								pickerOptions,
-								storeOptions,
-								function(InkBlobs){
-									if(typeof scope.filePickerSuccess === 'function'){
-										scope.filePickerSuccess({InkBlobs: InkBlobs});
+							if(scope.filePickerAction === 'pickAndStore'){
+
+								filepicker.pickAndStore(
+									pickerOptions,
+									storeOptions,
+									function(InkBlobs){
+										if(typeof scope.filePickerSuccess === 'function'){
+											scope.filePickerSuccess({InkBlobs: InkBlobs});
+										}
+									},
+									function(FPError){
+										if(typeof scope.filePickerFail === 'function'){
+											scope.filePickerFail({FPError: FPError});
+										}
 									}
-								},
-								function(FPError){
-									if(typeof scope.filePickerFail === 'function'){
-										scope.filePickerFail({FPError: FPError});
+								);
+
+							}else if(scope.filePickerAction === 'update'){
+
+								//if it's an update, we first pick the image, then write back the original blob
+								filepicker.pick(
+									pickerOptions,
+									function(InkBlobs){
+
+										filepicker.write(
+											scope.filePickerOriginalBlob,
+											InkBlobs[0],
+											function(InkBlobs){
+												if(typeof scope.filePickerSuccess === 'function'){
+													scope.filePickerSuccess({InkBlobs: InkBlobs});
+												}
+											},
+											function(FPError){
+												if(typeof scope.filePickerFail === 'function'){
+													scope.filePickerFail({FPError: FPError});
+												}
+											}
+										);
+
+									},
+									function(FPError){
+										if(typeof scope.filePickerFail === 'function'){
+											scope.filePickerFail({FPError: FPError});
+										}
 									}
-								}
-							);
+								);
+
+							}
 
 						});
 
