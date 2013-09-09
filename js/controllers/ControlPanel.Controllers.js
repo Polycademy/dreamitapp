@@ -196,7 +196,8 @@ define(['angular', 'lodash'], function(angular, _){
 			'dialog',
 			'AppIdeasServ',
 			'IdeasServ',
-			function($scope, $rootScope, dialog, AppIdeasServ, IdeasServ){
+			'TagsServ',
+			function($scope, $rootScope, dialog, AppIdeasServ, IdeasServ, TagsServ){
 
 				$rootScope.viewingOverlay = true;
 
@@ -208,7 +209,10 @@ define(['angular', 'lodash'], function(angular, _){
 				$scope.validationErrors = false;
 				$scope.addIdeaTags = [];
 				$scope.addIdeaPrivacy = 'privacy';
-
+				$scope.addIdeaTagsOptions = {
+					tags: []
+				};
+				
 				$scope.uploadImage = function(imageObject){
 					//imageObject is apparently an array, so we're only allowing one image
 					$scope.addIdeaImage = imageObject[0].url;
@@ -216,10 +220,15 @@ define(['angular', 'lodash'], function(angular, _){
 					$scope.$apply();
 				};
 
-				$scope.addIdeaTagsOptions = {
-					tags: [], //get popular tags here
-					tokenSeparators: [",", " "],
-				};
+				TagsServ.get({
+					popular: true,
+					trending: true,
+					limit: 20
+				}, function(response){
+					for(var i = 0; i < response.content.length; i++){
+						$scope.addIdeaTagsOptions.tags.push(response.content[i].tag);
+					}
+				});
 
 				$scope.submitIdea = function(){
 
