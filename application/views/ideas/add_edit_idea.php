@@ -57,8 +57,8 @@
 							file-store-options="{
 								location: 'S3'
 							}" 
-							file-picker-original-blob="addIdeaImageBlob" 
-							file-picker-action="filePickerAction" 
+							file-picker-original-blob="{{addIdeaImageBlob}}" 
+							file-picker-action="{{filePickerAction}}" 
 							file-picker-success="processImage(InkBlobs)"
 						>
 							Upload

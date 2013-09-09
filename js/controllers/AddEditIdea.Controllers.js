@@ -2,6 +2,15 @@ define(['angular'], function(angular){
 
 	'use strict';
 
+	/**
+	 * Add Edit Idea Controller. This is a controller for adding and editing ideas. This is for both
+	 * the overlay and the full page.
+	 * When using modal dialog to open this controller, make sure to set customOptions.action = 'add'/'edit'
+	 * on the dialog options.
+	 * When using the state router to open this controller, make sure to set data.action = 'add'/'edit' and 
+	 * set a resolve.dialog to a function that returns null. This is make sure the dependency injector doesn't 
+	 * fail when it doesn't receive the dialog service instance that is used by the overlay.
+	 */
 	angular.module('Controllers')
 		.controller('AddEditIdeaCtrl', [
 			'$scope',
@@ -163,7 +172,7 @@ define(['angular'], function(angular){
 							$scope.addIdeaTitle = response.content.title;
 							$scope.addIdeaDescriptionShort = response.content.descriptionShort;
 							$scope.addIdeaImage = response.content.image;
-							$scope.addIdeaImageBlob = JSON.parse(response.content.imageBlob);
+							$scope.addIdeaImageBlob = response.content.imageBlob;
 							$scope.addIdeaDescription = response.content.description;
 							$scope.addIdeaPrivacy = response.content.privacy;
 							$scope.addIdeaTags = response.content.tags; //will this work?

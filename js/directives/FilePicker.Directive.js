@@ -10,7 +10,7 @@ define(['angular', 'filepicker'], function(angular, filepicker){
 						filePickerApiKey: '@',
 						filePickerOptions: '&',
 						fileStoreOptions: '&', 
-						filePickerOriginalBlob: '=',
+						filePickerOriginalBlob: '@',
 						filePickerAction: '@', 
 						filePickerSuccess: '&',
 						filePickerFail: '&'
@@ -48,13 +48,15 @@ define(['angular', 'filepicker'], function(angular, filepicker){
 
 							}else if(scope.filePickerAction === 'update'){
 
+								var originalBlob = JSON.parse(scope.filePickerOriginalBlob);
+
 								//if it's an update, we first pick the image, then write back the original blob
 								filepicker.pick(
 									pickerOptions,
 									function(InkBlobs){
 
 										filepicker.write(
-											scope.filePickerOriginalBlob,
+											originalBlob,
 											InkBlobs[0],
 											function(InkBlobs){
 												if(typeof scope.filePickerSuccess === 'function'){
