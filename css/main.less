@@ -525,17 +525,20 @@ header.navbar{
 	}
 	.add_idea_form{
 		margin: 20px auto;
-		padding-right: 60px;
 		width: 90%;
-		.box-sizing();
+		.add_idea_form_internal{
+			padding-right: 46px;
+			margin: 0 auto;
+			.box-sizing();
+			.add_idea_image_button{
+				margin-top: 10px;
+			}
+		}
 		.control-label{
 			width: 120px;
 		}
 		.controls{
 			margin-left: 134px;
-		}
-		.add_idea_image_button{
-			margin-top: 10px;
 		}
 	}
 }
@@ -593,6 +596,20 @@ header.navbar{
 	}
 	.add_idea_container{
 		padding: 20px;
+	}
+}
+
+/*
+	FORM VALIDATION
+*/
+.validation_errors{
+	margin: 0 auto;
+	ul{
+		list-style: none;
+		margin: 0;
+		li{
+			margin-bottom: 2px;
+		}
 	}
 }
 

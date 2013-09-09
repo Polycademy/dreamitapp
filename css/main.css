@@ -6637,21 +6637,24 @@ header.navbar .nav li a {
 }
 .add_idea_container .add_idea_form {
   margin: 20px auto;
-  padding-right: 60px;
   width: 90%;
+}
+.add_idea_container .add_idea_form .add_idea_form_internal {
+  padding-right: 46px;
+  margin: 0 auto;
   -ms-box-sizing: border-box;
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
+}
+.add_idea_container .add_idea_form .add_idea_form_internal .add_idea_image_button {
+  margin-top: 10px;
 }
 .add_idea_container .add_idea_form .control-label {
   width: 120px;
 }
 .add_idea_container .add_idea_form .controls {
   margin-left: 134px;
-}
-.add_idea_container .add_idea_form .add_idea_image_button {
-  margin-top: 10px;
 }
 /*
 	OVERLAY BACKDROP
@@ -6705,6 +6708,19 @@ header.navbar .nav li a {
 }
 .overlay_backdrop .add_idea_container {
   padding: 20px;
+}
+/*
+	FORM VALIDATION
+*/
+.validation_errors {
+  margin: 0 auto;
+}
+.validation_errors ul {
+  list-style: none;
+  margin: 0;
+}
+.validation_errors ul li {
+  margin-bottom: 2px;
 }
 /*
 	RESPONSIVE
