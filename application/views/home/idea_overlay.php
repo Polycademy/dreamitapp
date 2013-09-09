@@ -26,7 +26,7 @@
 					</div>
 				</div>
 				<hr />
-				<div class="idea_idea_data idea_aside_text">
+				<div class="idea_data idea_aside_text">
 					<ul>
 						<li>Submitted: {{idea.date}}</li>
 						<li>Feedback: 42</li>

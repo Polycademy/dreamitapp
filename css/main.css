@@ -6439,6 +6439,7 @@ header.navbar .nav li a {
 .main .control_panel .affixed_controls .popular_tags {
   font-size: 18px;
   padding: 20px;
+  word-wrap: break-word;
 }
 .main .control_panel .affixed_controls .popular_tags .popular_tags_title {
   margin-left: 5px;
@@ -6451,6 +6452,7 @@ header.navbar .nav li a {
 .main .control_panel .affixed_controls .popular_tags ul li {
   display: inline-block;
   margin: 4px;
+  max-width: 80%;
 }
 .main .control_panel .affixed_controls .popular_tags ul li a {
   color: #16a085;
@@ -6588,13 +6590,15 @@ header.navbar .nav li a {
 .idea_container .idea_content .idea_meta .idea_author .idea_author_name a {
   color: #2c3e50;
 }
-.idea_container .idea_content .idea_meta .idea_idea_data {
+.idea_container .idea_content .idea_meta .idea_data {
   color: #7f8c8d;
+  word-wrap: break-word;
 }
-.idea_container .idea_content .idea_meta .idea_idea_data .idea_tags_list {
+.idea_container .idea_content .idea_meta .idea_data .idea_tags_list {
   display: inline;
 }
-.idea_container .idea_content .idea_meta .idea_idea_data .idea_tags_list li {
+.idea_container .idea_content .idea_meta .idea_data .idea_tags_list li {
+  max-width: 80%;
   display: inline;
 }
 .idea_container .idea_content .idea_meta .idea_actions {

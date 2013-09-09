@@ -210,9 +210,10 @@ define(['angular', 'lodash'], function(angular, _){
 				$scope.addIdeaTags = [];
 				$scope.addIdeaPrivacy = 'privacy';
 				$scope.addIdeaTagsOptions = {
-					tags: []
+					tags: [],
+					maximumInputLength: 20
 				};
-				
+
 				$scope.uploadImage = function(imageObject){
 					//imageObject is apparently an array, so we're only allowing one image
 					$scope.addIdeaImage = imageObject[0].url;
