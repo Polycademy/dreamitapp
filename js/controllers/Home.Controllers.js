@@ -118,23 +118,6 @@ define(['angular', 'lodash'], function(angular, _){
 				
 				};
 
-				/**
-				 * Determine if an idea has an image or not. This is used for ng-show so that the HTML
-				 * that contains the images will not be displayed if there is no image for an item.
-				 * @param  {Integer} index Ng-repeat's index of the item.
-				 * @return {Boolean}
-				 */
-				$scope.ideaHasImage = function(index){
-
-					//it is possible that image may be "false"
-					if('image' in $scope.appIdeas[index]){
-						return $scope.appIdeas[index].image;
-					}else{
-						return false;
-					}
-
-				};
-
 				/////////////////////////////
 				//  SEARCH EVENT HANDLING  //
 				/////////////////////////////
