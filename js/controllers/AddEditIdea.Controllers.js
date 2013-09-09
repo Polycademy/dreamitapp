@@ -16,11 +16,12 @@ define(['angular'], function(angular){
 			'$scope',
 			'$rootScope',
 			'$state',
+			'$location',
 			'AppIdeasServ',
 			'IdeasServ',
 			'TagsServ',
 			'dialog',
-			function($scope, $rootScope, $state, AppIdeasServ, IdeasServ, TagsServ, dialog){
+			function($scope, $rootScope, $state, $location, AppIdeasServ, IdeasServ, TagsServ, dialog){
 
 				/** If dialog is available, switch on overlay and provide a closeOverlay function */
 				if(dialog){
@@ -35,12 +36,22 @@ define(['angular'], function(angular){
 				}
 
 				/** Action of "edit" or "add" must either come from the state, or the dialog. */
-				var action = '';
 				try{
 					//this will cause a deep type error if the $state object does not exist
-					action = $state.current.data.action;
+					$scope.action = $state.current.data.action;
 				}catch(e){
-					action = dialog.options.customOptions.action;
+					$scope.action = dialog.options.customOptions.action;
+				}
+
+				/** If the action is "edit" we'll need to grab the ideaId either from state params or dialog options. */
+				if($scope.action === 'edit'){
+					try{
+						var ideaId = $state.params.ideaId;
+						var ideaUrl = $state.params.ideaUrl;
+					}catch(e){
+						var ideaId = dialog.options.customOptions.ideaId;
+						var ideaUrl = dialog.options.customOptions.ideaUrl;
+					}
 				}
 
 				/** Default field parameters */
@@ -50,7 +61,7 @@ define(['angular'], function(angular){
 					tags: [],
 					maximumInputLength: 20
 				};
-				$scope.addIdeaPrivacy = 'privacy';
+				$scope.addIdeaPrivacy = 'public';
 				$scope.validationErrors = false;
 
 				/** This will fill up the tags field with a list of suggested tags */
@@ -107,7 +118,7 @@ define(['angular'], function(angular){
 
 				};
 
-				if(action === 'add'){
+				if($scope.action === 'add'){
 
 					$scope.filePickerAction = 'pickAndStore';
 
@@ -117,19 +128,25 @@ define(['angular'], function(angular){
 
 						var successSave = function(response){
 
+							var newIdeaId = response.content;
+
 							IdeasServ.get(
 								{
-									id: response.content
+									id: newIdeaId
 								},
 								function(response){
 
-									AppIdeasServ.prependIdeas(response.content);
-									$scope.closeOverlay();
+									if(dialog){
+										AppIdeasServ.prependIdea(response.content);
+										$scope.closeOverlay();
+									}else{
+										//if in full page, just transition to the full page idae
+										$state.transitionTo('idea', {ideaId: newIdeaId, ideaUrl: response.content.titleUrl});
+									}
 
 								},
 								function(response){
 
-									//dont close the overlay, show the error via the validation errors, and allow resubmitting
 									$scope.validationErrors = ['Was not able to read the new idea. Try submitting again.'];
 
 								}
@@ -159,12 +176,9 @@ define(['angular'], function(angular){
 					};
 
 
-				}else if(action === 'edit'){
+				}else if($scope.action === 'edit'){
 
 					$scope.filePickerAction = 'update';
-
-					//first we're going to try to get the idea's properties before 
-					var ideaId = $state.params.ideaId;
 
 					IdeasServ.get(
 						{
@@ -172,13 +186,33 @@ define(['angular'], function(angular){
 						},
 						function(response){
 
+							//if we're in fullpage, the titleUrl should match the true url
+							if(!dialog){
+								if(response.content.titleUrl !== ideaUrl){
+									$location.path(
+										'ideas/edit' 
+										+ '/' 
+										+ ideaId 
+										+ '/' 
+										+ response.content.titleUrl
+									);
+								}
+							}
+
 							$scope.addIdeaTitle = response.content.title;
 							$scope.addIdeaDescriptionShort = response.content.descriptionShort;
 							$scope.addIdeaImage = response.content.image;
 							$scope.addIdeaImageBlob = response.content.imageBlob;
 							$scope.addIdeaDescription = response.content.description;
 							$scope.addIdeaPrivacy = response.content.privacy;
-							$scope.addIdeaTags = response.content.tags; //will this work?
+							var tagObjectArray = [];
+							for(var i=0;i<response.content.tags.length;i++){
+								tagObjectArray.push({
+									id: response.content.tags[i],
+									text: response.content.tags[i]
+								});
+							}
+							$scope.addIdeaTags = tagObjectArray;
 
 						},
 						function(response){
@@ -196,23 +230,37 @@ define(['angular'], function(angular){
 
 							var updatedIdeaId = response.content;
 
-							IdeasServ.get(
-								{
-									id: updatedIdeaId
-								},
-								function(response){
+							//if it was a success response, but with code error, then that just means nothing needed to be updated
+							if(response.code !== 'error'){
 
-									//update it on the wall, if the wall contains the relevant item
-									AppIdeasServ.replaceIdea(updatedIdeaId, response.content);
-									$scope.closeOverlay();
+								IdeasServ.get(
+									{
+										id: updatedIdeaId
+									},
+									function(response){
 
-								},
-								function(response){
+										if(dialog){
+											//update it on the wall, if the wall contains the relevant item
+											AppIdeasServ.replaceIdea(updatedIdeaId, response.content);
+											$scope.closeOverlay();
+										}else{
+											//if in full page, just transition to the full page idae
+											$state.transitionTo('idea', {ideaId: updatedIdeaId, ideaUrl: response.content.titleUrl});
+										}
 
-									$scope.validationErrors = ['Was not able to read the updated idea. Try submitting again.'];
+									},
+									function(response){
 
-								}
-							);
+										$scope.validationErrors = ['Was not able to read the updated idea. Try submitting again.'];
+
+									}
+								);
+
+							}else{
+
+								$scope.validationErrors = [response.content];
+
+							}
 
 						};
 

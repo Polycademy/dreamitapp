@@ -158,6 +158,8 @@ class Ideas extends CI_Controller{
 
 			if($code == 'validation_error'){
 				$this->output->set_status_header(400);
+			}elseif($code == 'system_error'){
+				$this->output->set_status_header(500);
 			}
 			
 		}

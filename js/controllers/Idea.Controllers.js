@@ -24,7 +24,7 @@ define(['angular'], function(angular){
 						//if the url passed into stateParams was different, we're going to make sure its the correct url
 						if(response.content.titleUrl !== stateParams.ideaUrl){
 							$location.path(
-								$state.current.name 
+								'ideas' 
 								+ '/' 
 								+ stateParams.ideaId 
 								+ '/' 

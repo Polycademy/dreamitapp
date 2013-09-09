@@ -137,7 +137,7 @@ define([
 								.state(
 									'idea',
 									{
-										url: '/ideas/{ideaId:[0-9]+}/{ideaUrl:.+}',
+										url: '/ideas/{ideaId:[0-9]+}/{ideaUrl:.*}',
 										templateUrl: 'idea.html',
 										controller: 'IdeaCtrl',
 										reloadOnSearch: false
@@ -162,7 +162,7 @@ define([
 								.state(
 									'editIdea',
 									{
-										url: '/ideas/{ideaId:[0-9]+}/edit',
+										url: '/ideas/edit/{ideaId:[0-9]+}/{ideaUrl:.*}',
 										templateUrl: 'add_edit_idea.html',
 										controller: 'AddEditIdeaCtrl',
 										data: {

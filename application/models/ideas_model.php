@@ -60,12 +60,11 @@ class Ideas_model extends CI_Model{
 
 		if(isset($tags_data)){
 			foreach($tags_data as $tag){
-				$data = array(
+				$tag_data = array(
 					'ideaId'	=> $idea_id,
 					'tag'		=> $tag,
 				);
-				FB::log($data);
-				$this->db->insert('tags', $data);
+				$this->db->insert('tags', $tag_data);
 			}
 		}
 
@@ -140,7 +139,7 @@ class Ideas_model extends CI_Model{
 				'likes'					=> $row->likes,
 				'tags'					=> $tags,
 				'date'					=> $row->date,
-				'privacy'				=> $row->privacy,
+				'privacy'				=> $this->reverse_privacy($row->privacy),
 			);
 			return $data;
 			
@@ -269,7 +268,7 @@ class Ideas_model extends CI_Model{
 					'likes'					=> $row->likes,
 					'tags'					=> $tags,
 					'date'					=> $row->date,
-					'privacy'				=> $row->privacy,
+					'privacy'				=> $this->reverse_privacy($row->privacy),
 				);
 			
 			}
@@ -290,6 +289,8 @@ class Ideas_model extends CI_Model{
 
 	public function update($id, $input_data){
 
+		//FILTERING
+
 		$data = elements(array(
 			'title',
 			'image',
@@ -304,16 +305,56 @@ class Ideas_model extends CI_Model{
 
 		//VALIDATION
 
+		//validate the tags array //ONLY A LIMITED NUMBER TAGS IS ALLOWED!!
 		//$this->validator->set_data()
 		//$this->validator->set_rules()
 		//$this->validator->run()
 		//$this->validator->error_array()
 		//return false
 
+		$this->db->trans_start();
+
+		$tags_affected_rows = 0;
+		if(isset($data['tags'])){
+			//first delete all the tags relevant to this idea
+			$this->db->where('ideaId', $id);
+			$this->db->delete('tags');
+			//now add in the rest of the tags
+			$tags_data = $data['tags'];
+			foreach($tags_data as $tag){
+				$tag_data = array(
+					'ideaId'	=> $id,
+					'tag'		=> $tag,
+				);
+				$this->db->insert('tags', $tag_data);
+			}
+			$tags_affected_rows = $this->db->affected_rows();
+			unset($data['tags']);
+		}
+
 		$this->db->where('id', $id);
 		$this->db->update('ideas', $data);
+		$ideas_affected_rows = $this->db->affected_rows();
 
-		if($this->db->affected_rows() > 0){
+		$this->db->trans_complete();
+
+		if($this->db->trans_status() === FALSE){
+
+			$msg = $this->db->error()['message'];
+			$num = $this->db->error()['code'];
+			$last_query = $this->db->last_query();
+			
+			log_message('error', 'Problem updating to ideas table: ' . $msg . ' (' . $num . '), using this query: "' . $last_query . '"');
+			
+			$this->errors = array(
+				'system_error'	=> 'Problem updating data to ideas table.',
+			);
+			
+			return false;
+
+		}
+
+		if(($tags_affected_rows + $ideas_affected_rows) > 0){
 		
 			return true;
 		
@@ -331,10 +372,19 @@ class Ideas_model extends CI_Model{
 
 	public function delete($id){
 
-		$this->db->where('id', $id);
-		$this->db->delete('ideas'); 
+		$this->db->trans_start();
 
-		if($this->db->affected_rows() > 0){
+		$this->db->where('id', $id);
+		$this->db->delete('ideas');
+		$ideas_affected_rows = $this->db->affected_rows();
+
+		$this->db->where('ideaId', $id);
+		$this->db->delete('tags');
+		$tags_affected_rows = $this->db->affected_rows();
+
+		$this->db->trans_complete();
+
+		if(($tags_affected_rows + $ideas_affected_rows) > 0){
 		
 			return true;
 		
@@ -374,6 +424,27 @@ class Ideas_model extends CI_Model{
 		}
 
 		return $bitwise;
+
+	}
+
+	protected function reverse_privacy($privacy_selection){
+
+		$privacy_selection = bindec($privacy_selection);
+
+		$result = '';
+
+		switch($privacy_selection){
+			case self::PUBLIC_PRIVACY:
+				$result = 'public';
+				break;
+			case self::DEVELOPERS_PRIVACY:
+				$result = 'developers';
+				break;
+			default:
+				$result = 'public';
+		}
+
+		return $result;
 
 	}
 

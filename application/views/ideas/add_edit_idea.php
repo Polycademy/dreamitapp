@@ -7,7 +7,10 @@
 		ng-show="!notFoundError"
 	>
 		<header class="add_idea_header">
-			<h1 class="add_idea_heading">Add a New Idea</h1>
+			<h1 class="add_idea_heading" ng-switch="action">
+				<span ng-switch-when="add">Add a New Idea</span>
+				<span ng-switch-when="edit">Edit Idea</span>
+			</h1>
 			<button 
 				class="add_idea_close overlay_close" 
 				ng-click="closeOverlay()" 
@@ -161,7 +164,10 @@
 				</ul>
 			</div>
 			<div class="form-actions">
-				<button type="submit" class="btn btn-primary">Add Idea</button>
+				<button type="submit" class="btn btn-primary" ng-switch="action">
+					<span ng-switch-when="add">Add Idea</span>
+					<span ng-switch-when="edit">Edit Idea</span>
+				</button>
 				<button type="button" class="btn" ng-click="closeOverlay()">Cancel</button>
 			</div>
 		</form>
