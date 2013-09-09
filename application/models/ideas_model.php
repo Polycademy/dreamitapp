@@ -384,6 +384,9 @@ class Ideas_model extends CI_Model{
 		//if it isnt, we need to check if its a developers privacy
 		//if it is, then if the current user is not a developer, then we return false
 
+		//convert the bitwise back to decimal form
+		$privacy = bindec($privacy);
+
 		//if not public privacy
 		if(!($privacy & self::PUBLIC_PRIVACY)){
 
