@@ -64,7 +64,7 @@
 					</div>
 					<div class="item_tags">
 						<ul>
-							<li ng-repeat="tag in idea.tags">
+							<li ng-repeat="tag in idea.tags | limitTo:4">
 								<a ng-href="?tags={{tag}}" ng-click="tagAction(tag)">{{tag}}</a>
 							</li>
 						</ul>

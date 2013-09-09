@@ -6331,6 +6331,7 @@ header.navbar .nav li a {
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
   padding: 10px;
+  word-wrap: break-word;
 }
 .main .wall_container .wall .item_panel .item_meta .item_tags ul {
   list-style: none;
@@ -6343,6 +6344,7 @@ header.navbar .nav li a {
 .main .wall_container .wall .item_panel .item_meta .item_tags ul li {
   display: inline-block;
   margin: 0 2px;
+  max-width: 80%;
 }
 .main .wall_container .wall .item_panel .item_meta .item_tags ul li a {
   color: #7f8c8d;
