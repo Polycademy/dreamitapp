@@ -1,8 +1,8 @@
 <script type="text/ng-template" id="idea_overlay.html">
-	<article class="idea_container" overlay-dir pull-down-to-window-dir ng-show="!idea.errorMessage">
+	<article class="idea_container overlay_container" overlay-dir pull-down-to-window-dir ng-show="!idea.errorMessage">
 		<header class="idea_header">
 			<h1 class="idea_heading"><a ng-href="ideas/{{idea.id}}/{{idea.titleUrl}}">{{idea.title}}</a></h1>
-			<button class="idea_close" ng-click="closeOverlay()"><span class="fui-cross"></span></button>
+			<button class="idea_close overlay_close" ng-click="closeOverlay()"><span class="fui-cross"></span></button>
 		</header>
 		<div class="idea_content">
 			<div class="idea_inner_content">

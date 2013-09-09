@@ -46,6 +46,10 @@ a{
 	border: none; //this is for the error message in ideas
 }
 
+.form-actions{
+	background: none;
+}
+
 /*
 	CUSTOM ICONS
  */
@@ -407,19 +411,6 @@ header.navbar{
 		}
 		.idea_close{
 			margin: 30px;
-			float: right;
-			background: @colour_grey_clouds;
-			border: 1px solid @colour_greyer_clouds;
-			.rounded(8px);
-			color: @colour_wet_asphalt;
-			font-size: 34px;
-			width: 54px;
-			height: 54px;
-			line-height: 50px;
-			&:hover{
-				background: @colour_clouds;
-				color: @colour_midnight_blue;
-			};
 		}
 	}
 	.idea_content{
@@ -512,6 +503,44 @@ header.navbar{
 }
 
 /*
+	ADD IDEA
+*/
+.add_idea_container{
+	margin: 0 auto;
+	border-left: 1px solid @colour_green_highlight;
+	border-right: 1px solid @colour_green_highlight;
+	.add_idea_header{
+		overflow: auto;
+		.add_idea_heading{
+			float: left;
+			font-size: 32px;
+			font-family: 'source_sans_prosemibold', arial, sans-serif;
+			font-weight: normal;
+			padding: 20px 40px;
+			margin: 0;
+		}
+		.add_idea_close{
+			margin: 10px;
+		}
+	}
+	.add_idea_form{
+		margin: 20px auto;
+		padding-right: 60px;
+		width: 90%;
+		.box-sizing();
+		.control-label{
+			width: 120px;
+		}
+		.controls{
+			margin-left: 134px;
+		}
+		.add_idea_image_button{
+			margin-top: 10px;
+		}
+	}
+}
+
+/*
 	OVERLAY BACKDROP
 */
 .overlay_backdrop{
@@ -529,37 +558,42 @@ header.navbar{
 }
 
 /*
-	IDEA OVERLAY
+	OVERLAY CONTAINERS
 */
-.overlay_backdrop > .idea_container{
-	width: 780px;
-	background: @colour_bright_clouds;
-	position: absolute;
-	top: 0;
-	left: 0;
-	right: 0;
-	border: none;
-	.idea_header{
-		.idea_heading{
-			padding: 60px;
+.overlay_backdrop{
+	.overlay_container{
+		width: 780px;
+		background: @colour_bright_clouds;
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		.overlay_close{
+			float: right;
+			background: @colour_grey_clouds;
+			border: 1px solid @colour_greyer_clouds;
+			.rounded(8px);
+			color: @colour_wet_asphalt;
+			font-size: 34px;
+			width: 54px;
+			height: 54px;
+			line-height: 50px;
+			&:hover{
+				background: @colour_clouds;
+				color: @colour_midnight_blue;
+			};
 		}
 	}
-}
-
-/*
-	ADD IDEA OVERLAY
- */
-.add_idea_container{
-	width: 780px;
-	background: @colour_bright_clouds;
-	position: absolute;
-	top: 0;
-	left: 0;
-	right: 0;
-	border: none;
-	margin: 0 auto;
-	border: 1px solid @colour_green_highlight;
-	padding: 20px;
+	.idea_container{
+		.idea_header{
+			.idea_heading{
+				padding: 60px;
+			}
+		}
+	}
+	.add_idea_container{
+		padding: 20px;
+	}
 }
 
 /*
