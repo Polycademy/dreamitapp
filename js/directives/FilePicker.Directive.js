@@ -17,12 +17,21 @@ define(['angular', 'filepicker'], function(angular, filepicker){
 					},
 					link: function(scope, element, attributes){
 
+						var pickerOptions = scope.filePickerOptions(),
+							storeOptions = scope.fileStoreOptions(),
+							originalBlob = {};
+
 						scope.$watch('filePickerApiKey', function(value){
-							filepicker.setKey(value);
+							if(value){
+								filepicker.setKey(value);
+							}
 						});
 
-						var pickerOptions = scope.filePickerOptions(),
-							storeOptions = scope.fileStoreOptions();
+						scope.$watch('filePickerOriginalBlob', function(value){
+							if(value){
+								originalBlob = JSON.parse(value);
+							}
+						});
 
 						element.bind('click', function(){
 
@@ -48,19 +57,51 @@ define(['angular', 'filepicker'], function(angular, filepicker){
 
 							}else if(scope.filePickerAction === 'update'){
 
-								var originalBlob = JSON.parse(scope.filePickerOriginalBlob);
+								//this is going to delete the previous blob and pick and store a new blob
+								filepicker.remove(
+									originalBlob,
+									{},
+									function(){
+										filepicker.pickAndStore(
+											pickerOptions,
+											storeOptions,
+											function(InkBlobs){
+												if(typeof scope.filePickerSuccess === 'function'){
+													scope.filePickerSuccess({InkBlobs: InkBlobs});
+												}
+											},
+											function(FPError){
+												if(typeof scope.filePickerFail === 'function'){
+													scope.filePickerFail({FPError: FPError});
+												}
+											}
+										);
+									},
+									function(FPError){
+										if(typeof scope.filePickerFail === 'function'){
+											scope.filePickerFail({FPError: FPError});
+										}
+									}
+								);
+
+							}else if(scope.filePickerAction === 'replace'){
+
+								//this uses filepicker.write in order to replace the original URL
+								//this means the originalBlob's url is going to point to a new image
+								//however it won't auto update due to browser cache, so remember to use
+								//a cachebusting query parameter
 
 								//if it's an update, we first pick the image, then write back the original blob
 								filepicker.pick(
 									pickerOptions,
-									function(InkBlobs){
+									function(InkBlob){
 
 										filepicker.write(
 											originalBlob,
-											InkBlobs[0],
-											function(InkBlobs){
+											InkBlob,
+											function(InkBlob){
 												if(typeof scope.filePickerSuccess === 'function'){
-													scope.filePickerSuccess({InkBlobs: InkBlobs});
+													scope.filePickerSuccess({InkBlobs: InkBlob});
 												}
 											},
 											function(FPError){

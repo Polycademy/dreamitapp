@@ -71,12 +71,15 @@ define(['angular'], function(angular){
 				 * @return {Void}
 				 */
 				$scope.processImage = function(imageObject){
-					//we only want the first and only image uploaded
+
 					$scope.addIdeaImage = imageObject[0].url;
 					$scope.addIdeaImageBlob = JSON.stringify(imageObject[0]);
+
 					//once we have the new image, we're going to switch to updating in case the user decides to change the image while creating a new idea
 					$scope.filePickerAction = 'update';
+
 					$scope.$apply();
+
 				};
 
 				/**
