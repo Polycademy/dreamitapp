@@ -5,7 +5,13 @@
 		</header>
 		<div class="idea_content">
 			<div class="idea_inner_content">
-				<img class="idea_main_image" ng-src="{{idea.image}}/convert?w=819&fit=max" image-centering-dir image-centering-limit="40px" />
+				<img 
+					class="idea_main_image" 
+					ng-src="{{idea.image}}/convert?w=819&fit=max" 
+					image-centering-dir 
+					image-centering-limit="40px" 
+					ng-show="idea.image" 
+				/>
 				<div class="idea_description" ng-bind-html="idea.descriptionParsed"></div>
 			</div>
 			<aside class="idea_meta gradient">

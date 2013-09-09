@@ -5,13 +5,14 @@ define(['angular', 'lodash'], function(angular, _){
 	angular.module('Controllers')
 		.controller('ControlPanelCtrl', [
 			'$scope',
+			'$state',
 			'$location',
 			'$dialog',
 			'TagsServ',
 			'SearchServ',
 			'UtilitiesServ',
 			'UsersServ',
-			function($scope, $location, $dialog, TagsServ, SearchServ, UtilitiesServ, UsersServ){
+			function($scope, $state, $location, $dialog, TagsServ, SearchServ, UtilitiesServ, UsersServ){
 
 				////////////////////////
 				// FILTERS AND SEARCH //
@@ -143,15 +144,20 @@ define(['angular', 'lodash'], function(angular, _){
 				// ACTION OVERLAY //
 				////////////////////
 
-				//these are the overlays
 				$scope.openAddIdeaOverlay = function(){
+
+					//smaller screen sizes should directly transition
+					if(UtilitiesServ.checkMinimumOverlayWidth()){
+						$state.transitionTo('addIdea');
+						return;
+					}
 
 					var dialog = $dialog.dialog({
 						backdrop: false,
 						keyboard: true,
 						dialogClass: 'modal overlay_backdrop',
-						templateUrl: 'add_idea_overlay.html',
-						controller: 'AddIdeaOverlayCtrl'
+						templateUrl: 'add_edit_idea.html',
+						controller: 'AddEditIdeaCtrl'
 					});
 
 					dialog.open();
@@ -186,105 +192,6 @@ define(['angular', 'lodash'], function(angular, _){
 				$scope.signOut = function(){
 					//do the logout stuff
 					$scope.loggedIn = false;
-				};
-
-			}
-		])
-		.controller('AddIdeaOverlayCtrl', [
-			'$scope',
-			'$rootScope',
-			'dialog',
-			'AppIdeasServ',
-			'IdeasServ',
-			'TagsServ',
-			function($scope, $rootScope, dialog, AppIdeasServ, IdeasServ, TagsServ){
-
-				$rootScope.viewingOverlay = true;
-
-				$scope.closeOverlay = function(){
-					$rootScope.viewingOverlay = false;
-					dialog.close();
-				};
-
-				$scope.validationErrors = false;
-				$scope.addIdeaTags = [];
-				$scope.addIdeaPrivacy = 'privacy';
-				$scope.addIdeaTagsOptions = {
-					tags: [],
-					maximumInputLength: 20
-				};
-
-				$scope.uploadImage = function(imageObject){
-					//imageObject is apparently an array, so we're only allowing one image
-					$scope.addIdeaImage = imageObject[0].url;
-					$scope.addIdeaImageBlob = JSON.stringify(imageObject[0]);
-					$scope.$apply();
-				};
-
-				TagsServ.get({
-					popular: true,
-					trending: true,
-					limit: 20
-				}, function(response){
-					for(var i = 0; i < response.content.length; i++){
-						$scope.addIdeaTagsOptions.tags.push(response.content[i].tag);
-					}
-				});
-
-				$scope.submitIdea = function(){
-
-					var newIdea = {};
-
-					newIdea.title = $scope.addIdeaTitle;
-					newIdea.descriptionShort = $scope.addIdeaDescriptionShort;
-					newIdea.image = $scope.addIdeaImage;
-					newIdea.imageBlob = $scope.addIdeaImageBlob;
-					newIdea.description = $scope.addIdeaDescription;
-					newIdea.privacy = $scope.addIdeaPrivacy;
-
-					//addIdeaTags will be returned as an array of objects, and this object will contain "text" property
-					newIdea.tags = [];
-					for(var i=0; i<$scope.addIdeaTags.length; i++){
-						newIdea.tags.push($scope.addIdeaTags[i].text);
-					}
-
-					IdeasServ.save(
-						{},
-						newIdea,
-						function(response){
-
-							IdeasServ.get(
-								{
-									id: response.content
-								},
-								function(response){
-
-									AppIdeasServ.prependIdeas(response.content);
-									$scope.closeOverlay();
-
-								},
-								function(response){
-
-									//dont close the overlay, show the error via the validation errors, and allow resubmitting
-									$scope.validationErrors = ['Was not able to read the new idea. Try submitting again.'];
-
-								}
-							);
-
-						},
-						function(response){
-
-							$scope.validationErrors = [];
-							if(response.data.code = 'validation_error'){
-								//the content would be an object of fields to errors
-								for(var key in response.data.content){
-									$scope.validationErrors.push(response.data.content[key]); 
-								}
-							}
-
-						}
-					);
-
 				};
 
 			}

@@ -1,16 +1,28 @@
 <script type="text/ng-template" id="add_edit_idea.html">
-	<div class="add_idea_container overlay_container" overlay-dir>
+	<div 
+		class="add_idea_container" 
+		ng-class="{'overlay_container': viewingOverlay, 'container': !viewingOverlay}"
+		overlay-close-dir="viewingOverlay" 
+		overlay-close-func="closeOverlay()" 
+		ng-show="!notFoundError"
+	>
 		<header class="add_idea_header">
 			<h1 class="add_idea_heading">Add a New Idea</h1>
-			<button class="add_idea_close overlay_close" ng-click="closeOverlay()"><span class="fui-cross"></span></button>
+			<button 
+				class="add_idea_close overlay_close" 
+				ng-click="closeOverlay()" 
+				ng-show="viewingOverlay"
+			>
+				<span class="fui-cross"></span>
+			</button>
 		</header>
 		<form class="add_idea_form form-horizontal" ng-submit="submitIdea()" name="add_idea_form">
 			<div class="add_idea_form_internal">
 				<div 
 					class="control-group" 
-					ng-class="{error: 
-						add_idea_form.add_idea_title.$invalid 
-						&& add_idea_form.add_idea_title.$dirty}"
+					ng-class="{
+						error: add_idea_form.add_idea_title.$invalid && add_idea_form.add_idea_title.$dirty
+					}"
 				>
 					<label class="control-label" for="add_idea_title">Title:</label>
 					<div class="controls">
@@ -55,9 +67,9 @@
 				</div>
 				<div 
 					class="control-group" 
-					ng-class="{error: 
-						add_idea_form.add_idea_short_description.$invalid 
-						&& add_idea_form.add_idea_short_description.$dirty}"
+					ng-class="{
+						error: add_idea_form.add_idea_short_description.$invalid && add_idea_form.add_idea_short_description.$dirty
+					}"
 				>
 					<label class="control-label" for="add_idea_short_description">Short Description:</label>
 					<div class="controls">
@@ -78,9 +90,9 @@
 				</div>
 				<div 
 					class="control-group" 
-					ng-class="{error: 
-						add_idea_form.add_idea_description.$invalid 
-						&& add_idea_form.add_idea_description.$dirty}"
+					ng-class="{
+						error: add_idea_form.add_idea_description.$invalid && add_idea_form.add_idea_description.$dirty
+					}"
 				>
 					<label class="control-label" for="add_idea_description">Description:</label>
 					<div class="controls">
@@ -150,5 +162,20 @@
 				<button type="button" class="btn" ng-click="closeOverlay()">Cancel</button>
 			</div>
 		</form>
+	</div>
+	<div 
+		class="add_idea_container" 
+		ng-class="{'overlay_container': viewingOverlay, 'container': !viewingOverlay}" 
+		pull-down-to-window-dir 
+		overlay-close-dir="viewingOverlay" 
+		overlay-close-func="closeOverlay()" 
+		ng-show="notFoundError"
+	>
+		<header class="page-header">
+			<div class="alert alert-error alert-block">
+				<h1>404 Error!</h1>
+				{{notFoundError}}
+			</div>
+		</header>
 	</div>
 </script>

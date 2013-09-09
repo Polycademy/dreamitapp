@@ -217,15 +217,6 @@ define(['angular', 'lodash'], function(angular, _){
 				//  OVERLAY HANDLING  //
 				////////////////////////
 
-				//setting up the overlay options
-				var dialog = $dialog.dialog({
-					backdrop: false,
-					keyboard: true,
-					dialogClass: 'modal overlay_backdrop',
-					templateUrl: 'idea_overlay.html',
-					controller: 'IdeaOverlayCtrl'
-				});
-
 				//we want to cancel the state change to ideas, and instead launch an overlay
 				//however we must keep the URL to the idea
 				$scope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){
@@ -237,7 +228,7 @@ define(['angular', 'lodash'], function(angular, _){
 
 					//state change is prevented from home to ideas
 					//but the URL is preserved
-					if(fromState.name === 'home' && toState.name === 'ideas'){
+					if(fromState.name === 'home' && toState.name === 'idea'){
 						event.preventDefault();
 					}
 
@@ -256,6 +247,15 @@ define(['angular', 'lodash'], function(angular, _){
 					if(UtilitiesServ.checkMinimumOverlayWidth()){
 						return;
 					}
+
+					//setting up the overlay options
+					var dialog = $dialog.dialog({
+						backdrop: false,
+						keyboard: true,
+						dialogClass: 'modal overlay_backdrop',
+						templateUrl: 'idea_overlay.html',
+						controller: 'IdeaOverlayCtrl'
+					});
 
 					//ideaId is to be injected to the overlay controller to get the correct idea
 					//locationParamsAndHash is the current URL state before the overlay launches

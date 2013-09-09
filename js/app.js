@@ -75,7 +75,7 @@ define([
 				'directives/Affix.Directive',
 				'directives/PullDownToWindow.Directive',
 				'directives/ShareButton.Directive',
-				'directives/Overlay.Directive',
+				'directives/OverlayClose.Directive',
 				'directives/AnchorScroll.Directive',
 				'directives/Disqus.Directive',
 				'directives/ImageCentering.Directive',
@@ -135,7 +135,7 @@ define([
 									}
 								)
 								.state(
-									'ideas',
+									'idea',
 									{
 										url: '/ideas/{ideaId:[0-9]+}/{ideaUrl:.+}',
 										templateUrl: 'idea.html',
@@ -157,7 +157,7 @@ define([
 								.state(
 									'editIdea',
 									{
-										url: '/ideas/edit/{ideaId:[0-9]+}',
+										url: '/ideas/{ideaId:[0-9]+}/edit',
 										templateUrl: 'add_edit_idea.html',
 										controller: 'AddEditIdeaCtrl',
 										data: {

@@ -20,16 +20,26 @@ define(['angular'], function(angular){
 
 				};
 
-				this.appendIdeas = function(ideas){
+				this.appendIdea = function(ideas){
 
 					this.appIdeas.push(ideas);
 
 				};
 
-				this.prependIdeas = function(ideas){
+				this.prependIdea = function(ideas){
 
 					this.appIdeas.unshift(ideas);
 
+				};
+
+				this.replaceIdea = function(id, updatedIdea){
+
+					for(var i=0; i<this.appIdeas.length; i++){
+						if(id == this.appIdeas[i].id){
+							this.appIdeas[i] = updatedIdea;
+						}
+					}
+					
 				};
 
 			}
