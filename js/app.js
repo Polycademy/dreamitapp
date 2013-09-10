@@ -139,7 +139,12 @@ define([
 									{
 										url: '/ideas/{ideaId:[0-9]+}/{ideaUrl:.*}',
 										templateUrl: 'idea.html',
-										controller: 'IdeaCtrl'
+										controller: 'IdeaCtrl',
+										resolve: {
+											dialog: angular.noop,
+											ideaId: angular.noop,
+											locationParamsAndHash: angular.noop
+										}
 									}
 								)
 								.state(
@@ -152,9 +157,7 @@ define([
 											action: 'add'
 										},
 										resolve: {
-											dialog: function(){
-												return null;
-											}
+											dialog: angular.noop
 										}
 									}
 								)
@@ -168,9 +171,7 @@ define([
 											action: 'edit'
 										},
 										resolve: {
-											dialog: function(){
-												return null;
-											}
+											dialog: angular.noop
 										}
 									}
 								)
