@@ -139,8 +139,7 @@ define([
 									{
 										url: '/ideas/{ideaId:[0-9]+}/{ideaUrl:.*}',
 										templateUrl: 'idea.html',
-										controller: 'IdeaCtrl',
-										reloadOnSearch: false
+										controller: 'IdeaCtrl'
 									}
 								)
 								.state(
