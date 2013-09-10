@@ -51,26 +51,58 @@
 				<p class="lead text-center">Contact Us:</p>
 				<div class="row-fluid">
 					<div class="span6 contact_details">
-						<form class="form-horizontal">
-							<div class="control-group">
+						<form class="form-horizontal" ng-submit="submitContact()" name="contact_us_form">
+							<div 
+								class="control-group" 
+								ng-class="{
+									error: contact_us_form.contact_message.$invalid && contact_us_form.contact_message.$dirty
+								}"
+							>
 								<label class="control-label" for="contact_message">Message:</label>
 								<div class="controls">
 									<textarea 
 										id="contact_message" 
 										class="input-block-level" 
-										rows="6"
+										name="contact_message" 
+										ng-model="contactMessage" 
+										rows="6" 
+										ng-minlength="16" 
+										ng-maxlength="13500" 
+										required
 									></textarea>
+									<span class="help-block" ng-show="contact_us_form.contact_message.$error.required">Required</span>
+									<span class="help-block" ng-show="contact_us_form.contact_message.$error.minlength">Message is too short.</span>
+									<span class="help-block" ng-show="contact_us_form.contact_message.$error.maxlength">Message is too long.</span>
 								</div>
 							</div>
-							<div class="control-group">
+							<div 
+								class="control-group" 
+								ng-class="{
+									error: contact_us_form.contact_email.$invalid && contact_us_form.contact_email.$dirty
+								}"
+							>
 								<label class="control-label" for="contact_email">Email:</label>
 								<div class="controls">
 									<input 
 										id="contact_email" 
 										class="input-block-level" 
 										type="email" 
+										name="contact_email" 
+										ng-model="contactEmail" 
+										required 
 									/>
+									<span class="help-block" ng-show="contact_us_form.contact_email.$error.required">Required</span>
+									<span class="help-block" ng-show="contact_us_form.contact_email.$error.email">Enter a valid email.</span>
 								</div>
+							</div>
+							<div class="validation_errors text-center" ng-show="validationErrors">
+								<em class="text-warning">Oops! Please fix up these errors:</em>
+								<ul>
+									<li class="alert alert-error" ng-repeat="error in validationErrors">{{error}}</li>
+								</ul>
+							</div>
+							<div class="success_submit text-center" ng-show="success_submit">
+								<em class="text-success">Successfully sent message!</em>
 							</div>
 							<div class="form-actions">
 								<button type="submit" class="btn btn-primary">Send</button>

@@ -5,14 +5,36 @@ define(['angular'], function(angular){
 	angular.module('Controllers')
 		.controller('AboutCtrl', [
 			'$scope',
-			function($scope){
+			'EmailServ',
+			function($scope, EmailServ){
 
-				$scope.searchTag = '';
+				$scope.submitContact = function(){
 
-				$scope.doSomething = function(){
-					console.log($scope);
-					console.log($scope.searchTag);
+					newEmail = {
+						toEmail: dreamItAppConfig.sitemeta.email,
+						fromEmail: $scope.contactEmail,
+						message: $scope.contactMessage
+					};
+
+					EmailServ.save({}, newEmail, function(response){
+
+						$scope.successSubmit = true;
+
+					}, function(response){
+
+						$scope.validationErrors = [];
+						if(response.data.code = 'validation_error'){
+							for(var key in response.data.content){
+								$scope.validationErrors.push(response.data.content[key]); 
+							}
+						}else{
+							$scope.validationErrors = [response.data.content];
+						}
+
+					});
+
 				};
+
 
 			}
 		]);

@@ -12,6 +12,9 @@ Pigeon::map(function($r){
 		//like resource only allows get and put (toggling)
 		$r->get('like/(:num)', 'like/show/$1');
 		$r->put('like/(:num)', 'like/update/$1');
+
+		//sending emails
+		$r->post('email', 'email/send');
 		
 		//for user accounts
 		$r->resources('accounts');

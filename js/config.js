@@ -5,6 +5,9 @@
 'use strict';
 
 var dreamItAppConfig = {
+	sitemeta: {
+		email: 'developersupport@dreamitapp.com'
+	},
 	display: {
 		minimumOverlayWidth: 800
 	},

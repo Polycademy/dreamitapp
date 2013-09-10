@@ -11,4 +11,5 @@ $config['sitemeta'] = array(
 	'copyright'					=> '&copy; Dream it App 2013',
 	'google_site_verification'	=> '',
 	'google_analytics_key'		=> '',
+	'email'						=> 'developersupport@dreamitapp.com',
 );

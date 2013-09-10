@@ -162,6 +162,8 @@ define(['angular'], function(angular){
 								for(var key in response.data.content){
 									$scope.validationErrors.push(response.data.content[key]); 
 								}
+							}else{
+								$scope.validationErrors = [response.data.content];
 							}
 
 						};
@@ -271,6 +273,8 @@ define(['angular'], function(angular){
 								for(var key in response.data.content){
 									$scope.validationErrors.push(response.data.content[key]); 
 								}
+							}else{
+								$scope.validationErrors = [response.data.content];
 							}
 
 						};
