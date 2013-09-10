@@ -17,7 +17,7 @@ define(['angular'], function(angular){
 					//if length is greater than the cutoff
 					//then we need to find the maximum number that is below the cutoff
 					//and add an '+' sign to the right of it
-					if(typeof integer !== 'undefined' && length > cutoff){
+					if(integer && length > cutoff){
 
 						for(var i = 0; i < cutoff; i++){
 							output += '9';
@@ -26,6 +26,11 @@ define(['angular'], function(angular){
 						output += '+';
 
 						return output;
+
+					//if the integer was undefined or null, then it's going to be zero
+					}else if(typeof integer === 'undefined' || integer === null){
+
+						return 0;
 
 					}else{
 
