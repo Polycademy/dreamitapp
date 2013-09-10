@@ -57,7 +57,7 @@ class Tags extends CI_Controller{
 	 */
 	public function show($id){
 		
-		$query = $this->Tags_model->read($id);		
+		$query = $this->Tags_model->read($id);
 		
 		if($query){
 			
@@ -78,18 +78,6 @@ class Tags extends CI_Controller{
 		);
 		
 		Template::compose(false, $output, 'json');
-		
-	}
-	
-	public function create(){
-		
-	}
-	
-	public function update($id){
-		
-	}
-
-	public function delete($id){
 		
 	}
 

@@ -13,38 +13,6 @@ class Tags_model extends CI_Model{
 
 	}
 
-	//this creates a single tag!
-	public function create($input_data){
-
-		$data = elements(array(
-			'ideaId',
-			'tag'
-		), $input_data, null, true);
-
-		//do validation (tags is an array that must be require)
-
-		$query = $this->db->insert('tags', $data);
-
-		if(!$query){
-
-			$msg = $this->db->error()['message'];
-			$num = $this->db->error()['code'];
-			$last_query = $this->db->last_query();
-			
-			log_message('error', 'Problem inserting to tags table: ' . $msg . ' (' . $num . '), using this query: "' . $last_query . '"');
-			
-			$this->errors = array(
-				'system_error'	=> 'Problem inserting tags to tags table.',
-			);
-			
-			return false;
-			
-		}
-
-		return $this->db->insert_id();
-
-	}
-
 	public function read($id){
 
 		$query = $this->db->get_where('tags', array('id' => $id));
@@ -130,14 +98,6 @@ class Tags_model extends CI_Model{
 			return false;
 
 		}
-
-	}
-
-	public function update($id, $data){
-
-	}
-
-	public function delete($id){
 
 	}
 
