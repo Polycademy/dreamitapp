@@ -14,9 +14,9 @@ define(['angular', 'lodash'], function(angular, _){
 			'UsersServ',
 			function($scope, $state, $location, $dialog, TagsServ, SearchServ, UtilitiesServ, UsersServ){
 
-				////////////////////////
-				// FILTERS AND SEARCH //
-				////////////////////////
+				////////////
+				// SEARCH //
+				////////////
 
 				/**
 				 * Submits a tag query parameter to be searched in real time
@@ -40,6 +40,32 @@ define(['angular', 'lodash'], function(angular, _){
 					},
 					400
 				);
+
+				/**
+				 * Opens an overlay for search in small screens
+				 * @return {Void}
+				 */
+				$scope.openSearch = function(){
+
+					var dialog = $dialog.dialog({
+						backdrop: false,
+						keyboard: true,
+						dialogClass: 'modal overlay_backdrop',
+						templateUrl: 'search_modal.html',
+						controller: 'SearchModalCtrl'
+					});
+
+					dialog.open().then(function(searchValue){
+						if(searchValue){
+							$scope.submitSearch(searchValue);
+						}
+					});
+
+				};
+
+				/////////////
+				// FILTERS //
+				/////////////
 
 				/**
 				 * Determines whether we are showing popular ideas or not
@@ -181,8 +207,8 @@ define(['angular', 'lodash'], function(angular, _){
 						backdrop: false,
 						keyboard: true,
 						dialogClass: 'modal overlay_backdrop',
-						templateUrl: 'signin_overlay.html',
-						controller: 'SignInOverlayCtrl'
+						templateUrl: 'signin_modal.html',
+						controller: 'SignInModalCtrl'
 					});
 
 					dialog.open().then(function(loggedIn){
@@ -199,7 +225,28 @@ define(['angular', 'lodash'], function(angular, _){
 
 			}
 		])
-		.controller('SignInOverlayCtrl', [
+		.controller('SearchModalCtrl', [
+			'$scope',
+			'$rootScope',
+			'dialog',
+			function($scope, $rootScope, dialog){
+
+				$scope.searchValue = '';
+
+				$rootScope.viewingOverlay = true;
+
+				$scope.closeOverlay = function(){
+					$rootScope.viewingOverlay = false;
+					dialog.close($scope.searchValue);
+				};
+
+				$scope.submitSearch = function(){
+					$scope.closeOverlay();
+				};
+
+			}
+		])
+		.controller('SignInModalCtrl', [
 			'$scope',
 			'$rootScope',
 			'dialog',
