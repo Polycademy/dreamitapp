@@ -6751,12 +6751,90 @@ header.navbar .nav li a {
   border-right: 1px solid #b8e0d8;
 }
 .about .about_header {
-  padding: 0 30px;
+  padding: 0 30px 10px;
   border-bottom: 1px solid #b8e0d8;
+  margin-bottom: 0;
 }
 .about .about_header h1 {
   font-family: 'source_sans_probold', arial, sans-serif;
   color: #34495e;
+}
+.about .about_content {
+  margin: 4%;
+}
+.about .about_content .lead {
+  font-family: 'source_sans_prosemibold', arial, sans-serif;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 30px;
+  width: 80%;
+  color: #2c3e50;
+  font-size: 25px;
+}
+.about .about_content .about_intro,
+.about .about_content .about_features,
+.about .about_content .about_team,
+.about .about_content .contact_us {
+  margin: 4% 0;
+}
+.about .about_content .about_features .feature_box {
+  border: 1px solid #b8e0d8;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  -ms-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.about .about_content .about_features .feature_box h3 {
+  font-family: 'source_sans_proregular', arial, sans-serif;
+  font-size: 28px;
+  color: #363943;
+}
+.about .about_content .about_features .feature_box .feature_image {
+  display: block;
+  margin: 0 auto;
+  text-align: center;
+  height: 100px;
+  line-height: 100px;
+}
+.about .about_content .about_features .feature_box .feature_image .fui-chat {
+  color: #16a085;
+  font-size: 99px;
+}
+.about .about_content .about_features .feature_box .feature_image .fui-user {
+  color: #2ecc71;
+  font-size: 99px;
+}
+.about .about_content .about_features .feature_box p {
+  padding: 20px;
+}
+.about .about_content .about_team .team_profile {
+  overflow: auto;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.about .about_content .about_team .team_profile img {
+  border-radius: 4px;
+}
+.about .about_content .about_team .team_profile p {
+  padding: 10px;
+}
+.about .about_content .contact_us .contact_details {
+  padding: 20px;
+}
+.about .about_content .contact_us form label {
+  width: 120px;
+}
+.about .about_content .contact_us form .controls {
+  margin-left: 140px;
+}
+.about .about_content .contact_us form .form-actions {
+  padding-left: 140px;
+}
+.about .about_content .contact_us address {
+  margin-top: 20px;
+  font-size: 16px;
 }
 /*
 	BLOG

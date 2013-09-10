@@ -5,52 +5,52 @@
 		</header>
 		<div class="about_content">
 			<div class="about_intro">
-				<p class="lead text-center">Dream it App is a platform for showcasing your ideas for web, mobile or tablet applications, games or software. Build your audience here.</p>
+				<p class="lead text-center">Dream it App is a platform for showcasing your ideas for web, mobile or tablet applications, games or software. Build your audience here!</p>
 				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur sodales ligula in libero. </p>
 				<p>Sed dignissim lacinia nunc. Curabitur tortor. Pellentesque nibh. Aenean quam. In scelerisque sem at dolor. Maecenas mattis. Sed convallis tristique sem. Proin ut ligula vel nunc egestas porttitor. Morbi lectus risus, iaculis vel, suscipit quis, luctus non, massa. Fusce ac turpis quis ligula lacinia aliquet. Mauris ipsum. </p>
 				<p>Nulla metus metus, ullamcorper vel, tincidunt sed, euismod in, nibh. Quisque volutpat condimentum velit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nam nec ante. Sed lacinia, urna non tincidunt mattis, tortor neque adipiscing diam, a cursus ipsum ante quis turpis. Nulla facilisi. Ut fringilla. Suspendisse potenti. Nunc feugiat mi a tellus consequat imperdiet. Vestibulum sapien. Proin quam. </p>
 			</div>
 			<div class="about_features">
 				<p class="lead text-center">Here's how we can help:</p>
-				<div class="row">
-					<div class="span4">
-						<h3>Add Ideas</h3>
-						<img class="feature_image" src="img/apple-touch-icon-57x57-precomposed.png" />
+				<div class="row-fluid" equalise-heights-dir=".feature_box">
+					<div class="span4 feature_box">
+						<h3 class="text-center">Add Ideas</h3>
+						<img class="feature_image" src="img/add_idea_icon.png" />
 						<p>You can add ideas, and use markdown for description. You can also set the privacy settings. One image is allowed for the main image.</p>
 					</div>
-					<div class="span4">
-						<h3>Gain Feedback</h3>
-						<img class="feature_image" src="img/apple-touch-icon-57x57-precomposed.png" />
+					<div class="span4 feature_box">
+						<h3 class="text-center">Gain Feedback</h3>
+						<div class="feature_image"><span class="fui-chat"></span></div>
 						<p>Check the comments and likes. Get your friends to like them, the most popular ones goes to top.</p>
 					</div>
-					<div class="span4">
-						<h3>Contact Developers</h3>
-						<img class="feature_image" src="img/apple-touch-icon-57x57-precomposed.png" />
+					<div class="span4 feature_box">
+						<h3 class="text-center">Contact Developers</h3>
+						<div class="feature_image"><span class="fui-user"></span></div>
 						<p>Developers can get in contact with you if your idea is interesting, or you can browse developer profiles.</p>
 					</div>
 				</div>
 			</div>
 			<div class="about_team">
 				<p class="lead text-center">Check out the team behind this project:</p>
-				<div class="row">
-					<div class="span6">
+				<div class="row-fluid">
+					<div class="span6 team_profile">
 						<div class="pull-left">
-							<img class="feature_image" src="img/apple-touch-icon-57x57-precomposed.png" />
+							<img class="feature_image" src="http://gravatar.com/avatar/98a347823sd1db90af884b227a29c29e?s=100&d=mm" />
 						</div>
-						<p>Stephen Kiley</p>
+						<p class="pull-left">Stephen Kiley - Description</p>
 					</div>
-					<div class="span6">
+					<div class="span6 team_profile">
 						<div class="pull-left">
-							<img class="feature_image" src="img/apple-touch-icon-57x57-precomposed.png" />
+							<img class="feature_image" src="http://gravatar.com/avatar/98a347823cd1db90af884b227a29c29e?s=100&d=mm" />
 						</div>
-						<p>Roger Qiu</p>
+						<p class="pull-left">Roger Qiu - Main Developer of Dream it App.</p>
 					</div>
 				</div>
 			</div>
 			<div class="contact_us">
 				<p class="lead text-center">Contact Us:</p>
-				<div class="row">
-					<div class="span6">
+				<div class="row-fluid">
+					<div class="span6 contact_details">
 						<form class="form-horizontal">
 							<div class="control-group">
 								<label class="control-label" for="contact_message">Message:</label>
@@ -77,8 +77,8 @@
 							</div>
 						</form>
 					</div>
-					<div class="span6">
-						<address>
+					<div class="span6 contact_details">
+						<address class="text-center">
 							<strong>Dream it App</strong><br />
 							795 Folsom Street<br />
 							Canberra, ACT, Australia 2207<br />

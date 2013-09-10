@@ -641,11 +641,91 @@ header.navbar{
 	border-left: 1px solid @colour_green_highlight;
 	border-right: 1px solid @colour_green_highlight;
 	.about_header{
-		padding: 0 30px;
+		padding: 0 30px 10px;
 		border-bottom: 1px solid @colour_green_highlight;
+		margin-bottom: 0;
 		h1{
 			font-family: 'source_sans_probold', arial, sans-serif;
 			color: @colour_wet_asphalt;
+		}
+	}
+	.about_content{
+		margin: 4%;
+		.lead{
+			font-family: 'source_sans_prosemibold', arial, sans-serif;
+			margin-left: auto;
+			margin-right: auto;
+			margin-bottom: 30px;
+			width: 80%;
+			color: @colour_midnight_blue;
+			font-size: 25px;
+		}
+		.about_intro, .about_features, .about_team, .contact_us{
+			margin: 4% 0;
+		}
+		.about_features{
+			.feature_box{
+				border: 1px solid @colour_green_highlight;
+				margin-top: 10px;
+				margin-bottom: 10px;
+				.box-sizing();
+				h3{
+					font-family: 'source_sans_proregular', arial, sans-serif;
+					font-size: 28px;
+					color: @colour_dark_asphalt;
+				}
+				.feature_image{
+					display: block;
+					margin: 0 auto;
+					text-align: center;
+					height: 100px;
+					line-height: 100px;
+					.fui-chat{
+						color: @colour_green_sea;
+						font-size: 99px;
+					}
+					.fui-user{
+						color: @colour_emerald;
+						font-size: 99px;
+					}
+				}
+				p{
+					padding: 20px;
+				}
+			}
+		}
+		.about_team{
+			.team_profile{
+				overflow: auto;
+				margin-top: 10px;
+				margin-bottom: 10px;
+				img{
+					border-radius: 4px;
+				}
+				p{
+					padding: 10px;
+				}
+			}
+		}
+		.contact_us{
+			.contact_details{
+				padding: 20px;
+			}
+			form{
+				label{
+					width: 120px;
+				}
+				.controls{
+					margin-left: 140px;
+				}
+				.form-actions{
+					padding-left: 140px;
+				}
+			}
+			address{
+				margin-top: 20px;
+				font-size: 16px;
+			}
 		}
 	}
 }

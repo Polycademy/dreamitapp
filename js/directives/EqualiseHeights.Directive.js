@@ -11,15 +11,11 @@ define(['angular', 'jquery'], function(angular){
 		.directive('equaliseHeightsDir', [
 			function(){
 				return {
-					scope: true,
 					link: function(scope, element, attributes){
 					
 						//we're not using scope.watch here because, watch would require the values to change, and it can't watch browser events like window.resize, also we're not watching value changes, but events! therefore we're doing jquery event binding
 						//another method here: http://jsfiddle.net/bY5qe/
-						var items;
-						attributes.$observe('equaliseHeightsDir', function(value){
-							items = angular.element(value);
-						});
+						var items = angular.element(attributes.equaliseHeightsDir);
 						
 						var equaliseHeight = function(){
 							var maxHeight = 0;
