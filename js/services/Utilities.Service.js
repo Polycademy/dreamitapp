@@ -152,7 +152,7 @@ define(['angular', 'lodash'], function(angular, _){
 
 				};
 
-				this.viewportWidth = '';
+				this.viewportWidth = $window.innerWidth || $document[0].documentElement.clientWidth || $document[0].getElementsByTagName('body')[0].clientWidth;
 
 				this.watchViewportWidth = function(){
 
@@ -177,7 +177,7 @@ define(['angular', 'lodash'], function(angular, _){
 				this.checkMinimumOverlayWidth = function(){
 
 					var minimum = $rootScope.dreamItAppConfig.display.minimumOverlayWidth;
-
+					
 					if(this.viewportWidth < minimum){
 						return true;
 					}
