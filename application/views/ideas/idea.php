@@ -1,11 +1,34 @@
 <script type="text/ng-template" id="idea.html">
-	<article class="idea_container container" pull-down-to-window-dir ng-show="!idea.errorMessage">
+	<article 
+		class="idea_container" 
+		ng-class="{'overlay_container': viewingOverlay, 'container': !viewingOverlay}"
+		overlay-close-dir="viewingOverlay" 
+		overlay-close-func="closeOverlay()" 
+		pull-down-to-window-dir 
+		ng-show="!notFoundError"
+	>
 		<header class="idea_header">
 			<h1 class="idea_heading"><a ng-href="ideas/{{idea.id}}/{{idea.titleUrl}}">{{idea.title}}</a></h1>
+			<button 
+				class="idea_close overlay_close" 
+				ng-click="closeOverlay()" 
+				ng-show="viewingOverlay"
+			>
+				<span class="fui-cross"></span>
+			</button>
 		</header>
 		<div class="idea_content">
-			<div class="idea_inner_content">
+			<div class="idea_inner_content" ng-switch="viewingOverlay">
 				<img 
+					ng-switch-when="true" 
+					class="idea_main_image" 
+					ng-src="{{idea.image}}/convert?w=546&fit=max" 
+					image-centering-dir 
+					image-centering-limit="40px" 
+					ng-show="idea.image" 
+				/>
+				<img 
+					ng-switch-when="false" 
 					class="idea_main_image" 
 					ng-src="{{idea.image}}/convert?w=819&fit=max" 
 					image-centering-dir 
@@ -85,11 +108,18 @@
 			></div>
 		</section>
 	</article>
-	<article class="idea_container container" pull-down-to-window-dir ng-show="idea.errorMessage">
+	<article 
+		class="idea_container" 
+		ng-class="{'overlay_container': viewingOverlay, 'container': !viewingOverlay}" 
+		overlay-close-dir="viewingOverlay" 
+		overlay-close-func="closeOverlay()" 
+		pull-down-to-window-dir 
+		ng-show="notFoundError"
+	>
 		<header class="page-header">
 			<div class="alert alert-error alert-block">
 				<h1>404 Error!</h1>
-				{{idea.errorMessage}}
+				{{notFoundError}}
 			</div>
 		</header>
 	</article>

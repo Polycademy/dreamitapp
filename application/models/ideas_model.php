@@ -36,6 +36,7 @@ class Ideas_model extends CI_Model{
 			'privacy'
 		), $input_data, null, true);
 
+		$data['likes'] = 0;
 		$data['date'] = date('Y-m-d H:i:s');
 		$data['privacy'] = (isset($data['privacy'])) ? $this->assign_privacy($data['privacy']) : $this->assign_privacy();
 

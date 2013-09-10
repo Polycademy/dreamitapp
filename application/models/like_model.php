@@ -28,7 +28,7 @@ class Like_model extends CI_Model{
 
 			$data = array(
 				'id'		=> $id,
-				'likes'		=> $row->likes
+				'likes'		=> intval($row->likes)
 			);
 
 			return $data;

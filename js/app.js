@@ -141,9 +141,7 @@ define([
 										templateUrl: 'idea.html',
 										controller: 'IdeaCtrl',
 										resolve: {
-											dialog: angular.noop,
-											ideaId: angular.noop,
-											locationParamsAndHash: angular.noop
+											dialog: angular.noop
 										}
 									}
 								)

@@ -238,96 +238,31 @@ define(['angular', 'lodash'], function(angular, _){
 					}
 
 					//setting up the overlay options
+					//ideaId is to get the correct idea
+					//locationParamsAndHash is the current URL state before the overlay launches
+					//it will be used when the overlay closes, and we want to return to original URL state
 					var dialog = $dialog.dialog({
 						backdrop: false,
 						keyboard: true,
 						dialogClass: 'modal overlay_backdrop',
-						templateUrl: 'idea_overlay.html',
-						controller: 'IdeaOverlayCtrl'
-					});
-
-					//ideaId is to be injected to the overlay controller to get the correct idea
-					//locationParamsAndHash is the current URL state before the overlay launches
-					//it will be used when the overlay closes, and we want to return to original URL state
-					dialog.options.resolve = {
-						ideaId: function(){ return ideaId },
-						locationParamsAndHash: function(){ 
-							return {
+						templateUrl: 'idea.html',
+						controller: 'IdeaCtrl',
+						customOptions: {
+							ideaId: ideaId,
+							locationParamsAndHash: {
 								path: $location.path(),
 								search: $location.search(),
 								hash: $location.hash()
-							};
+							}
 						}
-					};
+					});
 					
 					//closing callback will receive the previous locationParams through the overlay
 					dialog.open().then(function(locationParamsAndHash){
-
-						$rootScope.viewingOverlay = false;
 						$location.path(locationParamsAndHash.path);
 						$location.search(locationParamsAndHash.search);
 						$location.hash(locationParamsAndHash.hash);
-
 					});
-
-				};
-
-			}
-		])
-		.controller('IdeaOverlayCtrl', [
-			'$scope',
-			'$rootScope',
-			'dialog',
-			'ideaId',
-			'locationParamsAndHash',
-			'IdeasServ',
-			'LikeServ',
-			function($scope, $rootScope, dialog, ideaId, locationParamsAndHash, IdeasServ, LikeServ){
-
-				$rootScope.viewingOverlay = true;
-
-				$scope.closeOverlay = function(){
-					//this can only pass in a single param
-					dialog.close(locationParamsAndHash);
-				};
-
-				//and load in the appropriate data
-				$scope.idea = {};
-				IdeasServ.get(
-					{
-						id: ideaId
-					},
-					function(response){
-
-						$scope.idea = response.content;
-
-					},
-					function(response){
-
-						$scope.idea.errorMessage = response.data.content;
-
-					}
-				);
-
-				$scope.likeAction = function(ideaId){
-
-					LikeServ.update(
-						{
-							id: ideaId
-						},
-						false,
-						function(response){
-
-							LikeServ.get({
-								id: ideaId
-							}, function(response){
-
-								$scope.idea.likes = response.content.likes;
-
-							});
-
-						}
-					);
 
 				};
 
