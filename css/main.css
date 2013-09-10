@@ -6069,6 +6069,10 @@ blockquote {
 .x-ng-cloak {
   display: none;
 }
+html {
+  min-height: 100%;
+  position: relative;
+}
 body {
   font-family: arial, sans-serif;
   font-size: 14px;
@@ -6110,14 +6114,6 @@ a:focus {
   width: 23px;
   height: 18px;
   background: url('../img/logout.png') no-repeat center center;
-}
-/*
-	HEADINGS
- */
-h3 {
-  font-family: 'source_sans_prosemibold', arial, sans-serif;
-  font-size: 20px;
-  font-weight: normal;
 }
 /*
 	HEADER
@@ -6182,6 +6178,9 @@ header.navbar .nav li a {
   border-bottom: 1px solid #b8e0d8;
 }
 .main .wall_container .wall .item_panel .item_header {
+  font-family: 'source_sans_prosemibold', arial, sans-serif;
+  font-size: 20px;
+  font-weight: normal;
   padding: 5px 10px;
   margin: 0;
 }
@@ -6355,8 +6354,14 @@ header.navbar .nav li a {
 .main .wall_container .wall .item_panel .item_meta .item_tags ul li a:hover {
   color: #333;
 }
+.main .control_panel.affix {
+  top: 0;
+  position: fixed;
+}
 .main .control_panel {
-  float: left;
+  position: absolute;
+  right: 0;
+  height: 100%;
   font-family: 'source_sans_prosemibold', arial, sans-serif;
   color: #16a085;
   background: #34495e;
@@ -6366,22 +6371,15 @@ header.navbar .nav li a {
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
 }
-.main .control_panel .affixed_controls.affix {
-  top: 0;
-  width: inherit;
-}
-.main .control_panel .affixed_controls {
-  width: 100%;
-}
-.main .control_panel .affixed_controls .search_form {
+.main .control_panel .search_form {
   padding: 20px;
   margin: 0;
 }
-.main .control_panel .affixed_controls .search_form label {
+.main .control_panel .search_form label {
   font-size: 20px;
   margin-bottom: 0;
 }
-.main .control_panel .affixed_controls .search_form #search {
+.main .control_panel .search_form #search {
   background: none;
   border: none;
   box-shadow: none;
@@ -6393,71 +6391,71 @@ header.navbar .nav li a {
   height: 26px;
   margin-bottom: 10px;
 }
-.main .control_panel .affixed_controls .search_form #search:-moz-placeholder {
+.main .control_panel .search_form #search:-moz-placeholder {
   color: #16a085;
   opacity: 1;
 }
-.main .control_panel .affixed_controls .search_form #search::-moz-placeholder {
+.main .control_panel .search_form #search::-moz-placeholder {
   color: #16a085;
   opacity: 1;
 }
-.main .control_panel .affixed_controls .search_form #search:-ms-input-placeholder {
+.main .control_panel .search_form #search:-ms-input-placeholder {
   color: #16a085;
   opacity: 1;
 }
-.main .control_panel .affixed_controls .search_form #search::-webkit-input-placeholder {
+.main .control_panel .search_form #search::-webkit-input-placeholder {
   color: #16a085;
   opacity: 1;
 }
-.main .control_panel .affixed_controls .control_menu {
+.main .control_panel .control_menu {
   font-size: 22px;
   background: #2980b9;
 }
-.main .control_panel .affixed_controls .control_menu ul {
+.main .control_panel .control_menu ul {
   margin: 0;
   list-style: none;
 }
-.main .control_panel .affixed_controls .control_menu ul li {
+.main .control_panel .control_menu ul li {
   padding: 12px 20px;
 }
-.main .control_panel .affixed_controls .control_menu ul li.viewing_my_ideas,
-.main .control_panel .affixed_controls .control_menu ul li.viewing_popular_ideas {
+.main .control_panel .control_menu ul li.viewing_my_ideas,
+.main .control_panel .control_menu ul li.viewing_popular_ideas {
   background: #16a085;
 }
-.main .control_panel .affixed_controls .control_menu ul a {
+.main .control_panel .control_menu ul a {
   color: #2c3e50;
   text-decoration: none;
 }
-.main .control_panel .affixed_controls .control_menu ul a span {
+.main .control_panel .control_menu ul a span {
   margin-right: 10px;
   vertical-align: bottom;
 }
-.main .control_panel .affixed_controls .control_menu ul a .login_icon,
-.main .control_panel .affixed_controls .control_menu ul a .logout_icon {
+.main .control_panel .control_menu ul a .login_icon,
+.main .control_panel .control_menu ul a .logout_icon {
   margin-left: -1px;
 }
-.main .control_panel .affixed_controls .popular_tags {
+.main .control_panel .popular_tags {
   font-size: 18px;
   padding: 20px;
   word-wrap: break-word;
 }
-.main .control_panel .affixed_controls .popular_tags .popular_tags_title {
+.main .control_panel .popular_tags .popular_tags_title {
   margin-left: 5px;
   font-size: 17px;
 }
-.main .control_panel .affixed_controls .popular_tags ul {
+.main .control_panel .popular_tags ul {
   list-style: none;
   margin: 0;
 }
-.main .control_panel .affixed_controls .popular_tags ul li {
+.main .control_panel .popular_tags ul li {
   display: inline-block;
   margin: 4px;
   max-width: 80%;
 }
-.main .control_panel .affixed_controls .popular_tags ul li a {
+.main .control_panel .popular_tags ul li a {
   color: #16a085;
 }
-.main .control_panel .affixed_controls .popular_tags ul li a:before {
+.main .control_panel .popular_tags ul li a:before {
   content: '\0023';
 }
 .main .control_panel .slider_menu {

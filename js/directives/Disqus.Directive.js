@@ -2,6 +2,10 @@ define(['angular'], function(angular){
 
 	'use strict';
 
+	//TODO:
+	//1. Convert to JSONP
+	//2. Use a cache shim like store.js
+
 	angular.module('Directives')
 		.provider('DisqusServ', function(){
 

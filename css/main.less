@@ -16,6 +16,11 @@
 	display: none;
 }
 
+html{
+	min-height: 100%;
+	position: relative;
+}
+
 body{
 	font-family: arial, sans-serif;
 	font-size: 14px;
@@ -65,15 +70,6 @@ a{
 	width: 23px;
 	height: 18px;
 	background: url('../img/logout.png') no-repeat center center;
-}
-
-/*
-	HEADINGS
- */
-h3{
-	font-family: 'source_sans_prosemibold', arial, sans-serif;
-	font-size: 20px;
-	font-weight: normal;
 }
 
 /*
@@ -133,6 +129,9 @@ header.navbar{
 				border-left: 1px solid @colour_green_highlight;
 				border-bottom: 1px solid @colour_green_highlight;
 				.item_header{
+					font-family: 'source_sans_prosemibold', arial, sans-serif;
+					font-size: 20px;
+					font-weight: normal;
 					padding: 5px 10px;
 					margin: 0;
 					a{
@@ -276,86 +275,85 @@ header.navbar{
 			}
 		}
 	}
+	.control_panel.affix{
+		top: 0;
+		position: fixed;
+	}
 	.control_panel{
-		float: left;
+		position: absolute;
+		right: 0;
+		height: 100%;
 		font-family: 'source_sans_prosemibold', arial, sans-serif;
 		color: @colour_green_sea;
 		background: @colour_wet_asphalt;
 		border-left: 1px solid @colour_blue_highlight;
 		.box-sizing();
-		.affixed_controls.affix{
-			top: 0;
-			width: inherit; //fixed elements should inherit its parent's width
+		.search_form{
+			padding: 20px;
+			margin: 0;
+			label{
+				font-size: 20px;
+				margin-bottom: 0;
+			}
+			#search{
+				background: none;
+				border: none;
+				box-shadow: none;
+				transition: none;
+				border-radius: 0;
+				color: @colour_green_sea;
+				font-size: 20px;
+				width: 140px;
+				height: 26px;
+				margin-bottom: 10px;
+				.input-placeholder-colours(@colour_green_sea);
+			}
 		}
-		.affixed_controls{
-			width: 100%;
-			.search_form{
-				padding: 20px;
+		.control_menu{
+			font-size: 22px;
+			background: @colour_belize_hole;
+			ul{
 				margin: 0;
-				label{
-					font-size: 20px;
-					margin-bottom: 0;
+				list-style: none;
+				li{
+					padding: 12px 20px;
 				}
-				#search{
-					background: none;
-					border: none;
-					box-shadow: none;
-					transition: none;
-					border-radius: 0;
-					color: @colour_green_sea;
-					font-size: 20px;
-					width: 140px;
-					height: 26px;
-					margin-bottom: 10px;
-					.input-placeholder-colours(@colour_green_sea);
+				li.viewing_my_ideas, li.viewing_popular_ideas{
+					background: @colour_green_sea;
+				}
+				a{
+					color: @colour_midnight_blue;
+					text-decoration: none;
+					span{
+						margin-right: 10px;
+						vertical-align: bottom;
+					}
+					.login_icon, .logout_icon{
+						margin-left: -1px;
+					}
 				}
 			}
-			.control_menu{
-				font-size: 22px;
-				background: @colour_belize_hole;
-				ul{
-					margin: 0;
-					list-style: none;
-					li{
-						padding: 12px 20px;
-					}
-					li.viewing_my_ideas, li.viewing_popular_ideas{
-						background: @colour_green_sea;
-					}
+		}
+		.popular_tags{
+			font-size: 18px;
+			padding: 20px;
+			word-wrap: break-word;
+			.popular_tags_title{
+				margin-left: 5px;
+				font-size: 17px;
+			}
+			ul{
+				list-style: none;
+				margin: 0;
+				li{
+					display: inline-block;
+					margin: 4px;
+					max-width: 80%;
 					a{
-						color: @colour_midnight_blue;
-						text-decoration: none;
-						span{
-							margin-right: 10px;
-							vertical-align: bottom;
-						}
-						.login_icon, .logout_icon{
-							margin-left: -1px;
-						}
-					}
-				}
-			}
-			.popular_tags{
-				font-size: 18px;
-				padding: 20px;
-				word-wrap: break-word;
-				.popular_tags_title{
-					margin-left: 5px;
-					font-size: 17px;
-				}
-				ul{
-					list-style: none;
-					margin: 0;
-					li{
-						display: inline-block;
-						margin: 4px;
-						max-width: 80%;
-						a{
-							color: @colour_green_sea;
-							&:before{
-								content: '\0023';
-							};
-						}
+						color: @colour_green_sea;
+						&:before{
+							content: '\0023';
+						};
 					}
 				}
 			}
