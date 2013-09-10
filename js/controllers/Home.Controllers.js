@@ -35,6 +35,12 @@ define(['angular', 'lodash'], function(angular, _){
 				var counterOffset = 0;
 
 				/**
+				 * Upon instantiation or reinstantiation of the home controller, we need to clear any ideas in the AppIdeas
+				 * service, since it is a singleton. This will make sure ideas aren't doubled up.
+				 */
+				AppIdeasServ.clearAppIdeas();
+
+				/**
 				 * This is assigned a reference to an array of app ideas to be repeated across the wall.
 				 * Changes will to the array inside the service will be propagated across the application.
 				 * @type {Array}

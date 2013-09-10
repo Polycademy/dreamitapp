@@ -20,15 +20,21 @@ define(['angular'], function(angular){
 
 				};
 
-				this.appendIdea = function(ideas){
+				this.clearAppIdeas = function(){
 
-					this.appIdeas.push(ideas);
+					this.appIdeas = [];
 
 				};
 
-				this.prependIdea = function(ideas){
+				this.appendIdea = function(idea){
 
-					this.appIdeas.unshift(ideas);
+					this.appIdeas.push(idea);
+
+				};
+
+				this.prependIdea = function(idea){
+
+					this.appIdeas.unshift(idea);
 
 				};
 
