@@ -14,8 +14,12 @@ class Email extends CI_Controller{
 
 		$data = $this->input->json(false);
 
-		//if the data's email is not equal to the main email, then we need them to be logged in to be able to use this service
+		//if the data's email is not equal to the main email, 
+		//then we need them to be logged in to be able to use this service
+		//also we will set the from email to be from the main email.
+		//this way emails will either always to main email or from main email
 		if($data['toEmail'] != $this->config->item('sitemeta')['email']){
+			$data['fromEmail'] = $this->config->item('sitemeta')['email'];
 			//check if they are logged in using polyauth
 		}
 
