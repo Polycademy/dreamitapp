@@ -101,8 +101,8 @@
 									<li class="alert alert-error" ng-repeat="error in validationErrors">{{error}}</li>
 								</ul>
 							</div>
-							<div class="success_submit text-center" ng-show="success_submit">
-								<em class="text-success">Successfully sent message!</em>
+							<div class="success_submit alert alert-success text-center" ng-show="successSubmit">
+								Successfully sent message!
 							</div>
 							<div class="form-actions">
 								<button type="submit" class="btn btn-primary">Send</button>

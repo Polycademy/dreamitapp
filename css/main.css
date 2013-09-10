@@ -6116,6 +6116,19 @@ a:focus {
   background: url('../img/logout.png') no-repeat center center;
 }
 /*
+	FORM VALIDATION
+*/
+.validation_errors {
+  margin: 0 auto;
+}
+.validation_errors ul {
+  list-style: none;
+  margin: 0;
+}
+.validation_errors ul li {
+  margin-bottom: 2px;
+}
+/*
 	HEADER
 */
 header.navbar {
@@ -6727,19 +6740,6 @@ header.navbar .nav li a {
 }
 .overlay_backdrop .add_idea_container {
   padding: 20px;
-}
-/*
-	FORM VALIDATION
-*/
-.validation_errors {
-  margin: 0 auto;
-}
-.validation_errors ul {
-  list-style: none;
-  margin: 0;
-}
-.validation_errors ul li {
-  margin-bottom: 2px;
 }
 /*
 	ABOUT

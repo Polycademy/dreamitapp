@@ -99,7 +99,8 @@ define([
 				'resources/Sessions.Service',
 				'resources/Ideas.Service',
 				'resources/Tags.Service',
-				'resources/Like.Service'
+				'resources/Like.Service',
+				'resources/Email.Service'
 			], function(){
 
 				/* ==========================================================================
