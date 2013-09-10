@@ -6155,6 +6155,9 @@ header.navbar .nav li a {
   text-shadow: none;
   padding: 10px 0;
 }
+/*
+	HOME WALL & CONTROL PANEL
+*/
 .main:before,
 .main:after {
   content: "";
@@ -6669,6 +6672,9 @@ header.navbar .nav li a {
 .add_idea_container .add_idea_form .controls {
   margin-left: 134px;
 }
+.add_idea_container .add_idea_form .form-actions {
+  padding-left: 0;
+}
 /*
 	OVERLAY BACKDROP
 */
@@ -6735,6 +6741,26 @@ header.navbar .nav li a {
 .validation_errors ul li {
   margin-bottom: 2px;
 }
+/*
+	ABOUT
+*/
+.about {
+  padding: 0;
+  margin: 0 auto;
+  border-left: 1px solid #b8e0d8;
+  border-right: 1px solid #b8e0d8;
+}
+.about .about_header {
+  padding: 0 30px;
+  border-bottom: 1px solid #b8e0d8;
+}
+.about .about_header h1 {
+  font-family: 'source_sans_probold', arial, sans-serif;
+  color: #34495e;
+}
+/*
+	BLOG
+*/
 /*
 	RESPONSIVE
 */

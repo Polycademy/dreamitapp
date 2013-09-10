@@ -164,11 +164,10 @@
 				</ul>
 			</div>
 			<div class="form-actions">
-				<button type="submit" class="btn btn-primary" ng-switch="action">
+				<button type="submit" class="btn btn-large btn-block btn-primary" ng-switch="action">
 					<span ng-switch-when="add">Add Idea</span>
 					<span ng-switch-when="edit">Edit Idea</span>
 				</button>
-				<button type="button" class="btn" ng-click="closeOverlay()">Cancel</button>
 			</div>
 		</form>
 	</div>
