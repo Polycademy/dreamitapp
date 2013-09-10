@@ -29,22 +29,22 @@ class Email_model extends CI_Model{
 		//$this->validator->error_array()
 		//return false
 
-		$mail->IsSMTP();
-		$mail->Host = 'smtp.mandrillapp.com';
-		$mail->Port = 587;
-		$mail->SMTPAuth = true;
-		$mail->Username = $_ENV['secrets']['mandrill_user'];
-		$mail->Password = $_ENV['secrets']['mandrill_key'];
-		$mail->SMTPSecure = 'tls';
+		$this->mailer->IsSMTP();
+		$this->mailer->Host = 'smtp.mandrillapp.com';
+		$this->mailer->Port = 587;
+		$this->mailer->SMTPAuth = true;
+		$this->mailer->Username = $_ENV['secrets']['mandrill_user'];
+		$this->mailer->Password = $_ENV['secrets']['mandrill_key'];
+		$this->mailer->SMTPSecure = 'tls';
 
-		$mail->From = $data['fromEmail'];
-		$mail->FromName = 'Dream it App Notifications';
-		$mail->AddAddress($data['toEmail']);
+		$this->mailer->From = $data['fromEmail'];
+		$this->mailer->FromName = 'Dream it App Notifications';
+		$this->mailer->AddAddress($data['toEmail']);
 
-		$mail->Subject = 'Message from Dream it App Notifications';
-		$mail->Body = $data['message'];
+		$this->mailer->Subject = 'Message from Dream it App Notifications';
+		$this->mailer->Body = $data['message'];
 
-		if(!$mail->Send()) {
+		if(!$this->mailer->Send()) {
 
 			$this->errors = array(
 				'error'	=> 'Problem sending email. Try again.'

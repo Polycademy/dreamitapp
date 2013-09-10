@@ -8,7 +8,6 @@ define(['angular', 'jquery'], function(angular){
 			'$timeout',
 			function($window, $timeout){
 				return {
-					scope: true,
 					link: function(scope, element, attributes){
 
 						var window = angular.element($window);

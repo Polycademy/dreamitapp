@@ -1,5 +1,5 @@
 <script type="text/ng-template" id="about.html">
-	<article class="container about" pull-down-to-window-dir>
+	<article class="container about">
 		<header class="about_header page-header">
 			<h1>Welcome to Dream it App</h1>
 		</header>

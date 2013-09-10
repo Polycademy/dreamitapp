@@ -10,7 +10,7 @@ define(['angular'], function(angular){
 
 				$scope.submitContact = function(){
 
-					newEmail = {
+					var newEmail = {
 						toEmail: dreamItAppConfig.sitemeta.email,
 						fromEmail: $scope.contactEmail,
 						message: $scope.contactMessage
@@ -34,8 +34,7 @@ define(['angular'], function(angular){
 					});
 
 				};
-
-
+				
 			}
 		]);
 
