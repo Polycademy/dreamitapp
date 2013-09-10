@@ -41,7 +41,13 @@
 				<div class="idea_data idea_aside_text">
 					<ul>
 						<li>Submitted: {{idea.date}}</li>
-						<li>Feedback: 42</li>
+						<li
+							disqus-comment-count-dir 
+							disqus-shortname="{{dreamItAppConfig.apiKeys.disqusShortname}}" 
+							disqus-api-key="{{dreamItAppConfig.apiKeys.disqusApiKey}}" 
+							disqus-ident="{{idea.id}}" 
+							disqus-cache="commentCache"
+						>Feedback: {{commentCount}}</li>
 						<li>Likes: {{idea.likes}}</li>
 						<li>Tags: 
 							<ul class="idea_tags_list">

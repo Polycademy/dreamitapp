@@ -410,14 +410,12 @@ define(['angular'], function(angular){
 									//if the cache exists, we're going to try to get the comment count from cache first
 									if(DisqusServ.disqusCache){
 										cacheKey = (identifierConfig.link || identifierConfig.ident);
-										//CALLBACK HAS NOT YET BEEN IMPLEMENTED
 										//assign the comment count and provide a callback that can be optionally 
 										//called in order to allow the previously cached item
 										//to be remembered in case we need it even though it expired
-										scope.commentCount = DisqusServ.disqusCache.get(cacheKey, function(oldKey, oldValue){
+										scope.commentCount = DisqusServ.disqusCache.get(cacheKey, function(oldValue){
 											previousCachedCommentCount = oldValue;
 										});
-
 									}
 
 									//if comment count was not extracted from the cache, we're going to call Disqus
