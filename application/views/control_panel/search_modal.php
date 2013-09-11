@@ -4,13 +4,12 @@
 		overlay-close-dir="viewingOverlay" 
 		overlay-close-func="closeOverlay()" 
 	>
-		<button class="search_close overlay_close" ng-click="closeOverlay()" ng-show="viewingOverlay">
-			<span class="fui-cross"></span>
-		</button>
 		<form class="search_form form-inline" ng-submit="submitSearch()" name="search_modal_form">
-			<label for="search_modal"><span class="fui-search"></span></label>
-			<input id="search_modal" name="search" type="text" ng-model="searchValue" placeholder="Search"></input>
+			<input name="search" type="text" ng-model="searchValue" placeholder="Search" input-focus-dir="true" />
 			<button type="submit" class="btn btn-primary">Submit</button>
+			<button class="search_close overlay_close" ng-click="closeOverlay()">
+				<span class="fui-cross"></span>
+			</button>
 		</form>
 	</div>
 </script>

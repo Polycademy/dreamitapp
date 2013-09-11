@@ -82,6 +82,7 @@ define([
 				'directives/ShareThis.Directive',
 				'directives/LikeToggle.Directive',
 				'directives/FilePicker.Directive',
+				'directives/InputFocus.Directive',
 				//FILTERS
 				'filters/StripHtml.Filter',
 				'filters/UrlFriendly.Filter',

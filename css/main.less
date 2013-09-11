@@ -40,7 +40,7 @@ a{
 }
 
 .no_scroll{
-	overflow: hidden; //when viewing overlay, remove the body's scroll bar
+	overflow: hidden !important; //when viewing overlay, remove the body's scroll bar
 }
 
 .alert{
@@ -524,7 +524,7 @@ header.navbar{
 }
 
 /*
-	ADD IDEA
+	ADD EDIT IDEA
 */
 .add_idea_container{
 	margin: 0 auto;
@@ -588,8 +588,8 @@ header.navbar{
 	margin: 0;
 	top: 0 !important; //need to overwrite this
 	bottom: 0;
-	left: 0;
-	right: 0;
+	left: 0 !important;
+	right: 0 !important;
 	overflow-y: scroll;
 }
 
@@ -631,6 +631,34 @@ header.navbar{
 		padding: 20px;
 	}
 }
+
+/*
+	SEARCH MODAL
+*/
+.overlay_backdrop{
+	.search_container{
+		width: 300px;
+		margin: 0 auto;
+		top: 20%;
+		border: 1px solid @colour_green_highlight;
+		border-radius: 4px;
+		padding: 10px;
+		.search_close{
+			font-size: 18px;
+			width: 30px;
+			height: 30px;
+			line-height: 28px;
+			border-radius: 4px;
+		}
+		.search_form{
+			margin: 0;
+			input{
+				width: 178px;
+			}
+		}
+	}
+}
+
 
 /*
 	ABOUT

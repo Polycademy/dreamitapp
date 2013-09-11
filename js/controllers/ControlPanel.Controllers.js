@@ -50,14 +50,15 @@ define(['angular', 'lodash'], function(angular, _){
 					var dialog = $dialog.dialog({
 						backdrop: false,
 						keyboard: true,
-						dialogClass: 'modal overlay_backdrop',
+						dialogClass: 'modal overlay_backdrop no_scroll',
 						templateUrl: 'search_modal.html',
 						controller: 'SearchModalCtrl'
 					});
 
 					dialog.open().then(function(searchValue){
 						if(searchValue){
-							$scope.submitSearch(searchValue);
+							$scope.searchTag = searchValue;
+							$scope.submitSearch();
 						}
 					});
 
@@ -233,10 +234,7 @@ define(['angular', 'lodash'], function(angular, _){
 
 				$scope.searchValue = '';
 
-				$rootScope.viewingOverlay = true;
-
 				$scope.closeOverlay = function(){
-					$rootScope.viewingOverlay = false;
 					dialog.close($scope.searchValue);
 				};
 
