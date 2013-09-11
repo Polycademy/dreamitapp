@@ -194,11 +194,11 @@ define(['angular', 'lodash'], function(angular, _){
 
 				};
 
-				////////////////////////
-				// SIGN IN & SIGN OUT //
-				////////////////////////
+				//////////////////////////////////
+				// SIGN IN & SIGN OUT & SIGN UP //
+				//////////////////////////////////
 
-				//should start false
+				//should start false, currently true to allow testing
 				$scope.loggedIn = true;
 
 				//this will bring up an overlay as well
@@ -207,7 +207,7 @@ define(['angular', 'lodash'], function(angular, _){
 					var dialog = $dialog.dialog({
 						backdrop: false,
 						keyboard: true,
-						dialogClass: 'modal overlay_backdrop',
+						dialogClass: 'modal overlay_backdrop no_scroll',
 						templateUrl: 'signin_modal.html',
 						controller: 'SignInModalCtrl'
 					});
@@ -222,6 +222,21 @@ define(['angular', 'lodash'], function(angular, _){
 				$scope.signOut = function(){
 					//do the logout stuff
 					$scope.loggedIn = false;
+				};
+
+				$scope.signUp = function(){
+
+					var dialog = $dialog.dialog({
+						backdrop: false,
+						keyboard: true,
+						dialogClass: 'modal overlay_backdrop no_scroll',
+						templateUrl: 'signup_modal.html',
+						controller: 'SignUpModalCtrl'
+					});
+
+					//after signing up, should we allow auto sign in? nah, have to go and activate account first
+					dialog.open();
+
 				};
 
 			}
@@ -252,16 +267,28 @@ define(['angular', 'lodash'], function(angular, _){
 
 				var loggedIn = false;
 
-				$rootScope.viewingOverlay = true;
-
 				$scope.closeOverlay = function(){
-					$rootScope.viewingOverlay = false;
 					dialog.close(loggedIn);
 				};
 
 				$scope.submitLogin = function(){
 					//if successful
 					loggedIn = true;
+				};
+
+			}
+		])
+		.controller('SignUpModalCtrl', [
+			'$scope',
+			'$rootScope',
+			'dialog',
+			function($scope, $rootScope, dialog){
+
+				$scope.closeOverlay = function(){
+					dialog.close();
+				};
+
+				$scope.submitSignUp = function(){
 				};
 
 			}
