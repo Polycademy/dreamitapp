@@ -16,6 +16,7 @@
 			>
 				<span class="fui-cross"></span>
 			</button>
+			<a class="edit_item" ng-href="ideas/edit/{{idea.id}}/{{idea.titleUrl}}"><span class="fui-new"></span></a>
 		</header>
 		<div class="idea_content">
 			<div class="idea_inner_content">
