@@ -97,8 +97,8 @@
 				</li>
 			</ul>
 			<ul ng-switch-default>
-				<li>
-					<a ng-click="viewMostPopularIdeas()"><span class="fui-heart"></span>Popular Ideas</a>
+				<li ng-class="{true: 'viewing_popular_ideas'}[viewingPopularIdeas]">
+					<a ng-click="viewPopularIdeas()"><span class="fui-heart"></span>Popular Ideas</a>
 				</li>
 				<li>
 					<a ng-click="signIn()"><span class="login_icon"></span>Sign In</a>
@@ -141,8 +141,8 @@
 				<li>
 					<a ng-click="openSearch()" title="Search"><span class="fui-search"></span></a>
 				</li>
-				<li>
-					<a ng-click="viewMostPopularIdeas()" title="Popular Ideas"><span class="fui-heart"></span></a>
+				<li ng-class="{true: 'viewing_popular_ideas'}[viewingPopularIdeas]">
+					<a ng-click="viewPopularIdeas()" title="Popular Ideas"><span class="fui-heart"></span></a>
 				</li>
 				<li>
 					<a ng-click="signIn()" title="Sign In"><span class="login_icon"></span></a>
