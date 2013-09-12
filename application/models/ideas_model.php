@@ -13,17 +13,12 @@ class Ideas_model extends CI_Model{
 	public function __construct(){
 
 		parent::__construct();
-
 		$this->parser = new MarkdownExtra;
-
-		//use set_data and reset_validation (test it out)
 		$this->load->library('form_validation', false, 'validator');
 
 	}
 
 	public function create($input_data){
-
-		//FILTERING
 
 		$data = elements(array(
 			'title',
@@ -40,14 +35,54 @@ class Ideas_model extends CI_Model{
 		$data['date'] = date('Y-m-d H:i:s');
 		$data['privacy'] = (isset($data['privacy'])) ? $this->assign_privacy($data['privacy']) : $this->assign_privacy();
 
-		//VALIDATION
+		$this->validator->set_data($data);
+		
+		$this->validator->set_rules(array(
+			array(
+				'field'	=> 'title',
+				'label'	=> 'Title',
+				'rules'	=> 'required|htmlspecialchars|trim|min_length[2]|max_length[30]',
+			),
+			array(
+				'field'	=> 'image',
+				'label'	=> 'Image',
+				'rules'	=> 'valid_url|prep_url',
+			),
+			array(
+				'field'	=> 'imageBlob',
+				'label'	=> 'Image Blob',
+				'rules'	=> 'valid_json'
+			),
+			array(
+				'field'	=> 'description',
+				'label'	=> 'Description',
+				'rules'	=> 'required|htmlspecialchars|trim|min_length[10]|max_length[13500]',
+			),
+			array(
+				'field'	=> 'descriptionShort',
+				'label'	=> 'Short Description',
+				'rules'	=> 'required|htmlspecialchars|trim|min_length[10]|max_length[280]',
+			),
+			array(
+				'field'	=> 'tags[]',
+				'label'	=> 'Tags',
+				'rules'	=> 'array_max[4]|htmlspecialchars|trim|min_length[1]|max_length[20]',
+			),
+			array(
+				'field'	=> 'privacy',
+				'label'	=> 'Privacy',
+				'rules'	=> 'required|trim|alpha_dash',
+			),
+		));
 
-		//validate the tags array //ONLY A LIMITED NUMBER TAGS IS ALLOWED!!
-		//$this->validator->set_data()
-		//$this->validator->set_rules()
-		//$this->validator->run()
-		//$this->validator->error_array()
-		//return false
+		if($this->validator->run() ==  false){
+
+			$this->errors = array(
+				'validation_error'	=> $this->validator->error_array()
+			);
+			return false;
+
+		}
 
 		$this->db->trans_start();
 
@@ -59,7 +94,7 @@ class Ideas_model extends CI_Model{
 		$query = $this->db->insert('ideas', $data);
 		$idea_id = $this->db->insert_id();
 
-		if(isset($tags_data)){
+		if(isset($tags_data) AND is_array($tags_data)){
 			foreach($tags_data as $tag){
 				$tag_data = array(
 					'ideaId'	=> $idea_id,
