@@ -16,9 +16,9 @@ define(['angular'], function(angular){
 
 				if(dialog){
 					$rootScope.viewingOverlay = true;
-					$scope.closeOverlay = function(){
+					$scope.closeOverlay = function(value){
 						$rootScope.viewingOverlay = false;
-						dialog.close();
+						dialog.close(value);
 					};
 				}else{
 					$rootScope.viewingOverlay = false;

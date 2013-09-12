@@ -4,6 +4,7 @@
 		ng-class="{'overlay_container': viewingOverlay, 'container': !viewingOverlay}"
 		overlay-close-dir="viewingOverlay" 
 		overlay-close-func="closeOverlay()" 
+		pull-down-to-window-dir 
 		ng-show="!notFoundError"
 	>
 		<header class="add_blog_header">
@@ -19,7 +20,7 @@
 				<span class="fui-cross"></span>
 			</button>
 		</header>
-		<form class="add_blog_form form-horizontal" ng-submit="submitblog()" name="add_blog_form">
+		<form class="add_blog_form form-horizontal" ng-submit="submitBlog()" name="add_blog_form">
 			<div class="add_blog_form_internal">
 				<div 
 					class="control-group" 
@@ -78,11 +79,11 @@
 			</div>
 			<div class="form-actions">
 				<button type="submit" class="btn btn-large btn-block btn-primary" ng-switch="action">
-					<span ng-switch-when="add">Add Blog</span>
-					<span ng-switch-when="edit">Edit Blog</span>
+					<span ng-switch-when="add">Add Blog Post</span>
+					<span ng-switch-when="edit">Edit Blog Post</span>
 				</button>
 				<button type="button" class="btn btn-large btn-block btn-danger" ng-click="deleteBlog()" ng-show="editAction">
-					Delete Blog (Irreversible)
+					Delete Blog Post (Irreversible)
 				</button>
 			</div>
 		</form>

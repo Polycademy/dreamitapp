@@ -4,6 +4,7 @@
 		ng-class="{'overlay_container': viewingOverlay, 'container': !viewingOverlay}"
 		overlay-close-dir="viewingOverlay" 
 		overlay-close-func="closeOverlay()" 
+		pull-down-to-window-dir 
 		ng-show="!notFoundError"
 	>
 		<header class="add_idea_header">
