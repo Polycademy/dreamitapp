@@ -789,7 +789,37 @@ header.navbar{
 /*
 	BLOG
 */
-
+.blog{
+	padding: 0;
+	margin: 0 auto;
+	border-left: 1px solid @colour_green_highlight;
+	border-right: 1px solid @colour_green_highlight;
+	.blog_header{
+		padding: 0 30px 10px;
+		border-bottom: 1px solid @colour_green_highlight;
+		margin-bottom: 0;
+		h1{
+			font-family: 'source_sans_probold', arial, sans-serif;
+			color: @colour_wet_asphalt;
+		}
+	}
+	.blog_content{
+		.blog_item{
+			padding: 4% 5%;
+			border-bottom: 1px solid @colour_green_highlight;
+			&:nth-child(odd){
+				background-color: @colour_grey_clouds;
+			}
+			&:nth-child(even){
+				background-color: lighten(@colour_greyer_clouds, 4%);
+			}
+			.post_header{
+				font-size: 30px;
+				margin-top: 0;
+			}
+		}
+	}
+}
 
 
 /*

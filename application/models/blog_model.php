@@ -89,7 +89,7 @@ class Blog_model extends CI_Model{
 			$author_url = 'roger_qiu';
 
 			$data = array(
-				'id'					=> $id,
+				'id'					=> $row->id,
 				'title'					=> $row->title,
 				'titleUrl'				=> url_title($row->title, '_', true),
 				'description'			=> $row->description,
@@ -134,7 +134,7 @@ class Blog_model extends CI_Model{
 				$author_url = 'roger_qiu';
 
 				$data[] = array(
-					'id'					=> $id,
+					'id'					=> $row->id,
 					'title'					=> $row->title,
 					'titleUrl'				=> url_title($row->title, '_', true),
 					'description'			=> $row->description,

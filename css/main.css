@@ -6896,6 +6896,35 @@ header.navbar .nav li a {
 /*
 	BLOG
 */
+.blog {
+  padding: 0;
+  margin: 0 auto;
+  border-left: 1px solid #b8e0d8;
+  border-right: 1px solid #b8e0d8;
+}
+.blog .blog_header {
+  padding: 0 30px 10px;
+  border-bottom: 1px solid #b8e0d8;
+  margin-bottom: 0;
+}
+.blog .blog_header h1 {
+  font-family: 'source_sans_probold', arial, sans-serif;
+  color: #34495e;
+}
+.blog .blog_content .blog_item {
+  padding: 4% 5%;
+  border-bottom: 1px solid #b8e0d8;
+}
+.blog .blog_content .blog_item:nth-child(odd) {
+  background-color: #efebe7;
+}
+.blog .blog_content .blog_item:nth-child(even) {
+  background-color: #ebe8e8;
+}
+.blog .blog_content .blog_item .post_header {
+  font-size: 30px;
+  margin-top: 0;
+}
 /*
 	RESPONSIVE
 */
