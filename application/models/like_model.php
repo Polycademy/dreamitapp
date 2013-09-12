@@ -127,7 +127,10 @@ class Like_model extends CI_Model{
 
 		}
 
-		if(!$this->validate_idea_author_ids($id, $author_id)){
+		if(!$this->validate_idea_ids($id)){
+			$this->errors = array(
+				'validation_error'	=> 'Idea ID does not exist.'
+			);
 			return false;
 		}
 
@@ -202,7 +205,10 @@ class Like_model extends CI_Model{
 
 		}
 
-		if(!$this->validate_idea_author_ids($id, $author_id)){
+		if(!$this->validate_idea_ids($id)){
+			$this->errors = array(
+				'validation_error'	=> 'Idea ID does not exist.'
+			);
 			return false;
 		}
 
@@ -249,34 +255,15 @@ class Like_model extends CI_Model{
 
 	}
 
-	/**
-	 * Validates whether both the idea id and author id are valid ids
-	 * @param  Integer $id        Idea id
-	 * @param  Integer $author_id User account id
-	 * @return Boolean
-	 */
-	protected function validate_idea_author_ids($id, $author_id){
+	protected function validate_idea_ids($id){
 
-		//this relies on UserAccount from PolyAuth being setup, for now hardcoded true
-		return true;
-		/*
+		$query = $this->db->get_where('ideas', array('id' => $id));
 
-		$idea_query = $this->db->get_where('ideas', array('id' => $id));
-		$author_query = $this->db->get_where('user_accounts', array('id' => $author_id));
-
-		if($idea_query->num_rows() > 0 AND $author_query->num_rows() > 0){
-
+		if($query->num_rows() > 0){
 			return true;
-
 		}
 
-		$this->errors = array(
-			'validation_error'	=> 'Idea or author does not exist.'
-		);
-
 		return false;
-
-		*/
 
 	}
 
