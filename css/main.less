@@ -814,8 +814,12 @@ header.navbar{
 				background-color: lighten(@colour_greyer_clouds, 4%);
 			}
 			.post_header{
-				font-size: 30px;
+				font-size: 34px;
 				margin-top: 0;
+				font-family: 'source_sans_prosemibold', arial, sans-serif;
+			}
+			.post_meta{
+				float: right;
 			}
 		}
 	}
@@ -830,12 +834,14 @@ header.navbar{
 	border-left: 1px solid @colour_green_highlight;
 	border-right: 1px solid @colour_green_highlight;
 	.post_header{
-		padding: 30px;
+		padding: 0 30px 10px;
 		border-bottom: 1px solid @colour_green_highlight;
 		margin-bottom: 0;
 		h1{
 			font-family: 'source_sans_probold', arial, sans-serif;
-			color: @colour_wet_asphalt;
+			a{
+				color: @colour_wet_asphalt;
+			}
 		}
 	}
 	.post_item{

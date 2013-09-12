@@ -1,8 +1,8 @@
 <script type="text/ng-template" id="post.html">
 	<article class="container post" pull-down-to-window-dir ng-show="!notFoundError">
-		<h1 class="post_header">
-			<a ng-href="blog/{{post.id}}/{{post.titleUrl}}">{{post.title}}</a>
-		</h1>
+		<header class="post_header page-header">
+			<h1 class="post_heading"><a ng-href="blog/{{post.id}}/{{post.titleUrl}}">{{post.title}}</a></h1>
+		</header>
 		<div class="post_item">
 			<div class="post_description" ng-bind-html="post.descriptionParsed"></div>
 			<div class="post_meta muted">

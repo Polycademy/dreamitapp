@@ -6922,8 +6922,12 @@ header.navbar .nav li a {
   background-color: #ebe8e8;
 }
 .blog .blog_content .blog_item .post_header {
-  font-size: 30px;
+  font-size: 34px;
   margin-top: 0;
+  font-family: 'source_sans_prosemibold', arial, sans-serif;
+}
+.blog .blog_content .blog_item .post_meta {
+  float: right;
 }
 /*
 	POST
@@ -6935,12 +6939,14 @@ header.navbar .nav li a {
   border-right: 1px solid #b8e0d8;
 }
 .post .post_header {
-  padding: 30px;
+  padding: 0 30px 10px;
   border-bottom: 1px solid #b8e0d8;
   margin-bottom: 0;
 }
 .post .post_header h1 {
   font-family: 'source_sans_probold', arial, sans-serif;
+}
+.post .post_header h1 a {
   color: #34495e;
 }
 .post .post_item {
