@@ -18,6 +18,7 @@ define(['angular'], function(angular){
 
 					$rootScope.viewingOverlay = true;
 					var ideaId = dialog.options.customOptions.ideaId;
+					var ideaUrl = dialog.options.customOptions.ideaUrl;
 					var locationParamsAndHash = dialog.options.customOptions.locationParamsAndHash;
 					$scope.closeOverlay = function(){
 						$rootScope.viewingOverlay = false;
@@ -30,6 +31,7 @@ define(['angular'], function(angular){
 					$rootScope.viewingOverlay = false;
 					var ideaId = $state.params.ideaId;
 					var ideaUrl = $state.params.ideaUrl;
+					$scope.closeOverlay = angular.noop;
 
 				}
 
@@ -92,6 +94,18 @@ define(['angular'], function(angular){
 						locationParamsAndHash.tags = tag;
 						$scope.closeOverlay();
 					}
+
+				};
+
+				//this will be dependent upon being logged in and owning the current idea, you will send a request to see if it is true
+				$scope.loggedInAndOwns = true;
+
+				$scope.openEditIdeaOverlay = function(){
+
+					if(dialog){
+						$scope.closeOverlay();
+					}
+					$state.transitionTo('editIdea', {ideaId: ideaId, ideaUrl: ideaUrl});
 
 				};
 

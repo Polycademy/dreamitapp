@@ -230,7 +230,7 @@ define(['angular', 'lodash'], function(angular, _){
 				 * @param  {Number} ideaId Id of the Idea
 				 * @return {Void}
 				 */
-				$scope.openIdeaOverlay = function(ideaId){
+				$scope.openIdeaOverlay = function(ideaId, ideaUrl){
 
 					//smaller screen sizes should directly transition
 					if(UtilitiesServ.checkMinimumOverlayWidth()){
@@ -249,6 +249,7 @@ define(['angular', 'lodash'], function(angular, _){
 						controller: 'IdeaCtrl',
 						customOptions: {
 							ideaId: ideaId,
+							ideaUrl: ideaUrl,
 							locationParamsAndHash: {
 								path: $location.path(),
 								search: $location.search(),

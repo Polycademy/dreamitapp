@@ -47,11 +47,11 @@ define(['angular'], function(angular){
 				/** If the action is "edit" we'll need to grab the ideaId either from state params or dialog options. */
 				if($scope.action === 'edit'){
 					try{
-						var ideaId = $state.params.ideaId;
-						var ideaUrl = $state.params.ideaUrl;
-					}catch(e){
 						var ideaId = dialog.options.customOptions.ideaId;
 						var ideaUrl = dialog.options.customOptions.ideaUrl;
+					}catch(e){
+						var ideaId = $state.params.ideaId;
+						var ideaUrl = $state.params.ideaUrl;
 					}
 				}
 
@@ -249,14 +249,8 @@ define(['angular'], function(angular){
 
 										$scope.successSubmit = 'Successfully Updated Idea';
 										$timeout(function(){
-											if(dialog){
-												//update it on the wall, if the wall contains the relevant item
-												AppIdeasServ.replaceIdea(updatedIdeaId, response.content);
-												$scope.closeOverlay();
-											}else{
-												//if in full page, just transition to the full page idea
-												$state.transitionTo('idea', {ideaId: updatedIdeaId, ideaUrl: response.content.titleUrl});
-											}
+											//if in full page, just transition to the full page idea
+											$state.transitionTo('idea', {ideaId: updatedIdeaId, ideaUrl: response.content.titleUrl});
 										}, 1000);
 
 									},
@@ -315,11 +309,7 @@ define(['angular'], function(angular){
 
 									$scope.successSubmit = 'Successfully Deleted Idea';
 									$timeout(function(){
-										if(dialog){
-											$scope.closeOverlay();
-										}else{
-											$state.transitionTo('home');
-										}
+										$state.transitionTo('home');
 									}, 1000);
 
 								}
