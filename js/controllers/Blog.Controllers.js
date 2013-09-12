@@ -79,7 +79,33 @@ define(['angular'], function(angular){
 		])
 		.controller('PostCtrl', [
 			'$scope',
-			function($scope){
+			'$state',
+			'BlogServ',
+			function($scope, $state, BlogServ){
+
+				$scope.post = {};
+
+				BlogServ.get(
+					{
+						id: $state.params.blogId
+					},
+					function(response){
+
+						if($state.params.blogUrl !== response.content.titleUrl){
+							$location.path('blog' + '/' + $state.params.blogId + '/' + response.content.titleUrl);
+						}
+
+						$scope.post = response.content;
+
+
+					},
+					function(response){
+
+						$scope.notFoundError = response.data.content;
+
+					}
+				);
+				
 			}
 		]);
 

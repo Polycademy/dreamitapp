@@ -6926,6 +6926,31 @@ header.navbar .nav li a {
   margin-top: 0;
 }
 /*
+	POST
+*/
+.post {
+  padding: 0;
+  margin: 0 auto;
+  border-left: 1px solid #b8e0d8;
+  border-right: 1px solid #b8e0d8;
+}
+.post .post_header {
+  padding: 30px;
+  border-bottom: 1px solid #b8e0d8;
+  margin-bottom: 0;
+}
+.post .post_header h1 {
+  font-family: 'source_sans_probold', arial, sans-serif;
+  color: #34495e;
+}
+.post .post_item {
+  padding: 4% 5%;
+}
+.post .post_item .post_meta {
+  margin-top: 26px;
+  float: right;
+}
+/*
 	RESPONSIVE
 */
 /*!
