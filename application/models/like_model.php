@@ -7,7 +7,9 @@ class Like_model extends CI_Model{
 	public function __construct(){
 
 		parent::__construct();
-	
+
+		$this->load->library('form_validation', false, 'validator');
+
 	}
 
 	/**
@@ -54,6 +56,33 @@ class Like_model extends CI_Model{
 	 */
 	public function has_liked($id, $author_id){
 
+		$this->validator->set_data(array(
+			'id'		=> $id,
+			'authorId'	=> $author_id,
+		));
+
+		$this->validator->set_rules(array(
+			array(
+				'field'	=> 'id',
+				'label'	=> 'Idea ID',
+				'rules'	=> 'numeric',
+			),
+			array(
+				'field'	=> 'authorId',
+				'label'	=> 'Author ID',
+				'rules'	=> 'numeric',
+			)
+		));
+
+		if($this->validator->run() ==  false){
+
+			$this->errors = array(
+				'validation_error'	=> $this->validator->error_array()
+			);
+			return false;
+
+		}
+
 		$query = $this->db->get_where('likes', array('ideaId' => $id, 'authorId' => $author_id));
 
 		if($query->num_rows() > 0){
@@ -71,6 +100,33 @@ class Like_model extends CI_Model{
 	 * @return String|Boolean     '+1' string if successful
 	 */
 	public function up_one($id, $author_id){
+
+		$this->validator->set_data(array(
+			'id'		=> $id,
+			'authorId'	=> $author_id,
+		));
+
+		$this->validator->set_rules(array(
+			array(
+				'field'	=> 'id',
+				'label'	=> 'Idea ID',
+				'rules'	=> 'numeric',
+			),
+			array(
+				'field'	=> 'authorId',
+				'label'	=> 'Author ID',
+				'rules'	=> 'numeric',
+			)
+		));
+
+		if($this->validator->run() ==  false){
+
+			$this->errors = array(
+				'validation_error'	=> $this->validator->error_array()
+			);
+			return false;
+
+		}
 
 		if(!$this->validate_idea_author_ids($id, $author_id)){
 			return false;
@@ -119,6 +175,33 @@ class Like_model extends CI_Model{
 	 * @return String|Boolean     '-1' string if successful
 	 */
 	public function down_one($id, $author_id){
+
+		$this->validator->set_data(array(
+			'id'		=> $id,
+			'authorId'	=> $author_id,
+		));
+
+		$this->validator->set_rules(array(
+			array(
+				'field'	=> 'id',
+				'label'	=> 'Idea ID',
+				'rules'	=> 'numeric',
+			),
+			array(
+				'field'	=> 'authorId',
+				'label'	=> 'Author ID',
+				'rules'	=> 'numeric',
+			)
+		));
+
+		if($this->validator->run() ==  false){
+
+			$this->errors = array(
+				'validation_error'	=> $this->validator->error_array()
+			);
+			return false;
+
+		}
 
 		if(!$this->validate_idea_author_ids($id, $author_id)){
 			return false;

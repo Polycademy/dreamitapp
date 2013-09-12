@@ -19,8 +19,11 @@ class Email extends CI_Controller{
 		//also we will set the from email to be from the main email.
 		//this way emails will either always to main email or from main email
 		if($data['toEmail'] != $this->config->item('sitemeta')['email']){
+
 			$data['fromEmail'] = $this->config->item('sitemeta')['email'];
+
 			//check if they are logged in using polyauth
+			
 		}
 
 		$query = $this->Email_model->send($data);
