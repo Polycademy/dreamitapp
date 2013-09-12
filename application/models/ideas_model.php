@@ -68,11 +68,6 @@ class Ideas_model extends CI_Model{
 				'label'	=> 'Tags',
 				'rules'	=> 'htmlspecialchars|trim|min_length[1]|max_length[20]',
 			),
-			array(
-				'field'	=> 'privacy',
-				'label'	=> 'Privacy',
-				'rules'	=> 'required|trim|alpha_dash',
-			),
 		));
 
 		if($this->validator->run() ==  false){
@@ -203,8 +198,6 @@ class Ideas_model extends CI_Model{
 	}
 
 	public function read_all($limit = false, $offset = false, $tags = false, $author = false, $popular = false){
-
-		//we need to validate data here!
 
 		//typecast to help the binding
 		$limit = ($limit) ? (int) $limit : 20;
@@ -337,8 +330,6 @@ class Ideas_model extends CI_Model{
 
 	public function update($id, $input_data){
 
-		//FILTERING
-
 		$data = elements(array(
 			'title',
 			'image',
@@ -351,14 +342,61 @@ class Ideas_model extends CI_Model{
 
 		$data['privacy'] = (isset($data['privacy'])) ? $this->assign_privacy($data['privacy']) : $this->assign_privacy();
 
-		//VALIDATION
+		$this->validator->set_data($data);
 
-		//validate the tags array //ONLY A LIMITED NUMBER TAGS IS ALLOWED!!
-		//$this->validator->set_data()
-		//$this->validator->set_rules()
-		//$this->validator->run()
-		//$this->validator->error_array()
-		//return false
+		$this->validator->set_rules(array(
+			array(
+				'field'	=> 'title',
+				'label'	=> 'Title',
+				'rules'	=> 'htmlspecialchars|trim|min_length[2]|max_length[30]',
+			),
+			array(
+				'field'	=> 'image',
+				'label'	=> 'Image',
+				'rules'	=> 'valid_url|prep_url',
+			),
+			array(
+				'field'	=> 'imageBlob',
+				'label'	=> 'Image Blob',
+				'rules'	=> 'valid_json'
+			),
+			array(
+				'field'	=> 'description',
+				'label'	=> 'Description',
+				'rules'	=> 'htmlspecialchars|trim|min_length[10]|max_length[13500]',
+			),
+			array(
+				'field'	=> 'descriptionShort',
+				'label'	=> 'Short Description',
+				'rules'	=> 'htmlspecialchars|trim|min_length[10]|max_length[280]',
+			),
+			array(
+				'field'	=> 'tags[]',
+				'label'	=> 'Tags',
+				'rules'	=> 'htmlspecialchars|trim|min_length[1]|max_length[20]',
+			),
+		));
+
+		if($this->validator->run() ==  false){
+
+			$this->errors = array(
+				'validation_error'	=> $this->validator->error_array()
+			);
+			return false;
+
+		}
+
+		//tags array should be limited to 4 properties, form validation library doesn't provide array access
+		if(isset($data['tags']) AND is_array($data['tags'])){
+			if(count($data['tags']) > 4){
+				$this->errors = array(
+					'validation_error'	=> array(
+						'tags'	=> 'The tags field has too many properties.'
+					)
+				);
+				return false;
+			}
+		}
 
 		$this->db->trans_start();
 
@@ -527,17 +565,14 @@ class Ideas_model extends CI_Model{
 	/**
 	 * Parse Markdown Description.
 	 * Markdown will be stored in the database to allow easy editing.
-	 * The resulting output will be xss cleaned.
 	 * @param  String $text Markdown String from the database
-	 * @return String       Processed and XSS cleaned HTML
+	 * @return String       Processed output
 	 */
 	protected function parse_markdown($text){
 
 		$this->parser->no_markup = true;
 
 		$html = $this->parser->transform($text);
-
-		//get a better XSS filter
 
 		return $html;
 
