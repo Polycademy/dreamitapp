@@ -147,7 +147,7 @@ define(['angular', 'lodash'], function(angular, _){
 				TagsServ.get({
 					popular: true,
 					trending: true,
-					limit: 10
+					limit: 5
 				}, function(response){
 
 					for(var i = 0; i < response.content.length; i++){
