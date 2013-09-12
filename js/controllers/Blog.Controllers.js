@@ -103,8 +103,10 @@ define(['angular'], function(angular){
 		.controller('PostCtrl', [
 			'$scope',
 			'$state',
+			'$dialog',
+			'UtilitiesServ',
 			'BlogServ',
-			function($scope, $state, BlogServ){
+			function($scope, $state, $dialog, UtilitiesServ, BlogServ){
 
 				$scope.post = {};
 
