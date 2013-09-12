@@ -121,7 +121,7 @@
 				</div>
 			</div>
 			<div class="about_minor text-center">
-				<small class="muted">&copy; Dream it App 2013</small>
+				<small class="muted"><?= $copyright ?></small>
 				<br />
 				<small class="muted">Dream it App was handmade at <a href="http://polycademy.com">Polycademy</a></small>
 			</div>
