@@ -71,6 +71,7 @@ define([
 				'controllers/Blog.Controllers',
 				'controllers/Idea.Controllers',
 				'controllers/AddEditIdea.Controllers',
+				'controllers/AddEditBlog.Controllers',
 				//DIRECTIVES
 				'directives/EqualiseHeights.Directive',
 				'directives/EqualiseHeightTo.Directive',
@@ -99,13 +100,15 @@ define([
 				'services/Cache.Service',
 				'services/LocationSearch.Service',
 				'services/AppIdeas.Service',
+				'services/BlogData.Service',
 				//RESOURCES
 				'resources/Accounts.Service',
 				'resources/Sessions.Service',
 				'resources/Ideas.Service',
 				'resources/Tags.Service',
 				'resources/Like.Service',
-				'resources/Email.Service'
+				'resources/Email.Service',
+				'resources/Blog.Service'
 			], function(){
 
 				/* ==========================================================================
@@ -217,6 +220,34 @@ define([
 										url: '/blog/{blogId:[0-9]+}/{blogUrl:.+}',
 										templateUrl: 'post.html',
 										controller: 'PostCtrl'
+									}
+								)
+								.state(
+									'addBlog',
+									{
+										url: '/blog/create',
+										templateUrl: 'add_edit_blog.html',
+										controller: 'AddEditBlogCtrl',
+										data: {
+											action: 'add'
+										},
+										resolve: {
+											dialog: angular.noop
+										}
+									}
+								)
+								.state(
+									'editBlog',
+									{
+										url: '/blog/edit/{blogId:[0-9]+}/{blogUrl:.*}',
+										templateUrl: 'add_edit_blog.html',
+										controller: 'AddEditBlogCtrl',
+										data: {
+											action: 'edit'
+										},
+										resolve: {
+											dialog: angular.noop
+										}
 									}
 								);
 							
