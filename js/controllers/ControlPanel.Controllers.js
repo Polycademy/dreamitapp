@@ -239,6 +239,17 @@ define(['angular', 'lodash'], function(angular, _){
 
 				};
 
+				$scope.$watch(loggedIn, function(value){
+
+					if(value === true){
+						//HERE you need to check if the logged in user is an admin account, if so set it on rootScope
+						$rootScope.loggedInAdmin = true;
+					}else{
+						$rootScope.loggedInAdmin = false;						
+					}
+
+				});
+
 			}
 		])
 		.controller('SearchModalCtrl', [

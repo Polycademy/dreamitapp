@@ -289,6 +289,9 @@ define([
 
 						//PROVIDING BASE URL IN CASE IT ISN'T AUTOMATIC (such as addthis)
 						$rootScope.baseUrl = serverVars.baseUrl;
+
+						//REMOVE THIS, here only for testing logged in stuff
+						$rootScope.loggedInAdmin = true;
 						
 					}
 				]);

@@ -2,7 +2,7 @@
 	<article class="container post" pull-down-to-window-dir ng-show="!notFoundError">
 		<header class="post_header page-header">
 			<h1 class="post_heading"><a ng-href="blog/{{post.id}}/{{post.titleUrl}}">{{post.title}}</a></h1>
-			<button class="add_edit_blog_button" ng-click="openAddEditBlog()"><span class="fui-new"></span> Edit this Blog Post</button>
+			<button class="add_edit_blog_button" ng-click="openAddEditBlog()" ng-show="loggedInAdmin"><span class="fui-new"></span> Edit this Blog Post</button>
 		</header>
 		<div class="post_item">
 			<div class="post_description" ng-bind-html="post.descriptionParsed"></div>

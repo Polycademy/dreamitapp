@@ -6,10 +6,11 @@ define(['angular'], function(angular){
 		.controller('BlogCtrl', [
 			'$scope',
 			'$location',
+			'$dialog',
 			'UtilitiesServ',
 			'BlogDataServ',
 			'BlogServ',
-			function($scope, $location, UtilitiesServ, BlogDataServ, BlogServ){
+			function($scope, $location, $dialog, UtilitiesServ, BlogDataServ, BlogServ){
 
 				var defaultLimit = 20;
 
@@ -75,6 +76,28 @@ define(['angular'], function(angular){
 					true
 				);
 
+				$scope.openAddEditBlog = function(){
+
+					if(UtilitiesServ.checkMinimumOverlayWidth()){
+						$state.transitionTo('addBlog');
+						return;
+					}
+
+					var dialog = $dialog.dialog({
+						backdrop: false,
+						keyboard: true,
+						dialogClass: 'modal overlay_backdrop',
+						templateUrl: 'add_edit_blog.html',
+						controller: 'AddEditBlogCtrl',
+						customOptions: {
+							action: 'add'
+						}
+					});
+
+					dialog.open();
+
+				};
+
 			}
 		])
 		.controller('PostCtrl', [
@@ -85,26 +108,62 @@ define(['angular'], function(angular){
 
 				$scope.post = {};
 
-				BlogServ.get(
-					{
-						id: $state.params.blogId
-					},
-					function(response){
+				$scope.getBlogPost = function(){
 
-						if($state.params.blogUrl !== response.content.titleUrl){
-							$location.path('blog' + '/' + $state.params.blogId + '/' + response.content.titleUrl);
+					BlogServ.get(
+						{
+							id: $state.params.blogId
+						},
+						function(response){
+
+							if($state.params.blogUrl !== response.content.titleUrl){
+								$location.path('blog' + '/' + $state.params.blogId + '/' + response.content.titleUrl);
+							}
+
+							$scope.post = response.content;
+
+
+						},
+						function(response){
+
+							$scope.notFoundError = response.data.content;
+
+						}
+					);
+
+				};
+
+				$scope.getBlogPost();
+
+				$scope.openAddEditBlog = function(){
+
+					if(UtilitiesServ.checkMinimumOverlayWidth()){
+						$state.transitionTo('editBlog', {blogId: $state.params.blogId, blogUrl: $state.params.blogUrl});
+						return;
+					}
+
+					var dialog = $dialog.dialog({
+						backdrop: false,
+						keyboard: true,
+						dialogClass: 'modal overlay_backdrop',
+						templateUrl: 'add_edit_blog.html',
+						controller: 'AddEditBlogCtrl',
+						customOptions: {
+							action: 'edit',
+							blogId: $state.params.blogId,
+							blogUrl: $state.params.blogUrl
+						}
+					});
+
+					dialog.open().then(function(blogPostHasBeenUpdated){
+
+						if(blogPostHasBeenUpdated){
+							$scope.getBlogPost();
 						}
 
-						$scope.post = response.content;
+					});
 
-
-					},
-					function(response){
-
-						$scope.notFoundError = response.data.content;
-
-					}
-				);
+				};
 				
 			}
 		]);

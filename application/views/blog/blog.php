@@ -2,7 +2,7 @@
 	<div class="container blog">
 		<header class="blog_header page-header">
 			<h1>Blog</h1>
-			<button class="add_edit_blog_button" ng-click="openAddEditBlog()"><span class="fui-new"></span> New Blog Post</button>
+			<button class="add_edit_blog_button" ng-click="openAddEditBlog()" ng-show="loggedInAdmin"><span class="fui-new"></span> New Blog Post</button>
 		</header>
 		<div class="blog_content">
 			<div 
