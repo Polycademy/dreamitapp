@@ -163,10 +163,16 @@
 					<li class="alert alert-error" ng-repeat="error in validationErrors">{{error}}</li>
 				</ul>
 			</div>
+			<div class="success_submit alert alert-success text-center" ng-show="successSubmit">
+				{{successSubmit}}
+			</div>
 			<div class="form-actions">
 				<button type="submit" class="btn btn-large btn-block btn-primary" ng-switch="action">
 					<span ng-switch-when="add">Add Idea</span>
 					<span ng-switch-when="edit">Edit Idea</span>
+				</button>
+				<button type="button" class="btn btn-large btn-block btn-danger" ng-click="deleteIdea()" ng-show="editAction">
+					Delete Idea (Irreversible)
 				</button>
 			</div>
 		</form>

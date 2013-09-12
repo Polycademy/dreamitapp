@@ -17,11 +17,12 @@ define(['angular'], function(angular){
 			'$rootScope',
 			'$state',
 			'$location',
+			'$timeout',
 			'AppIdeasServ',
 			'IdeasServ',
 			'TagsServ',
 			'dialog',
-			function($scope, $rootScope, $state, $location, AppIdeasServ, IdeasServ, TagsServ, dialog){
+			function($scope, $rootScope, $state, $location, $timeout, AppIdeasServ, IdeasServ, TagsServ, dialog){
 
 				/** If dialog is available, switch on overlay and provide a closeOverlay function */
 				if(dialog){
@@ -120,6 +121,7 @@ define(['angular'], function(angular){
 
 				if($scope.action === 'add'){
 
+					$scope.addAction = true;
 					$scope.filePickerAction = 'pickAndStore';
 
 					$scope.submitIdea = function(){
@@ -180,6 +182,7 @@ define(['angular'], function(angular){
 
 				}else if($scope.action === 'edit'){
 
+					$scope.editAction = true;
 					$scope.filePickerAction = 'update';
 
 					IdeasServ.get(
@@ -246,7 +249,7 @@ define(['angular'], function(angular){
 											AppIdeasServ.replaceIdea(updatedIdeaId, response.content);
 											$scope.closeOverlay();
 										}else{
-											//if in full page, just transition to the full page idae
+											//if in full page, just transition to the full page idea
 											$state.transitionTo('idea', {ideaId: updatedIdeaId, ideaUrl: response.content.titleUrl});
 										}
 
@@ -288,6 +291,41 @@ define(['angular'], function(angular){
 							failedUpdate
 						);
 
+					};
+
+					$scope.deleteIdea = function(){
+
+						IdeasServ.delete(
+							{
+								id: ideaId
+							},
+							function(response){
+
+								if(response.code == 'error'){
+
+									$scope.validationErrors = ['Failed to delete idea. ID does not exist.'];
+
+								}else{
+
+									$scope.successSubmit = 'Successfully Deleted Idea';
+									$timeout(function(){
+										if(dialog){
+											$scope.closeOverlay();
+										}else{
+											$state.transitionTo('home');
+										}
+									}, 4000);
+
+								}
+
+							},
+							function(response){
+
+								$scope.validationErrors = [response.data.content];
+
+							}
+						)
+						
 					};
 
 				}
