@@ -33,8 +33,8 @@ class Email extends CI_Controller{
 		
 		}else{
 		
-			$content = current($this->Ideas_model->get_errors());
-			$code = key($this->Ideas_model->get_errors());
+			$content = current($this->Email_model->get_errors());
+			$code = key($this->Email_model->get_errors());
 			$this->output->set_status_header(400);
 			
 		}

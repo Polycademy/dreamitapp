@@ -23,11 +23,34 @@ class Email_model extends CI_Model{
 			'message',
 		), $input_data, null, true);
 
-		//$this->validator->set_data()
-		//$this->validator->set_rules()
-		//$this->validator->run()
-		//$this->validator->error_array()
-		//return false
+		$this->validator->set_data($data);
+
+		$this->validator->set_rules(array(
+			array(
+				'field'	=> 'toEmail',
+				'label'	=> 'To Email',
+				'rules'	=> 'required|trim|valid_email',
+			),
+			array(
+				'field'	=> 'fromEmail',
+				'label'	=> 'From Email',
+				'rules'	=> 'required|trim|valid_email',
+			),
+			array(
+				'field'	=> 'message',
+				'label'	=> 'Message',
+				'rules'	=> 'required|htmlspecialchars|trim|min_length[16]|max_length[13500]'
+			),
+		));
+
+		if($this->validator->run() ==  false){
+
+			$this->errors = array(
+				'validation_error'	=> $this->validator->error_array()
+			);
+			return false;
+
+		}
 
 		$this->mailer->IsSMTP();
 		$this->mailer->Host = 'smtp.mandrillapp.com';
