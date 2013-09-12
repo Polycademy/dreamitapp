@@ -10,7 +10,6 @@ class Email_model extends CI_Model{
 		parent::__construct();
 
 		$this->mailer = new \PHPMailer;
-
 		$this->load->library('form_validation', false, 'validator');
 
 	}

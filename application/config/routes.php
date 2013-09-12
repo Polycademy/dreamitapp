@@ -8,6 +8,8 @@ Pigeon::map(function($r){
 		//services
 		$r->resources('ideas');
 		$r->resources('tags');
+		$r->resources('blog');
+		$r->resources('comments');
 
 		//like resource only allows get and put (toggling)
 		$r->get('like/(:num)', 'like/show/$1');

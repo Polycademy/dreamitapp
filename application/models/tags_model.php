@@ -7,8 +7,6 @@ class Tags_model extends CI_Model{
 	public function __construct(){
 
 		parent::__construct();
-
-		//use set_data and reset_validation (test it out)
 		$this->load->library('form_validation', false, 'validator');
 
 	}
@@ -42,7 +40,8 @@ class Tags_model extends CI_Model{
 
 	public function read_all($limit = false, $offset = false, $idea = false, $author = false, $popular = false, $trending = false){
 
-		//NEEDS VALIDATION
+		$limit = ($limit) ? (int) $limit : 20;
+		$offset = ($offset) ? (int) $offset : 0;
 
 		$this->db->select('t.*');
 		$this->db->from('tags AS t');
