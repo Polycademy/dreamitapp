@@ -5,6 +5,7 @@ define(['angular', 'lodash'], function(angular, _){
 	angular.module('Controllers')
 		.controller('ControlPanelCtrl', [
 			'$scope',
+			'$rootScope',
 			'$state',
 			'$location',
 			'$dialog',
@@ -12,7 +13,7 @@ define(['angular', 'lodash'], function(angular, _){
 			'SearchServ',
 			'UtilitiesServ',
 			'UsersServ',
-			function($scope, $state, $location, $dialog, TagsServ, SearchServ, UtilitiesServ, UsersServ){
+			function($scope, $rootScope, $state, $location, $dialog, TagsServ, SearchServ, UtilitiesServ, UsersServ){
 
 				////////////
 				// SEARCH //
@@ -239,10 +240,14 @@ define(['angular', 'lodash'], function(angular, _){
 
 				};
 
-				$scope.$watch(loggedIn, function(value){
+				$scope.$watch('loggedIn', function(value){
 
 					if(value === true){
+						
 						//HERE you need to check if the logged in user is an admin account, if so set it on rootScope
+
+
+
 						$rootScope.loggedInAdmin = true;
 					}else{
 						$rootScope.loggedInAdmin = false;						
