@@ -97,6 +97,14 @@ define(['angular'], function(angular){
 
 				};
 
+				$scope.contactAuthor = function(authorId, ideaId){
+
+				};
+
+				//////////////////
+				// EDIT OVERLAY //
+				//////////////////
+
 				//this will be dependent upon being logged in and owning the current idea, you will send a request to see if it is true
 				$scope.loggedInAndOwns = true;
 
