@@ -28,7 +28,9 @@ define([
 			'angular-bootstrap',
 			'angular-ui-router',
 			'angular-ui-select2',
-			'angular-cache'
+			'angular-cache',
+			'angulartics',
+			'angulartics-google-analytics'
 		], function(){
 
 			//app is an module that is dependent on several top level modules
@@ -44,7 +46,9 @@ define([
 				'ui.bootstrap',
 				'ui.state',
 				'ui.select2',
-				'angular-cache'
+				'angular-cache',
+				'angulartics',
+				'angulartics.google.analytics'
 			]);
 
 			//parent core modules for the registry, they have the [] allowing functions to be appended to them

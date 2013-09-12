@@ -48,6 +48,8 @@ requirejs.config({
 			// 'https://raw.github.com/jmdobry/angular-cache/master/dist/angular-cache-1.0.0-rc.1.min',
 			'../bower_components/angular-cache/src/angular-cache'
 		],
+		'angulartics': '../bower_components/angulartics/src/angulartics',
+		'angulartics-google-analytics': '../bower_components/angulartics/src/angulartics-google-analytics',
 		//ANGULAR UI SELECT2
 		'select2': [
 			// '//cdn.jsdelivr.net/select2/3.4.2/select2.min',
@@ -124,6 +126,14 @@ requirejs.config({
 		},
 		'angular-cache': {
 			deps: ['angular'],
+			exports: "angular"
+		},
+		'angulartics': {
+			deps: ['angular'],
+			exports: "angular"
+		},
+		'angulartics-google-analytics': {
+			deps: ['angular', 'angulartics'],
 			exports: "angular"
 		},
 		'select2': {
