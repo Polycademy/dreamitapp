@@ -138,13 +138,16 @@ define(['angular'], function(angular){
 								},
 								function(response){
 
-									if(dialog){
-										AppIdeasServ.prependIdea(response.content);
-										$scope.closeOverlay();
-									}else{
-										//if in full page, just transition to the full page idae
-										$state.transitionTo('idea', {ideaId: newIdeaId, ideaUrl: response.content.titleUrl});
-									}
+									$scope.successSubmit = 'Successfully Added Idea';
+									$timeout(function(){
+										if(dialog){
+											AppIdeasServ.prependIdea(response.content);
+											$scope.closeOverlay();
+										}else{
+											//if in full page, just transition to the full page idae
+											$state.transitionTo('idea', {ideaId: newIdeaId, ideaUrl: response.content.titleUrl});
+										}
+									}, 1000);
 
 								},
 								function(response){
@@ -244,14 +247,17 @@ define(['angular'], function(angular){
 									},
 									function(response){
 
-										if(dialog){
-											//update it on the wall, if the wall contains the relevant item
-											AppIdeasServ.replaceIdea(updatedIdeaId, response.content);
-											$scope.closeOverlay();
-										}else{
-											//if in full page, just transition to the full page idea
-											$state.transitionTo('idea', {ideaId: updatedIdeaId, ideaUrl: response.content.titleUrl});
-										}
+										$scope.successSubmit = 'Successfully Updated Idea';
+										$timeout(function(){
+											if(dialog){
+												//update it on the wall, if the wall contains the relevant item
+												AppIdeasServ.replaceIdea(updatedIdeaId, response.content);
+												$scope.closeOverlay();
+											}else{
+												//if in full page, just transition to the full page idea
+												$state.transitionTo('idea', {ideaId: updatedIdeaId, ideaUrl: response.content.titleUrl});
+											}
+										}, 1000);
 
 									},
 									function(response){
@@ -314,7 +320,7 @@ define(['angular'], function(angular){
 										}else{
 											$state.transitionTo('home');
 										}
-									}, 4000);
+									}, 1000);
 
 								}
 
