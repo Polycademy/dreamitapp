@@ -6903,6 +6903,7 @@ header.navbar .nav li a {
   border-right: 1px solid #b8e0d8;
 }
 .blog .blog_header {
+  overflow: auto;
   padding: 0 30px 10px;
   border-bottom: 1px solid #b8e0d8;
   margin-bottom: 0;
@@ -6910,6 +6911,10 @@ header.navbar .nav li a {
 .blog .blog_header h1 {
   font-family: 'source_sans_probold', arial, sans-serif;
   color: #34495e;
+  float: left;
+}
+.blog .blog_header .add_edit_blog_button {
+  float: right;
 }
 .blog .blog_content .blog_item {
   padding: 4% 5%;
@@ -6939,15 +6944,20 @@ header.navbar .nav li a {
   border-right: 1px solid #b8e0d8;
 }
 .post .post_header {
+  overflow: auto;
   padding: 0 30px 10px;
   border-bottom: 1px solid #b8e0d8;
   margin-bottom: 0;
 }
 .post .post_header h1 {
   font-family: 'source_sans_probold', arial, sans-serif;
+  float: left;
 }
 .post .post_header h1 a {
   color: #34495e;
+}
+.post .post_header .add_edit_blog_button {
+  float: right;
 }
 .post .post_item {
   padding: 4% 5%;

@@ -795,12 +795,17 @@ header.navbar{
 	border-left: 1px solid @colour_green_highlight;
 	border-right: 1px solid @colour_green_highlight;
 	.blog_header{
+		overflow: auto;
 		padding: 0 30px 10px;
 		border-bottom: 1px solid @colour_green_highlight;
 		margin-bottom: 0;
 		h1{
 			font-family: 'source_sans_probold', arial, sans-serif;
 			color: @colour_wet_asphalt;
+			float: left;
+		}
+		.add_edit_blog_button{
+			float: right;
 		}
 	}
 	.blog_content{
@@ -834,14 +839,19 @@ header.navbar{
 	border-left: 1px solid @colour_green_highlight;
 	border-right: 1px solid @colour_green_highlight;
 	.post_header{
+		overflow: auto;
 		padding: 0 30px 10px;
 		border-bottom: 1px solid @colour_green_highlight;
 		margin-bottom: 0;
 		h1{
 			font-family: 'source_sans_probold', arial, sans-serif;
+			float: left;
 			a{
 				color: @colour_wet_asphalt;
 			}
+		}
+		.add_edit_blog_button{
+			float: right;
 		}
 	}
 	.post_item{

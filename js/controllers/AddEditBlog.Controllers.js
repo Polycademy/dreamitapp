@@ -5,7 +5,8 @@ define(['angular'], function(angular){
 	angular.module('Controllers')
 		.controller('AddEditBlogCtrl', [
 			'$scope',
-			function($scope){
+			'dialog',
+			function($scope, dialog){
 
 
 
