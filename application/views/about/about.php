@@ -10,6 +10,22 @@
 				<p>We stumbled upon the idea for this site when we were thinking what we would do when we came up with the idea for the next Angry Birds or Words With Friends.  The idea for the killer app hasn't come yet, so in the meantime we've set up www.dreamitapp.com to help all the people out there (like you!) who have a lot more creativity and brighter ideas than we do.</p>
 				<p>Check out our <a href="about#faq">FAQs</a> to learn more about what we do, or drop us a line using the <a href="about#contact_us">contact us form</a>.</p>
 			</div>
+			<div class="about_social">
+				<div class="row-fluid">
+					<div class="span6">
+						<a href="https://www.facebook.com/Dreamitapp" target="_blank">
+							<img src="img/fb.png" />
+							<span><strong>Like us on Facebook</strong></span>
+						</a>
+					</div>
+					<div class="span6">
+						<a href="#" target="_blank">
+							<img src="img/twitter.png" />
+							<span><strong>Follow us on Twitter</strong></span>
+						</a>
+					</div>
+				</div>
+			</div>
 			<div class="about_features">
 				<p class="lead text-center">Here's how we can help:</p>
 				<div class="row-fluid" equalise-heights-dir=".feature_box">

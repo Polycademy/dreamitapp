@@ -6815,12 +6815,16 @@ header.navbar .nav li a {
   font-size: 25px;
 }
 .about .about_content .about_intro,
+.about .about_content .about_social,
 .about .about_content .about_features,
 .about .about_content .about_faq,
 .about .about_content .about_team,
 .about .about_content .contact_us,
 .about .about_content .about_tac {
   margin: 4% 0;
+}
+.about .about_content .about_social {
+  text-align: center;
 }
 .about .about_content .about_features .feature_box {
   border: 1px solid #b8e0d8;
