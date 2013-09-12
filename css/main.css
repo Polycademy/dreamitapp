@@ -6816,8 +6816,10 @@ header.navbar .nav li a {
 }
 .about .about_content .about_intro,
 .about .about_content .about_features,
+.about .about_content .about_faq,
 .about .about_content .about_team,
-.about .about_content .contact_us {
+.about .about_content .contact_us,
+.about .about_content .about_tac {
   margin: 4% 0;
 }
 .about .about_content .about_features .feature_box {
@@ -6852,6 +6854,9 @@ header.navbar .nav li a {
 .about .about_content .about_features .feature_box p {
   padding: 20px;
 }
+.about .about_content .about_faq h4 {
+  text-align: center;
+}
 .about .about_content .about_team .team_profile {
   overflow: auto;
   margin-top: 10px;
@@ -6866,6 +6871,9 @@ header.navbar .nav li a {
 .about .about_content .contact_us .contact_details {
   padding: 20px;
 }
+.about .about_content .contact_us form {
+  margin-bottom: 0;
+}
 .about .about_content .contact_us form label {
   width: 120px;
 }
@@ -6874,6 +6882,8 @@ header.navbar .nav li a {
 }
 .about .about_content .contact_us form .form-actions {
   padding-left: 140px;
+  border: none;
+  margin-bottom: 0;
 }
 .about .about_content .contact_us address {
   margin-top: 20px;

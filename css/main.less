@@ -705,7 +705,7 @@ header.navbar{
 			color: @colour_midnight_blue;
 			font-size: 25px;
 		}
-		.about_intro, .about_features, .about_team, .contact_us{
+		.about_intro, .about_features, .about_faq, .about_team, .contact_us, .about_tac{
 			margin: 4% 0;
 		}
 		.about_features{
@@ -739,6 +739,11 @@ header.navbar{
 				}
 			}
 		}
+		.about_faq{
+			h4{
+				text-align: center;
+			}
+		}
 		.about_team{
 			.team_profile{
 				overflow: auto;
@@ -757,6 +762,7 @@ header.navbar{
 				padding: 20px;
 			}
 			form{
+				margin-bottom: 0;
 				label{
 					width: 120px;
 				}
@@ -765,6 +771,8 @@ header.navbar{
 				}
 				.form-actions{
 					padding-left: 140px;
+					border: none;
+					margin-bottom: 0;
 				}
 			}
 			address{
