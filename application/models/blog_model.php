@@ -111,7 +111,6 @@ class Blog_model extends CI_Model{
 		
 		}
 
-
 	}
 
 	public function read_all($limit = false, $offset = false){
