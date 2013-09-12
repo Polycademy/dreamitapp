@@ -64,6 +64,11 @@ class Ideas_model extends CI_Model{
 				'rules'	=> 'required|htmlspecialchars|trim|min_length[10]|max_length[280]',
 			),
 			array(
+				'field'	=> 'authorId',
+				'label'	=> 'Author ID',
+				'rules'	=> 'required|numeric',
+			),
+			array(
 				'field'	=> 'tags[]',
 				'label'	=> 'Tags',
 				'rules'	=> 'htmlspecialchars|trim|min_length[1]|max_length[20]',
