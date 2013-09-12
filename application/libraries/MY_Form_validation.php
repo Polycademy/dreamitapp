@@ -82,28 +82,5 @@ class MY_Form_validation extends CI_Form_validation{
 		return (json_last_error() == JSON_ERROR_NONE);
 
 	}
-
-	public function array_max($array, $limit){
-
-		FB::log($array);
-		FB::log($limit);
-
-		// if(count($array) > $limit){
-		// 	return false;
-		// }
-
-		return true;
-
-	}
-
-	public function array_min($array, $limit){
-
-		if(count($array) < limit){
-			return false;
-		}
-
-		return true;
-
-	}
 	
 }

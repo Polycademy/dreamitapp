@@ -36,7 +36,7 @@ class Ideas_model extends CI_Model{
 		$data['privacy'] = (isset($data['privacy'])) ? $this->assign_privacy($data['privacy']) : $this->assign_privacy();
 
 		$this->validator->set_data($data);
-		
+
 		$this->validator->set_rules(array(
 			array(
 				'field'	=> 'title',
@@ -66,7 +66,7 @@ class Ideas_model extends CI_Model{
 			array(
 				'field'	=> 'tags[]',
 				'label'	=> 'Tags',
-				'rules'	=> 'array_max[4]|htmlspecialchars|trim|min_length[1]|max_length[20]',
+				'rules'	=> 'htmlspecialchars|trim|min_length[1]|max_length[20]',
 			),
 			array(
 				'field'	=> 'privacy',
@@ -82,6 +82,18 @@ class Ideas_model extends CI_Model{
 			);
 			return false;
 
+		}
+
+		//tags array should be limited to 4 properties, form validation library doesn't provide array access
+		if(isset($data['tags']) AND is_array($data['tags'])){
+			if(count($data['tags']) > 4){
+				$this->errors = array(
+					'validation_error'	=> array(
+						'tags'	=> 'The tags field has too many properties.'
+					)
+				);
+				return false;
+			}
 		}
 
 		$this->db->trans_start();
