@@ -37,6 +37,8 @@ class Email extends CI_Controller{
 		}else{
 
 			//check if the user is logged in, if not, don't allow it
+			//also check if the toEmail is one of the users that are registered on the site!
+			//also check if the fromEmail is one of the users that are registered on the site!
 			//POLYAUTH!
 			
 			$message = $this->load->view('emails/developer_contact_email', $data, true);
