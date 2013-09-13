@@ -7,7 +7,7 @@ $config['sitemeta'] = array(
 	'desc'						=> 'Give your app ideas feedback!',
 	'meta_desc'					=> 'Dream it App is a platform for app ideas to gain feedback and potentially get built.',
 	'copyright'					=> '&copy; Dream it App 2013',
-	'email'						=> 'developersupport@dreamitapp.com',
+	'email'						=> 'info@dreamitapp.com',
 	'google_site_verification'	=> '',
 	'google_analytics_key'		=> '',
 );
