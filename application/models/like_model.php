@@ -129,7 +129,7 @@ class Like_model extends CI_Model{
 
 		if(!$this->validate_idea_ids($id)){
 			$this->errors = array(
-				'validation_error'	=> 'Idea ID does not exist.'
+				'error'	=> 'Idea ID does not exist.'
 			);
 			return false;
 		}
@@ -207,7 +207,7 @@ class Like_model extends CI_Model{
 
 		if(!$this->validate_idea_ids($id)){
 			$this->errors = array(
-				'validation_error'	=> 'Idea ID does not exist.'
+				'error'	=> 'Idea ID does not exist.'
 			);
 			return false;
 		}
