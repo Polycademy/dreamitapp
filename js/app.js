@@ -108,7 +108,8 @@ define([
 				'resources/Tags.Service',
 				'resources/Like.Service',
 				'resources/Email.Service',
-				'resources/Blog.Service'
+				'resources/Blog.Service',
+				'resources/Comments.Service'
 			], function(){
 
 				/* ==========================================================================

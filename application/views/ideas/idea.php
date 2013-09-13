@@ -105,19 +105,55 @@
 				</div>
 			</aside>
 		</div>
-		<section id="feedback" class="idea_comments">
+		<section id="feedback" class="idea_comments" ng-controller="CommentsCtrl">
 			<h2>Feedback</h2>
+			<form class="comment_form" ng-submit="submitComment(idea.id)" name="comment_form" ng-show="loggedIn">
+				<div 
+					class="control-group" 
+					ng-class="{
+						error: comment_form.comment.$invalid && comment_form.comment.$dirty
+					}"
+				>
+					<div class="controls">
+						<textarea 
+							class="input-block-level" 
+							name="comment" 
+							ng-model="comment" 
+							rows="3" 
+							ng-minlength="10" 
+							ng-maxlength="2000" 
+							required
+						></textarea>
+						<span class="help-block" ng-show="comment_form.comment.$error.minlength">Comment is too short, write at least 10 characters.</span>
+						<span class="help-block" ng-show="comment_form.comment.$error.maxlength">Comment is too long, write less than 2000 characters.</span>
+					</div>
+				</div>
+				<div class="validation_errors text-center" ng-show="validationErrors">
+					<em class="text-warning">Oops! Please fix up these errors:</em>
+					<ul>
+						<li class="alert alert-error" ng-repeat="error in validationErrors">{{error}}</li>
+					</ul>
+				</div>
+				<div class="success_submit alert alert-success text-center" ng-show="successSubmit">
+					{{successSubmit}}
+				</div>
+				<div class="form-actions">
+					<button type="submit" class="btn btn-primary">Add Comment</button>
+				</div>
+			</form>
 			<div 
-				class="comment_box"
-				infinite-scroll="getComments()" 
+				class="comment_list"
+				infinite-scroll="getComments(idea.id)" 
 				infinite-scroll-disabled="commentsServiceBusy" 
 				infinite-scroll-distance="2"
 			>
-				<div class="comment_meta">
-					<img class="commentAvatar" ng-src="{{commentAvatar}}" />
-					<span class="commentAuthor">{{commentAuthor}}</span>
+				<div class="comment_box" ng-repeat="comment in comments">
+					<div class="comment_meta">
+						<img class="commentAvatar" ng-src="{{comment.authorAvatar}}" />
+						<span class="commentAuthor"><a href="users/{{comment.authorId}}/{{comment.authorUrl}}">{{comment.author}}</a></span>
+					</div>
+					<div class="comment_content">{{comment.comment}}</div>
 				</div>
-				<div class="comment_content">{{commentContent}}</div>
 			</div>
 		</section>
 	</article>

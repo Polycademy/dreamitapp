@@ -139,6 +139,80 @@ define(['angular'], function(angular){
 
 			}
 		])
+		.controller('CommentsCtrl', [
+			'$scope',
+			'CommentsServ'
+			function($scope, CommentsServ){
+
+				var limit = 20,
+					counterOffset = 0;
+
+				$scope.comments = [];
+
+				$scope.commentsServiceBusy = false;
+
+				$scope.getComments = function(ideaId){
+
+					$scope.commentsServiceBusy = true;
+
+					var queryParameters = {
+						limit: limit,
+						offset: counterOffset,
+						idea: ideaId
+					};
+
+					CommentsServ.get(
+						queryParameters,
+						function(response){
+
+							//increase the counterOffset
+							counterOffset = counterOffset + limit;
+							$scope.comments.push.apply($scope.comments, response.content);
+							$scope.commentsServiceBusy = false;
+
+						},
+						function(response){
+
+							$scope.commentsServiceBusy = false;
+
+						}
+					);
+
+				};
+
+				//POLYAUTH
+				var currentUserId = 1;
+
+				$scope.submitComment = function(ideaId){
+					
+					var newComment = {
+						ideaId: ideaId,
+						authorId: currentUserId,
+						comment: $scope.comment
+					};
+
+					CommentsServ.save({}, newComment, function(response){
+
+						$scope.successSubmit = 'Successfully added Comment!';
+						$scope.comments.push(response.content);
+
+					}, function(response){
+
+						$scope.validationErrors = [];
+						if(response.data.code = 'validation_error'){
+							for(var key in response.data.content){
+								$scope.validationErrors.push(response.data.content[key]); 
+							}
+						}else{
+							$scope.validationErrors = [response.data.content];
+						}
+
+					});
+
+				};
+
+			}
+		])
 		.controller('DeveloperContactCtrl', [
 			'$scope',
 			'$timeout',
