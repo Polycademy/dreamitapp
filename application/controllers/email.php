@@ -1,5 +1,13 @@
 <?php
 
+/**
+ * This is the email controller.
+ * This controller needs improvement.
+ * Firstly the templating process of emails needs to be handled in a more modularised manner. It should be after
+ * validation of properties required to send emails.
+ * The Email_model also needs improvement, it requires more breaking down and modularisation of the functions.
+ * This class should also be more transparent, it needs to specify what kind of data is being expected to allow to be sent.
+ */
 class Email extends CI_Controller{
 
 	public function __construct(){
