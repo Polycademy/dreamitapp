@@ -114,6 +114,8 @@ class Email_model extends CI_Model{
 			'ideaTitle',
 		), $input_data, null, true);
 
+		$this->validator->set_data($data);
+
 		$this->validator->set_rules(array(
 			array(
 				'field'	=> 'toEmail',
@@ -134,11 +136,6 @@ class Email_model extends CI_Model{
 				'field'	=> 'message',
 				'label'	=> 'Message',
 				'rules'	=> 'required|htmlspecialchars|trim|min_length[100]|max_length[13500]'
-			),
-			array(
-				'field'	=> 'replyTo',
-				'label'	=> 'Reply To Email',
-				'rules'	=> 'required|trim|valid_email',
 			),
 			array(
 				'field'	=> 'authorName',
@@ -172,6 +169,7 @@ class Email_model extends CI_Model{
 			$this->errors = array(
 				'validation_error'	=> $this->validator->error_array()
 			);
+
 			return false;
 
 		}

@@ -141,9 +141,9 @@
 
 					<h4>Hi <?= $authorName ?>,</h4>
 
-					<p><?= $senderName ?> has contacted you regarding your application <a href="<?= base_url() ?>/ideas/<?= $ideaId ?>/<?= $ideaUrl?>" target ="_blank"><?= $ideaTitle ?></a>:</p>
+					<p><?= $senderName ?> has contacted you regarding your application <a href="<?= base_url() ?>ideas/<?= $ideaId ?>/<?= $ideaUrl?>" target ="_blank"><?= $ideaTitle ?></a>:</p>
 
-					<p style="padding-left: 10px;"><?= nl2br($message) ?></p>
+					<p style="margin-left: 10px; padding-left: 10px; border-left: 4px solid #ccc;"><?= nl2br($message) ?></p>
 
 					<div style="color: #8f8f8f; margin-top: 20px; font-size: 12px;">
 						<p>

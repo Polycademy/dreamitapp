@@ -139,9 +139,10 @@ define(['angular'], function(angular){
 		])
 		.controller('DeveloperContactCtrl', [
 			'$scope',
+			'$timeout',
 			'EmailServ',
 			'dialog',
-			function($scope, EmailServ, dialog){
+			function($scope, $timeout, EmailServ, dialog){
 
 				var author = dialog.options.customOptions.author,
 					authorId = dialog.options.customOptions.authorId,
@@ -177,6 +178,9 @@ define(['angular'], function(angular){
 					EmailServ.save({}, newEmail, function(response){
 
 						$scope.successSubmit = 'Successfully sent message!';
+						$timeout(function(){
+							dialog.close();
+						}, 1000);
 
 					}, function(response){
 
