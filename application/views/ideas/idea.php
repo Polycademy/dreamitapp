@@ -108,13 +108,17 @@
 		<section id="feedback" class="idea_comments">
 			<h2>Feedback</h2>
 			<div 
-				disqus-thread-dir 
-				disqus-shortname="{{dreamItAppConfig.apiKeys.disqusShortname}}" 
-				disqus-identifier="{{idea.id}}" 
-				disqus-title="{{idea.title}}" 
-				disqus-url="{{baseUrl + 'ideas/' + idea.id + '/' + idea.titleUrl}}" 
-				disqus-developer="true"
-			></div>
+				class="comment_box"
+				infinite-scroll="getComments()" 
+				infinite-scroll-disabled="commentsServiceBusy" 
+				infinite-scroll-distance="2"
+			>
+				<div class="comment_meta">
+					<img class="commentAvatar" ng-src="{{commentAvatar}}" />
+					<span class="commentAuthor">{{commentAuthor}}</span>
+				</div>
+				<div class="comment_content">{{commentContent}}</div>
+			</div>
 		</section>
 	</article>
 	<article 
