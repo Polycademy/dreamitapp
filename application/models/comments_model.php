@@ -83,13 +83,15 @@ class Comments_model extends CI_Model{
 			//get author information (currently hardcoded)
 			$author = 'Roger Qiu';
 			$author_url = 'roger_qiu';
+			$author_avatar = 'http://gravatar.com/avatar/' . md5(trim('roger.qiu@polycademy.com'));
 
 			$data = array(
 				'id'					=> $row->id,
 				'ideaId'				=> $row->ideaId,
+				'author'				=> $author,
 				'authorId'				=> $row->authorId,
 				'authorUrl'				=> $author_url,
-				'author'				=> $author,
+				'authorAvatar'			=> $author_avatar,
 				'comment'				=> $row->comment,
 				'date'					=> $row->date,
 			);
@@ -128,13 +130,15 @@ class Comments_model extends CI_Model{
 
 				$author = 'Roger Qiu';
 				$author_url = 'roger_qiu';
+				$author_avatar = 'http://gravatar.com/avatar/' . md5(trim('roger.qiu@polycademy.com'));
 
 				$data[] = array(
 					'id'					=> $row->id,
 					'ideaId'				=> $row->ideaId,
+					'author'				=> $author,
 					'authorId'				=> $row->authorId,
 					'authorUrl'				=> $author_url,
-					'author'				=> $author,
+					'authorAvatar'			=> $author_avatar,
 					'comment'				=> $row->comment,
 					'date'					=> $row->date,
 				);
