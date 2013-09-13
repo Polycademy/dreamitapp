@@ -14,13 +14,14 @@ class Email_model extends CI_Model{
 
 	}
 
-	public function send($input_data){
+	public function send($to, $from, $reply_to, $message, $html){
 
-		$data = elements(array(
-			'toEmail',
-			'fromEmail',
-			'message',
-		), $input_data, null, true);
+		$data = array(
+			'toEmail'	=> $to,
+			'fromEmail'	=> $from,
+			'replyTo'	=> $reply_to,
+			'message'	=> $message
+		);
 
 		$this->validator->set_data($data);
 
@@ -36,9 +37,14 @@ class Email_model extends CI_Model{
 				'rules'	=> 'required|trim|valid_email',
 			),
 			array(
+				'field'	=> 'replyTo',
+				'label'	=> 'Reply To Email',
+				'rules'	=> 'required|trim|valid_email',
+			),
+			array(
 				'field'	=> 'message',
 				'label'	=> 'Message',
-				'rules'	=> 'required|htmlspecialchars|trim|min_length[16]|max_length[13500]'
+				'rules'	=> 'required|htmlspecialchars|trim|min_length[100]|max_length[13500]'
 			),
 		));
 
@@ -61,10 +67,12 @@ class Email_model extends CI_Model{
 
 		$this->mailer->From = $data['fromEmail'];
 		$this->mailer->FromName = 'Dream it App Notifications';
+		$this->mailer->addReplyTo($data['replyTo']);
 		$this->mailer->AddAddress($data['toEmail']);
 
 		$this->mailer->Subject = 'Message from Dream it App Notifications';
 		$this->mailer->Body = $data['message'];
+		$this->mail->isHTML($html);
 
 		if(!$this->mailer->Send()) {
 

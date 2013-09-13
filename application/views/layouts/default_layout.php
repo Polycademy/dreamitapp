@@ -64,6 +64,7 @@
 				'application/views/index.html', //CI stuff
 				'application/views/layouts/**',  //for server side
 				'application/views/errors/**', //this is for CI
+				'application/views/emails/**', //these are email templates for the server side
 			));
 		?>
 

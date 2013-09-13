@@ -14,19 +14,29 @@ class Email extends CI_Controller{
 
 		$data = $this->input->json(false);
 
-		//if the data's email is not equal to the main email, 
-		//then we need them to be logged in to be able to use this service
-		//also we will set the from email to be from the main email.
-		//this way emails will either always to main email or from main email
-		if($data['toEmail'] != $this->config->item('sitemeta')['email']){
+		$to = $data['toEmail'];
+		$from = $this->config->item('sitemeta')['email'];
+		$reply_to = $data['fromEmail'];
 
-			$data['fromEmail'] = $this->config->item('sitemeta')['email'];
+		//if the toEmail is the same as the app's email, then it's an enquiry email
+		if($data['toEmail'] == $this->config->item('sitemeta')['email']){
 
-			//check if they are logged in using polyauth
-			
+			//enquiry emails have no markup
+			$message = $data['message'];
+			$html = false;
+
+		//else it's a custom email to an idea author, we need them to be logged in
+		}else{
+
+			//check if the user is logged in, if not, don't allow it
+			//POLYAUTH!
+
+			$message = $this->load->view('emails/developer_contact_email', $data, true);
+			$html = true;
+
 		}
 
-		$query = $this->Email_model->send($data);
+		$query = $this->Email_model->send($to, $from, $reply_to, $message, $html);
 
 		if($query){
 		
