@@ -1,30 +1,31 @@
 <script type="text/ng-template" id="developer_contact.html">
-	<article class="container developer_contact">
+	<div class="developer_contact_container">
 		<header class="developer_contact_header page-header">
-			<h1>Contact Author</h1>
+			<h3>Contact {{author}}</h3>
+			<button class="developer_contact_close overlay_close" ng-click="closeOverlay()">
+				<span class="fui-cross"></span>
+			</button>
 		</header>
-		<form class="form-horizontal" ng-submit="submitContact()" name="developer_contact">
+		<form class="developer_contact_form" ng-submit="submitContact()" name="developer_contact">
 			<div 
 				class="control-group" 
 				ng-class="{
 					error: developer_contact.contact_message.$invalid && developer_contact.contact_message.$dirty
 				}"
 			>
-				<label class="control-label" for="contact_message">Message:</label>
 				<div class="controls">
 					<textarea 
-						id="contact_message" 
 						class="input-block-level" 
 						name="contact_message" 
 						ng-model="contactMessage" 
-						rows="6" 
-						ng-minlength="16" 
+						rows="4" 
+						ng-minlength="100" 
 						ng-maxlength="13500" 
+						placeholder="Write Email..."
 						required
 					></textarea>
-					<span class="help-block" ng-show="developer_contact.contact_message.$error.required">Required</span>
-					<span class="help-block" ng-show="developer_contact.contact_message.$error.minlength">Message is too short.</span>
-					<span class="help-block" ng-show="developer_contact.contact_message.$error.maxlength">Message is too long.</span>
+					<span class="help-block" ng-show="developer_contact.contact_message.$error.minlength">Message is too short, write at least 100 characters.</span>
+					<span class="help-block" ng-show="developer_contact.contact_message.$error.maxlength">Message is too long, write less than 2000 words.</span>
 				</div>
 			</div>
 			<div class="validation_errors text-center" ng-show="validationErrors">
@@ -34,11 +35,11 @@
 				</ul>
 			</div>
 			<div class="success_submit alert alert-success text-center" ng-show="successSubmit">
-				Successfully sent message!
+				{{successSubmit}}
 			</div>
 			<div class="form-actions">
-				<button type="submit" class="btn btn-primary">Send to Author</button>
+				<button type="submit" class="btn btn-primary">Send Message</button>
 			</div>
 		</form>
-	</article>
+	</div>
 </script>

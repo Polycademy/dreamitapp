@@ -6793,10 +6793,6 @@ header.navbar .nav li a {
   height: 54px;
   line-height: 50px;
 }
-.overlay_backdrop .overlay_container .overlay_close:hover {
-  background: #ecf0f1;
-  color: #2c3e50;
-}
 .overlay_backdrop .idea_container .idea_header .idea_heading {
   padding: 60px;
 }
@@ -6826,6 +6822,50 @@ header.navbar .nav li a {
 }
 .overlay_backdrop .search_container .search_form input {
   width: 178px;
+}
+/*
+	DEVELOPER CONTACT MODAL
+*/
+.modal .developer_contact_container {
+  margin: 0 auto;
+  padding: 10px;
+}
+.modal .developer_contact_container .developer_contact_header {
+  margin: 0;
+  overflow: auto;
+  padding: 0;
+}
+.modal .developer_contact_container .developer_contact_header h3 {
+  float: left;
+  font-size: 28px;
+  font-family: 'source_sans_prosemibold', arial, sans-serif;
+  margin: 10px;
+}
+.modal .developer_contact_container .developer_contact_header .developer_contact_close {
+  margin: 10px;
+  float: right;
+  font-size: 18px;
+  width: 30px;
+  height: 30px;
+  line-height: 28px;
+  border-radius: 4px;
+  border: 1px solid #e2dddd;
+  background: #efebe7;
+  color: #34495e;
+}
+.modal .developer_contact_container .developer_contact_header .developer_contact_close:hover {
+  background: #ecf0f1;
+  color: #2c3e50;
+}
+.modal .developer_contact_container .developer_contact_form {
+  margin: 0;
+  padding: 10px;
+}
+.modal .developer_contact_container .developer_contact_form .form-actions {
+  border-top: none;
+  margin: 0;
+  text-align: center;
+  padding: 10px;
 }
 /*
 	ABOUT

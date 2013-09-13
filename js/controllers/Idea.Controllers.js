@@ -8,10 +8,11 @@ define(['angular'], function(angular){
 			'$rootScope',
 			'$state',
 			'$location',
+			'$dialog',
 			'IdeasServ',
 			'LikeServ',
 			'dialog',
-			function($scope, $rootScope, $state, $location, IdeasServ, LikeServ, dialog){
+			function($scope, $rootScope, $state, $location, $dialog, IdeasServ, LikeServ, dialog){
 
 				//if dialog is passed in, we're inside an overlay and we need the ideaId and locationParamsAndHash
 				if(dialog){
@@ -99,6 +100,23 @@ define(['angular'], function(angular){
 
 				$scope.contactAuthor = function(authorId, ideaId){
 
+					var dialog = $dialog.dialog({
+						backdrop: false,
+						keyboard: false,
+						dialogClass: 'modal',
+						templateUrl: 'developer_contact.html',
+						controller: 'DeveloperContactCtrl',
+						customOptions: {
+							ideaId: ideaId,
+							ideaUrl: ideaUrl,
+							ideaTitle: $scope.idea.title,
+							author: $scope.idea.author,
+							authorId: $scope.idea.authorId
+						}
+					});
+
+					dialog.open();
+
 				};
 
 				//////////////////
@@ -114,6 +132,64 @@ define(['angular'], function(angular){
 						$scope.closeOverlay();
 					}
 					$state.transitionTo('editIdea', {ideaId: ideaId, ideaUrl: ideaUrl});
+
+				};
+
+			}
+		])
+		.controller('DeveloperContactCtrl', [
+			'$scope',
+			'EmailServ',
+			'dialog',
+			function($scope, EmailServ, dialog){
+
+				$scope.closeOverlay = function(){
+					dialog.close();
+				};
+
+				var author = dialog.options.customOptions.author,
+					authorId = dialog.options.customOptions.authorId,
+					ideaId = dialog.options.customOptions.ideaId,
+					ideaUrl = dialog.options.customOptions.ideaUrl
+					ideaTitle = dialog.options.customOptions.ideaTitle;
+
+				//we need to get the email of the author based on authorId
+				var authorEmail = 'roger.qiu@polycademy.com';
+				//we need to get the email of the currently logged in user
+				var currentUser = 'Roger Qiu';
+				var currentUserEmail = 'cmcdragonkai@gmail.com'
+
+				$scope.author = dialog.options.customOptions.author;
+
+				$scope.submitContact = function(){
+
+					var newEmail = {
+						toEmail: authorEmail,
+						fromEmail: currentUserEmail,
+						message: $scope.message,
+						author: author,
+						sender: currentUser,
+						ideaId: ideaId,
+						ideaUrl: ideaUrl,
+						ideaTitle: ideaTitle
+					};
+
+					EmailServ.save({}, newEmail, function(response){
+
+						$scope.successSubmit = 'Successfully sent message!';
+
+					}, function(response){
+
+						$scope.validationErrors = [];
+						if(response.data.code = 'validation_error'){
+							for(var key in response.data.content){
+								$scope.validationErrors.push(response.data.content[key]); 
+							}
+						}else{
+							$scope.validationErrors = [response.data.content];
+						}
+
+					});
 
 				};
 
