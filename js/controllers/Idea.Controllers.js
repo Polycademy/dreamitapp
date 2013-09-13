@@ -124,7 +124,9 @@ define(['angular'], function(angular){
 				//////////////////
 
 				//this will be dependent upon being logged in and owning the current idea, you will send a request to see if it is true
-				$scope.loggedInAndOwns = true;
+				$scope.loggedInAndOwns = function(){
+					return true; //POLYAUTH
+				};
 
 				$scope.openEditIdeaOverlay = function(){
 

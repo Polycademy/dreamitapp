@@ -14,6 +14,8 @@ define(['angular'], function(angular){
 			'dialog',
 			function($scope, $rootScope, $state, $location, $timeout, BlogDataServ, BlogServ, dialog){
 
+				//NEEDS POLYAUTH (this person must be logged in to access this stuff) loggedInAdmin!!
+
 				if(dialog){
 					$rootScope.viewingOverlay = true;
 					$scope.closeOverlay = function(value){

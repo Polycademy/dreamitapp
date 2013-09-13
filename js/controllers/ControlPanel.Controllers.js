@@ -199,8 +199,7 @@ define(['angular', 'lodash'], function(angular, _){
 				// SIGN IN & SIGN OUT & SIGN UP //
 				//////////////////////////////////
 
-				//should start false, currently true to allow testing
-				$scope.loggedIn = true;
+				//POLYAUTH
 
 				//this will bring up an overlay as well
 				$scope.signIn = function(){
@@ -214,7 +213,7 @@ define(['angular', 'lodash'], function(angular, _){
 					});
 
 					dialog.open().then(function(loggedIn){
-						$scope.loggedIn = loggedIn;
+						$rootScope.loggedIn = loggedIn;
 					});
 
 				};
@@ -222,7 +221,7 @@ define(['angular', 'lodash'], function(angular, _){
 				//this does not bring up an overlay
 				$scope.signOut = function(){
 					//do the logout stuff
-					$scope.loggedIn = false;
+					$rootScope.loggedIn = false;
 				};
 
 				$scope.signUp = function(){
@@ -245,12 +244,12 @@ define(['angular', 'lodash'], function(angular, _){
 					if(value === true){
 						
 						//HERE you need to check if the logged in user is an admin account, if so set it on rootScope
-
-
-
 						$rootScope.loggedInAdmin = true;
+
 					}else{
+
 						$rootScope.loggedInAdmin = false;						
+					
 					}
 
 				});
