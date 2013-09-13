@@ -50,6 +50,8 @@ class Email_model extends CI_Model{
 			'message'
 		), $input_data, null, true);
 
+		$this->validator->set_data($data);
+
 		$this->validator->set_rules(array(
 			array(
 				'field'	=> 'toEmail',
@@ -69,7 +71,7 @@ class Email_model extends CI_Model{
 			array(
 				'field'	=> 'message',
 				'label'	=> 'Message',
-				'rules'	=> 'required|htmlspecialchars|trim|min_length[100]|max_length[13500]'
+				'rules'	=> 'required|htmlspecialchars|trim|min_length[16]|max_length[13500]'
 			),
 		));
 
