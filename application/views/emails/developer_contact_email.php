@@ -137,15 +137,20 @@
 <!-- Wrapper/Container Table: Use a wrapper table to control the width and the background color consistently of your email. Use this approach instead of setting attributes on the body tag. -->
 <table cellpadding="0" cellspacing="0" border="0" id="backgroundTable">
 	<tr>
-		<td valign="top"> 
+		<td valign="top" style="padding: 16px;"> 
 
-			<h4>Hi <?= $author ?></h4>
+			<h4>Hi <?= $author ?>,</h4>
 
 			<p><?= $sender ?> has contacted you regarding your application <a href="<?= base_url() ?>/ideas/<?= $ideaId ?>/<?= $ideaUrl?>" target ="_blank"><?= $ideaTitle ?></a>:</p>
 
-			<p><?= nl2br($message) ?></p>
+			<p style="padding-left: 10px;"><?= nl2br($message) ?></p>
 
-			<p>You can reply back to the sender by replying to this email.</p>
+			<div style="color: #8f8f8f; margin-top: 20px; font-size: 12px;">
+				<p>
+					You can reply back to the sender by replying to this email.<br />
+					Dream it App is a platform for you to gain feedback on your ideas. You can contact Dream it App at <a href="mailto:info@dreamitapp.com">info@dreamitapp.com</a>
+				</p>
+			</div>
 
 		</td>
 	</tr>
