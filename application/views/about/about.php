@@ -19,7 +19,7 @@
 						</a>
 					</div>
 					<div class="span6">
-						<a href="#" target="_blank">
+						<a href="https://twitter.com/LetsDreamItApp" target="_blank">
 							<img src="img/twitter.png" />
 							<span><strong>Follow us on Twitter</strong></span>
 						</a>
