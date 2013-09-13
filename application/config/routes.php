@@ -18,10 +18,8 @@ Pigeon::map(function($r){
 		//sending emails
 		$r->post('email', 'email/send');
 		
-		//for user accounts
+		//for authentication/authorisation
 		$r->resources('accounts');
-		
-		//for logging in and out
 		$r->resources('sessions');
 		
 	});
