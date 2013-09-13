@@ -12,8 +12,13 @@ class Comments extends CI_Controller{
 		$limit = $this->input->get('limit', true);
 		$offset = $this->input->get('offset', true);
 		$idea_id = $this->input->get('idea', true);
+		$count = $this->input->get('count', true);
 		
-		$query = $this->Comments_model->read_all($limit, $offset, $idea_id);
+		if($count){
+			$query = $this->Comments_model->read_count($idea_id);
+		}else{
+			$query = $this->Comments_model->read_all($limit, $offset, $idea_id);
+		}
 		
 		if($query){
 			

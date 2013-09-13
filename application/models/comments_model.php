@@ -109,6 +109,36 @@ class Comments_model extends CI_Model{
 
 	}
 
+	public function read_count($idea_id = false){
+
+		$this->db->select('COUNT(id) AS commentsCount');
+		if(is_numeric($idea_id)){
+			$this->db->where('ideaId', $idea_id);
+		}
+		$this->db->from('comments');
+		$query = $this->db->get();
+
+		if($query->num_rows() > 0){
+
+			$row = $query->row();
+
+			$data = array(
+				'count'	=> $row->commentsCount
+			);
+
+			return $data;
+
+		}else{
+
+			$this->errors = array(
+				'error' => 'Could not find comments associated with the passed in Idea ID.'
+			);
+			return false;
+
+		}
+
+	}
+
 	public function read_all($limit = false, $offset = false, $idea_id = false){
 
 		$limit = ($limit) ? (int) $limit : 20;
