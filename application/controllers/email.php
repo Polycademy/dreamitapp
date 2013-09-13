@@ -30,7 +30,7 @@ class Email extends CI_Controller{
 
 			//check if the user is logged in, if not, don't allow it
 			//POLYAUTH!
-
+			
 			$message = $this->load->view('emails/developer_contact_email', $data, true);
 			$html = true;
 

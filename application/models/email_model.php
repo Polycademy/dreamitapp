@@ -72,7 +72,7 @@ class Email_model extends CI_Model{
 
 		$this->mailer->Subject = 'Message from Dream it App Notifications';
 		$this->mailer->Body = $data['message'];
-		$this->mail->isHTML($html);
+		$this->mailer->isHTML($html);
 
 		if(!$this->mailer->Send()) {
 

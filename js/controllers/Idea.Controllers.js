@@ -150,7 +150,7 @@ define(['angular'], function(angular){
 				var author = dialog.options.customOptions.author,
 					authorId = dialog.options.customOptions.authorId,
 					ideaId = dialog.options.customOptions.ideaId,
-					ideaUrl = dialog.options.customOptions.ideaUrl
+					ideaUrl = dialog.options.customOptions.ideaUrl,
 					ideaTitle = dialog.options.customOptions.ideaTitle;
 
 				//we need to get the email of the author based on authorId
@@ -166,7 +166,7 @@ define(['angular'], function(angular){
 					var newEmail = {
 						toEmail: authorEmail,
 						fromEmail: currentUserEmail,
-						message: $scope.message,
+						message: $scope.contactMessage,
 						author: author,
 						sender: currentUser,
 						ideaId: ideaId,
