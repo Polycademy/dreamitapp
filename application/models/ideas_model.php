@@ -169,6 +169,8 @@ class Ideas_model extends CI_Model{
 				}
 			}
 
+			$comment_count = intval($this->get_comment_count($id));
+
 			$data = array(
 				'id'					=> $id,
 				'title'					=> $row->title,
@@ -188,6 +190,7 @@ class Ideas_model extends CI_Model{
 				'tags'					=> $tags,
 				'date'					=> $row->date,
 				'privacy'				=> $this->reverse_privacy($row->privacy),
+				'commentCount'			=> $comment_count,
 			);
 			return $data;
 			
@@ -296,6 +299,9 @@ class Ideas_model extends CI_Model{
 					}
 				}
 
+				//comment count for each idea
+				$comment_count = intval($this->get_comment_count($idea_id));
+
 				$data[] = array(
 					'id'					=> $row->id,
 					'title'					=> $row->title,
@@ -315,6 +321,7 @@ class Ideas_model extends CI_Model{
 					'tags'					=> $tags,
 					'date'					=> $row->date,
 					'privacy'				=> $this->reverse_privacy($row->privacy),
+					'commentCount'			=> $comment_count,
 				);
 			
 			}
@@ -580,6 +587,26 @@ class Ideas_model extends CI_Model{
 		$html = $this->parser->transform($text);
 
 		return $html;
+
+	}
+
+	protected function get_comment_count($idea_id){
+
+		$this->db->select('COUNT(id) AS commentsCount');
+		$this->db->where('ideaId', $idea_id);
+		$this->db->from('comments');
+		$query = $this->db->get();
+
+		if($query->num_rows() > 0){
+
+			$row = $query->row();
+			return $row->commentsCount;
+
+		}else{
+
+			return false;
+
+		}
 
 	}
 

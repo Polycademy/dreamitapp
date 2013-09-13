@@ -48,12 +48,6 @@ define(['angular', 'lodash'], function(angular, _){
 				$scope.appIdeas = AppIdeasServ.getAppIdeas();
 
 				/**
-				 * Setup comment cache, this will be passed into the Disqus Directive
-				 * @type {Object}
-				 */
-				$scope.commentCache = CachServ.commentCache;
-
-				/**
 				 * This is to throttle the retrieving of idea items due to infinite scroll pagination.
 				 * When set to true, the infinite scroll will stop activating the getIdeas.
 				 * It will only be reset to false, once a response comes back from the resource query.

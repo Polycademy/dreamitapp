@@ -66,7 +66,7 @@
 				<div class="idea_data idea_aside_text">
 					<ul>
 						<li>Submitted: {{idea.date}}</li>
-						<li>Feedback: {{commentCount}}</li>
+						<li>Feedback: {{idea.commentCount}}</li>
 						<li>Likes: {{idea.likes}}</li>
 						<li>Tags: 
 							<ul class="idea_tags_list">

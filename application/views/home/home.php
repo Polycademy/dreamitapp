@@ -46,14 +46,7 @@
 							anchor-scroll-delay="3000"
 						>
 							<div class="item_icon fui-chat">
-								<span 
-									class="item_number" 
-									disqus-comment-count-dir 
-									disqus-shortname="{{dreamItAppConfig.apiKeys.disqusShortname}}" 
-									disqus-api-key="{{dreamItAppConfig.apiKeys.disqusApiKey}}" 
-									disqus-ident="{{idea.id}}" 
-									disqus-cache="commentCache"
-								>{{commentCount | NumCounter:2}}</span>
+								<span class="item_number">{{idea.commentCount | NumCounter:2}}</span>
 							</div>
 						</a>
 						<a class="item_likes" like-toggle-dir like-index="{{$index}}" like-id="{{idea.id}}">

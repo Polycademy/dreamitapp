@@ -10,9 +10,10 @@ define(['angular'], function(angular){
 			'$location',
 			'$dialog',
 			'IdeasServ',
+			'CommentsServ',
 			'LikeServ',
 			'dialog',
-			function($scope, $rootScope, $state, $location, $dialog, IdeasServ, LikeServ, dialog){
+			function($scope, $rootScope, $state, $location, $dialog, IdeasServ, CommentsServ, LikeServ, dialog){
 
 				//if dialog is passed in, we're inside an overlay and we need the ideaId and locationParamsAndHash
 				if(dialog){
@@ -199,6 +200,7 @@ define(['angular'], function(angular){
 						}, function(response){
 
 							$scope.comments.unshift(response.content);
+							$scope.$parent.idea.commentCount++;
 
 						}, function(response){
 
