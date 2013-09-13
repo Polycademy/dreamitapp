@@ -66,13 +66,7 @@
 				<div class="idea_data idea_aside_text">
 					<ul>
 						<li>Submitted: {{idea.date}}</li>
-						<li
-							disqus-comment-count-dir 
-							disqus-shortname="{{dreamItAppConfig.apiKeys.disqusShortname}}" 
-							disqus-api-key="{{dreamItAppConfig.apiKeys.disqusApiKey}}" 
-							disqus-ident="{{idea.id}}" 
-							disqus-cache="commentCache"
-						>Feedback: {{commentCount}}</li>
+						<li>Feedback: {{commentCount}}</li>
 						<li>Likes: {{idea.likes}}</li>
 						<li>Tags: 
 							<ul class="idea_tags_list">
@@ -142,10 +136,10 @@
 				</div>
 			</form>
 			<div 
-				class="comment_list"
-				infinite-scroll="getComments(idea.id)" 
-				infinite-scroll-disabled="commentsServiceBusy" 
-				infinite-scroll-distance="2"
+				class="comment_list" 
+				when-scrolled-dir="getComments(idea.id)" 
+				when-scrolled-container="{{{true: '.overlay_backdrop', false: 'window'}[viewingOverlay]}}" 
+				when-scrolled-disabled="commentsServiceBusy"
 			>
 				<div class="comment_box" ng-repeat="comment in comments">
 					<div class="comment_meta">

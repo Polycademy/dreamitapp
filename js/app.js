@@ -88,6 +88,7 @@ define([
 				'directives/LikeToggle.Directive',
 				'directives/FilePicker.Directive',
 				'directives/InputFocus.Directive',
+				'directives/WhenScrolled.Directive',
 				//FILTERS
 				'filters/StripHtml.Filter',
 				'filters/UrlFriendly.Filter',

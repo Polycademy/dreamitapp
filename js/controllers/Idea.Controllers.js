@@ -141,7 +141,7 @@ define(['angular'], function(angular){
 		])
 		.controller('CommentsCtrl', [
 			'$scope',
-			'CommentsServ'
+			'CommentsServ',
 			function($scope, CommentsServ){
 
 				var limit = 20,
@@ -150,6 +150,10 @@ define(['angular'], function(angular){
 				$scope.comments = [];
 
 				$scope.commentsServiceBusy = false;
+
+				$scope.$watch('idea.id', function(value){
+					console.log(value);
+				});
 
 				$scope.getComments = function(ideaId){
 
