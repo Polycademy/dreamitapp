@@ -1,13 +1,5 @@
 <?php
 
-/**
- * This is the email controller.
- * This controller needs improvement.
- * Firstly the templating process of emails needs to be handled in a more modularised manner. It should be after
- * validation of properties required to send emails.
- * The Email_model also needs improvement, it requires more breaking down and modularisation of the functions.
- * This class should also be more transparent, it needs to specify what kind of data is being expected to allow to be sent.
- */
 class Email extends CI_Controller{
 
 	public function __construct(){
@@ -18,21 +10,24 @@ class Email extends CI_Controller{
 	
 	}
 	
+	/**
+	 * Sends either an enquiry email to ourselves or sends to an idea author.
+	 * @param json $data JSON post data that can include toEmail, fromEmail, message, authorName, senderName, ideaId, ideaUrl, ideaTitle  
+	 * @return [type] [description]
+	 */
 	public function send(){
 
 		$data = $this->input->json(false);
 
-		$to = $data['toEmail'];
-		$from = $this->config->item('sitemeta')['email'];
-		$reply_to = $data['fromEmail'];
+		//reassign fromEmail to always be from the app, but the replyTo will be the sender's email
+		$data['replyTo'] = $data['fromEmail'];
+		$data['fromEmail'] = $this->config->item('sitemeta')['email'];
 
 		//if the toEmail is the same as the app's email, then it's an enquiry email
 		if($data['toEmail'] == $this->config->item('sitemeta')['email']){
 
-			//enquiry emails have no markup
-			$message = $data['message'];
-			$html = false;
-
+			$query = $this->Email_model->send_enquiry($data);
+			
 		//else it's a custom email to an idea author, we need them to be logged in
 		}else{
 
@@ -41,12 +36,9 @@ class Email extends CI_Controller{
 			//also check if the fromEmail is one of the users that are registered on the site!
 			//POLYAUTH!
 			
-			$message = $this->load->view('emails/developer_contact_email', $data, true);
-			$html = true;
+			$query = $this->Email_model->send_developer_contact($data);
 
 		}
-
-		$query = $this->Email_model->send($to, $from, $reply_to, $message, $html);
 
 		if($query){
 		

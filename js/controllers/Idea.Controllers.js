@@ -143,23 +143,23 @@ define(['angular'], function(angular){
 			'dialog',
 			function($scope, EmailServ, dialog){
 
-				$scope.closeOverlay = function(){
-					dialog.close();
-				};
-
 				var author = dialog.options.customOptions.author,
 					authorId = dialog.options.customOptions.authorId,
 					ideaId = dialog.options.customOptions.ideaId,
 					ideaUrl = dialog.options.customOptions.ideaUrl,
 					ideaTitle = dialog.options.customOptions.ideaTitle;
 
-				//we need to get the email of the author based on authorId
+				$scope.closeOverlay = function(){
+					dialog.close();
+				};
+
+				//for the template
+				$scope.author = dialog.options.customOptions.author;
+
+				//getting author details using authorId (POLYAUTH)
 				var authorEmail = 'roger.qiu@polycademy.com';
-				//we need to get the email of the currently logged in user
 				var currentUser = 'Roger Qiu';
 				var currentUserEmail = 'cmcdragonkai@gmail.com'
-
-				$scope.author = dialog.options.customOptions.author;
 
 				$scope.submitContact = function(){
 
@@ -167,8 +167,8 @@ define(['angular'], function(angular){
 						toEmail: authorEmail,
 						fromEmail: currentUserEmail,
 						message: $scope.contactMessage,
-						author: author,
-						sender: currentUser,
+						authorName: author,
+						senderName: currentUser,
 						ideaId: ideaId,
 						ideaUrl: ideaUrl,
 						ideaTitle: ideaTitle
