@@ -42,6 +42,32 @@ class Comments extends CI_Controller{
 
 	}
 
+	public function show($id){
+
+		$query = $this->Comments_model->read($id);		
+		
+		if($query){
+			
+			$content = $query;
+			$code = 'success';
+		
+		}else{
+		
+			$this->output->set_status_header('404');
+			$content = current($this->Comments_model->get_errors());
+			$code = key($this->Comments_model->get_errors());
+		
+		}
+		
+		$output = array(
+			'content'	=> $content,
+			'code'		=> $code,
+		);
+		
+		Template::compose(false, $output, 'json');
+
+	}
+
 	public function create(){
 
 		$data = $this->input->json(false);

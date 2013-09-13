@@ -151,10 +151,6 @@ define(['angular'], function(angular){
 
 				$scope.commentsServiceBusy = false;
 
-				$scope.$watch('idea.id', function(value){
-					console.log(value);
-				});
-
 				$scope.getComments = function(ideaId){
 
 					$scope.commentsServiceBusy = true;
@@ -198,7 +194,17 @@ define(['angular'], function(angular){
 					CommentsServ.save({}, newComment, function(response){
 
 						$scope.successSubmit = 'Successfully added Comment!';
-						$scope.comments.push(response.content);
+						CommentsServ.get({
+							id: response.content
+						}, function(response){
+
+							$scope.comments.unshift(response.content);
+
+						}, function(response){
+
+							$scope.validationErrors = ['Was not able to read the new comment. Try submitting again.'];
+
+						});
 
 					}, function(response){
 
