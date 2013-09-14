@@ -13,8 +13,10 @@
 
 $ioc = new Pimple;
 
-//Setup a database connection here, this is for libraries that will require a database connection
-//this only works for PDO based connections (which you should be using!)
+/**
+ * Setups a PDO Database Handle.
+ * This is for libraries that will require database connection.
+ */
 $ioc['Database'] = $ioc->share(function($c){
 	$CI = get_instance();
 	$CI->load->database();
@@ -22,13 +24,15 @@ $ioc['Database'] = $ioc->share(function($c){
 	return $dbh;
 });
 
-//MONOLOG BASED LOGGER, use this for libraries that need to log things, in fact this can replace the standard Codeigniter Logger
+/**
+ * Monolog Logger using FirePHP and StreamHandler for Libraries
+ */
 $ioc['Logger'] = $ioc->share(function($c){
 
 	//$this is available inside the anonymous function in 5.4
 	if($this->config['log_threshold'] !== 0){
 	
-		$log_path = ($this->config['log_path'] !== '') ? $this->config['log_path'] : APPPATH.'logs/';
+		$log_path = APPPATH . 'logs/dev.php';
 		
 		//codeigniter's options is a maximum threshold, while monolog is a minimum threshold, we'll need to switch them around
 		switch($this->config['log_threshold']){
@@ -50,6 +54,7 @@ $ioc['Logger'] = $ioc->share(function($c){
 		
 		$logger = new Monolog\Logger('Monolog');
 		$logger->pushHandler(new Monolog\Handler\StreamHandler($log_path, $log_threshold));
+		$logger->pushHandler(new Monolog\Handler\FirePHPHandler($log_threshold));
 	
 	}else{
 	
@@ -60,6 +65,43 @@ $ioc['Logger'] = $ioc->share(function($c){
 	
 	return $logger;
 	
+});
+
+/**
+ * PolyAuth Options
+ */
+$ioc['PolyAuth\Options'] = $ioc->share(function($c){
+	return new PolyAuth\Options($this->config['polyauth']);
+});
+
+/**
+ * PolyAuth Language
+ */
+$ioc['PolyAuth\Language'] = $ioc->share(function($c){
+	return new PolyAuth\Language;
+});
+
+/**
+ * PolyAuth Storage using MySQL Adapter
+ */
+$ioc['PolyAuth\Storage'] = $ioc->share(function($c){
+	return new PolyAuth\Storage\MySQLAdapter($c['Database'], $c['PolyAuth\Options'], $c['Logger']);
+});
+
+/**
+ * PolyAuth AccountsManager
+ */
+$ioc['PolyAuth\Accounts\AccountsManager'] = $ioc->share(function($c){
+
+	$accounts_manager = new PolyAuth\Accounts\AccountsManager(
+		$c['PolyAuth\Storage'], 
+		$c['PolyAuth\Options'], 
+		$c['PolyAuth\Language'], 
+		$c['Logger']
+	);
+
+	return $accounts_manager;
+
 });
 
 //we need to pass the $ioc into the global $config variable, so now it can be accessed by Codeigniter
