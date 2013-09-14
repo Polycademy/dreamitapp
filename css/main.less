@@ -537,6 +537,49 @@ header.navbar{
 			font-weight: normal;
 			color: @colour_wet_asphalt;
 		}
+		.comment_form{
+			.form-actions{
+				padding: 0;
+				border: none;
+				> button{
+					float: right;
+				}
+			}
+		}
+		.comment_list{
+			.comment_box{
+				margin: 20px 0;
+				background: #fff;
+				border-radius: 10px;
+				border: 1px solid #ccc;
+				padding: 4px;
+				overflow: auto;
+				.comment_meta{
+					float: left;
+					width: 16%;
+					word-wrap: break-word;
+					padding: 10px;
+					.box-sizing();
+					.comment_avatar{
+						display: block;
+						margin: 0 auto;
+						.rounded(2px);
+						margin-top: 4px;
+					}
+					.comment_author{
+						text-align: center;
+					}
+				}
+				.comment_content{
+					float: left;
+					width: 84%;
+					white-space: pre-wrap;
+					word-wrap: break-word;
+					padding: 10px;
+					.box-sizing();
+				}
+			}
+		}
 	}
 }
 

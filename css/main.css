@@ -6652,6 +6652,53 @@ header.navbar .nav li a {
   font-weight: normal;
   color: #34495e;
 }
+.idea_container .idea_comments .comment_form .form-actions {
+  padding: 0;
+  border: none;
+}
+.idea_container .idea_comments .comment_form .form-actions > button {
+  float: right;
+}
+.idea_container .idea_comments .comment_list .comment_box {
+  margin: 20px 0;
+  background: #fff;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  padding: 4px;
+  overflow: auto;
+}
+.idea_container .idea_comments .comment_list .comment_box .comment_meta {
+  float: left;
+  width: 16%;
+  word-wrap: break-word;
+  padding: 10px;
+  -ms-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.idea_container .idea_comments .comment_list .comment_box .comment_meta .comment_avatar {
+  display: block;
+  margin: 0 auto;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  border-radius: 2px;
+  margin-top: 4px;
+}
+.idea_container .idea_comments .comment_list .comment_box .comment_meta .comment_author {
+  text-align: center;
+}
+.idea_container .idea_comments .comment_list .comment_box .comment_content {
+  float: left;
+  width: 84%;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  padding: 10px;
+  -ms-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
 /*
 	ADD EDIT IDEA
 */
