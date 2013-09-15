@@ -17,7 +17,7 @@
 					<li ng-show="user.gender">Gender: {{user.gender}}</li>
 					<li>Date Joined: {{user.createdOn}}</li>
 				</ul>
-				<span><a ng-href="/?author={{user.id}}">View {{user.username}}'s Public Ideas.</a></span>
+				<span><a ng-href="?author={{user.id}}">View {{user.username}}'s Public Ideas.</a></span>
 			</div>
 		</div>
 	</article>
