@@ -255,8 +255,8 @@ define(['angular'], function(angular){
 								function(successResponse){
 
 									//if successResponse has an userId, this means is already logged in, so we should go get the account
-									if(typeof successResponse.content.userId !== 'undefined'){
-										$rootScope.$broadcast('authenticationLogin', successResponse.content.userId);
+									if(typeof successResponse.content !== 'undefined'){
+										$rootScope.$broadcast('authenticationLogin', successResponse.content);
 									}
 								
 									if(typeof successFn === 'function'){

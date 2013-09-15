@@ -120,5 +120,31 @@ $ioc['PolyAuth\Accounts\Rbac'] = $ioc->share(function($c){
 
 });
 
+$ioc['PolyAuth\AuthStrategies\CookieStrategy'] = $ioc->share(function($c){
+
+	$cookie_strategy = new PolyAuth\AuthStrategies\CookieStrategy(
+		$c['PolyAuth\Storage'],
+		$c['PolyAuth\Options'],
+		$c['Logger']
+	);
+
+	return $cookie_strategy;
+
+});
+
+$ioc['PolyAuth\Sessions\UserSessions'] = $ioc->share(function($c){
+
+	$sessions = new PolyAuth\Sessions\UserSessions(
+		$c['PolyAuth\AuthStrategies\CookieStrategy'],
+		$c['PolyAuth\Storage'],
+		$c['PolyAuth\Options'],
+		$c['PolyAuth\Language'],
+		$c['Logger']
+	);
+
+	return $sessions;
+
+});
+
 //we need to pass the $ioc into the global $config variable, so now it can be accessed by Codeigniter
 $config['ioc'] = $ioc;

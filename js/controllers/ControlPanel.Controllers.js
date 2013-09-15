@@ -212,16 +212,15 @@ define(['angular', 'lodash'], function(angular, _){
 						controller: 'SignInModalCtrl'
 					});
 
-					dialog.open().then(function(loggedIn){
-						$rootScope.loggedIn = loggedIn;
-					});
+					dialog.open();
 
 				};
 
 				//this does not bring up an overlay
 				$scope.signOut = function(){
-					//do the logout stuff
-					$rootScope.loggedIn = false;
+
+					UsersServ.logoutSession(0);
+
 				};
 
 				$scope.signUp = function(){
@@ -238,21 +237,6 @@ define(['angular', 'lodash'], function(angular, _){
 					dialog.open();
 
 				};
-
-				$scope.$watch('loggedIn', function(value){
-
-					if(value === true){
-						
-						//HERE you need to check if the logged in user is an admin account, if so set it on rootScope
-						$rootScope.loggedInAdmin = true;
-
-					}else{
-
-						$rootScope.loggedInAdmin = false;						
-					
-					}
-
-				});
 
 			}
 		])
@@ -280,10 +264,8 @@ define(['angular', 'lodash'], function(angular, _){
 			function($scope, UsersServ, dialog){
 
 				$scope.closeOverlay = function(){
-					dialog.close(loggedIn);
+					dialog.close();
 				};
-
-				var loggedIn = false;
 
 				$scope.submitSignIn = function(){
 
@@ -296,7 +278,6 @@ define(['angular', 'lodash'], function(angular, _){
 
 						//Users serv should try to get the data themselves
 						//we can then check the data
-						loggedIn = true;
 
 					}, function(response){
 

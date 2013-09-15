@@ -25,6 +25,7 @@ Pigeon::map(function($r){
 
 		//testing
 		$r->get('accounts/test', 'accounts/test');
+		$r->get('sessions/test', 'sessions/test');
 		
 	});
 

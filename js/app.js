@@ -274,7 +274,8 @@ define([
 					'$http',
 					'$state',
 					'$stateParams',
-					function($rootScope, $cookies, $http, $state, $stateParams){
+					'UsersServ',
+					function($rootScope, $cookies, $http, $state, $stateParams, UsersServ){
 					
 						//XSRF INTEGRATION
 						$rootScope.$watch(
@@ -296,9 +297,32 @@ define([
 						//PROVIDING BASE URL IN CASE IT ISN'T AUTOMATIC (such as addthis)
 						$rootScope.baseUrl = serverVars.baseUrl;
 
-						//CHANGE THIS TO FALSE ONCE POLYAUTH IS DONE
 						$rootScope.loggedIn = false;
 						$rootScope.loggedInAdmin = false;
+						$rootScope.loggedInDeveloper = false;
+						$rootScope.user = {};
+
+						$rootScope.$on('authenticationProvided', function(event, args){
+
+							$rootScope.user = args;
+							$rootScope.loggedIn = true;
+							if($rootScope.user.type === 'Site Administrator'){
+								$rootScope.loggedInAdmin = true;
+								$rootScope.loggedInDeveloper = true;
+							}else if($rootScope.user.type === 'Developer'){
+								$rootScope.loggedInDeveloper = true;
+							}
+
+						});
+
+						$rootScope.$on('authenticationLogout', function(event, args){
+
+							$rootScope.loggedIn = false;
+							$rootScope.loggedInAdmin = false;
+							$rootScope.loggedInDeveloper = false;
+							$rootScope.user = {};
+
+						});
 
 					}
 				]);
