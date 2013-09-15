@@ -157,7 +157,7 @@ class Migration_add_polyauth extends CI_Migration {
 				'constraint' => '40',
 				'null'	=> TRUE,
 			),
-			'operating_system' => array(
+			'operatingSystem' => array(
 				'type' => 'VARCHAR',
 				'constraint' => '40',
 				'null' => TRUE,
