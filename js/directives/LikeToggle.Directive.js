@@ -4,6 +4,7 @@ define(['angular'], function(angular){
 
 	angular.module('Directives')
 		.directive('likeToggleDir', [
+			'$rootScope',
 			'LikeServ',
 			function(LikeServ){
 				return {
@@ -22,6 +23,10 @@ define(['angular'], function(angular){
 						});
 
 						element.bind('click', function(){
+
+							if(!$rootScope.loggedIn){
+								return false;
+							}
 
 							LikeServ.update(
 								{

@@ -67,6 +67,10 @@ define(['angular'], function(angular){
 				 */
 				$scope.likeAction = function(ideaId){
 
+					if(!$rootScope.loggedIn){
+						return false;
+					}
+
 					LikeServ.update(
 						{
 							id: ideaId
@@ -124,9 +128,11 @@ define(['angular'], function(angular){
 				// EDIT OVERLAY //
 				//////////////////
 
-				//this will be dependent upon being logged in and owning the current idea, you will send a request to see if it is true
 				$scope.loggedInAndOwns = function(){
-					return true; //POLYAUTH
+					if($scope.idea.authorId == $rootScope.user.id){
+						return true;
+					}
+					return false;
 				};
 
 				$scope.openEditIdeaOverlay = function(){
@@ -142,8 +148,9 @@ define(['angular'], function(angular){
 		])
 		.controller('CommentsCtrl', [
 			'$scope',
+			'$rootScope',
 			'CommentsServ',
-			function($scope, CommentsServ){
+			function($scope, $rootScope, CommentsServ){
 
 				var limit = 20,
 					counterOffset = 0;
@@ -181,14 +188,11 @@ define(['angular'], function(angular){
 
 				};
 
-				//POLYAUTH
-				var currentUserId = 1;
-
 				$scope.submitComment = function(ideaId){
 					
 					var newComment = {
 						ideaId: ideaId,
-						authorId: currentUserId,
+						authorId: $rootScope.user.id,
 						comment: $scope.comment
 					};
 
@@ -227,10 +231,11 @@ define(['angular'], function(angular){
 		])
 		.controller('DeveloperContactCtrl', [
 			'$scope',
+			'$rootScope',
 			'$timeout',
 			'EmailServ',
 			'dialog',
-			function($scope, $timeout, EmailServ, dialog){
+			function($scope, $rootScope, $timeout, EmailServ, dialog){
 
 				var author = dialog.options.customOptions.author,
 					authorId = dialog.options.customOptions.authorId,
@@ -245,15 +250,14 @@ define(['angular'], function(angular){
 				//for the template
 				$scope.author = dialog.options.customOptions.author;
 
-				//getting author details using authorId (POLYAUTH)
-				var authorEmail = 'roger.qiu@polycademy.com';
-				var currentUser = 'Roger Qiu';
-				var currentUserEmail = 'cmcdragonkai@gmail.com'
+				//bring authorEmail based on authorId
+				var currentUser = $rootScope.user.username;
+				var currentUserEmail = $rootScope.user.email;
 
 				$scope.submitContact = function(){
 
 					var newEmail = {
-						toEmail: authorEmail,
+						toUser: authorId,
 						fromEmail: currentUserEmail,
 						message: $scope.contactMessage,
 						authorName: author,

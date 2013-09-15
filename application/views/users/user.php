@@ -2,7 +2,7 @@
 	<article class="container user" pull-down-to-window-dir ng-show="!notFoundError">
 		<header class="user_header page-header">
 			<h1 class="user_heading"><a ng-href="users/{{user.id}}/{{user.usernameUrl}}">{{user.username}}</a></h1>
-			<button class="edit_profile_button" ng-click="openEditProfile()" ng-show="loggedInAndOwns"><span class="fui-new"></span> Edit Profile</button>
+			<button class="edit_profile_button" ng-click="openEditProfile()" ng-show="loggedInAndOwns()"><span class="fui-new"></span> Edit Profile</button>
 		</header>
 		<div class="user_item">
 			<div class="user_avatar">

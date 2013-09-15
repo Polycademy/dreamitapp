@@ -12,9 +12,6 @@ define(['angular', 'lodash'], function(angular, _){
 			'UtilitiesServ',
 			function($scope, $state, $location, $dialog, AccountsServ, UtilitiesServ){
 
-				//requires POLYAUTH! we need to see if they own this resource
-				$scope.loggedInAndOwns = true;
-
 				$scope.user = {};
 
 				$scope.getUser = function(){
@@ -38,6 +35,16 @@ define(['angular', 'lodash'], function(angular, _){
 				};
 
 				$scope.getUser();
+
+				$scope.loggedInAndOwns = function(){
+
+					if($scope.user.id == $rootScope.user.id){
+						return true;
+					}
+
+					return false;
+
+				};
 
 				$scope.openEditProfile = function(){
 
