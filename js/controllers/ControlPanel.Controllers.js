@@ -102,8 +102,7 @@ define(['angular', 'lodash'], function(angular, _){
 
 					$scope.viewingMyIdeas = !$scope.viewingMyIdeas;
 					if($scope.viewingMyIdeas){
-						//hardcoded author id, can only be used once we are "logged in"
-						var authorId = 1;
+						var authorId = $rootScope.user.id;
 						SearchServ.searchAuthor(authorId);
 					}else{
 						SearchServ.searchAuthor('');
@@ -156,17 +155,6 @@ define(['angular', 'lodash'], function(angular, _){
 					}
 
 				});
-
-				//////////////////
-				// PROFILE LINK //
-				//////////////////
-
-				// wait until user data is working... also this depends on the person being logged in!
-				// var userData = UsersServ.getUserData();
-				// var $scope.authorId = userData.id;
-				// var $scope.authorUrl = userData.url;
-				$scope.userId = 1;
-				$scope.userUrl = 'roger_qiu';
 
 				////////////////////
 				// ACTION OVERLAY //
@@ -259,9 +247,10 @@ define(['angular', 'lodash'], function(angular, _){
 		])
 		.controller('SignInModalCtrl', [
 			'$scope',
+			'$timeout',
 			'UsersServ',
 			'dialog',
-			function($scope, UsersServ, dialog){
+			function($scope, $timeout, UsersServ, dialog){
 
 				$scope.closeOverlay = function(){
 					dialog.close();
@@ -276,8 +265,10 @@ define(['angular', 'lodash'], function(angular, _){
 
 					UsersServ.loginSession(credentials, function(response){
 
-						//Users serv should try to get the data themselves
-						//we can then check the data
+						$scope.successSubmit = 'Successfully Signed In';
+						$timeout(function(){
+							$scope.closeOverlay();
+						}, 1000);
 
 					}, function(response){
 

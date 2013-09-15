@@ -87,6 +87,27 @@ class Sessions extends CI_Controller{
 
 	public function delete($id){
 
+		$query = $this->Sessions_model->delete($id);
+
+		if($query){
+
+			$content = $id;
+			$code = 'success';
+
+		}else{
+
+			$content = current($this->Sessions_model->get_errors());
+			$code = key($this->Sessions_model->get_errors());
+
+		}
+
+		$output = array(
+			'content'	=> $content,
+			'code'		=> $code,
+		);
+		
+		Template::compose(false, $output, 'json');
+
 	}
 
 }

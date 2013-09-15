@@ -12,8 +12,7 @@ class Sessions_model extends CI_Model{
 
 		parent::__construct();
 
-		$ioc = $this->config->item('ioc')
-		;
+		$ioc = $this->config->item('ioc');
 		$this->sessions_manager = $ioc['PolyAuth\Sessions\UserSessions'];
 
 		//start the session process
@@ -102,8 +101,6 @@ class Sessions_model extends CI_Model{
 
 			}catch(PolyAuthException $e){
 
-				var_dump($e);
-
 				$this->errors = array(
 					'validation_error'	=> $e->get_errors()
 				);
@@ -117,6 +114,23 @@ class Sessions_model extends CI_Model{
 	}
 
 	public function delete($id){
+
+		try{
+
+			$this->sessions_manager->logout();
+			return true;
+
+		}catch(PolyAuthException $e){
+
+			var_dump($e);
+
+			$this->errors = array(
+				'validation_error'	=> $e->get_errors()
+			);
+
+			return false;
+
+		}
 
 	}
 

@@ -2,11 +2,16 @@
 
 class Ideas extends CI_Controller{
 
+	protected $sessions_manager;
+
 	public function __construct(){
 
 		//THIS STILL REQUIRES the loading of the PolyAuth
 		parent::__construct();
 		$this->load->model('Ideas_model');
+		$ioc = $this->config->item('ioc');
+		$this->sessions_manager = $ioc['PolyAuth\Sessions\UserSessions'];
+		$this->sessions_manager->start();
 
 	}
 	
@@ -99,10 +104,9 @@ class Ideas extends CI_Controller{
 		//codeigniter's XSS clean would add a semicolon if "&" is used by itself
 		$data = $this->input->json(false);
 
-		//based on PolyAuth
-		//currently hardcoded
-		$data['authorId'] = 1;
-		
+		$data['authorId'] = $this->sessions_manager->get_user()['id'];
+
+
 		$query = $this->Ideas_model->create($data);
 		
 		if($query){
