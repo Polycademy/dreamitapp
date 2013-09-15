@@ -73,7 +73,7 @@ define(['angular'], function(angular){
 			
 			var userData = {}, //userData is an object containing all the userData
 				redirectDestination = '', //for saved redirect destination (by default it's home)
-				loginPage = '/auth', //this will be configurable, but by default it's /login
+				loginPage = '/', //this will be configurable, but by default it's /
 				authenticationPartial = false, //this will be set as true when it's a partial authentication
 				authenticatedRequests = []; //saved list of 401 and 403 requests that need authentication to be retried
 			
