@@ -32,12 +32,12 @@
 					<div class="span4 feature_box">
 						<h3 class="text-center">Add Ideas</h3>
 						<img class="feature_image" src="img/add_idea_icon.png" />
-						<p>You can add ideas, and use markdown for description. You can also set the privacy settings. One image is allowed for the main image.</p>
+						<p>If you have an idea, add it here.  Think of a catchy name, upload an image and give us a description.  You can set the privacy settings - set the idea free and make it public, or keep it to yourself and our participating developers.</p>
 					</div>
 					<div class="span4 feature_box">
 						<h3 class="text-center">Gain Feedback</h3>
 						<div class="feature_image"><span class="fui-chat"></span></div>
-						<p>Check the comments and likes. Get your friends to like them, the most popular ones goes to top.</p>
+						<p>If you have submitted an idea - check the comments and likes. Share the idea with your friends and enlist their support - the most popular ones goes to top.  Find ideas you like and leave comments and likes - your comments can help another person improve their idea.</p>
 					</div>
 					<div class="span4 feature_box">
 						<h3 class="text-center">Contact Developers</h3>

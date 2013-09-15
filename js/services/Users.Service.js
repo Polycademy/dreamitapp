@@ -193,10 +193,12 @@ define(['angular'], function(angular){
 								{},
 								payload,
 								function(successResponse){
+
+									if(successResponse.code !== 'error'){
+										//broadcast successful login (now go grab data for the listeners)
+										$rootScope.$broadcast('authenticationLogin', successResponse.content);
+									}
 								
-									//broadcast successful login (now go grab data for the listeners)
-									$rootScope.$broadcast('authenticationLogin', successResponse.content);
-									
 									if(typeof successFn === 'function'){
 										successFn(successResponse);
 									}

@@ -22,6 +22,7 @@ web1:
     - imagick
     - session
     - zip
+    - mcrypt
   zend_extensions:
     - xdebug
   before_deploy:
