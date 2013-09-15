@@ -2,8 +2,6 @@
 
 class Accounts extends CI_Controller{
 
-	protected $accounts_manager;
-
 	public function __construct(){
 
 		parent::__construct();
