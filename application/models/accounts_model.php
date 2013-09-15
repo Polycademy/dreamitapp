@@ -42,7 +42,7 @@ class Accounts_model extends CI_Model{
 			array(
 				'field'	=> 'email',
 				'label'	=> 'Description',
-				'rules'	=> 'required|trim|valid_email',
+				'rules'	=> 'required|trim|valid_email|max_length[100]',
 			),
 			array(
 				'field'	=> 'password',
