@@ -229,7 +229,7 @@ define(['angular', 'lodash'], function(angular, _){
 					var dialog = $dialog.dialog({
 						backdrop: false,
 						keyboard: true,
-						dialogClass: 'modal overlay_backdrop no_scroll',
+						dialogClass: 'modal overlay_backdrop',
 						templateUrl: 'signup_modal.html',
 						controller: 'SignUpModalCtrl'
 					});
@@ -258,9 +258,8 @@ define(['angular', 'lodash'], function(angular, _){
 		])
 		.controller('SearchModalCtrl', [
 			'$scope',
-			'$rootScope',
 			'dialog',
-			function($scope, $rootScope, dialog){
+			function($scope, dialog){
 
 				$scope.searchValue = '';
 
@@ -280,11 +279,14 @@ define(['angular', 'lodash'], function(angular, _){
 			'dialog',
 			function($scope, $rootScope, dialog){
 
-				var loggedIn = false;
+				$rootScope.viewingOverlay = true;
 
 				$scope.closeOverlay = function(){
+					$rootScope.viewingOverlay = false;
 					dialog.close(loggedIn);
 				};
+
+				var loggedIn = false;
 
 				$scope.submitLogin = function(){
 					//if successful
@@ -296,14 +298,48 @@ define(['angular', 'lodash'], function(angular, _){
 		.controller('SignUpModalCtrl', [
 			'$scope',
 			'$rootScope',
+			'UsersServ',
 			'dialog',
-			function($scope, $rootScope, dialog){
+			function($scope, $rootScope, UsersServ, dialog){
+
+				$rootScope.viewingOverlay = true;
 
 				$scope.closeOverlay = function(){
+					$rootScope.viewingOverlay = false;
 					dialog.close();
 				};
 
 				$scope.submitSignUp = function(){
+
+					var newUser = {
+						username: $scope.username,
+						email: $scope.email,
+						password: $scope.password,
+						developer: $scope.developer,
+						tac: $scope.tac
+					};
+
+					UsersServ.registerAccount(newUser, function(response){
+
+						$scope.successSubmit = 'Successfully Registered. If you are a general member, you can login immediately. If you applied to be a developer, you need to await a response from Dream it App.';
+						$timeout(function(){
+							$scope.closeOverlay();
+						}, 1000);
+
+					}, function(response){
+
+						$scope.validationErrors = [];
+						if(response.data.code = 'validation_error'){
+							//the content would be an object of fields to errors
+							for(var key in response.data.content){
+								$scope.validationErrors.push(response.data.content[key]); 
+							}
+						}else{
+							$scope.validationErrors = [response.data.content];
+						}
+
+					});
+
 				};
 
 			}

@@ -293,7 +293,7 @@ define([
 						$rootScope.baseUrl = serverVars.baseUrl;
 
 						//CHANGE THIS TO FALSE ONCE POLYAUTH IS DONE
-						$rootScope.loggedIn = true;
+						$rootScope.loggedIn = false;
 						$rootScope.loggedInAdmin = false;
 
 					}

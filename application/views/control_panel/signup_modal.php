@@ -3,12 +3,19 @@
 		class="signup_container overlay_container" 
 		overlay-close-dir="viewingOverlay" 
 		overlay-close-func="closeOverlay()" 
+		pull-down-to-window-dir
 	>
+		<header class="signup_header page-header">
+			<h3 class="signup_heading">Sign Up</h3>
+			<button class="signup_close overlay_close" ng-click="closeOverlay()">
+				<span class="fui-cross"></span>
+			</button>
+		</header>
 		<form class="signup_form form-horizontal" ng-submit="submitSignUp()" name="signup_form">
 			<div 
 				class="control-group" 
 				ng-class="{
-					error: signup_form.username_message.$invalid && signup_form.username_message.$dirty
+					error: signup_form.username.$invalid && signup_form.username.$dirty
 				}"
 			>
 				<label class="control-label" for="username">Username:</label>
@@ -31,7 +38,7 @@
 			<div 
 				class="control-group" 
 				ng-class="{
-					error: signup_form.email_message.$invalid && signup_form.email_message.$dirty
+					error: signup_form.email.$invalid && signup_form.email.$dirty
 				}"
 			>
 				<label class="control-label" for="email">Email:</label>
@@ -74,7 +81,7 @@
 				</div>
 			</div>
 			<div class="control-group">
-				<label class="control-label">Apply to be a Developer:</label>
+				<label class="control-label">Developer Membership:</label>
 				<div class="controls">
 					<label class="radio inline">
 						<input 
@@ -96,6 +103,21 @@
 						Yes
 					</label>
 					<span class="help-block">Applying to become a developer requires manual approval from Dream it App.</span>
+				</div>
+			</div>
+			<div class="control-group">
+				<div class="controls">
+					<label class="checkbox">
+						<input 
+							type="checkbox" 
+							name="tac" 
+							ng-model="tac" 
+							value="true" 
+							required 
+						/>
+						Agree to the <a href="about#tac" target="_blank">Terms and Conditions</a>.
+					</label>
+					<span class="help-block" ng-show="signup_form.tac.$error.required">Required</span>
 				</div>
 			</div>
 			<div class="validation_errors text-center" ng-show="validationErrors">

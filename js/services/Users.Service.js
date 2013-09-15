@@ -110,7 +110,7 @@ define(['angular'], function(angular){
 								payload,
 								function(successResponse){
 								
-									//broadcast this event, should result in login attempt
+									//broadcast this event, can be used in automatic login attempt
 									$rootScope.$broadcast('authenticationRegister', payload);
 									
 									if(typeof successFn === 'function'){
@@ -317,17 +317,18 @@ define(['angular'], function(angular){
 						
 					});
 					
-					//COMPLETED REGISTRATION (MAY OVERRIDE AUTHENTICATION FULL)
-					$rootScope.$on('authenticationRegister', function(event, args){
+					// //COMPLETED REGISTRATION (MAY OVERRIDE AUTHENTICATION FULL)
+					// Not used, we don't want to autologin when there is a possibility of activation step
+					// $rootScope.$on('authenticationRegister', function(event, args){
 						
-						//point to home after account is created
-						redirectDestination = '/';
-						userAPI.loginSession({
-							username: args.username,
-							password: args.password
-						});
+					// 	//point to home after account is created
+					// 	redirectDestination = '/';
+					// 	userAPI.loginSession({
+					// 		username: args.username,
+					// 		password: args.password
+					// 	});
 					
-					});
+					// });
 					
 					//COMPLETED ACCOUNT DESTRUCTION
 					$rootScope.$on('authenticationDestroy', function(event, args){

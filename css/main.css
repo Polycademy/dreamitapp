@@ -6871,6 +6871,50 @@ header.navbar .nav li a {
   width: 178px;
 }
 /*
+	SIGN UP
+*/
+.overlay_backdrop .signup_container {
+  margin: 0 auto;
+  border-left: 1px solid #b8e0d8;
+  border-right: 1px solid #b8e0d8;
+}
+.overlay_backdrop .signup_container .signup_header {
+  overflow: auto;
+}
+.overlay_backdrop .signup_container .signup_header .signup_heading {
+  float: left;
+  font-size: 32px;
+  font-family: 'source_sans_prosemibold', arial, sans-serif;
+  font-weight: normal;
+  padding: 20px 40px;
+  margin: 0;
+}
+.overlay_backdrop .signup_container .signup_header .signup_close {
+  margin: 10px 30px;
+}
+.overlay_backdrop .signup_container .signup_form {
+  margin: 20px auto;
+  width: 90%;
+}
+.overlay_backdrop .signup_container .signup_form .signup_form_internal {
+  padding-right: 46px;
+  margin: 0 auto;
+  -ms-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.overlay_backdrop .signup_container .signup_form .control-label {
+  width: 120px;
+}
+.overlay_backdrop .signup_container .signup_form .controls {
+  margin-left: 134px;
+  margin-right: 60px;
+}
+.overlay_backdrop .signup_container .signup_form .form-actions {
+  padding-left: 0;
+}
+/*
 	DEVELOPER CONTACT MODAL
 */
 .modal .developer_contact_container {

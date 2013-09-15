@@ -757,6 +757,50 @@ header.navbar{
 }
 
 /*
+	SIGN UP
+*/
+.overlay_backdrop{
+	.signup_container{
+		margin: 0 auto;
+		border-left: 1px solid @colour_green_highlight;
+		border-right: 1px solid @colour_green_highlight;
+		.signup_header{
+			overflow: auto;
+			.signup_heading{
+				float: left;
+				font-size: 32px;
+				font-family: 'source_sans_prosemibold', arial, sans-serif;
+				font-weight: normal;
+				padding: 20px 40px;
+				margin: 0;
+			}
+			.signup_close{
+				margin: 10px 30px;
+			}
+		}
+		.signup_form{
+			margin: 20px auto;
+			width: 90%;
+			.signup_form_internal{
+				padding-right: 46px;
+				margin: 0 auto;
+				.box-sizing();
+			}
+			.control-label{
+				width: 120px;
+			}
+			.controls{
+				margin-left: 134px;
+				margin-right: 60px;
+			}
+			.form-actions{
+				padding-left: 0;
+			}
+		}
+	}
+}
+
+/*
 	DEVELOPER CONTACT MODAL
 */
 .modal{

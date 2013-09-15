@@ -29,6 +29,7 @@ class Accounts_model extends CI_Model{
 			'email',
 			'password',
 			'developer',
+			'tac',
 		), $input_data, null, true);
 
 		$this->validator->set_data($data);
@@ -53,6 +54,11 @@ class Accounts_model extends CI_Model{
 				'field'	=> 'developer',
 				'label'	=> 'Developer',
 				'rules'	=> 'trim'
+			),
+			array(
+				'field'	=> 'tac',
+				'label'	=> 'Terms and Conditions',
+				'rules'	=> 'required'
 			)
 		));
 
@@ -75,6 +81,9 @@ class Accounts_model extends CI_Model{
 			return false;
 
 		}
+
+		//tac won't be sent to the user_accounts table
+		unset($data['tac']);
 
 		try{
 
