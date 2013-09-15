@@ -52,23 +52,24 @@
 				<dl>
 					<dt>Why post an idea?</dt>
 					<dd>
-						<p>By posting an idea on www.dreamitapp.com, you are putting that idea in front of our participating developers who will be able to look at the idea and contact you if they are interested in working with you to make the idea.</p>
+						<p>To receive feedback, gain popularity and test the market.</p>
+						<p>By posting an idea on www.dreamitapp.com, you are putting that idea in front of our participating developers who will be able to look at the idea and contact you if they are interested in working with you to turn your dream idea into reality.</p>
 						<p>You can post your idea as a public idea, visible to anyone who visits www.dreamitapp.com, or you can keep your idea to yourself and share only with participating developers.</p>
 						<p>Best of all, it's free to post an idea and all our participating developers have committed to keeping your ideas private and not using any information that you post without your agreement.</p>
 					</dd>
 					<dt>Why would I make my idea public?</dt>
 					<dd>
-						<p>Setting an idea free is often the best way to test the idea.</p>
-						<p>If you have an existing business, posting a public idea is great to see if an app would assist in supporting and expanding your services and to find out from users what features such an app would have. You can post your idea on www.dreamitapp.com and alert your existing customers through your Facebook page or Twitter account.</p>
-						<p>If you are involved in a sporting or social club, you can also post a public idea to see if your members would use an app and to find out from members what features they would most like to see.</p>
-						<p>You can also suggest an app that you think would be great for someone else to make, for example, your local council or a favourite charity.  Put your idea on www.dreamitapp.com, gather support and votes and use weight of numbers to get your app made.</p>
-						<p>Of course, you can also just post that crazy thought you had while playing with your phone on the bus. Be the envy of your friends by having the most popular idea on the site.</p>
+						<p>Setting an idea free is often the best way to test the idea. .</p>
+						<p>If you have an existing business, posting a public idea is great way to see if an app would assist in supporting and expanding your services and to find out from users what features such an app should have. You can post your idea on www.dreamitapp.com and alert your existing customers through your Facebook page or Twitter account. .</p>
+						<p>If you are involved in a sporting or social club, you can post a public idea to see if your members would use an app and to find out from members what features they would most like to see. .</p>
+						<p>You can also suggest an app that you think would be great for someone else to make, for example, your local council or a favourite charity. Put your idea on www.dreamitapp.com, gather support and votes and use weight of numbers to get your app made. .</p>
+						<p>Of course, you can also just post that crazy thought you had while playing with your phone on the bus. Be the envy of your friends by having the most popular idea on the site. .</p>
 					</dd>
 					<dt>Will my idea be stolen?</dt>
 					<dd>
-						<p>Our reputation and success, and that of our participating developers, depends on keeping you, the user, happy with our services.</p>
-						<p>All our participating developers have committed to keeping your ideas private and not using any information that you post without your agreement.</p>
-						<p>Of course, someone may have had the same idea as yours independently of you putting it on the site.  If they beat you to the idea, we can’t help with that, so the sooner you submit your idea and get it made, the better.</p>
+						<p>Our reputation and success, and that of our participating developers, depends on keeping you, the user, happy with our services. .</p>
+						<p>All our participating developers have committed to keeping your ideas private and not using any information that you post without your agreement. .</p>
+						<p>Of course, someone may have had the same idea as yours independently of you putting it on the site. If they beat you to the idea, we can’t help with that, so the sooner you submit your idea and get it made, the better. .</p>
 					</dd>
 					<dt>Who are your participating developers?</dt>
 					<dd>
@@ -86,11 +87,11 @@
 				<dl>
 					<dt>Why would I sign up?</dt>
 					<dd>
-						<p>There is a vast amount of creativity out there, just waiting for someone to tap into it.  Not everyone who has an idea has the skills, contacts or money to make it a reality and that’s when they come to us.</p>
-						<p>People who submit ideas are likely to be passionate about their ideas, providing you with the perfect partner to not only test the app as you develop it, but also to promote it once it's made.</p>
-						<p>Users who sign up to www.dreamitapp.com can also opt in to receive marketing messages from our participating developers as well as being contacted about being beta testers.</p>
-						<p>By signing up as a participating developer, you will have access to a wide range of new and exciting ideas and an engaged community that will help you build better apps and promote your business.</p>
-						<p>So contact us to find out more information about how you can be part of the exciting www.dreamitapp.com community.</p>
+						<p>There is a vast amount of creativity out there, just waiting for someone to tap into it. Not everyone who has an idea has the skills, contacts or money to make it a reality and that’s when they come to us. .</p>
+						<p>People who submit ideas are likely to be passionate about their ideas, providing you with the perfect partner to not only test the app as you develop it, but also to promote it once it's made. .</p>
+						<p>Users who sign up to www.dreamitapp.com can also opt in to receive marketing messages from our participating developers as well as being contacted about being beta testers. .</p>
+						<p>By signing up as a participating developer, you will have access to a wide range of new and exciting ideas and an engaged community that will help you build better apps and promote your business. .</p>
+						<p>So contact us to find out more information about how you can be part of the exciting www.dreamitapp.com community. .</p>
 					</dd>
 				</dl>
 			</div>
@@ -101,7 +102,7 @@
 						<div class="pull-left">
 							<img class="feature_image" src="http://gravatar.com/avatar/ea59014d56405353525324386464727d?s=100&d=mm" />
 						</div>
-						<p class="pull-left">Stephen Kiley - Description</p>
+						<p class="pull-left">Stephen Kiley - Founder</p>
 					</div>
 					<div class="span6 team_profile">
 						<div class="pull-left">

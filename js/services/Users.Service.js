@@ -193,12 +193,10 @@ define(['angular'], function(angular){
 								{},
 								payload,
 								function(successResponse){
-
-									if(successResponse.code !== 'error'){
-										//broadcast successful login (now go grab data for the listeners)
-										$rootScope.$broadcast('authenticationLogin', successResponse.content);
-									}
 								
+									//broadcast successful login (now go grab data for the listeners)
+									$rootScope.$broadcast('authenticationLogin', successResponse.content);
+									
 									if(typeof successFn === 'function'){
 										successFn(successResponse);
 									}
@@ -256,9 +254,13 @@ define(['angular'], function(angular){
 								},
 								function(successResponse){
 
-									//if successResponse has an userId, this means is already logged in, so we should go get the account
-									if(typeof successResponse.content !== 'undefined'){
-										$rootScope.$broadcast('authenticationLogin', successResponse.content);
+									if(successResponse.code !== 'error'){
+
+										//if successResponse has an userId, this means is already logged in, so we should go get the account
+										if(typeof successResponse.content !== 'undefined'){
+											$rootScope.$broadcast('authenticationLogin', successResponse.content);
+										}
+
 									}
 								
 									if(typeof successFn === 'function'){
