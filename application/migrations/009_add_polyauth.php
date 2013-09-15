@@ -1,5 +1,7 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 
+use PolyAuth\Storage\MySQLAdapter;
+use PolyAuth\Options;
 use RBAC\Permission;
 use RBAC\Role\Role;
 use RBAC\Manager\RoleManager;
@@ -36,12 +38,14 @@ class Migration_add_polyauth extends CI_Migration {
 			'createdOn'				=> date('Y-m-d H:i:s'),
 			'lastLogin'				=> date('Y-m-d H:i:s'),
 			'active'				=> '1',
+			'developer'				=> '1'
 		);
 		
 		//roles to descriptions
 		$default_roles = array(
 			'admin'		=> 'Site Administrators',
 			'member'	=> 'General Members',
+			'developer' => 'Developers'
 		);
 		
 		//roles to permissions to permission descriptions
@@ -64,6 +68,7 @@ class Migration_add_polyauth extends CI_Migration {
 			$default_user['id']	=> array(
 				'admin',
 				'member',
+				'developer',
 			),
 		);
 		
@@ -97,7 +102,7 @@ class Migration_add_polyauth extends CI_Migration {
 			),
 			'email' => array(
 				'type' => 'VARCHAR',
-				'constraint' => '100'
+				'constraint' => '100',
 				'null'	=> TRUE,
 			),
 			'activationCode' => array(
@@ -141,6 +146,32 @@ class Migration_add_polyauth extends CI_Migration {
 				'unsigned' => TRUE,
 				'default' => 0,
 			),
+			'developer' => array(
+				'type' => 'TINYINT',
+				'constraint' => '1',
+				'unsigned' => TRUE,
+				'default' => 0,
+			),
+			'phone' => array(
+				'type' => 'VARCHAR',
+				'constraint' => '40',
+				'null'	=> TRUE,
+			),
+			'operating_system' => array(
+				'type' => 'VARCHAR',
+				'constraint' => '40',
+				'null' => TRUE,
+			),
+			'age' => array(
+				'type' => 'VARCHAR',
+				'constraint' => '3',
+				'null' => TRUE
+			),
+			'gender' => array(
+				'type' => 'VARCHAR',
+				'constraint' => '10',
+				'null' => TRUE,
+			)
 		));
 		
 		$this->dbforge->add_key('id', TRUE);
@@ -262,7 +293,7 @@ class Migration_add_polyauth extends CI_Migration {
 		$this->db->query($create_auth_subject_role);
 		
 		//time to insert the default permission and role data
-		$role_manager = new RoleManager($this->db->conn_id);
+		$role_manager = new RoleManager(new MySQLAdapter($this->db->conn_id, new Options));
 		
 		foreach($default_role_permissions as $role => $permissions_array){
 		
