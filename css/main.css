@@ -7141,6 +7141,53 @@ header.navbar .nav li a {
   float: right;
 }
 /*
+	USER
+*/
+.user {
+  padding: 0;
+  margin: 0 auto;
+  border-left: 1px solid #b8e0d8;
+  border-right: 1px solid #b8e0d8;
+}
+.user .user_header {
+  overflow: auto;
+  padding: 0 30px 10px;
+  border-bottom: 1px solid #b8e0d8;
+  margin-bottom: 0;
+}
+.user .user_header h1 {
+  font-family: 'source_sans_probold', arial, sans-serif;
+  float: left;
+}
+.user .user_header h1 a {
+  color: #34495e;
+}
+.user .user_header .edit_profile_button {
+  float: right;
+}
+.user .user_item {
+  padding: 4% 5%;
+}
+.user .user_item .user_avatar img {
+  display: block;
+  margin: auto;
+  border-radius: 10px;
+}
+.user .user_item .user_information {
+  text-align: center;
+}
+.user .user_item .user_information ul {
+  margin: 20px;
+  list-style-type: none;
+  font-size: 16px;
+}
+.user .user_item .user_information ul li {
+  margin: 5px;
+}
+.user .user_item .user_information span {
+  font-size: 16px;
+}
+/*
 	RESPONSIVE
 */
 /*!

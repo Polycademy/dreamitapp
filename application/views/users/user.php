@@ -6,12 +6,16 @@
 		</header>
 		<div class="user_item">
 			<div class="user_avatar">
-				<img ng-src="{{user.avatar}}" />
+				<img ng-src="{{user.avatar}}?s=184&d=mm" />
 			</div>
 			<div class="user_information">
 				<ul>
 					<li>Name: {{user.username}}</li>
 					<li>Type: {{user.type}}</li>
+					<li ng-show="user.operatingSystem">Operating System: {{user.operatingSystem}}</li>
+					<li ng-show="user.age">Age: {{user.age}}</li>
+					<li ng-show="user.gender">Gender: {{user.gender}}</li>
+					<li>Date Joined: {{user.createdOn}}</li>
 				</ul>
 				<span><a ng-href="/?author={{user.id}}">View {{user.username}}'s Public Ideas.</a></span>
 			</div>
