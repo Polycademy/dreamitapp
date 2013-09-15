@@ -118,6 +118,7 @@
 						Agree to the <a href="about#tac" target="_blank">Terms and Conditions</a>.
 					</label>
 					<span class="help-block" ng-show="signup_form.tac.$error.required">Required</span>
+					<span class="help-block">You also agree to receive emails from Dream it App and participating developers.</span>
 				</div>
 			</div>
 			<div class="validation_errors text-center" ng-show="validationErrors">
