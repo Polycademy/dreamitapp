@@ -3,6 +3,7 @@
 //Site Meta Data
 
 $config['sitemeta'] = array(
+	'domain'					=> 'dreamitapp.com',
 	'title'						=> 'Dream it App',
 	'desc'						=> 'Give your app ideas feedback!',
 	'meta_desc'					=> 'Dream it App is a platform for app ideas to gain feedback and potentially get built.',
@@ -10,5 +11,5 @@ $config['sitemeta'] = array(
 	'email'						=> 'info@dreamitapp.com',
 	'developer_email'			=> 'developersupport@dreamitapp.com',
 	'google_site_verification'	=> '',
-	'google_analytics_key'		=> '',
+	'google_analytics_key'		=> 'UA-44032867-1',
 );

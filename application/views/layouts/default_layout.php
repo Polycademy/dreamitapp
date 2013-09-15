@@ -30,7 +30,7 @@
 			<? if(ENVIRONMENT == 'development'){ ?>
 				ga('create', '<?= $google_analytics_key ?>', {'cookieDomain': 'none'});
 			<? }elseif(ENVIRONMENT == 'production'){ ?>
-				ga('create', '<?= $google_analytics_key ?>');
+				ga('create', '<?= $google_analytics_key ?>', '<?= $domain ?>');
 			<? } ?>
 		</script>
 		<script data-main="js/bootstrap" src="js/lib/require.min.js"></script>
