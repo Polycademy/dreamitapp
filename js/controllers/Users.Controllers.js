@@ -7,8 +7,10 @@ define(['angular', 'lodash'], function(angular, _){
 			'$scope',
 			'$state',
 			'$location',
+			'$dialog',
 			'AccountsServ',
-			function($scope, $state, $location, AccountsServ){
+			'UtilitiesServ',
+			function($scope, $state, $location, $dialog, AccountsServ, UtilitiesServ){
 
 				//requires POLYAUTH! we need to see if they own this resource
 				$scope.loggedInAndOwns = true;
