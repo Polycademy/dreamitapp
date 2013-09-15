@@ -206,7 +206,7 @@ class Accounts_model extends CI_Model{
 			array(
 				'field'	=> 'password',
 				'label'	=> 'Password',
-				'rules'	=> 'trim|matches[passwordConfirm]'
+				'rules'	=> 'trim'
 			),
 			array(
 				'field'	=> 'passwordConfirm',
@@ -292,7 +292,7 @@ class Accounts_model extends CI_Model{
 					'error'	=> 'Nothing to delete.',
 				);
 				return false;
-				
+
 			}
 
 		}catch(PolyAuthException $e){
