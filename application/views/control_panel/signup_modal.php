@@ -52,6 +52,7 @@
 						ng-maxlength="100" 
 						required 
 					/>
+					<span class="help-block">Use your email at <a href="https://en.gravatar.com/" target="_blank">Gravatar</a> in order to get an avatar at Dream it App.</span>
 					<span class="help-block" ng-show="signup_form.email.$error.required">Required</span>
 					<span class="help-block" ng-show="signup_form.email.$error.email">Enter a valid email.</span>
 					<span class="help-block" ng-show="signup_form.email.$error.maxlength">Email is too long.</span>
@@ -60,7 +61,7 @@
 			<div 
 				class="control-group" 
 				ng-class="{
-					error: signup_form.password_message.$invalid && signup_form.password_message.$dirty
+					error: signup_form.password.$invalid && signup_form.password.$dirty
 				}"
 			>
 				<label class="control-label" for="password">Password:</label>
@@ -86,7 +87,7 @@
 					<label class="radio inline">
 						<input 
 							type="radio" 
-							name="developer" 
+							name="developerFalse" 
 							ng-model="developer" 
 							value="0" 
 							ng-checked="true" 
@@ -96,7 +97,7 @@
 					<label class="radio inline">
 						<input 
 							type="radio" 
-							name="developer" 
+							name="developerTrue" 
 							ng-model="developer" 
 							value="1" 
 						/>
