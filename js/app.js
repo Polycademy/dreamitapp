@@ -72,6 +72,7 @@ define([
 				'controllers/Idea.Controllers',
 				'controllers/AddEditIdea.Controllers',
 				'controllers/AddEditBlog.Controllers',
+				'controllers/EditUser.Controllers',
 				//DIRECTIVES
 				'directives/EqualiseHeights.Directive',
 				'directives/EqualiseHeightTo.Directive',
