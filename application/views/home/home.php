@@ -83,7 +83,7 @@
 					<a ng-click="myIdeas()"><span class="fui-radio-checked"></span>My Ideas</a>
 				</li>
 				<li>
-					<a ng-href="{{'users/' + authorId + '/' + authorUrl}}"><span class="fui-gear"></span>Profile</a>
+					<a ng-href="{{'users/' + userId + '/' + userUrl}}"><span class="fui-gear"></span>Profile</a>
 				</li>
 				<li>
 					<a ng-click="signOut()"><span class="logout_icon"></span>Sign out</a>
@@ -124,7 +124,7 @@
 					<a ng-click="myIdeas()" title="My Ideas"><span class="fui-radio-checked"></span></a>
 				</li>
 				<li>
-					<a ng-href="{{'users/' + authorId + '/' + authorUrl}}" title="Profile"><span class="fui-gear"></span></a>
+					<a ng-href="{{'users/' + userId + '/' + userUrl}}" title="Profile"><span class="fui-gear"></span></a>
 				</li>
 				<li>
 					<a ng-click="signOut()" title="Sign out"><span class="logout_icon"></span></a>

@@ -165,8 +165,8 @@ define(['angular', 'lodash'], function(angular, _){
 				// var userData = UsersServ.getUserData();
 				// var $scope.authorId = userData.id;
 				// var $scope.authorUrl = userData.url;
-				$scope.authorId = 1;
-				$scope.authorUrl = 'roger_qiu';
+				$scope.userId = 1;
+				$scope.userUrl = 'roger_qiu';
 
 				////////////////////
 				// ACTION OVERLAY //
