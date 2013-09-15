@@ -99,7 +99,7 @@
 				<div class="row-fluid">
 					<div class="span6 team_profile">
 						<div class="pull-left">
-							<img class="feature_image" src="http://gravatar.com/avatar/98a347823sd1db90af884b227a29c29e?s=100&d=mm" />
+							<img class="feature_image" src="http://gravatar.com/avatar/ea59014d56405353525324386464727d?s=100&d=mm" />
 						</div>
 						<p class="pull-left">Stephen Kiley - Description</p>
 					</div>

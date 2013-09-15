@@ -8,16 +8,18 @@ $config['polyauth'] = array(
 	'email'					=> true,
 	'email_smtp'			=> true,
 	'email_host'			=> 'smtp.mandrillapp.com',
+	'email_port'			=> '587',
 	'email_auth'			=> true,
 	'email_username'		=> $_ENV['secrets']['mandrill_user'],
 	'email_password'		=> $_ENV['secrets']['mandrill_key'],
 	'email_smtp_secure'		=> 'tls',
 	'email_from'			=> $this->config['sitemeta']['email'],
 	'email_from_name'		=> $this->config['sitemeta']['title'],
+	'email_html'			=> true,
 	//LOGIN SETTINGS
-	'login_identity'		=> 'username',
+	'login_identity'		=> 'email',
 	//REGISTRATION SETTINGS
-	'reg_activation'		=> 'email',
+	'reg_activation'		=> 'manual',
 	//EXTERNAL PROVIDER SETTINGS
 	'external_providers'	=> array(
 		'facebook'	=> array(

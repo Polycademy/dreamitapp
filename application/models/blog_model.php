@@ -203,7 +203,7 @@ class Blog_model extends CI_Model{
 			$this->errors = array(
 				'error'	=> 'Blog post doesn\'t need to update.',
 			);
-            return false;
+			return false;
 		
 		}
 
@@ -223,7 +223,7 @@ class Blog_model extends CI_Model{
 				'error'	=> 'Nothing to delete.',
 			);
 			
-            return false;
+			return false;
 			
 		}
 

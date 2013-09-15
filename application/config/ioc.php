@@ -88,6 +88,10 @@ $ioc['PolyAuth\Storage'] = $ioc->share(function($c){
 	return new PolyAuth\Storage\MySQLAdapter($c['Database'], $c['PolyAuth\Options'], $c['Logger']);
 });
 
+$ioc['PolyAuth\Emailer'] = $ioc->share(function($c){
+	return new PolyAuth\Emailer($c['PolyAuth\Options'], $c['PolyAuth\Language'], $c['Logger']);
+});
+
 /**
  * PolyAuth AccountsManager
  */
@@ -101,6 +105,18 @@ $ioc['PolyAuth\Accounts\AccountsManager'] = $ioc->share(function($c){
 	);
 
 	return $accounts_manager;
+
+});
+
+$ioc['PolyAuth\Accounts\Rbac'] = $ioc->share(function($c){
+
+	$rbac = new PolyAuth\Accounts\Rbac(
+		$c['PolyAuth\Storage'], 
+		$c['PolyAuth\Language'], 
+		$c['Logger']
+	);
+
+	return $rbac;
 
 });
 

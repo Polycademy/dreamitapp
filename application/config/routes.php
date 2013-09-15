@@ -20,7 +20,11 @@ Pigeon::map(function($r){
 		
 		//for authentication/authorisation
 		$r->resources('accounts');
+		$r->get('accounts/activate', 'accounts/activate');
 		$r->resources('sessions');
+
+		//testing
+		$r->get('accounts/test', 'accounts/test');
 		
 	});
 
