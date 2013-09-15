@@ -158,7 +158,6 @@ class Ideas_model extends CI_Model{
 			$author_url = 'roger_qiu';
 			$author_avatar = 'http://gravatar.com/avatar/' . md5(trim('roger.qiu@polycademy.com'));
 			$author_type = 'Developer';
-			$author_profile_links = array('http://polycademy.com');
 
 			$tags = array();
 			$this->db->select('tag')->where('ideaId', $id)->from('tags');
@@ -185,7 +184,6 @@ class Ideas_model extends CI_Model{
 				'author'				=> $author,
 				'authorAvatar'			=> $author_avatar,
 				'authorType'			=> $author_type,
-				'authorProfileLinks'	=> $author_profile_links,
 				'likes'					=> intval($row->likes),
 				'tags'					=> $tags,
 				'date'					=> $row->date,
@@ -287,7 +285,6 @@ class Ideas_model extends CI_Model{
 				$author_url = 'roger_qiu1';
 				$author_avatar = 'http://gravatar.com/avatar/' . md5(trim('roger.qiu@polycademy.com')) . '?s=184&d=mm';
 				$author_type = 'Developer';
-				$author_profile_links = array('http://polycademy.com');
 
 				//tags for each idea
 				$tags = array();
@@ -316,7 +313,6 @@ class Ideas_model extends CI_Model{
 					'author'				=> $author,
 					'authorAvatar'			=> $author_avatar,
 					'authorType'			=> $author_type,
-					'authorProfileLinks'	=> $author_profile_links,
 					'likes'					=> intval($row->likes),
 					'tags'					=> $tags,
 					'date'					=> $row->date,

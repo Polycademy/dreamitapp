@@ -132,9 +132,40 @@ class Accounts_model extends CI_Model{
 
 	public function read($id){
 
-	}
+		//NEED POLYAUTH TO DETECT WHETHER THIS RESOURCE IS OWNED
 
-	public function read_all($limit = false, $offset = false){
+		try{
+
+			$user = $this->accounts_manager->get_user($id);
+
+			//in the future, this data should be filtered on what is allowed to the public to see
+			//for example emails here can easily be harvested if discovered!
+			//however there's no time currently to do this
+			$data = $user->get_user_data($id);
+
+			if($user->has_role('admin')){
+				$data['type'] = 'Site Administrator';
+			}elseif($user->has_role('developer')){
+				$data['type'] = 'Developer';
+			}else{
+				$data['type'] = 'Member';
+			}
+
+			$data['usernameUrl'] = url_title($data['username']);
+			$data['avatar'] = 'http://gravatar.com/avatar/' . md5(trim($data['email']));
+			unset($data['email']);
+
+			return $data;
+
+		}catch(PolyAuthException $e){
+
+			$this->errors = array(
+				'error'	=> implode($e->get_errors())
+			);
+
+			return false;
+
+		}
 
 	}
 

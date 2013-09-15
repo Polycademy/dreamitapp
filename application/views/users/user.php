@@ -1,5 +1,28 @@
 <script type="text/ng-template" id="user.html">
-	<div class="container">
-		<p>This is the singular user page.</p>
-	</div>
+	<article class="container user" pull-down-to-window-dir ng-show="!notFoundError">
+		<header class="user_header page-header">
+			<h1 class="user_heading"><a ng-href="users/{{user.id}}/{{user.usernameUrl}}">{{user.username}}</a></h1>
+			<button class="edit_profile_button" ng-click="openEditProfile()" ng-show="loggedInAndOwns"><span class="fui-new"></span> Edit Profile</button>
+		</header>
+		<div class="user_item">
+			<div class="user_avatar">
+				<img ng-src="{{user.avatar}}" />
+			</div>
+			<div class="user_information">
+				<ul>
+					<li>Name: {{user.username}}</li>
+					<li>Type: {{user.type}}</li>
+				</ul>
+				<span><a ng-href="/?author={{user.id}}">View {{user.username}}'s Public Ideas.</a></span>
+			</div>
+		</div>
+	</article>
+	<article class="container user" pull-down-to-window-dir ng-show="notFoundError">
+		<header class="page-header">
+			<div class="alert alert-error alert-block">
+				<h1>404 Error!</h1>
+				{{notFoundError}}
+			</div>
+		</header>
+	</article>
 </script>

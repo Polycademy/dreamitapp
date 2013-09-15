@@ -125,7 +125,6 @@ define(['angular'], function(angular){
 
 							$scope.post = response.content;
 
-
 						},
 						function(response){
 

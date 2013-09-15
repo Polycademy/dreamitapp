@@ -55,10 +55,6 @@
 						</span>
 						<ul class="idea_author_additonal_information">
 							<li>{{idea.authorType}}</li>
-							<li>Links:</li>
-							<li ng-repeat="link in idea.authorProfileLinks">
-								<a ng-href="{{link}}">{{link}}</a>
-							</li>
 						</ul>
 					</div>
 				</div>

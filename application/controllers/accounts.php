@@ -15,12 +15,32 @@ class Accounts extends CI_Controller{
 
 
 	}
-
-	public function index(){
-
-	}
 	
 	public function show($id){
+
+		//this should only show public information, no private information
+
+		$query = $this->Accounts_model->read($id);		
+		
+		if($query){
+			
+			$content = $query;
+			$code = 'success';
+		
+		}else{
+		
+			$this->output->set_status_header('404');
+			$content = current($this->Accounts_model->get_errors());
+			$code = key($this->Accounts_model->get_errors());
+		
+		}
+		
+		$output = array(
+			'content'	=> $content,
+			'code'		=> $code,
+		);
+		
+		Template::compose(false, $output, 'json');
 		
 	}
 

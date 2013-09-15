@@ -185,19 +185,22 @@ define([
 									}
 								)
 								.state(
-									'users',
+									'user',
 									{
-										url: '/users',
-										templateUrl: 'users.html',
-										controller: 'UsersCtrl'
+										url: '/users/{userId:[0-9]+}/{userUrl:.*}',
+										templateUrl: 'user.html',
+										controller: 'UserCtrl'
 									}
 								)
 								.state(
-									'user',
+									'editUser',
 									{
-										url: '/users/{userId:[0-9]+}/{userUrl:.+}',
-										templateUrl: 'user.html',
-										controller: 'UserCtrl'
+										url: '/users/edit/{userId:[0-9]+}/{userUrl:.*}',
+										templateUrl: 'edit_user.html',
+										controller: 'EditUserCtrl',
+										resolve: {
+											dialog: angular.noop
+										}
 									}
 								)
 								.state(
@@ -219,7 +222,7 @@ define([
 								.state(
 									'post',
 									{
-										url: '/blog/{blogId:[0-9]+}/{blogUrl:.+}',
+										url: '/blog/{blogId:[0-9]+}/{blogUrl:.*}',
 										templateUrl: 'post.html',
 										controller: 'PostCtrl'
 									}
