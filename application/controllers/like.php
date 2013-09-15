@@ -49,17 +49,12 @@ class Like extends CI_Controller{
 	 */
 	public function update($id){
 
-		//author id needs to be extracted from PolyAuth
-		//currently hardcoded
-		//also if the person is not logged in, we pass back a 401, and say that you need to be logged in, in order to like
-		$author_id = 1;
-
-		$has_liked = $this->Like_model->has_liked($id, $author_id);
+		$has_liked = $this->Like_model->has_liked($id);
 
 		if($has_liked){
-			$query = $this->Like_model->down_one($id, $author_id);
+			$query = $this->Like_model->down_one($id);
 		}else{
-			$query = $this->Like_model->up_one($id, $author_id);
+			$query = $this->Like_model->up_one($id);
 		}
 
 		if($query){

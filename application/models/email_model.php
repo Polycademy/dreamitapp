@@ -2,12 +2,19 @@
 
 class Email_model extends CI_Model{
 
+	protected $accounts_manager;
+	protected $sessions_manager;
 	protected $errors;
 	protected $mailer;
 
 	public function __construct(){
 
 		parent::__construct();
+		
+		$ioc = $this->config->item('ioc');
+		$this->accounts_manager = $ioc['PolyAuth\Accounts\AccountsManager'];
+		$this->sessions_manager = $ioc['PolyAuth\Sessions\UserSessions'];
+		$this->sessions_manager->start();
 
 		$this->mailer = new \PHPMailer;
 		$this->load->library('form_validation', false, 'validator');
@@ -103,6 +110,13 @@ class Email_model extends CI_Model{
 	}
 
 	public function send_developer_contact($input_data){
+
+		if(!$this->sessions_manager->authorized(false, 'developer') AND !$this->sessions_manager->authorized(false, 'admin')){
+			$this->errors = array(
+				'error'	=> 'Not authorised to email.'
+			);
+			return false;
+		}
 
 		$data = elements(array(
 			'toEmail',

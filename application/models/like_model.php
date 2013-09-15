@@ -2,11 +2,17 @@
 
 class Like_model extends CI_Model{
 
+	protected $accounts_manager;
+	protected $sessions_manager;
 	protected $errors;
 
 	public function __construct(){
 
 		parent::__construct();
+		$this->accounts_manager = $ioc['PolyAuth\Accounts\AccountsManager'];
+		$this->sessions_manager = $ioc['PolyAuth\Sessions\UserSessions'];
+		$this->sessions_manager->start();
+
 		$this->load->library('form_validation', false, 'validator');
 
 	}
@@ -53,7 +59,16 @@ class Like_model extends CI_Model{
 	 * @param  Integer  $author_id User account id
 	 * @return boolean
 	 */
-	public function has_liked($id, $author_id){
+	public function has_liked($id){
+
+		if(!$this->sessions_manager->authorized()){
+			$this->errors = array(
+				'error'	=> 'Not authorised to like.'
+			);
+			return false;
+		}
+
+		$author_id = $this->sessions_manager->get_user()['id'];
 
 		$this->validator->set_data(array(
 			'id'		=> $id,
@@ -98,7 +113,16 @@ class Like_model extends CI_Model{
 	 * @param  Integer $author_id User account id
 	 * @return String|Boolean     '+1' string if successful
 	 */
-	public function up_one($id, $author_id){
+	public function up_one($id){
+
+		if(!$this->sessions_manager->authorized()){
+			$this->errors = array(
+				'error'	=> 'Not authorised to like.'
+			);
+			return false;
+		}
+
+		$author_id = $this->sessions_manager->get_user()['id'];
 
 		$this->validator->set_data(array(
 			'id'		=> $id,
@@ -176,7 +200,16 @@ class Like_model extends CI_Model{
 	 * @param  Integer $author_id User account id
 	 * @return String|Boolean     '-1' string if successful
 	 */
-	public function down_one($id, $author_id){
+	public function down_one($id){
+
+		if(!$this->sessions_manager->authorized()){
+			$this->errors = array(
+				'error'	=> 'Not authorised to like.'
+			);
+			return false;
+		}
+
+		$author_id = $this->sessions_manager->get_user()['id'];
 
 		$this->validator->set_data(array(
 			'id'		=> $id,
