@@ -1,5 +1,6 @@
 <?php
 
+use PolyAuth\Exceptions\PolyAuthException;
 use Michelf\MarkdownExtra;
 
 class Ideas_model extends CI_Model{
@@ -7,18 +8,36 @@ class Ideas_model extends CI_Model{
 	const PUBLIC_PRIVACY = 1;
 	const DEVELOPERS_PRIVACY = 2;
 
+	protected $accounts_manager;
+	protected $sessions_manager;
 	protected $parser;
 	protected $errors;
 
 	public function __construct(){
 
 		parent::__construct();
+
+		$ioc = $this->config->item('ioc');
+		$this->accounts_manager = $ioc['PolyAuth\Accounts\AccountsManager'];
+		$this->sessions_manager = $ioc['PolyAuth\Sessions\UserSessions'];
+		$this->sessions_manager->start();
+
 		$this->parser = new MarkdownExtra;
+
 		$this->load->library('form_validation', false, 'validator');
 
 	}
 
 	public function create($input_data){
+
+		if(!$this->sessions_manager->authorized()){
+			$this->errors = array(
+				'error'	=> 'Not authorised to create ideas.'
+			);
+			return false;
+		}
+
+		$input_data['authorId'] = $this->sessions_manager->get_user()['id'];
 
 		$data = elements(array(
 			'title',
@@ -153,11 +172,25 @@ class Ideas_model extends CI_Model{
 				return false;
 			}
 
-			//get author information (currently hardcoded)
-			$author = 'Roger Qiu';
-			$author_url = 'roger_qiu';
-			$author_avatar = 'http://gravatar.com/avatar/' . md5(trim('roger.qiu@polycademy.com'));
-			$author_type = 'Developer';
+			$author = $this->accounts_manager->get_user($row->authorId);
+			$author_name = $author['username'];
+			$author_url = url_title($author['username'], '_', true);
+			$author_avatar = 'http://gravatar.com/avatar/' . md5(trim($author['email']));
+			//should be changed to role description instead
+			if($author->has_role('admin')){
+				$author_type = 'Site Administrator';
+			}elseif($author->has_role('developer')){
+				$author_type = 'Developer';
+			}else{
+				$author_type = 'Member';
+			}
+
+			$owns_resource = false;
+			if($this->sessions_manager->authorized()){
+				if($this->sessions_manager->get_user()['id'] == $author['id']){
+					$owns_resource = true;
+				}
+			}
 
 			$tags = array();
 			$this->db->select('tag')->where('ideaId', $id)->from('tags');
@@ -181,7 +214,7 @@ class Ideas_model extends CI_Model{
 				'descriptionShort'		=> $row->descriptionShort,
 				'authorId'				=> $row->authorId,
 				'authorUrl'				=> $author_url,
-				'author'				=> $author,
+				'author'				=> $author_name,
 				'authorAvatar'			=> $author_avatar,
 				'authorType'			=> $author_type,
 				'likes'					=> intval($row->likes),
@@ -189,6 +222,7 @@ class Ideas_model extends CI_Model{
 				'date'					=> $row->date,
 				'privacy'				=> $this->reverse_privacy($row->privacy),
 				'commentCount'			=> $comment_count,
+				'owns'					=> $owns_resource,
 			);
 			return $data;
 			
@@ -280,11 +314,27 @@ class Ideas_model extends CI_Model{
 				$idea_id = $row->id;
 				$author_id = $row->authorId;
 
-				//get author information (currently hardcoded)
-				$author = 'Roger Qiu';
-				$author_url = 'roger_qiu1';
-				$author_avatar = 'http://gravatar.com/avatar/' . md5(trim('roger.qiu@polycademy.com')) . '?s=184&d=mm';
-				$author_type = 'Developer';
+				//get author info
+				$author = $this->accounts_manager->get_user($author_id);
+				$author_name = $author['username'];
+				$author_url = url_title($author['username'], '_', true);
+				$author_avatar = 'http://gravatar.com/avatar/' . md5(trim($author['email']));
+				//should be changed to role description instead
+				if($author->has_role('admin')){
+					$author_type = 'Site Administrator';
+				}elseif($author->has_role('developer')){
+					$author_type = 'Developer';
+				}else{
+					$author_type = 'Member';
+				}
+
+				//owns resource?
+				$owns_resource = false;
+				if($this->sessions_manager->authorized()){
+					if($this->sessions_manager->get_user()['id'] == $author['id']){
+						$owns_resource = true;
+					}
+				}
 
 				//tags for each idea
 				$tags = array();
@@ -310,7 +360,7 @@ class Ideas_model extends CI_Model{
 					'descriptionShort'		=> $row->descriptionShort,
 					'authorId'				=> $author_id,
 					'authorUrl'				=> $author_url,
-					'author'				=> $author,
+					'author'				=> $author_name,
 					'authorAvatar'			=> $author_avatar,
 					'authorType'			=> $author_type,
 					'likes'					=> intval($row->likes),
@@ -318,6 +368,7 @@ class Ideas_model extends CI_Model{
 					'date'					=> $row->date,
 					'privacy'				=> $this->reverse_privacy($row->privacy),
 					'commentCount'			=> $comment_count,
+					'owns'					=> $owns_resource,
 				);
 			
 			}
@@ -337,6 +388,16 @@ class Ideas_model extends CI_Model{
 	}
 
 	public function update($id, $input_data){
+
+		if(!$this->sessions_manager->authorized()){
+			$query = $this->db->get_where('ideas', array('authorId' => $this->sessions_manager->get_user()['id']));
+			if(!$query->num_rows()){
+				$this->errors = array(
+					'error'	=> 'Not authorised to update this idea.'
+				);
+				return false;
+			}
+		}
 
 		$data = elements(array(
 			'title',
@@ -466,6 +527,16 @@ class Ideas_model extends CI_Model{
 
 	public function delete($id){
 
+		if(!$this->sessions_manager->authorized()){
+			$query = $this->db->get_where('ideas', array('authorId' => $this->sessions_manager->get_user()['id']));
+			if(!$query->num_rows()){
+				$this->errors = array(
+					'error'	=> 'Not authorised to update this idea.'
+				);
+				return false;
+			}
+		}
+
 		$this->db->trans_start();
 
 		$this->db->where('id', $id);
@@ -557,10 +628,11 @@ class Ideas_model extends CI_Model{
 
 			if($privacy & self::DEVELOPERS_PRIVACY){
 
-				//current user must be a developer to see it
-				// if(!$user->developer){
-					// return false
-				// }
+				$current_user = $this->sessions_manager->get_user()['id'];
+
+				if(!$current_user->has_role('admin') AND !$current_user->has_role('developer')){
+					return false;
+				}
 			
 			}
 

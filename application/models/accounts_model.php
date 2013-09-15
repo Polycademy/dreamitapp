@@ -154,7 +154,7 @@ class Accounts_model extends CI_Model{
 				$data['type'] = 'Member';
 			}
 
-			$data['usernameUrl'] = url_title($data['username']);
+			$data['usernameUrl'] = url_title($data['username'], '_', true);
 			$data['avatar'] = 'http://gravatar.com/avatar/' . md5(trim($data['email']));
 			if(!$logged_in_and_owns){
 				unset($data['email']);
