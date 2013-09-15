@@ -119,7 +119,7 @@ class Email_model extends CI_Model{
 		}
 
 		$data = elements(array(
-			'toEmail',
+			'toUser',
 			'fromEmail',
 			'replyTo',
 			'message',
@@ -134,9 +134,9 @@ class Email_model extends CI_Model{
 
 		$this->validator->set_rules(array(
 			array(
-				'field'	=> 'toEmail',
-				'label'	=> 'To Email',
-				'rules'	=> 'required|trim|valid_email',
+				'field'	=> 'toUser',
+				'label'	=> 'User ID',
+				'rules'	=> 'required|trim|integer',
 			),
 			array(
 				'field'	=> 'fromEmail',
@@ -189,6 +189,9 @@ class Email_model extends CI_Model{
 			return false;
 
 		}
+
+		$user = $this->accounts_manager->get_user($data['toUser']);
+		$data['toEmail'] = $user['email'];
 
 		$message = $this->load->view('emails/developer_contact_email', $data, true);
 

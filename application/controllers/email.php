@@ -24,17 +24,12 @@ class Email extends CI_Controller{
 		$data['fromEmail'] = $this->config->item('sitemeta')['email'];
 
 		//if the toEmail is the same as the app's email, then it's an enquiry email
-		if($data['toEmail'] == $this->config->item('sitemeta')['email']){
+		if(isset($data['toEmail']) AND $data['toEmail'] == $this->config->item('sitemeta')['email']){
 
 			$query = $this->Email_model->send_enquiry($data);
-			
+
 		//else it's a custom email to an idea author, we need them to be logged in
 		}else{
-
-			//check if the user is logged in, if not, don't allow it
-			//also check if the toEmail is one of the users that are registered on the site!
-			//also check if the fromEmail is one of the users that are registered on the site!
-			//POLYAUTH!
 			
 			$query = $this->Email_model->send_developer_contact($data);
 
