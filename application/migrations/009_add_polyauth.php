@@ -32,9 +32,6 @@ class Migration_add_polyauth extends CI_Migration {
 			'password'				=> '$2y$10$EiqipvSt3lnD//nchj4u9OgOTL9R3J4AbZ5bUVVrh.Tq/gmc5xIvS', //default is "password"
 			'passwordChange'		=> '0',
 			'email'					=> 'developersupport@dreamitapp.com',
-			'activationCode'		=> '',
-			'forgottenCode'			=> NULL,
-			'forgottenDate'			=> NULL,
 			'createdOn'				=> date('Y-m-d H:i:s'),
 			'lastLogin'				=> date('Y-m-d H:i:s'),
 			'active'				=> '1',
@@ -73,6 +70,7 @@ class Migration_add_polyauth extends CI_Migration {
 		);
 		
 		// Table structure for table 'user_accounts'
+		// by default all fields will be null when it is empty
 		$this->dbforge->add_field(array(
 			'id' => array(
 				'type' => 'MEDIUMINT',
@@ -87,12 +85,10 @@ class Migration_add_polyauth extends CI_Migration {
 			'username' => array(
 				'type' => 'VARCHAR',
 				'constraint' => '100',
-				'null'	=> TRUE,
 			),
 			'password' => array(
 				'type' => 'VARCHAR',
 				'constraint' => '255',
-				'null'	=> TRUE,
 			),
 			'passwordChange' => array(
 				'type' => 'TINYINT',
@@ -103,30 +99,24 @@ class Migration_add_polyauth extends CI_Migration {
 			'email' => array(
 				'type' => 'VARCHAR',
 				'constraint' => '100',
-				'null'	=> TRUE,
 			),
 			'activationCode' => array(
 				'type' => 'VARCHAR',
 				'constraint' => '40',
-				'null' => TRUE
 			),
 			'forgottenCode' => array(
 				'type' => 'VARCHAR',
 				'constraint' => '40',
-				'null' => TRUE
 			),
 			'forgottenDate' => array(
 				'type' => 'DATETIME',
-				'null' => TRUE
 			),
 			'autoCode' => array(
 				'type' => 'VARCHAR',
 				'constraint' => '40',
-				'null' => TRUE
 			),
 			'autoDate' => array(
 				'type' => 'DATETIME',
-				'null' => TRUE
 			),
 			'createdOn' => array(
 				'type' => 'DATETIME',
@@ -155,22 +145,18 @@ class Migration_add_polyauth extends CI_Migration {
 			'phone' => array(
 				'type' => 'VARCHAR',
 				'constraint' => '40',
-				'null'	=> TRUE,
 			),
 			'operatingSystem' => array(
 				'type' => 'VARCHAR',
 				'constraint' => '40',
-				'null' => TRUE,
 			),
 			'age' => array(
 				'type' => 'VARCHAR',
 				'constraint' => '3',
-				'null' => TRUE
 			),
 			'gender' => array(
 				'type' => 'VARCHAR',
 				'constraint' => '10',
-				'null' => TRUE,
 			)
 		));
 		

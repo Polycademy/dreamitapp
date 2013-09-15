@@ -39,6 +39,10 @@ define(['angular'], function(angular){
 
 				var fillUpPayload = function(){
 
+					//password and passwordConfirm will always start undefined
+					//this means these values do not get passed to the API, so empty password values won't hurt
+					//however null or empty strings will be passed
+					//so the GET part of this controller needs to get null/empty and update accordingly
 					var newUser = {
 						username: $scope.username,
 						email: $scope.email,

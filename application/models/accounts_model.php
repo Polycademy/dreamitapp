@@ -244,10 +244,23 @@ class Accounts_model extends CI_Model{
 
 		}
 
+		//password is a special case, sometimes an empty string password & passwordConfirm will be passed in
+		//this will then update the password to an empty password, thus triggering password complexity errors
+		//if the password is empty, we're not updating anything!
+		//note that this happens with AngularJS's ng-model when the field is filled and then backspaced!
+		if(empty($data['password'])){
+			unset($data['password']);
+		}
+
+		//no need for passwordConfirm in the db
+		unset($data['passwordConfirm']);
+
 		try{
 
 			$user = $this->accounts_manager->get_user($id);
-			$query = $this->accounts_manager->update_user($user, $input_data);
+
+			//password changing is handled by the library
+			$query = $this->accounts_manager->update_user($user, $data);
 
 			if($query){
 
@@ -265,7 +278,7 @@ class Accounts_model extends CI_Model{
 		}catch(PolyAuthException $e){
 
 			$this->errors = array(
-				'validation_error'	=> implode($e->get_errors())
+				'validation_error'	=> $e->get_errors()
 			);
 
 			return false;
