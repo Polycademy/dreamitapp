@@ -309,6 +309,9 @@ define(['angular', 'lodash'], function(angular, _){
 					dialog.close();
 				};
 
+				//default parameters
+				$scope.developer = 0;
+
 				$scope.submitSignUp = function(){
 
 					var newUser = {
