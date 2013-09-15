@@ -143,36 +143,30 @@ define(['angular'], function(angular){
 
 				$scope.deleteUser = function(){
 
-					AccountsServ.delete(
-						{
-							id: userId
-						},
-						function(response){
+					UsersServ.deleteAccount(userId, function(response){
 
-							if(response.code == 'error'){
+						if(response.code == 'error'){
 
-								$scope.validationErrors = ['Failed to delete user. ID does not exist.'];
+							$scope.validationErrors = ['Failed to delete user. ID does not exist.'];
 
-							}else{
+						}else{
 
-								$scope.successSubmit = 'Successfully Deleted User';
-								$timeout(function(){
-									if(dialog){
-										$scope.closeOverlay();
-									}else{
-										$state.transitionTo('home');
-									}
-								}, 1000);
-
-							}
-
-						},
-						function(response){
-
-							$scope.validationErrors = [response.data.content];
+							$scope.successSubmit = 'Successfully Deleted User';
+							$timeout(function(){
+								if(dialog){
+									$scope.closeOverlay();
+								}else{
+									$state.transitionTo('home');
+								}
+							}, 1000);
 
 						}
-					)
+
+					}, function(response){
+
+						$scope.validationErrors = [response.data.content];
+
+					});
 					
 				};
 
