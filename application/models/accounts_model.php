@@ -20,6 +20,8 @@ class Accounts_model extends CI_Model{
 
 		$this->load->library('form_validation', false, 'validator');
 
+		//it is possible to catch PDOException and log those errors and return a system_error!
+
 	}
 
 	public function create($input_data){
@@ -133,6 +135,7 @@ class Accounts_model extends CI_Model{
 	public function read($id){
 
 		//NEED POLYAUTH TO DETECT WHETHER THIS RESOURCE IS OWNED
+		$logged_in_and_owns = true;
 
 		try{
 
@@ -153,7 +156,10 @@ class Accounts_model extends CI_Model{
 
 			$data['usernameUrl'] = url_title($data['username']);
 			$data['avatar'] = 'http://gravatar.com/avatar/' . md5(trim($data['email']));
-			unset($data['email']);
+			if(!$logged_in_and_owns){
+				unset($data['email']);
+				unset($data['phone']);
+			}
 
 			return $data;
 
@@ -171,10 +177,133 @@ class Accounts_model extends CI_Model{
 
 	public function update($id, $input_data){
 
+		//POLYAUTH REQUIRED to check if the user is logged in and owns this resource
+
+		$data = elements(array(
+			'username',
+			'email',
+			'password',
+			'passwordConfirm',
+			'phone',
+			'operatingSystem',
+			'age',
+			'gender',
+		), $input_data, null, true);
+
+		$this->validator->set_data($data);
+
+		$this->validator->set_rules(array(
+			array(
+				'field'	=> 'username',
+				'label'	=> 'Username',
+				'rules'	=> 'htmlspecialchars|trim|min_length[2]|max_length[100]',
+			),
+			array(
+				'field'	=> 'email',
+				'label'	=> 'Description',
+				'rules'	=> 'trim|valid_email|max_length[100]',
+			),
+			array(
+				'field'	=> 'password',
+				'label'	=> 'Password',
+				'rules'	=> 'trim|matches[passwordConfirm]'
+			),
+			array(
+				'field'	=> 'passwordConfirm',
+				'label'	=> 'Password Confirm',
+				'rules'	=> 'trim|matches[password]'
+			),
+			array(
+				'field'	=> 'phone',
+				'label'	=> 'Phone',
+				'rules'	=> 'trim|numeric|max_length[40]'
+			),
+			array(
+				'field'	=> 'operatingSystem',
+				'label'	=> 'Operating System',
+				'rules'	=> 'trim|htmlspecialchars|max_length[40]'
+			),
+			array(
+				'field'	=> 'age',
+				'label'	=> 'Age',
+				'rules'	=> 'trim|integer|max_length[3]'
+			),
+			array(
+				'field'	=> 'gender',
+				'label'	=> 'Gender',
+				'rules'	=> 'trim|htmlspecialchars|max_length[10]'
+			)
+		));
+
+		if($this->validator->run() ==  false){
+
+			$this->errors = array(
+				'validation_error'	=> $this->validator->error_array()
+			);
+			return false;
+
+		}
+
+		try{
+
+			$user = $this->accounts_manager->get_user($id);
+			$query = $this->accounts_manager->update_user($user, $input_data);
+
+			if($query){
+
+				return $id;
+
+			}else{
+
+				$this->errors = array(
+					'error'	=> 'Nothing to update'
+				);
+				return false;
+
+			}
+
+		}catch(PolyAuthException $e){
+
+			$this->errors = array(
+				'validation_error'	=> implode($e->get_errors())
+			);
+
+			return false;
+
+		}
 
 	}
 
 	public function delete($id){
+
+		//POLYAUTH REQUIRED to check if the user is logged in and owns this resource
+		try{
+
+			$user = $this->accounts_manager->get_user($id);
+			$query = $this->accounts_manager->deregister($user);
+			
+			if($query){
+
+				return true;
+
+			}else{
+
+				$this->errors = array(
+					'error'	=> 'Nothing to delete.',
+				);
+				return false;
+				
+			}
+
+		}catch(PolyAuthException $e){
+
+			$this->errors = array(
+				'error'	=> implode($e->get_errors())
+			);
+
+			return false;
+
+		}
 
 	}
 

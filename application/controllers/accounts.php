@@ -81,9 +81,59 @@ class Accounts extends CI_Controller{
 
 	public function update($id){
 
+		$data = $this->input->json(false);
+
+		$query = $this->Accounts_model->update($id, $data);
+		
+		if($query){
+		
+			$content = $id;
+			$code = 'success';
+			
+		}else{
+		
+			$content = current($this->Accounts_model->get_errors());
+			$code = key($this->Accounts_model->get_errors());
+
+			if($code == 'validation_error'){
+				$this->output->set_status_header(400);
+			}elseif($code == 'system_error'){
+				$this->output->set_status_header(500);
+			}
+			
+		}
+		
+		$output = array(
+			'content'	=> $content,
+			'code'		=> $code,
+		);
+		
+		Template::compose(false, $output, 'json');
+
 	}
 
 	public function delete($id){
+
+		$query = $this->Accounts_model->delete($id);
+		
+		if($query){
+		
+			$content = $id;
+			$code = 'success';
+			
+		}else{
+		
+			$content = current($this->Accounts_model->get_errors());
+			$code = key($this->Accounts_model->get_errors());
+		
+		}
+		
+		$output = array(
+			'content'	=> $content,
+			'code'		=> $code,
+		);
+		
+		Template::compose(false, $output, 'json');
 
 	}
 
