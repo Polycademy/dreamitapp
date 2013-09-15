@@ -206,8 +206,8 @@ define(['angular', 'lodash'], function(angular, _){
 
 					var dialog = $dialog.dialog({
 						backdrop: false,
-						keyboard: true,
-						dialogClass: 'modal overlay_backdrop no_scroll',
+						keyboard: false,
+						dialogClass: 'modal',
 						templateUrl: 'signin_modal.html',
 						controller: 'SignInModalCtrl'
 					});
@@ -275,22 +275,33 @@ define(['angular', 'lodash'], function(angular, _){
 		])
 		.controller('SignInModalCtrl', [
 			'$scope',
-			'$rootScope',
+			'UsersServ',
 			'dialog',
-			function($scope, $rootScope, dialog){
-
-				$rootScope.viewingOverlay = true;
+			function($scope, UsersServ, dialog){
 
 				$scope.closeOverlay = function(){
-					$rootScope.viewingOverlay = false;
 					dialog.close(loggedIn);
 				};
 
 				var loggedIn = false;
 
-				$scope.submitLogin = function(){
-					//if successful
-					loggedIn = true;
+				$scope.submitSignIn = function(){
+
+					var credentials = {
+						email: $scope.email,
+						password: $scope.password
+					};
+
+					UsersServ.loginSession(credentials, function(response){
+
+						//Users serv should try to get the data themselves
+						//we can then check the data
+						loggedIn = true;
+
+					}, function(response){
+
+					});
+
 				};
 
 			}
