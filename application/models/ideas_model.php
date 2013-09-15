@@ -1,6 +1,5 @@
 <?php
 
-use PolyAuth\Exceptions\PolyAuthException;
 use Michelf\MarkdownExtra;
 
 class Ideas_model extends CI_Model{
@@ -185,13 +184,6 @@ class Ideas_model extends CI_Model{
 				$author_type = 'Member';
 			}
 
-			$owns_resource = false;
-			if($this->sessions_manager->authorized()){
-				if($this->sessions_manager->get_user()['id'] == $author['id']){
-					$owns_resource = true;
-				}
-			}
-
 			$tags = array();
 			$this->db->select('tag')->where('ideaId', $id)->from('tags');
 			$tag_query = $this->db->get();
@@ -222,7 +214,6 @@ class Ideas_model extends CI_Model{
 				'date'					=> $row->date,
 				'privacy'				=> $this->reverse_privacy($row->privacy),
 				'commentCount'			=> $comment_count,
-				'owns'					=> $owns_resource,
 			);
 			return $data;
 			
@@ -328,14 +319,6 @@ class Ideas_model extends CI_Model{
 					$author_type = 'Member';
 				}
 
-				//owns resource?
-				$owns_resource = false;
-				if($this->sessions_manager->authorized()){
-					if($this->sessions_manager->get_user()['id'] == $author['id']){
-						$owns_resource = true;
-					}
-				}
-
 				//tags for each idea
 				$tags = array();
 				$this->db->select('tag')->where('ideaId', $idea_id)->from('tags');
@@ -368,7 +351,6 @@ class Ideas_model extends CI_Model{
 					'date'					=> $row->date,
 					'privacy'				=> $this->reverse_privacy($row->privacy),
 					'commentCount'			=> $comment_count,
-					'owns'					=> $owns_resource,
 				);
 			
 			}
@@ -389,7 +371,7 @@ class Ideas_model extends CI_Model{
 
 	public function update($id, $input_data){
 
-		if(!$this->sessions_manager->authorized()){
+		if(!$this->sessions_manager->authorized() AND !$this->sessions_manager->authorized(false, 'admin')){
 			$query = $this->db->get_where('ideas', array('authorId' => $this->sessions_manager->get_user()['id']));
 			if(!$query->num_rows()){
 				$this->errors = array(
@@ -527,7 +509,7 @@ class Ideas_model extends CI_Model{
 
 	public function delete($id){
 
-		if(!$this->sessions_manager->authorized()){
+		if(!$this->sessions_manager->authorized() AND !$this->sessions_manager->authorized(false, 'admin')){
 			$query = $this->db->get_where('ideas', array('authorId' => $this->sessions_manager->get_user()['id']));
 			if(!$query->num_rows()){
 				$this->errors = array(

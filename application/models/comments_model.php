@@ -2,16 +2,33 @@
 
 class Comments_model extends CI_Model{
 
+	protected $accounts_manager;
+	protected $sessions_manager;
 	protected $errors;
 
 	public function __construct(){
 
 		parent::__construct();
+		
+		$ioc = $this->config->item('ioc');
+		$this->accounts_manager = $ioc['PolyAuth\Accounts\AccountsManager'];
+		$this->sessions_manager = $ioc['PolyAuth\Sessions\UserSessions'];
+		$this->sessions_manager->start();
+
 		$this->load->library('form_validation', false, 'validator');
 
 	}
 
 	public function create($input_data){
+
+		if(!$this->sessions_manager->authorized()){
+			$this->errors = array(
+				'error'	=> 'Not authorised to comment.'
+			);
+			return false;
+		}
+
+		$input_data['authorId'] = $this->sessions_manager->get_user()['id'];
 
 		$data = elements(array(
 			'ideaId',
@@ -80,15 +97,15 @@ class Comments_model extends CI_Model{
 			
 			$row = $query->row();
 
-			//get author information (currently hardcoded)
-			$author = 'Roger Qiu';
-			$author_url = 'roger_qiu';
-			$author_avatar = 'http://gravatar.com/avatar/' . md5(trim('roger.qiu@polycademy.com'));
+			$author = $this->accounts_manager->get_user($row->authorId);
+			$author_name = $author['username'];
+			$author_url = url_title($author['username'], '_', true);
+			$author_avatar = 'http://gravatar.com/avatar/' . md5(trim($author['email']));
 
 			$data = array(
 				'id'					=> $row->id,
 				'ideaId'				=> $row->ideaId,
-				'author'				=> $author,
+				'author'				=> $author_name,
 				'authorId'				=> $row->authorId,
 				'authorUrl'				=> $author_url,
 				'authorAvatar'			=> $author_avatar,
@@ -158,14 +175,15 @@ class Comments_model extends CI_Model{
 
 			foreach($query->result() as $row){
 
-				$author = 'Roger Qiu';
-				$author_url = 'roger_qiu';
-				$author_avatar = 'http://gravatar.com/avatar/' . md5(trim('roger.qiu@polycademy.com'));
+				$author = $this->accounts_manager->get_user($row->authorId);
+				$author_name = $author['username'];
+				$author_url = url_title($author['username'], '_', true);
+				$author_avatar = 'http://gravatar.com/avatar/' . md5(trim($author['email']));
 
 				$data[] = array(
 					'id'					=> $row->id,
 					'ideaId'				=> $row->ideaId,
-					'author'				=> $author,
+					'author'				=> $author_name,
 					'authorId'				=> $row->authorId,
 					'authorUrl'				=> $author_url,
 					'authorAvatar'			=> $author_avatar,
@@ -185,69 +203,6 @@ class Comments_model extends CI_Model{
 			
 			return false;
 
-		}
-
-	}
-
-	public function update($id, $input_data){
-
-		$data = elements(array(
-			'comment'
-		), $input_data, null, true);
-
-		$this->validator->set_data($data);
-
-		$this->validator->set_rules(array(
-			array(
-				'field'	=> 'comment',
-				'label'	=> 'Comment',
-				'rules'	=> 'htmlspecialchars|trim|min_length[10]|max_length[2000]',
-			),
-		));
-
-		if($this->validator->run() ==  false){
-
-			$this->errors = array(
-				'validation_error'	=> $this->validator->error_array()
-			);
-			return false;
-
-		}
-
-		$this->db->where('id', $id);
-		$this->db->update('comments', $data);
-
-		if($this->db->affected_rows() > 0){
-		
-			return true;
-		
-		}else{
-			
-			$this->errors = array(
-				'error'	=> 'Comment doesn\'t need to update.',
-			);
-            return false;
-		
-		}
-
-	}
-
-	public function delete($id){
-
-		$query = $this->db->delete('comments', array('id' => $id));
-
-		if($this->db->affected_rows() > 0){
-		
-			return true;
-			
-		}else{
-		
-			$this->errors = array(
-				'error'	=> 'Nothing to delete.',
-			);
-			
-            return false;
-			
 		}
 
 	}

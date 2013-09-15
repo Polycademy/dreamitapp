@@ -65,11 +65,6 @@ class Blog extends CI_Controller{
 	public function create(){
 
 		$data = $this->input->json(false);
-
-		//based on PolyAuth
-		//currently hardcoded,
-		//ONLY ALLOW ADMIN USER TO CREATE BLOGS
-		$data['authorId'] = 1;
 		
 		$query = $this->Blog_model->create($data);
 		

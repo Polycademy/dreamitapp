@@ -71,10 +71,6 @@ class Comments extends CI_Controller{
 	public function create(){
 
 		$data = $this->input->json(false);
-
-		//based on PolyAuth
-		//currently hardcoded,
-		$data['authorId'] = 1;
 		
 		$query = $this->Comments_model->create($data);
 		

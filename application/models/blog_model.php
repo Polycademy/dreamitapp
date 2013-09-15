@@ -4,18 +4,36 @@ use Michelf\MarkdownExtra;
 
 class Blog_model extends CI_Model{
 
+	protected $accounts_manager;
+	protected $sessions_manager;
 	protected $errors;
 	protected $parser;
 
 	public function __construct(){
 
 		parent::__construct();
+		
+		$ioc = $this->config->item('ioc');
+		$this->accounts_manager = $ioc['PolyAuth\Accounts\AccountsManager'];
+		$this->sessions_manager = $ioc['PolyAuth\Sessions\UserSessions'];
+		$this->sessions_manager->start();
+
 		$this->parser = new MarkdownExtra;
+
 		$this->load->library('form_validation', false, 'validator');
 
 	}
 
 	public function create($input_data){
+
+		if(!$this->sessions_manager->authorized(false, 'admin')){
+			$this->errors = array(
+				'error'	=> 'Not authorised to create blog posts.'
+			);
+			return false;
+		}
+
+		$input_data['authorId'] = $this->sessions_manager->get_user()['id'];
 
 		$data = elements(array(
 			'title',
@@ -84,9 +102,9 @@ class Blog_model extends CI_Model{
 			
 			$row = $query->row();
 
-			//get author information (currently hardcoded)
-			$author = 'Roger Qiu';
-			$author_url = 'roger_qiu';
+			$author = $this->accounts_manager->get_user($row->authorId);
+			$author_name = $author['username'];
+			$author_url = url_title($author['username'], '_', true);
 
 			$data = array(
 				'id'					=> $row->id,
@@ -96,7 +114,7 @@ class Blog_model extends CI_Model{
 				'descriptionParsed'		=> $this->parse_markdown($row->description),
 				'authorId'				=> $row->authorId,
 				'authorUrl'				=> $author_url,
-				'author'				=> $author,
+				'author'				=> $author_name,
 				'date'					=> $row->date,
 			);
 
@@ -129,8 +147,9 @@ class Blog_model extends CI_Model{
 
 			foreach($query->result() as $row){
 
-				$author = 'Roger Qiu';
-				$author_url = 'roger_qiu';
+				$author = $this->accounts_manager->get_user($row->authorId);
+				$author_name = $author['username'];
+				$author_url = url_title($author['username'], '_', true);
 
 				$data[] = array(
 					'id'					=> $row->id,
@@ -140,7 +159,7 @@ class Blog_model extends CI_Model{
 					'descriptionParsed'		=> $this->parse_markdown($row->description),
 					'authorId'				=> $row->authorId,
 					'authorUrl'				=> $author_url,
-					'author'				=> $author,
+					'author'				=> $author_name,
 					'date'					=> $row->date,
 				);
 
@@ -161,6 +180,13 @@ class Blog_model extends CI_Model{
 	}
 
 	public function update($id, $input_data){
+
+		if(!$this->sessions_manager->authorized(false, 'admin')){
+			$this->errors = array(
+				'error'	=> 'Not authorised to update blog posts.'
+			);
+			return false;
+		}
 
 		$data = elements(array(
 			'title',
@@ -210,6 +236,13 @@ class Blog_model extends CI_Model{
 	}
 
 	public function delete($id){
+
+		if(!$this->sessions_manager->authorized(false, 'admin')){
+			$this->errors = array(
+				'error'	=> 'Not authorised to delete blog posts.'
+			);
+			return false;
+		}
 
 		$query = $this->db->delete('blog', array('id' => $id));
 
