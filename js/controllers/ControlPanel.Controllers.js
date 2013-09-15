@@ -322,9 +322,6 @@ define(['angular', 'lodash'], function(angular, _){
 					UsersServ.registerAccount(newUser, function(response){
 
 						$scope.successSubmit = 'Successfully Registered. If you are a general member, you can login immediately. If you applied to be a developer, you need to await a response from Dream it App.';
-						$timeout(function(){
-							$scope.closeOverlay();
-						}, 1000);
 
 					}, function(response){
 

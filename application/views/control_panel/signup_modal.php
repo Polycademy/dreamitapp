@@ -88,7 +88,7 @@
 							type="radio" 
 							name="developer" 
 							ng-model="developer" 
-							value="false" 
+							value="0" 
 							ng-checked="true" 
 						/>
 						No
@@ -98,7 +98,7 @@
 							type="radio" 
 							name="developer" 
 							ng-model="developer" 
-							value="true" 
+							value="1" 
 						/>
 						Yes
 					</label>

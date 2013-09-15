@@ -53,7 +53,7 @@ class Accounts_model extends CI_Model{
 			array(
 				'field'	=> 'developer',
 				'label'	=> 'Developer',
-				'rules'	=> 'trim'
+				'rules'	=> 'trim|integer'
 			),
 			array(
 				'field'	=> 'tac',
@@ -71,11 +71,11 @@ class Accounts_model extends CI_Model{
 
 		}
 
-		if(!preg_match('/true|false/', $data['developer'])){
+		if(!preg_match('/[0-1]/', $data['developer'])){
 
 			$this->errors = array(
 				'validation_error'	=> array(
-					'developer'	=> 'The Developer field should be either (string) true or false.'
+					'developer'	=> 'The Developer field should be either (integer) 1 or 0.'
 				)
 			);
 			return false;
@@ -88,7 +88,7 @@ class Accounts_model extends CI_Model{
 		try{
 
 			//if developer, we need activation approval
-			if(isset($data['developer']) AND $data['developer'] == 'true'){
+			if(isset($data['developer']) AND $data['developer'] == true){
 
 				$user = $this->accounts_manager->register($data);
 
