@@ -5,12 +5,13 @@ define(['angular', 'lodash'], function(angular, _){
 	angular.module('Controllers')
 		.controller('UserCtrl', [
 			'$scope',
+			'$rootScope',
 			'$state',
 			'$location',
 			'$dialog',
 			'AccountsServ',
 			'UtilitiesServ',
-			function($scope, $state, $location, $dialog, AccountsServ, UtilitiesServ){
+			function($scope, $rootScope, $state, $location, $dialog, AccountsServ, UtilitiesServ){
 
 				$scope.user = {};
 
@@ -38,7 +39,7 @@ define(['angular', 'lodash'], function(angular, _){
 
 				$scope.loggedInAndOwns = function(){
 
-					if($scope.user.id == $rootScope.user.id){
+					if(($rootScope.loggedIn && $scope.user.authorId == $rootScope.user.id) || $rootScope.loggedInAdmin){
 						return true;
 					}
 

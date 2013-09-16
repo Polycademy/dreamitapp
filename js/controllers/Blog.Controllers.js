@@ -94,7 +94,13 @@ define(['angular'], function(angular){
 						}
 					});
 
-					dialog.open();
+					dialog.open().then(function(addedBlog){
+
+						if(addedBlog){
+							counterOffset++;
+						}
+
+					});
 
 				};
 

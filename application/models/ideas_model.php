@@ -164,7 +164,14 @@ class Ideas_model extends CI_Model{
 			
 			$row = $query->row();
 
-			if(!$this->check_privacy($row->privacy)){
+			$owned = false;
+			if($this->sessions_manager->authorized()){
+				if($this->sessions_manager->get_user()['id'] == $row->authorId){
+					$owned = true;
+				}
+			}
+
+			if(!$this->check_privacy($row->privacy) AND !$owned){
 				$this->errors = array(
 					'error' => 'This idea is private to developers.'
 				);
@@ -297,13 +304,20 @@ class Ideas_model extends CI_Model{
 		
 			foreach($query->result() as $row){
 
-				//if the idea didn't pass the privacy check, we just continue to the next idea
-				if(!$this->check_privacy($row->privacy)){
-					continue;
-				}
-
 				$idea_id = $row->id;
 				$author_id = $row->authorId;
+
+				$owned = false;
+				if($this->sessions_manager->authorized()){
+					if($this->sessions_manager->get_user()['id'] == $row->authorId){
+						$owned = true;
+					}
+				}
+
+				//if the idea didn't pass the privacy check, we just continue to the next idea
+				if(!$this->check_privacy($row->privacy) AND !$owned){
+					continue;
+				}
 
 				//get author info
 				$author = $this->accounts_manager->get_user($author_id);
@@ -610,9 +624,12 @@ class Ideas_model extends CI_Model{
 
 			if($privacy & self::DEVELOPERS_PRIVACY){
 
-				$current_user = $this->sessions_manager->get_user()['id'];
+				$current_user = false;
+				if($this->sessions_manager->authorized()){
+					$current_user = $this->sessions_manager->get_user();
+				}
 
-				if(!$current_user->has_role('admin') AND !$current_user->has_role('developer')){
+				if(!$current_user OR (!$current_user->has_role('admin') AND !$current_user->has_role('developer'))){
 					return false;
 				}
 			

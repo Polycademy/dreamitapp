@@ -80,7 +80,7 @@ define(['angular'], function(angular){
 									$timeout(function(){
 										if(dialog){
 											BlogDataServ.prependBlog(response.content);
-											$scope.closeOverlay();
+											$scope.closeOverlay(true);
 										}else{
 											$state.transitionTo('blog', {blogId: newBlogId, blogUrl: response.content.titleUrl});
 										}

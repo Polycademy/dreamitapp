@@ -129,7 +129,7 @@ define(['angular'], function(angular){
 				//////////////////
 
 				$scope.loggedInAndOwns = function(){
-					if($scope.idea.authorId == $rootScope.user.id){
+					if(($rootScope.loggedIn && $scope.idea.authorId == $rootScope.user.id) || $rootScope.loggedInAdmin){
 						return true;
 					}
 					return false;
@@ -203,6 +203,8 @@ define(['angular'], function(angular){
 							id: response.content
 						}, function(response){
 
+							//so that the query won't get the most recently added comment
+							counterOffset++;
 							$scope.comments.unshift(response.content);
 							$scope.$parent.idea.commentCount++;
 
