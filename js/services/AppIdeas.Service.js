@@ -48,6 +48,16 @@ define(['angular'], function(angular){
 					
 				};
 
+				this.replaceProperty = function(id, key, property){
+
+					for(var i=0; i<this.appIdeas.length; i++){
+						if(id == this.appIdeas[i].id){
+							this.appIdeas[i][key] = property;
+						}
+					}
+
+				};
+
 			}
 		]);
 

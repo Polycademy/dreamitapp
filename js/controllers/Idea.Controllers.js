@@ -12,8 +12,9 @@ define(['angular'], function(angular){
 			'IdeasServ',
 			'CommentsServ',
 			'LikeServ',
+			'AppIdeasServ',
 			'dialog',
-			function($scope, $rootScope, $state, $location, $dialog, IdeasServ, CommentsServ, LikeServ, dialog){
+			function($scope, $rootScope, $state, $location, $dialog, IdeasServ, CommentsServ, LikeServ, AppIdeasServ, dialog){
 
 				//if dialog is passed in, we're inside an overlay and we need the ideaId and locationParamsAndHash
 				if(dialog){
@@ -81,6 +82,9 @@ define(['angular'], function(angular){
 								id: ideaId
 							}, function(response){
 								$scope.idea.likes = response.content.likes;
+								if(dialog){
+									AppIdeasServ.replaceProperty(ideaId, 'likes', response.content.likes);
+								}
 							});
 						}
 					);
@@ -150,7 +154,8 @@ define(['angular'], function(angular){
 			'$scope',
 			'$rootScope',
 			'CommentsServ',
-			function($scope, $rootScope, CommentsServ){
+			'AppIdeasServ',
+			function($scope, $rootScope, CommentsServ, AppIdeasServ){
 
 				var limit = 20,
 					counterOffset = 0;
@@ -207,6 +212,10 @@ define(['angular'], function(angular){
 							counterOffset++;
 							$scope.comments.unshift(response.content);
 							$scope.$parent.idea.commentCount++;
+							//if we are in an overlay, we update AppIdeasServ
+							if($rootScope.viewingOverlay){
+								AppIdeasServ.replaceProperty(ideaId, 'commentCount', $scope.$parent.idea.commentCount);
+							}
 
 						}, function(response){
 
