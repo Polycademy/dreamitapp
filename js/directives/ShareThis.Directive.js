@@ -64,7 +64,11 @@ define(['angular', 'sharethis'], function(angular, sharethis){
 							shareThis.url = scope.shareThisUrl;
 							shareThis.title = scope.shareThisTitle;
 							shareThis.summary = scope.shareThisSummary;
-							shareThis.image = scope.shareThisImage;
+							//the image is optional, we don't want to stuff up the isObjectReady
+							//also this function runs on every digest loop
+							if(scope.shareThisImage){
+								shareThis.image = scope.shareThisImage;
+							}
 							
 							return shareThis;
 
