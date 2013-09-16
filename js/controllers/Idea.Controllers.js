@@ -164,6 +164,12 @@ define(['angular'], function(angular){
 
 				$scope.commentsServiceBusy = false;
 
+				$scope.loggedInAndComments = false;
+
+				if($rootScope.loggedIn){
+					$scope.loggedInAndComments = true;
+				}
+
 				$scope.getComments = function(ideaId){
 
 					$scope.commentsServiceBusy = true;
@@ -182,6 +188,7 @@ define(['angular'], function(angular){
 							counterOffset = counterOffset + limit;
 							$scope.comments.push.apply($scope.comments, response.content);
 							$scope.commentsServiceBusy = false;
+							$scope.loggedInAndComments = true;
 
 						},
 						function(response){

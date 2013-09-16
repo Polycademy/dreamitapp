@@ -90,13 +90,13 @@
 								<span class="fui-plus"></span>Share
 							</a>
 						</li>
-						<li><a anchor-scroll-dir="feedback"><span class="fui-chat"></span>Give Feedback</a></li>
+						<li ng-show="loggedIn"><a anchor-scroll-dir="feedback"><span class="fui-chat"></span>Give Feedback</a></li>
 					</ul>
 				</div>
 			</aside>
 		</div>
 		<section id="feedback" class="idea_comments" ng-controller="CommentsCtrl">
-			<h2>Feedback</h2>
+			<h2 ng-show="loggedInAndComments">Feedback</h2>
 			<form class="comment_form" ng-submit="submitComment(idea.id)" name="comment_form" ng-show="loggedIn">
 				<div 
 					class="control-group" 
