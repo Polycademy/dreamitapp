@@ -1,12 +1,13 @@
-define(['angular'], function(angular){
+define(['angular', 'bootstrap'], function(angular){
 
 	'use strict';
 
 	angular.module('Directives')
 		.directive('likeToggleDir', [
 			'$rootScope',
+			'$timeout',
 			'LikeServ',
-			function($rootScope, LikeServ){
+			function($rootScope, $timeout, LikeServ){
 				return {
 					link: function(scope, element, attributes){
 
@@ -22,9 +23,20 @@ define(['angular'], function(angular){
 							ideaId = value;
 						});
 
+						if(!$rootScope.loggedIn){
+							element.tooltip({
+								title: 'Sign in to like ideas!',
+								trigger: 'manual'
+							});
+						}
+
 						element.bind('click', function(){
 
 							if(!$rootScope.loggedIn){
+								element.tooltip('show');
+								$timeout(function(){
+									element.tooltip('hide');
+								}, 1000);
 								return false;
 							}
 
