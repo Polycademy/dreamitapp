@@ -24,8 +24,6 @@ define(['angular'], function(angular){
 			'dialog',
 			function($scope, $rootScope, $state, $location, $timeout, AppIdeasServ, IdeasServ, TagsServ, dialog){
 
-				//NEEDS POLYAUTH (this person must be logged in to access this stuff)
-
 				/** If dialog is available, switch on overlay and provide a closeOverlay function */
 				if(dialog){
 					$rootScope.viewingOverlay = true;
