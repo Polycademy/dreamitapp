@@ -139,7 +139,7 @@
 			>
 				<div class="comment_box" ng-repeat="comment in comments">
 					<div class="comment_meta">
-						<img class="comment_avatar" ng-src="{{comment.authorAvatar}}" />
+						<img class="comment_avatar" ng-src="{{comment.authorAvatar}}?s=184&d=mm" />
 						<div class="comment_author"><a href="users/{{comment.authorId}}/{{comment.authorUrl}}">{{comment.author}}</a></div>
 					</div>
 					<div class="comment_content">{{comment.comment}}</div>

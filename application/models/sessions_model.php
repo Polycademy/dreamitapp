@@ -65,8 +65,6 @@ class Sessions_model extends CI_Model{
 
 		}catch(PolyAuthException $e){
 
-			var_dump($e);
-
 			$this->errors = array(
 				'validation_error'	=> $e->get_errors()
 			);
@@ -121,8 +119,6 @@ class Sessions_model extends CI_Model{
 			return true;
 
 		}catch(PolyAuthException $e){
-
-			var_dump($e);
 
 			$this->errors = array(
 				'validation_error'	=> $e->get_errors()

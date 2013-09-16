@@ -6,7 +6,7 @@ define(['angular'], function(angular){
 		.directive('likeToggleDir', [
 			'$rootScope',
 			'LikeServ',
-			function(LikeServ){
+			function($rootScope, LikeServ){
 				return {
 					link: function(scope, element, attributes){
 
