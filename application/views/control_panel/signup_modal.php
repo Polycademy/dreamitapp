@@ -118,7 +118,51 @@
 						Agree to the <a href="about#tac" target="_blank">Terms and Conditions</a>.
 					</label>
 					<span class="help-block" ng-show="signup_form.tac.$error.required">Required</span>
-					<span class="help-block">You also agree to receive emails from Dream it App and participating developers.</span>
+				</div>
+			</div>
+			<div class="control-group">
+				<div class="controls">
+					<label class="checkbox">
+						<input 
+							type="checkbox" 
+							name="email1" 
+							ng-model="email1" 
+							value="true" 
+							required 
+						/>
+						Agree to receive marketing emails from Dream it App.
+					</label>
+					<span class="help-block" ng-show="signup_form.email1.$error.required">Required</span>
+				</div>
+			</div>
+			<div class="control-group">
+				<div class="controls">
+					<label class="checkbox">
+						<input 
+							type="checkbox" 
+							name="email2" 
+							ng-model="email2" 
+							value="true" 
+							required 
+						/>
+						Agree to receive marketing emails from participating developers.
+					</label>
+					<span class="help-block" ng-show="signup_form.email2.$error.required">Required</span>
+				</div>
+			</div>
+			<div class="control-group">
+				<div class="controls">
+					<label class="checkbox">
+						<input 
+							type="checkbox" 
+							name="email3" 
+							ng-model="email3" 
+							value="true" 
+							required 
+						/>
+						Agree to being contacted by developers about beta testing applications.
+					</label>
+					<span class="help-block" ng-show="signup_form.email3.$error.required">Required</span>
 				</div>
 			</div>
 			<div class="validation_errors text-center" ng-show="validationErrors">

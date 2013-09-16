@@ -5,6 +5,7 @@ use PolyAuth\Exceptions\PolyAuthException;
 class Accounts_model extends CI_Model{
 
 	protected $accounts_manager;
+	protected $sessions_manager;
 	protected $rbac;
 	protected $emailer;
 	protected $errors;
@@ -15,6 +16,7 @@ class Accounts_model extends CI_Model{
 
 		$ioc = $this->config->item('ioc');
 		$this->accounts_manager = $ioc['PolyAuth\Accounts\AccountsManager'];
+		$this->sessions_manager = $ioc['PolyAuth\Sessions\UserSessions'];
 		$this->rbac = $ioc['PolyAuth\Accounts\Rbac'];
 		$this->emailer = $ioc['PolyAuth\Emailer'];
 
@@ -32,6 +34,9 @@ class Accounts_model extends CI_Model{
 			'password',
 			'developer',
 			'tac',
+			'email1',
+			'email2',
+			'email3',
 		), $input_data, null, true);
 
 		$this->validator->set_data($data);
@@ -61,7 +66,22 @@ class Accounts_model extends CI_Model{
 				'field'	=> 'tac',
 				'label'	=> 'Terms and Conditions',
 				'rules'	=> 'required'
-			)
+			),
+			array(
+				'field'	=> 'email1',
+				'label'	=> 'Agree to receive marketing emails from Dream it App',
+				'rules'	=> 'required'
+			),
+			array(
+				'field'	=> 'email2',
+				'label'	=> 'Agree to receive marketing emails from participating developers',
+				'rules'	=> 'required'
+			),
+			array(
+				'field'	=> 'email3',
+				'label'	=> 'Agree to being contacted by developers about beta testing applications',
+				'rules'	=> 'required'
+			),
 		));
 
 		if($this->validator->run() ==  false){
@@ -86,6 +106,9 @@ class Accounts_model extends CI_Model{
 
 		//tac won't be sent to the user_accounts table
 		unset($data['tac']);
+		unset($data['email1']);
+		unset($data['email2']);
+		unset($data['email3']);
 
 		try{
 
@@ -134,17 +157,11 @@ class Accounts_model extends CI_Model{
 
 	public function read($id){
 
-		//NEED POLYAUTH TO DETECT WHETHER THIS RESOURCE IS OWNED
-		$logged_in_and_owns = true;
-
 		try{
 
 			$user = $this->accounts_manager->get_user($id);
 
-			//in the future, this data should be filtered on what is allowed to the public to see
-			//for example emails here can easily be harvested if discovered!
-			//however there's no time currently to do this
-			$data = $user->get_user_data($id);
+			$data = $user->get_user_data();
 
 			if($user->has_role('admin')){
 				$data['type'] = 'Site Administrator';
@@ -156,7 +173,9 @@ class Accounts_model extends CI_Model{
 
 			$data['usernameUrl'] = url_title($data['username'], '_', true);
 			$data['avatar'] = 'http://gravatar.com/avatar/' . md5(trim($data['email']));
-			if(!$logged_in_and_owns){
+
+			//if not admin and not the same identity
+			if(!$this->sessions_manager->authorized(false, 'admin') AND !$this->sessions_manager->authorized(false, false, $user['email'])){
 				unset($data['email']);
 				unset($data['phone']);
 			}

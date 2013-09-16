@@ -368,18 +368,19 @@ class Ideas_model extends CI_Model{
 				);
 			
 			}
-			
-			return $data;
-		
-		}else{
-		
-			$this->errors = array(
-				'error' => 'No more ideas to load!'
-			);
-			
-			return false;
+
+			//due to privacy, potentially no ideas may be returned
+			if(!empty($data)){
+				return $data;
+			}
 		
 		}
+		
+		$this->errors = array(
+			'error' => 'No more ideas to load!'
+		);
+		
+		return false;
 
 	}
 

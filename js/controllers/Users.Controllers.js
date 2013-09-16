@@ -39,10 +39,9 @@ define(['angular', 'lodash'], function(angular, _){
 
 				$scope.loggedInAndOwns = function(){
 
-					if(($rootScope.loggedIn && $scope.user.authorId == $rootScope.user.id) || $rootScope.loggedInAdmin){
+					if(($rootScope.loggedIn && $scope.user.id == $rootScope.user.id) || $rootScope.loggedInAdmin){
 						return true;
 					}
-
 					return false;
 
 				};

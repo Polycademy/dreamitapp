@@ -291,9 +291,11 @@ define(['angular', 'lodash'], function(angular, _){
 		.controller('SignUpModalCtrl', [
 			'$scope',
 			'$rootScope',
+			'$timeout',
+			'$state',
 			'UsersServ',
 			'dialog',
-			function($scope, $rootScope, UsersServ, dialog){
+			function($scope, $rootScope, $timeout, $state, UsersServ, dialog){
 
 				$rootScope.viewingOverlay = true;
 
@@ -312,12 +314,28 @@ define(['angular', 'lodash'], function(angular, _){
 						email: $scope.email,
 						password: $scope.password,
 						developer: $scope.developer,
-						tac: $scope.tac
+						tac: $scope.tac,
+						email1: $scope.email1,
+						email2: $scope.email2,
+						email3: $scope.email3
 					};
 
 					UsersServ.registerAccount(newUser, function(response){
 
 						$scope.successSubmit = 'Successfully Registered. If you are a general member, you can login immediately. If you applied to be a developer, you need to await a response from Dream it App.';
+
+						$timeout(function(){
+							//if user did apply to be a developer, sign him in and transition them to their profile page
+							if($scope.developer == '0'){
+								UsersServ.loginSession({
+									email: $scope.email,
+									password: $scope.password
+								}, function(response){
+									$state.transitionTo('user', {userId: response.content});
+								});
+							}
+							$scope.closeOverlay();
+						}, 1000);
 
 					}, function(response){
 

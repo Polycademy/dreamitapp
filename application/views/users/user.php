@@ -12,6 +12,8 @@
 				<ul>
 					<li>Name: {{user.username}}</li>
 					<li>Type: {{user.type}}</li>
+					<li ng-show="user.email">Email: {{user.email}}</li>
+					<li ng-show="user.phone">Phone: {{user.phone}}</li>
 					<li ng-show="user.operatingSystem">Operating System: {{user.operatingSystem}}</li>
 					<li ng-show="user.age">Age: {{user.age}}</li>
 					<li ng-show="user.gender">Gender: {{user.gender}}</li>
