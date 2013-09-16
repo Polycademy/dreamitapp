@@ -9,6 +9,7 @@ class Like_model extends CI_Model{
 	public function __construct(){
 
 		parent::__construct();
+		$ioc = $this->config->item('ioc');
 		$this->accounts_manager = $ioc['PolyAuth\Accounts\AccountsManager'];
 		$this->sessions_manager = $ioc['PolyAuth\Sessions\UserSessions'];
 		$this->sessions_manager->start();
