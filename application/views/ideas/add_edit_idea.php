@@ -130,7 +130,7 @@
 							ui-select2="addIdeaTagsOptions" 
 							ng-model="addIdeaTags" 
 						/>
-						<span class="help-block">Maximum of four tags.</span>
+						<span class="help-block">Maximum of four tags. Hit enter button to set each tag.</span>
 					</div>
 				</div>
 				<div class="control-group">
