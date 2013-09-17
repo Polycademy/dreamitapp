@@ -22,10 +22,10 @@ Pigeon::map(function($r){
 		$r->resources('accounts');
 		$r->get('accounts/activate', 'accounts/activate');
 		$r->resources('sessions');
+		$r->resources('oauth');
 
-		//testing
-		$r->get('accounts/test', 'accounts/test');
-		$r->get('sessions/test', 'sessions/test');
+		//FB login
+		$r->resource('facebook');
 		
 	});
 

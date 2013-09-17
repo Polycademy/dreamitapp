@@ -8,14 +8,6 @@ class Sessions extends CI_Controller{
 		$this->load->model('Sessions_model');
 	
 	}
-
-	public function test(){
-
-		$data['email'] = 'roger.qiu@polycademy.com';
-		$data['password'] = 'long0810';
-		$this->Sessions_model->create($data);
-
-	}
 	
 	public function show($id){
 		

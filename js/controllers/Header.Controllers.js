@@ -6,8 +6,7 @@ define(['angular'], function(angular){
 		.controller('HeaderCtrl', [
 			'$scope',
 			'$rootScope',
-			'$location',
-			function($scope, $rootScope, $location){
+			function($scope, $rootScope){
 
 				$scope.reloadWall = function(){
 					$rootScope.$broadcast('reloadWall');

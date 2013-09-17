@@ -8,17 +8,11 @@ class Accounts extends CI_Controller{
 		$this->load->model('Accounts_model');
 
 	}
-
-	public function test(){
-
-
-	}
 	
 	public function show($id){
 
 		//this should only show public information, no private information
-
-		$query = $this->Accounts_model->read($id);		
+		$query = $this->Accounts_model->read($id);
 		
 		if($query){
 			
@@ -45,7 +39,7 @@ class Accounts extends CI_Controller{
 	public function create(){
 
 		$data = $this->input->json(false);
-		
+
 		$query = $this->Accounts_model->create($data);
 		
 		if($query){

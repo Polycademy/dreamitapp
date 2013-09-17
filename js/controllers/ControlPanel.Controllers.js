@@ -207,7 +207,9 @@ define(['angular', 'lodash'], function(angular, _){
 				//this does not bring up an overlay
 				$scope.signOut = function(){
 
-					UsersServ.logoutSession(0);
+					UsersServ.logoutSession(0, function(){
+						$rootScope.$broadcast('reloadWall');
+					});
 
 				};
 
@@ -247,10 +249,11 @@ define(['angular', 'lodash'], function(angular, _){
 		])
 		.controller('SignInModalCtrl', [
 			'$scope',
+			'$rootScope',
 			'$timeout',
 			'UsersServ',
 			'dialog',
-			function($scope, $timeout, UsersServ, dialog){
+			function($scope, $rootScope, $timeout, UsersServ, dialog){
 
 				$scope.closeOverlay = function(){
 					dialog.close();
@@ -268,6 +271,7 @@ define(['angular', 'lodash'], function(angular, _){
 						$scope.successSubmit = 'Successfully Signed In';
 						$timeout(function(){
 							$scope.closeOverlay();
+							$rootScope.$broadcast('reloadWall');
 						}, 1000);
 
 					}, function(response){
