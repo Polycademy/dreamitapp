@@ -90,6 +90,7 @@ define([
 				'directives/FilePicker.Directive',
 				'directives/InputFocus.Directive',
 				'directives/WhenScrolled.Directive',
+				'directives/FacebookLogin.Directive',
 				//FILTERS
 				'filters/StripHtml.Filter',
 				'filters/UrlFriendly.Filter',
@@ -111,7 +112,8 @@ define([
 				'resources/Like.Service',
 				'resources/Email.Service',
 				'resources/Blog.Service',
-				'resources/Comments.Service'
+				'resources/Comments.Service',
+				'resources/Oauth.Service'
 			], function(){
 
 				/* ==========================================================================
