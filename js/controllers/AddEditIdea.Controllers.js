@@ -162,7 +162,7 @@ define(['angular'], function(angular){
 						var failedSave = function(response){
 
 							$scope.validationErrors = [];
-							if(response.data.code = 'validation_error'){
+							if(response.data.code == 'validation_error'){
 								//the content would be an object of fields to errors
 								for(var key in response.data.content){
 									$scope.validationErrors.push(response.data.content[key]); 
@@ -278,7 +278,7 @@ define(['angular'], function(angular){
 						var failedUpdate = function(response){
 
 							$scope.validationErrors = [];
-							if(response.data.code = 'validation_error'){
+							if(response.data.code == 'validation_error'){
 								for(var key in response.data.content){
 									$scope.validationErrors.push(response.data.content[key]); 
 								}

@@ -295,7 +295,7 @@ define(['angular'], function(angular){
 					}, function(response){
 
 						$scope.validationErrors = [];
-						if(response.data.code = 'validation_error'){
+						if(response.data.code == 'validation_error'){
 							for(var key in response.data.content){
 								$scope.validationErrors.push(response.data.content[key]); 
 							}
