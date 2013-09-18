@@ -308,6 +308,7 @@ define([
 
 							$rootScope.user = args;
 							$rootScope.loggedIn = true;
+							//admins have both admin and developer permissions
 							if($rootScope.user.type === 'Site Administrator'){
 								$rootScope.loggedInAdmin = true;
 								$rootScope.loggedInDeveloper = true;

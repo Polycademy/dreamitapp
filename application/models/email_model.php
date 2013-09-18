@@ -111,6 +111,7 @@ class Email_model extends CI_Model{
 
 	public function send_developer_contact($input_data){
 
+		//only developers and admin is allowed to contact
 		if(!$this->sessions_manager->authorized(false, 'developer') AND !$this->sessions_manager->authorized(false, 'admin')){
 			$this->errors = array(
 				'error'	=> 'Not authorised to email.'
