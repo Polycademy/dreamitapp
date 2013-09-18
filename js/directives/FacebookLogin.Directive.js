@@ -44,13 +44,15 @@ define(['angular'], function(angular){
 			}
 		])
 		.directive('facebookLoginDir', [
-			'$http',
 			'$rootScope',
 			'FacebookLoginServ',
 			'OauthServ',
 			'UsersServ',
-			function($http, $rootScope, FacebookLoginServ, OauthServ, UsersServ){
+			function($rootScope, FacebookLoginServ, OauthServ, UsersServ){
 				return {
+					scope: {
+						facebookOverlayClose: '&'
+					},
 					link: function(scope, element, attributes){
 
 						if(!FacebookLoginServ.facebookSetup){
@@ -75,6 +77,9 @@ define(['angular'], function(angular){
 
 											UsersServ.getAccount(response.content, function(response){
 
+												//this close overlay is not working currently
+												//http://stackoverflow.com/questions/12729122/prevent-error-digest-already-in-progress-when-calling-scope-apply
+												scope.facebookOverlayClose();
 												$rootScope.$broadcast('reloadWall');
 
 											});

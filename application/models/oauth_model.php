@@ -57,7 +57,7 @@ class Oauth_model extends CI_Model{
 		$query_parameters = $request->getQuery();
 		$query_parameters->set('access_token', $data['accessToken']);
 		$response = $request->send();
-		$returned_data = json_decode($response->json(), true);
+		$returned_data = $response->json();
 
 		$this->validator->set_data($returned_data);
 

@@ -6,6 +6,7 @@ requirejs.config({
 	enforceDefine: true,
 	baseUrl: 'js/',
 	urlArgs: 'bust=' +  (new Date()).getTime(),
+	waitSeconds: 12,
 	paths: {
 		//FRAMEWORK
 		'jquery': [

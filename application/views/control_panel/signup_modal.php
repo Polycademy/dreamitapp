@@ -176,6 +176,7 @@
 			</div>
 			<div class="form-actions">
 				<button type="submit" class="btn btn-primary">Sign Up</button>
+				<button type="button" class="btn btn-info" facebook-login-dir facebook-overlay-close="closeOverlay()">Sign Up via Facebook</button>
 			</div>
 		</form>
 	</div>
