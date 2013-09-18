@@ -222,6 +222,12 @@ define(['angular'], function(angular){
 							}
 							$scope.addIdeaTags = tagObjectArray;
 
+							//if there is no image blob, that means there was no original image,
+							//we need to change to pickAndStore
+							if(!$scope.addIdeaImageBlob){
+								$scope.filePickerAction = 'pickAndStore';
+							}
+
 						},
 						function(response){
 
