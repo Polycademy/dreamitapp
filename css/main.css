@@ -6519,14 +6519,21 @@ header.navbar .nav li a {
 }
 .idea_container .idea_header .idea_heading {
   float: left;
+  padding: 30px 60px;
+  max-width: 60%;
+}
+.idea_container .idea_header .idea_heading h1 {
   font-size: 36px;
   font-family: 'source_sans_prosemibold', arial, sans-serif;
   font-weight: normal;
-  padding: 30px 60px;
   margin: 0;
 }
-.idea_container .idea_header .idea_heading a {
+.idea_container .idea_header .idea_heading h1 a {
   color: #34495e;
+}
+.idea_container .idea_header .idea_heading .idea_short {
+  margin-top: 5px;
+  clear: both;
 }
 .idea_container .idea_header .idea_close {
   margin: 30px 30px 30px 0;
@@ -6687,6 +6694,7 @@ header.navbar .nav li a {
 }
 .idea_container .idea_comments .comment_list .comment_box .comment_meta .comment_author {
   text-align: center;
+  font-size: 12px;
 }
 .idea_container .idea_comments .comment_list .comment_box .comment_content {
   float: left;

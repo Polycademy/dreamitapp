@@ -8,7 +8,10 @@
 		ng-show="!notFoundError"
 	>
 		<header class="idea_header">
-			<h1 class="idea_heading"><a ng-href="ideas/{{idea.id}}/{{idea.titleUrl}}">{{idea.title}}</a></h1>
+			<div class="idea_heading">
+				<h1><a ng-href="ideas/{{idea.id}}/{{idea.titleUrl}}">{{idea.title}}</a></h1>
+				<div class="idea_short">{{idea.descriptionShort}}</div>
+			</div>
 			<button 
 				class="idea_close overlay_close" 
 				ng-click="closeOverlay()" 

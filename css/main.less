@@ -419,13 +419,20 @@ header.navbar{
 		border-bottom: 1px solid @colour_green_highlight;
 		.idea_heading{
 			float: left;
-			font-size: 36px;
-			font-family: 'source_sans_prosemibold', arial, sans-serif;
-			font-weight: normal;
 			padding: 30px 60px;
-			margin: 0;
-			a{
-				color: @colour_wet_asphalt;
+			max-width: 60%;
+			h1{
+				font-size: 36px;
+				font-family: 'source_sans_prosemibold', arial, sans-serif;
+				font-weight: normal;
+				margin: 0;
+				a{
+					color: @colour_wet_asphalt;
+				}
+			}
+			.idea_short{
+				margin-top: 5px;
+				clear: both;
 			}
 		}
 		.idea_close{
@@ -568,6 +575,7 @@ header.navbar{
 					}
 					.comment_author{
 						text-align: center;
+						font-size: 12px;
 					}
 				}
 				.comment_content{
