@@ -9,13 +9,9 @@ class Email extends CI_Controller{
 		$this->load->model('Email_model');
 	
 	}
-	
-	/**
-	 * Sends either an enquiry email to ourselves or sends to an idea author.
-	 * @param json $data JSON post data that can include toEmail, fromEmail, message, authorName, senderName, ideaId, ideaUrl, ideaTitle  
-	 * @return [type] [description]
-	 */
-	public function send(){
+
+	//then test as a developer to send mail! (using cmcdragonkai@gmail.com
+	public function create(){
 
 		$data = $this->input->json(false);
 
@@ -23,16 +19,10 @@ class Email extends CI_Controller{
 		$data['replyTo'] = $data['fromEmail'];
 		$data['fromEmail'] = $this->config->item('sitemeta')['email'];
 
-		//if the toEmail is the same as the app's email, then it's an enquiry email
-		if(isset($data['toEmail']) AND $data['toEmail'] == $this->config->item('sitemeta')['email']){
-
+		if(isset($data['intention']) AND $data['intention'] == 'enquiry'){
 			$query = $this->Email_model->send_enquiry($data);
-
-		//else it's a custom email to an idea author, we need them to be logged in
 		}else{
-			
-			$query = $this->Email_model->send_developer_contact($data);
-
+			$query = $this->Email_model->send($data);
 		}
 
 		if($query){

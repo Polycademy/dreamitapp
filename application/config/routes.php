@@ -16,7 +16,7 @@ Pigeon::map(function($r){
 		$r->put('like/(:num)', 'like/update/$1');
 
 		//sending emails
-		$r->post('email', 'email/send');
+		$r->resource('email');
 		
 		//for authentication/authorisation
 		$r->resources('accounts');

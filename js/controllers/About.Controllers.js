@@ -11,9 +11,9 @@ define(['angular'], function(angular){
 				$scope.submitContact = function(){
 
 					var newEmail = {
-						toEmail: dreamItAppConfig.sitemeta.email,
 						fromEmail: $scope.contactEmail,
-						message: $scope.contactMessage
+						message: $scope.contactMessage,
+						intention: 'enquiry' //this make sure to send to admin rather than standard contact
 					};
 
 					EmailServ.save({}, newEmail, function(response){
