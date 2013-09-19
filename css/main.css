@@ -6100,6 +6100,14 @@ a:focus {
 .form-actions {
   background: none;
 }
+.tooltip {
+  padding: 10px;
+  font-size: 12px;
+  font-family: arial, sans-serif;
+}
+.tooltip .tooltip-arrow {
+  display: none;
+}
 /*
 	CUSTOM ICONS
  */

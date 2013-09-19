@@ -66,6 +66,7 @@ class Like_model extends CI_Model{
 			$this->errors = array(
 				'error'	=> 'Not authorised to like.'
 			);
+			$this->output->set_status_header(401);
 			return false;
 		}
 
@@ -120,6 +121,7 @@ class Like_model extends CI_Model{
 			$this->errors = array(
 				'error'	=> 'Not authorised to like.'
 			);
+			$this->output->set_status_header(401);
 			return false;
 		}
 
@@ -207,6 +209,7 @@ class Like_model extends CI_Model{
 			$this->errors = array(
 				'error'	=> 'Not authorised to like.'
 			);
+			$this->output->set_status_header(401);
 			return false;
 		}
 

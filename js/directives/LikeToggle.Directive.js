@@ -23,22 +23,7 @@ define(['angular', 'bootstrap'], function(angular){
 							ideaId = value;
 						});
 
-						if(!$rootScope.loggedIn){
-							element.tooltip({
-								title: 'Sign in to like ideas!',
-								trigger: 'manual'
-							});
-						}
-
 						element.bind('click', function(){
-
-							if(!$rootScope.loggedIn){
-								element.tooltip('show');
-								$timeout(function(){
-									element.tooltip('hide');
-								}, 1000);
-								return false;
-							}
 
 							LikeServ.update(
 								{

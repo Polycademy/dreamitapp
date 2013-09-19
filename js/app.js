@@ -91,6 +91,7 @@ define([
 				'directives/InputFocus.Directive',
 				'directives/WhenScrolled.Directive',
 				'directives/FacebookLogin.Directive',
+				'directives/SignInPrompt.Directive',
 				//FILTERS
 				'filters/StripHtml.Filter',
 				'filters/UrlFriendly.Filter',

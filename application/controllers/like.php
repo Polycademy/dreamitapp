@@ -64,8 +64,8 @@ class Like extends CI_Controller{
 
 		}else{
 
-			$content = current($this->Tags_model->get_errors());
-			$code = key($this->Tags_model->get_errors());
+			$content = current($this->Like_model->get_errors());
+			$code = key($this->Like_model->get_errors());
 
 			if($code == 'validation_error'){
 				$this->output->set_status_header(400);
