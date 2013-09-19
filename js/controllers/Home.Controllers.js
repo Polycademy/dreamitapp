@@ -41,11 +41,20 @@ define(['angular', 'lodash'], function(angular, _){
 				AppIdeasServ.clearAppIdeas();
 
 				/**
-				 * This is assigned a reference to an array of app ideas to be repeated across the wall.
-				 * Changes will to the array inside the service will be propagated across the application.
-				 * @type {Array}
+				 * This watches array reference inside AppIdeasServ.
+				 * Any changes to properties of $scope.appIdeas gets propagated to the AppIdeasServ
+				 * Any changes to AppIdeasServ.appIdeas gets propagated to $scope.appIdeas
+				 * It seems that binding a reference directly does not work. This is possibly because
+				 * the array changes would not be detected by ng-repeat. But I don't know.
+				 * Note that manipulating $scope.appIdeas as an array directly does not affect AppIdeasServ
+				 * Only the properties get affected.
+				 * Basically if you want to change anything in appIdeas, change it directly in the AppIdeasServ
 				 */
-				$scope.appIdeas = AppIdeasServ.getAppIdeas();
+				$scope.$watch(function(){
+					return AppIdeasServ.appIdeas;
+				}, function(value){
+					$scope.appIdeas = value;
+				}, true);
 
 				/**
 				 * This is to throttle the retrieving of idea items due to infinite scroll pagination.
@@ -91,7 +100,7 @@ define(['angular', 'lodash'], function(angular, _){
 							//increase the counterOffset
 							counterOffset = counterOffset + limit;
 							//concat doesn't preserve the reference, this push.apply() will
-							$scope.appIdeas.push.apply($scope.appIdeas, response.content);
+							AppIdeasServ.appendIdeas(response.content);
 							$scope.ideasServiceBusy = false;
 
 						},
@@ -174,7 +183,7 @@ define(['angular', 'lodash'], function(angular, _){
 							|| $scope.popular == ''
 						){
 							//reset masonry, appIdeas and offset
-							$scope.appIdeas = [];
+							AppIdeasServ.clearAppIdeas();
 							counterOffset = 0;
 							$scope.getIdeas($scope.limit, $scope.tags, $scope.author, $scope.popular);
 						}
@@ -190,7 +199,7 @@ define(['angular', 'lodash'], function(angular, _){
 					$scope.tags = undefined;
 					$scope.author = undefined;
 					$scope.popular = undefined;
-					$scope.appIdeas = [];
+					AppIdeasServ.clearAppIdeas();
 					counterOffset = 0;
 					$scope.getIdeas($scope.limit);
 					

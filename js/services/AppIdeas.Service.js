@@ -32,9 +32,21 @@ define(['angular'], function(angular){
 
 				};
 
+				this.appendIdeas = function(ideas){
+
+					this.appIdeas.push.apply(this.appIdeas, ideas);
+
+				};
+
 				this.prependIdea = function(idea){
 
 					this.appIdeas.unshift(idea);
+
+				};
+
+				this.prependIdeas = function(ideas){
+
+					this.appIdeas.unshift.apply(this.appIdeas, ideas);
 
 				};
 

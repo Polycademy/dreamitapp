@@ -142,9 +142,10 @@ define(['angular'], function(angular){
 									$timeout(function(){
 										if(dialog){
 											AppIdeasServ.prependIdea(response.content);
+											//try root scope refresh?
 											$scope.closeOverlay();
 										}else{
-											//if in full page, just transition to the full page idae
+											//if in full page, just transition to the full page idea
 											$state.transitionTo('idea', {ideaId: newIdeaId, ideaUrl: response.content.titleUrl});
 										}
 									}, 1000);
