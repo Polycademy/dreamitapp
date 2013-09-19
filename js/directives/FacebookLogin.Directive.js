@@ -77,9 +77,10 @@ define(['angular'], function(angular){
 
 											UsersServ.getAccount(response.content, function(response){
 
-												//this close overlay is not working currently
-												//http://stackoverflow.com/questions/12729122/prevent-error-digest-already-in-progress-when-calling-scope-apply
-												scope.facebookOverlayClose();
+												//needs to be async, digest operations are happening!
+												scope.$evalAsync(function(scope){
+													scope.facebookOverlayClose();
+												});
 												$rootScope.$broadcast('reloadWall');
 
 											});
