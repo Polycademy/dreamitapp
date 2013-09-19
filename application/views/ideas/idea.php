@@ -136,7 +136,8 @@
 			</form>
 			<div 
 				class="comment_list" 
-				when-scrolled-dir="getComments(idea.id)" 
+				when-scrolled-dir="getComments(ideaId)" 
+				when-scrolled-idea="{{idea.id}}" 
 				when-scrolled-container="{{{true: '.overlay_backdrop', false: 'window'}[viewingOverlay]}}" 
 				when-scrolled-disabled="commentsServiceBusy"
 			>
