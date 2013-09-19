@@ -6100,6 +6100,9 @@ a:focus {
 .form-actions {
   background: none;
 }
+input {
+  font-family: arial;
+}
 .tooltip {
   padding: 10px;
   font-size: 12px;
