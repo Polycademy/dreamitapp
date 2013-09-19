@@ -33,6 +33,23 @@ define(['angular', 'filepicker'], function(angular, filepicker){
 							}
 						});
 
+						var pickAndStoreFunc = function(){
+							filepicker.pickAndStore(
+								pickerOptions,
+								storeOptions,
+								function(InkBlobs){
+									if(typeof scope.filePickerSuccess === 'function'){
+										scope.filePickerSuccess({InkBlobs: InkBlobs});
+									}
+								},
+								function(FPError){
+									if(typeof scope.filePickerFail === 'function'){
+										scope.filePickerFail({FPError: FPError});
+									}
+								}
+							);
+						};
+
 						element.bind('click', function(){
 
 							if(typeof pickerOptions === 'undefined') pickerOptions = {};
@@ -40,20 +57,7 @@ define(['angular', 'filepicker'], function(angular, filepicker){
 
 							if(scope.filePickerAction === 'pickAndStore'){
 
-								filepicker.pickAndStore(
-									pickerOptions,
-									storeOptions,
-									function(InkBlobs){
-										if(typeof scope.filePickerSuccess === 'function'){
-											scope.filePickerSuccess({InkBlobs: InkBlobs});
-										}
-									},
-									function(FPError){
-										if(typeof scope.filePickerFail === 'function'){
-											scope.filePickerFail({FPError: FPError});
-										}
-									}
-								);
+								pickAndStoreFunc();
 
 							}else if(scope.filePickerAction === 'update'){
 
@@ -78,6 +82,10 @@ define(['angular', 'filepicker'], function(angular, filepicker){
 										);
 									},
 									function(FPError){
+										//if the code was 171, this means the blob to be doesn't exist
+										if(FPError.code == 171){
+											pickAndStoreFunc();
+										}
 										if(typeof scope.filePickerFail === 'function'){
 											scope.filePickerFail({FPError: FPError});
 										}
