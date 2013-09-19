@@ -6306,7 +6306,6 @@ header.navbar .nav li a {
 }
 .main .wall_container .wall .item_panel .item_meta .item_actions {
   width: 30%;
-  overflow: auto;
   float: left;
 }
 .main .wall_container .wall .item_panel .item_meta .item_actions .item_feedback,
