@@ -86,7 +86,7 @@
 								share-this-dir 
 								share-this-publisher-id="{{dreamItAppConfig.apiKeys.shareThis}}" 
 								share-this-url="{{baseUrl + 'ideas/' + idea.id + '/' + idea.titleUrl}}" 
-								share-this-title="{{idea.title}}" 
+								share-this-title="{{'Check out this great idea for an app I found on Dream it App: ' + idea.title}}" 
 								share-this-summary="{{idea.descriptionShort}}" 
 								share-this-image="{{idea.image}}"
 							>
