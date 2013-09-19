@@ -47,6 +47,7 @@
 						<img src="img/logo.png" />
 					</a>
 					<ul class="nav">
+						<li ng-class="{'active_link': $state.includes('about')}"><a href="about#faq" title="Why use us?">Why use us?</a></li>
 						<li ng-class="{'active_link': $state.includes('about')}"><a href="about" title="Learn more about this platform">About</a></li>
 						<li ng-class="{'active_link': $state.includes('blog')}"><a href="blog" title="Keep up with the Dream it App team">Blog</a></li>
 					</ul>
