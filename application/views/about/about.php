@@ -176,10 +176,9 @@
 					</div>
 					<div class="span6 contact_details">
 						<address class="text-center">
-							<strong>Dream it App</strong><br />
+							<strong>Dream It App</strong><br />
 							795 Folsom Street<br />
 							Canberra, ACT, Australia 2207<br />
-							<abbr title="Phone">P:</abbr> (123) 456-7890<br />
 							<a href="http://www.google.com/recaptcha/mailhide/d?k=01ebDHQgYSQIgO98BBkNl3Iw==&amp;c=3jlSO61bF3OS40LW0BlSJfhS_gKpl9U6QfBANh2YGXE=" onclick="window.open('http://www.google.com/recaptcha/mailhide/d?k\07501ebDHQgYSQIgO98BBkNl3Iw\75\75\46c\0753jlSO61bF3OS40LW0BlSJfhS_gKpl9U6QfBANh2YGXE\075', '', 'toolbar=0,scrollbars=0,location=0,statusbar=0,menubar=0,resizable=0,width=500,height=300'); return false;" title="Reveal this e-mail address">deve...@dreamitapp.com</a>
 						</address>
 					</div>
