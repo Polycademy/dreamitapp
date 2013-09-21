@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "2f5d2075426b9ec9f95eebaf3a73f9f1",
+    "hash": "aad2ad69e0a38663e69e6cfa092cc57f",
     "packages": [
         {
             "name": "guzzle/guzzle",
@@ -545,16 +545,16 @@
         },
         {
             "name": "polycademy/polyauth",
-            "version": "0.0.2",
+            "version": "0.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Polycademy/PolyAuth.git",
-                "reference": "d2d15bd9c97dfecffd4272c7956f8e42a1f6cfc3"
+                "reference": "3c78bc3be55b7dc744d7397acca0105d856e8d21"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Polycademy/PolyAuth/zipball/d2d15bd9c97dfecffd4272c7956f8e42a1f6cfc3",
-                "reference": "d2d15bd9c97dfecffd4272c7956f8e42a1f6cfc3",
+                "url": "https://api.github.com/repos/Polycademy/PolyAuth/zipball/3c78bc3be55b7dc744d7397acca0105d856e8d21",
+                "reference": "3c78bc3be55b7dc744d7397acca0105d856e8d21",
                 "shasum": ""
             },
             "require": {
@@ -570,7 +570,8 @@
                 "codeception/codeception": "1.6.7"
             },
             "suggest": {
-                "ext-apc": "Can provide a faster memory cache for PolyAuth."
+                "ext-apc": "Can provide a faster memory cache for PolyAuth.",
+                "ext-mcrypt": "Required for encryption and decryption."
             },
             "type": "library",
             "autoload": {
@@ -601,7 +602,7 @@
                 "sessions",
                 "user accounts"
             ],
-            "time": "2013-09-14 20:47:45"
+            "time": "2013-09-20 23:23:16"
         },
         {
             "name": "psr/log",
