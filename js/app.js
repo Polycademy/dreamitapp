@@ -97,6 +97,7 @@ define([
 				'filters/UrlFriendly.Filter',
 				'filters/NumCounter.Filter',
 				'filters/Truncate.Filter',
+				'filters/Boolean.Filter',
 				//SERVICES
 				'services/Utilities.Service',
 				'services/Users.Service',

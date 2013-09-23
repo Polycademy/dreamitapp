@@ -319,9 +319,9 @@ define(['angular', 'lodash'], function(angular, _){
 						password: $scope.password,
 						developer: $scope.developer,
 						tac: $scope.tac,
-						email1: $scope.email1,
-						email2: $scope.email2,
-						email3: $scope.email3
+						marketingDreamitapp: $scope.marketingDreamitapp,
+						marketingDeveloper: $scope.marketingDeveloper,
+						marketingBeta: $scope.marketingBeta
 					};
 
 					UsersServ.registerAccount(newUser, function(response){

@@ -18,6 +18,9 @@
 					<li ng-show="user.age">Age: {{user.age}}</li>
 					<li ng-show="user.gender">Gender: {{user.gender}}</li>
 					<li>Date Joined: {{user.createdOn}}</li>
+					<li ng-show="user.marketingDreamitapp">Receiving Dream It App Emails: {{user.marketingDreamitapp | BooleanFilter}}</li>
+					<li ng-show="user.marketingDreamitapp">Receiving Participating Developer Emails: {{user.marketingDeveloper | BooleanFilter}}</li>
+					<li ng-show="user.marketingDreamitapp">Receiving Beta Testing Emails: {{user.marketingBeta | BooleanFilter}}</li>
 				</ul>
 				<span><a ng-href="?author={{user.id}}">View {{user.username}}'s Public Ideas.</a></span>
 			</div>

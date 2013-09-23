@@ -34,9 +34,9 @@ class Accounts_model extends CI_Model{
 			'password',
 			'developer',
 			'tac',
-			'email1',
-			'email2',
-			'email3',
+			'marketingDreamitapp',
+			'marketingDeveloper',
+			'marketingBeta',
 		), $input_data, null, true);
 
 		$this->validator->set_data($data);
@@ -68,19 +68,19 @@ class Accounts_model extends CI_Model{
 				'rules'	=> 'required'
 			),
 			array(
-				'field'	=> 'email1',
+				'field'	=> 'marketingDreamitapp',
 				'label'	=> 'Agree to receive marketing emails from Dream it App',
-				'rules'	=> 'required'
+				'rules'	=> 'trim|integer'
 			),
 			array(
-				'field'	=> 'email2',
+				'field'	=> 'marketingDeveloper',
 				'label'	=> 'Agree to receive marketing emails from participating developers',
-				'rules'	=> 'required'
+				'rules'	=> 'trim|integer'
 			),
 			array(
-				'field'	=> 'email3',
+				'field'	=> 'marketingBeta',
 				'label'	=> 'Agree to being contacted by developers about beta testing applications',
-				'rules'	=> 'required'
+				'rules'	=> 'trim|integer'
 			),
 		));
 
@@ -106,9 +106,6 @@ class Accounts_model extends CI_Model{
 
 		//tac won't be sent to the user_accounts table
 		unset($data['tac']);
-		unset($data['email1']);
-		unset($data['email2']);
-		unset($data['email3']);
 
 		try{
 

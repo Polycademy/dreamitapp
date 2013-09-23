@@ -125,14 +125,13 @@
 					<label class="checkbox">
 						<input 
 							type="checkbox" 
-							name="email1" 
-							ng-model="email1" 
+							name="marketingDreamitapp" 
+							ng-model="marketingDreamitapp" 
 							value="true" 
-							required 
 						/>
-						Agree to receive marketing emails from Dream it App.
+						Opt in to receive marketing emails from Dream it App.
 					</label>
-					<span class="help-block" ng-show="signup_form.email1.$error.required">Required</span>
+					<span class="help-block" ng-show="signup_form.marketingDreamitapp.$error.required">Required</span>
 				</div>
 			</div>
 			<div class="control-group">
@@ -140,14 +139,13 @@
 					<label class="checkbox">
 						<input 
 							type="checkbox" 
-							name="email2" 
-							ng-model="email2" 
+							name="marketingDeveloper" 
+							ng-model="marketingDeveloper" 
 							value="true" 
-							required 
 						/>
-						Agree to receive marketing emails from participating developers.
+						Opt in to receive marketing emails from participating developers.
 					</label>
-					<span class="help-block" ng-show="signup_form.email2.$error.required">Required</span>
+					<span class="help-block" ng-show="signup_form.marketingDeveloper.$error.required">Required</span>
 				</div>
 			</div>
 			<div class="control-group">
@@ -155,14 +153,13 @@
 					<label class="checkbox">
 						<input 
 							type="checkbox" 
-							name="email3" 
-							ng-model="email3" 
+							name="marketingBeta" 
+							ng-model="marketingBeta" 
 							value="true" 
-							required 
 						/>
-						Agree to being contacted by developers about beta testing applications.
+						Opt in to being contacted by developers about beta testing applications.
 					</label>
-					<span class="help-block" ng-show="signup_form.email3.$error.required">Required</span>
+					<span class="help-block" ng-show="signup_form.marketingBeta.$error.required">Required</span>
 				</div>
 			</div>
 			<div class="validation_errors text-center" ng-show="validationErrors">
