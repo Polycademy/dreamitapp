@@ -1,4 +1,4 @@
-define(['angular'], function(angular){
+define(['angular', 'jquery', 'twitter-bootstrap'], function(angular, $){
 
 	'use strict';
 

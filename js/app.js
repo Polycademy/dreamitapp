@@ -9,7 +9,8 @@ define([
 	//shims!
 	'es5-shim', 
 	'es6-shim', 
-	'json3'
+	'json3',
+	'twitter-bootstrap'
 	], function(require, angular, domReady){
 
 		'use strict';
