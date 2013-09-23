@@ -8564,6 +8564,30 @@ body {
   }
 }
 /*
+	ADD/EDIT IDEA
+ */
+@media (max-width: 780px) {
+  .add_idea_container .add_idea_form .add_idea_form_internal {
+    padding-right: 0;
+  }
+  .add_idea_container .add_idea_form .control-label {
+    width: 120px;
+    text-align: left;
+  }
+  .add_idea_container .add_idea_form .controls {
+    margin-left: 0;
+  }
+}
+/*
+	SIGN IN
+ */
+@media (max-width: 346px) {
+  .signin_form .form-actions button {
+    margin-top: 4px;
+    margin-bottom: 4px;
+  }
+}
+/*
 	RESPONSIVE WALL. The min-widths overwrite each other from smallest to largest.
  */
 @media (min-width: 755px) {
