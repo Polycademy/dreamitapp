@@ -8541,6 +8541,29 @@ body {
   }
 }
 /*
+	ABOUT
+ */
+@media (max-width: 780px) {
+  .about .about_content .about_social .row-fluid .span6 {
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+  .about .about_content .about_team .row-fluid .team_profile .feature_image {
+    width: 80px;
+    height: 80px;
+    margin: 10px;
+  }
+  .about .about_content .about_team .row-fluid .team_profile p {
+    float: none;
+  }
+  .about .about_content .contact_us form label {
+    width: 70px;
+  }
+  .about .about_content .contact_us form .controls {
+    margin-left: 90px;
+  }
+}
+/*
 	RESPONSIVE WALL. The min-widths overwrite each other from smallest to largest.
  */
 @media (min-width: 755px) {
