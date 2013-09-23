@@ -33,6 +33,9 @@
 			<? } ?>
 		</script>
 		<script data-main="js/bootstrap" src="js/lib/require.min.js"></script>
+		<?php if(ENVIRONMENT == 'production'){ ?>
+			<script src="js/main.js"></script>
+		<? } ?>
 	</head>
 	<body class="ng-cloak" ng-class="{'no_scroll': viewingOverlay}" ng-cloak>
 
