@@ -49,7 +49,7 @@ define(['angular', 'lodash'], function(angular, _){
 				$scope.openEditProfile = function(){
 
 					if(UtilitiesServ.checkMinimumOverlayWidth()){
-						$state.transitionTo('editProfile', {userId: $state.params.userId, userUrl: $state.params.userUrl});
+						$state.transitionTo('editUser', {userId: $state.params.userId, userUrl: $state.params.userUrl});
 						return;
 					}
 
