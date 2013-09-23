@@ -79,7 +79,12 @@
 				<hr />
 				<div class="idea_actions idea_aside_text">
 					<ul>
-						<li sign-in-prompt-dir="{{loggedIn}}" sign-in-prompt-message="Sign in to like ideas!"><a ng-click="likeAction(idea.id)"><span class="fui-heart"></span>Like</a></li>
+						<li 
+							sign-in-prompt-dir="{{loggedIn}}" 
+							sign-in-prompt-message="Sign up to like ideas!" 
+							sign-in-prompt-idea-id="{{idea.id}}" 
+							sign-in-prompt-idea-url="{{idea.titleUrl}}"
+						><a ng-click="likeAction(idea.id)"><span class="fui-heart"></span>Like</a></li>
 						<li><a ng-click="contactAuthor(idea.authorId, idea.id)" ng-show="loggedInDeveloper"><span class="fui-mail"></span>Contact</a></li>
 						<li>
 							<a 
@@ -93,7 +98,12 @@
 								<span class="fui-plus"></span>Share
 							</a>
 						</li>
-						<li sign-in-prompt-dir="{{loggedIn}}" sign-in-prompt-message="Sign in to give feedback!"><a anchor-scroll-dir="feedback"><span class="fui-chat"></span>Give Feedback</a></li>
+						<li 
+							sign-in-prompt-dir="{{loggedIn}}" 
+							sign-in-prompt-message="Sign up to give feedback!" 
+							sign-in-prompt-idea-id="{{idea.id}}" 
+							sign-in-prompt-idea-url="{{idea.titleUrl}}"
+						><a anchor-scroll-dir="feedback"><span class="fui-chat"></span>Give Feedback</a></li>
 					</ul>
 				</div>
 			</aside>

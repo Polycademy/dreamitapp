@@ -49,7 +49,16 @@
 								<span class="item_number">{{idea.commentCount | NumCounter:2}}</span>
 							</div>
 						</a>
-						<a class="item_likes" sign-in-prompt-dir="{{loggedIn}}" sign-in-prompt-message="Sign in to like ideas!" like-toggle-dir like-index="{{$index}}" like-id="{{idea.id}}">
+						<a 
+							class="item_likes" 
+							sign-in-prompt-dir="{{loggedIn}}" 
+							sign-in-prompt-message="Sign up to like ideas!" 
+							sign-in-prompt-idea-id="{{idea.id}}" 
+							sign-in-prompt-idea-url="{{idea.titleUrl}}" 
+							like-toggle-dir 
+							like-index="{{$index}}" 
+							like-id="{{idea.id}}"
+						>
 							<div class="item_icon fui-heart">
 								<span class="item_number">{{idea.likes | NumCounter:2}}</span>
 							</div>

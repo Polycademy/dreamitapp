@@ -213,7 +213,7 @@ define(['angular', 'lodash'], function(angular, _){
 
 				};
 
-				$scope.signUp = function(){
+				$scope.signUp = function(reopenIdea){
 
 					var dialog = $dialog.dialog({
 						backdrop: false,
@@ -223,10 +223,26 @@ define(['angular', 'lodash'], function(angular, _){
 						controller: 'SignUpModalCtrl'
 					});
 
+					var finishFunction = function(){
+						if(reopenIdea){
+							$state.transitionTo('idea', {
+								ideaId: reopenIdea.ideaId, 
+								ideaUrl: reopenIdea.titleUrl, 
+								force: 'true'
+							});
+						}
+					};
+
 					//after signing up, should we allow auto sign in? nah, have to go and activate account first
-					dialog.open();
+					dialog.open().then(finishFunction);
 
 				};
+
+				//crap code but who cares anymore, not my fault! event comes from SignInPrompt.Directive
+				$rootScope.$on('closeIdeaOpenSignUp', function(event, args){
+					//assume args is an object containing id & titleUrl
+					$scope.signUp(args);
+				});
 
 			}
 		])

@@ -4,8 +4,9 @@ define(['angular'], function(angular){
 
 	angular.module('Directives')
 		.directive('signInPromptDir', [
+			'$rootScope',
 			'$timeout',
-			function($timeout){
+			function($rootScope, $timeout){
 				return {
 					link: function(scope, element, attributes){
 
@@ -31,6 +32,16 @@ define(['angular'], function(angular){
 								$timeout(function(){
 									element.tooltip('hide');
 								}, 1000);
+
+								//crap code but who cares anymore
+								try{
+									scope.closeOverlay();
+								}catch(e){}
+								$rootScope.$broadcast('closeIdeaOpenSignUp', {
+									ideaId: attributes.signInPromptIdeaId,
+									titleUrl: attributes.signInPromptIdeaUrl
+								});
+
 								return false;
 							}
 

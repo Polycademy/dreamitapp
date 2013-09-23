@@ -220,7 +220,7 @@ define(['angular', 'lodash'], function(angular, _){
 
 					//state change is prevented from home to ideas
 					//but the URL is preserved
-					if(fromState.name === 'home' && toState.name === 'idea'){
+					if(fromState.name === 'home' && toState.name === 'idea' && !toParams.force){
 						event.preventDefault();
 					}
 

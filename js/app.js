@@ -153,7 +153,7 @@ define([
 								.state(
 									'idea',
 									{
-										url: '/ideas/{ideaId:[0-9]+}/{ideaUrl:.*}',
+										url: '/ideas/{ideaId:[0-9]+}/{ideaUrl:.*}?force',
 										templateUrl: 'idea.html',
 										controller: 'IdeaCtrl',
 										resolve: {
