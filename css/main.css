@@ -8588,6 +8588,44 @@ body {
   }
 }
 /*
+	SIGN UP
+ */
+@media (max-width: 780px) {
+  .signup_container.overlay_container {
+    width: 100%;
+    border: none;
+  }
+  .signup_container.overlay_container .signup_header .signup_close {
+    float: none;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .signup_container.overlay_container .signup_form .control-label {
+    width: 120px;
+    text-align: left;
+  }
+  .signup_container.overlay_container .signup_form .controls {
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
+/*
+	EDIT USER
+ */
+@media (max-width: 780px) {
+  .edit_user_container .edit_user_form .edit_user_form_internal {
+    padding-right: 0;
+  }
+  .edit_user_container .edit_user_form .control-label {
+    width: 120px;
+    text-align: left;
+  }
+  .edit_user_container .edit_user_form .controls {
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
+/*
 	RESPONSIVE WALL. The min-widths overwrite each other from smallest to largest.
  */
 @media (min-width: 755px) {
