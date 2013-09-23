@@ -79,7 +79,8 @@ module.exports = function(grunt){
 							filepath === 'package.json' || 
 							filepath === 'bower.json' || 
 							filepath === '.gitignore' || 
-							filepath === '.gitattributes'
+							filepath === '.gitattributes' || 
+							filepath === 'pkgscript.log'
 						){
 							grunt.log.writeln('Not copying: ' + filepath);
 							return false;
