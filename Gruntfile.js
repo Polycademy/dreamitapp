@@ -80,7 +80,9 @@ module.exports = function(grunt){
 							filepath === 'bower.json' || 
 							filepath === '.gitignore' || 
 							filepath === '.gitattributes' || 
-							filepath === 'pkgscript.log'
+							filepath === 'pkgscript.log' || 
+							filepath === 'npm_global_installer.js' || 
+							filepath === 'build.js'
 						){
 							grunt.log.writeln('Not copying: ' + filepath);
 							return false;
