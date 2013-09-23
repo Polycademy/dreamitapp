@@ -6,11 +6,12 @@ define([
 	'require',
 	'angular',
 	'domReady', 
+	//twitter bootstrap for global interactions
+	'twitter-bootstrap',
 	//shims!
 	'es5-shim', 
 	'es6-shim', 
-	'json3',
-	'twitter-bootstrap'
+	'json3'
 	], function(require, angular, domReady){
 
 		'use strict';
