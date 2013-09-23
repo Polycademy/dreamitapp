@@ -9,12 +9,13 @@ define(['angular'], function(angular){
 			'$state',
 			'$location',
 			'$dialog',
+			'$analytics',
 			'IdeasServ',
 			'CommentsServ',
 			'LikeServ',
 			'AppIdeasServ',
 			'dialog',
-			function($scope, $rootScope, $state, $location, $dialog, IdeasServ, CommentsServ, LikeServ, AppIdeasServ, dialog){
+			function($scope, $rootScope, $state, $location, $dialog, $analytics, IdeasServ, CommentsServ, LikeServ, AppIdeasServ, dialog){
 
 				//if dialog is passed in, we're inside an overlay and we need the ideaId and locationParamsAndHash
 				if(dialog){
@@ -27,6 +28,7 @@ define(['angular'], function(angular){
 						$rootScope.viewingOverlay = false;
 						dialog.close(locationParamsAndHash);
 					};
+					$analytics.pageTrack('ideas' + '/' + ideaId + '/' + ideaUrl);
 
 				//else we only need ideaId and ideaUrl
 				}else{

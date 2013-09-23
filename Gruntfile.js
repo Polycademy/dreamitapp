@@ -123,6 +123,16 @@ module.exports = function(grunt){
 				}]
 			}
 		},
+		shell:{
+			main:{
+				options: {
+					stdout: true,
+					stderr: true,
+					failOnError: true
+				},
+				command: 'r.js.cmd -o build.js' //this only works on windows, otherwise use r.js on linux
+			}
+		},
 		compress:{
 			main:{
 				options:{
@@ -150,6 +160,6 @@ module.exports = function(grunt){
 	grunt.loadNpmTasks('grunt-contrib-cssmin');
 	grunt.loadNpmTasks('grunt-contrib-compress');
 	
-	grunt.registerTask('default', ['clean:pre', 'copy', 'cssmin', 'replace']);
+	grunt.registerTask('default', ['clean:pre', 'copy', 'cssmin', 'replace', 'shell']);
 
 };
