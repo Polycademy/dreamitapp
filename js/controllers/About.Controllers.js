@@ -6,7 +6,13 @@ define(['angular'], function(angular){
 		.controller('AboutCtrl', [
 			'$scope',
 			'EmailServ',
-			function($scope, EmailServ){
+			'AboutServ',
+			function($scope, EmailServ, AboutServ){
+
+				AboutServ.get({}, function(response){
+					//the object contains a content property!
+					$scope.aboutContent = response.content.content;
+				});
 
 				$scope.submitContact = function(){
 

@@ -40,10 +40,8 @@
 					<div class="item_actions">
 						<a 
 							class="item_feedback" 
-							ng-href="ideas/{{idea.id}}/{{idea.titleUrl}}" 
+							ng-href="ideas/{{idea.id}}/{{idea.titleUrl}}#feedback" 
 							ng-click="openIdeaOverlay(idea.id, idea.titleUrl)" 
-							anchor-scroll-dir="feedback" 
-							anchor-scroll-delay="1000"
 						>
 							<div class="item_icon fui-chat">
 								<span class="item_number">{{idea.commentCount | NumCounter:2}}</span>

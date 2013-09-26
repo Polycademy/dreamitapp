@@ -94,6 +94,7 @@ define([
 				'directives/WhenScrolled.Directive',
 				'directives/FacebookLogin.Directive',
 				'directives/SignInPrompt.Directive',
+				'directives/Compile.Directive',
 				//FILTERS
 				'filters/StripHtml.Filter',
 				'filters/UrlFriendly.Filter',
@@ -108,6 +109,7 @@ define([
 				'services/LocationSearch.Service',
 				'services/AppIdeas.Service',
 				'services/BlogData.Service',
+				'services/HashScroll.Service',
 				//RESOURCES
 				'resources/Accounts.Service',
 				'resources/Sessions.Service',
@@ -117,7 +119,8 @@ define([
 				'resources/Email.Service',
 				'resources/Blog.Service',
 				'resources/Comments.Service',
-				'resources/Oauth.Service'
+				'resources/Oauth.Service',
+				'resources/About.Service'
 			], function(){
 
 				/* ==========================================================================

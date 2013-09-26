@@ -33,6 +33,7 @@ class About extends CI_Controller{
 
 	}
 
+	//not used atm
 	public function update($id){
 
 		$data = $this->input->json(false);

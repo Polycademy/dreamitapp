@@ -83,7 +83,7 @@ class About_model extends CI_Model{
 		}else{
 			
 			$this->errors = array(
-				'error'	=> 'About doesn\'t need to update.',
+				'error'	=> 'About content doesn\'t need to update.',
 			);
 			return false;
 		
