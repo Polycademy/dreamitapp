@@ -123,9 +123,6 @@ module.exports = function(grunt){
 				},{
 					from: /urlArgs: 'bust=' \+  \(new Date\(\)\).getTime\(\)/g,
 					to: "urlArgs: 'bust=" + (new Date()).getTime() + "'"
-				},{
-					from: /<script data-main="js\/bootstrap.js" src="js\/lib\/require.min.js"><\/script>/g,
-					to: '<script data-main="js/bootstrap.' + (new Date()).getTime() + '.js" src="js/lib/require.min.js"></script>'
 				}]
 			}
 		},
