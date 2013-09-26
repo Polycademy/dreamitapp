@@ -20,13 +20,13 @@ module.exports = function(grunt){
 					}
 				]
 			},
-			post:{
-				files: [
-					{
-						src: ['build/!(build.tar.gz)'],
-						dot: true
-					}
-				]
+			afterRequire:{
+				src: ['build/js/**/*'],
+				filter: function(filepath) {
+					grunt.log.writeln(filepath);
+					if (!grunt.file.isDir(filepath)) { return false; }
+					return (require('fs').readdirSync(filepath).length === 0);
+				},
 			}
 		},
 		copy:{
@@ -123,7 +123,28 @@ module.exports = function(grunt){
 				},{
 					from: /urlArgs: 'bust=' \+  \(new Date\(\)\).getTime\(\)/g,
 					to: "urlArgs: 'bust=" + (new Date()).getTime() + "'"
+				},{
+					from: /<script data-main="js\/bootstrap.js" src="js\/lib\/require.min.js"><\/script>/g,
+					to: '<script data-main="js/bootstrap.' + (new Date()).getTime() + '.js" src="js/lib/require.min.js"></script>'
 				}]
+			}
+		},
+		requirejs:{
+			main:{
+				options:{
+					baseUrl: 'build/js/', //base directory of source
+					mainConfigFile: 'build/js/bootstrap.js', //import runtime config
+					keepBuildDir: true, //build dir should not be deleted
+					removeCombined: true,
+					skipDirOptimize: true, //we're only optimising a single file here
+					findNestedDependencies: true, //could be false?? we should find nested dependencies!
+					name: 'bootstrap', //this is the file we're going to optimise
+					out: 'build/js/bootstrap.js', //this is final optimised file
+					paths: { //empty are for any scripts loaded from a CDN
+						'sharethis': 'empty:',
+						'filepicker': 'empty:'
+					}
+				}
 			}
 		},
 		shell:{
@@ -135,34 +156,16 @@ module.exports = function(grunt){
 				},
 				command: 'r.js.cmd -o build.js' //this only works on windows, otherwise use r.js on linux
 			}
-		},
-		compress:{
-			main:{
-				options:{
-					archive: 'build/build.tar.gz',
-					mode: 'tgz'
-				},
-				files:[
-					{
-						flatten: true,
-						dot: true,
-						src: 'build/**'
-					}
-				]
-			}
 		}
 	});
 		
 	grunt.loadNpmTasks('grunt-shell');
-	grunt.loadNpmTasks('grunt-contrib-concat');
-	grunt.loadNpmTasks('grunt-contrib-uglify');
 	grunt.loadNpmTasks('grunt-contrib-clean');
 	grunt.loadNpmTasks('grunt-contrib-copy');
 	grunt.loadNpmTasks('grunt-text-replace');
-	grunt.loadNpmTasks('grunt-contrib-jshint');
 	grunt.loadNpmTasks('grunt-contrib-cssmin');
-	grunt.loadNpmTasks('grunt-contrib-compress');
+	grunt.loadNpmTasks('grunt-contrib-requirejs');
 	
-	grunt.registerTask('default', ['clean:pre', 'copy', 'cssmin', 'replace', 'shell']);
+	grunt.registerTask('default', ['clean:pre', 'copy', 'cssmin', 'replace', 'requirejs', 'clean:afterRequire']);
 
 };

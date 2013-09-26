@@ -1,4 +1,10 @@
-require('package-script').spawn([
+var installer = require('package-script');
+
+installer.init({
+	log: false
+});
+
+installer.spawn([
 	{
 		admin: true,
 		command: "npm",
