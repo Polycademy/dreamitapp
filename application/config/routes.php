@@ -11,6 +11,9 @@ Pigeon::map(function($r){
 		$r->resources('blog');
 		$r->resources('comments');
 
+		//about content
+		$r->resource('about');
+
 		//like resource only allows get and put (toggling)
 		$r->get('like/(:num)', 'like/show/$1');
 		$r->put('like/(:num)', 'like/update/$1');
