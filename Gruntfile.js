@@ -146,16 +146,6 @@ module.exports = function(grunt){
 					}
 				}
 			}
-		},
-		shell:{
-			main:{
-				options: {
-					stdout: true,
-					stderr: true,
-					failOnError: true
-				},
-				command: 'r.js.cmd -o build.js' //this only works on windows, otherwise use r.js on linux
-			}
 		}
 	});
 		
