@@ -326,7 +326,7 @@ body{
 /*
 	RESPONSIVE WALL. The min-widths overwrite each other from smallest to largest.
  */
-@media(min-width: (@3_wall_cols + @scrollbar)){
+@media(min-width: (@3_wall_cols + 100px + @scrollbar)){
 
 	.main{
 		.wall_container{
@@ -342,7 +342,7 @@ body{
 
 }
 
-@media(min-width: (@4_wall_cols + @scrollbar)){
+@media(min-width: (@4_wall_cols + 100px + @scrollbar)){
 
 	.main{
 		.wall_container{
@@ -358,7 +358,7 @@ body{
 
 }
 
-@media(min-width: (@5_wall_cols + @scrollbar)){
+@media(min-width: (@5_wall_cols + 100px + @scrollbar)){
 
 	.main{
 		.wall_container{
@@ -374,7 +374,7 @@ body{
 
 }
 
-@media(min-width: (@6_wall_cols + @scrollbar)){
+@media(min-width: (@6_wall_cols + 150px + @scrollbar)){
 
 	.main{
 		.wall_container{
@@ -393,7 +393,7 @@ body{
 /*
 	MOBILE WALL. The max-widths overwite each other from largest to smallest.
  */
-@media(max-width: (@3_wall_cols + @scrollbar - 1px)){
+@media(max-width: (@3_wall_cols + 100px + @scrollbar - 1px)){
 
 	//below 2 columns, we need to change the menu to a small side bar
 	.main{

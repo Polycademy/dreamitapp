@@ -8628,7 +8628,7 @@ body {
 /*
 	RESPONSIVE WALL. The min-widths overwrite each other from smallest to largest.
  */
-@media (min-width: 755px) {
+@media (min-width: 855px) {
   .main .wall_container {
     width: 70%;
   }
@@ -8639,7 +8639,7 @@ body {
     width: 30%;
   }
 }
-@media (min-width: 995px) {
+@media (min-width: 1095px) {
   .main .wall_container {
     width: 75%;
   }
@@ -8650,7 +8650,7 @@ body {
     width: 25%;
   }
 }
-@media (min-width: 1235px) {
+@media (min-width: 1335px) {
   .main .wall_container {
     width: 74%;
   }
@@ -8661,7 +8661,7 @@ body {
     width: 26%;
   }
 }
-@media (min-width: 1475px) {
+@media (min-width: 1625px) {
   .main .wall_container {
     width: 74%;
   }
@@ -8675,7 +8675,7 @@ body {
 /*
 	MOBILE WALL. The max-widths overwite each other from largest to smallest.
  */
-@media (max-width: 754px) {
+@media (max-width: 854px) {
   .main .wall_container {
     width: 100%;
     margin: 0 auto;
