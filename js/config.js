@@ -12,7 +12,7 @@ var dreamItAppConfig = {
 		minimumOverlayWidth: 800
 	},
 	apiKeys: {
-		shareThis: '44d5ce83-7ac1-447a-a5b2-6128182dab3a',
+		shareThis: 'ce46ccc0-b686-4248-a58f-9990bae64771',
 		filePickerApiKey: 'A2WwXj1SHkupfpXAI2wgOz',
 		facebook: '639553099410043'
 	}
