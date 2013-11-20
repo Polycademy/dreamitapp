@@ -24,6 +24,15 @@ $ioc['Database'] = $ioc->share(function($c){
 	return $dbh;
 });
 
+$ioc['SnapSearchClientPHP'] = $ioc->share(function($c){
+
+	$client = new SnapSearchClientPHP\Client('randomkey');
+	$detector = new SnapSearchClientPHP\Detector;
+	$interceptor = new SnapSearchClientPHP\Interceptor($client, $detector);
+	return $interceptor;
+	
+});
+
 /**
  * Monolog Logger using FirePHP and StreamHandler for Libraries
  */

@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "302b27369411635c00acc2bf269229fb",
+    "hash": "abbb1c53e3bccb0e94c1e22b522a0fb0",
     "packages": [
         {
             "name": "guzzle/guzzle",
@@ -357,6 +357,56 @@
             "time": "2013-07-28 22:38:30"
         },
         {
+            "name": "nategood/httpful",
+            "version": "0.2.11",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/nategood/httpful.git",
+                "reference": "0bf1423028abe2f630e1d2ef8d62486d6655b2f3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/nategood/httpful/zipball/0bf1423028abe2f630e1d2ef8d62486d6655b2f3",
+                "reference": "0bf1423028abe2f630e1d2ef8d62486d6655b2f3",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "php": ">=5.3"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Httpful": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nate Good",
+                    "email": "me@nategood.com",
+                    "homepage": "http://nategood.com"
+                }
+            ],
+            "description": "A Readable, Chainable, REST friendly, PHP HTTP Client",
+            "homepage": "http://github.com/nategood/httpful",
+            "keywords": [
+                "api",
+                "curl",
+                "http",
+                "requests",
+                "rest",
+                "restful"
+            ],
+            "time": "2013-10-20 11:03:40"
+        },
+        {
             "name": "phpmailer/phpmailer",
             "version": "v5.2.7",
             "source": {
@@ -605,6 +655,62 @@
             "time": "2013-09-20 23:23:16"
         },
         {
+            "name": "polycademy/snapsearch-client-php",
+            "version": "0.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Polycademy/SnapSearch-Client-PHP.git",
+                "reference": "6308dfac690b2307aefe172aadad1d6d10fd4eb8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Polycademy/SnapSearch-Client-PHP/zipball/6308dfac690b2307aefe172aadad1d6d10fd4eb8",
+                "reference": "6308dfac690b2307aefe172aadad1d6d10fd4eb8",
+                "shasum": ""
+            },
+            "require": {
+                "nategood/httpful": "0.2.11",
+                "php": ">=5.3.3",
+                "symfony/http-foundation": "2.3.7"
+            },
+            "require-dev": {
+                "codeception/codeception": "1.8.0.1"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "SnapSearchClientPHP": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Roger Qiu",
+                    "email": "roger.qiu@polycademy.com",
+                    "homepage": "http://polycademy.com",
+                    "role": "Founder and Developer"
+                }
+            ],
+            "description": "PHP HTTP Client Middleware Libraries for SnapSearch. Search engine optimisation for single page applications.",
+            "homepage": "https://github.com/Polycademy/snapsearch_clients",
+            "keywords": [
+                "ajax",
+                "angular",
+                "backbone",
+                "dojo",
+                "ember",
+                "extjs",
+                "javascript",
+                "knockout",
+                "search engine optimisation",
+                "seo"
+            ],
+            "time": "2013-11-19 20:17:39"
+        },
+        {
             "name": "psr/log",
             "version": "1.0.0",
             "source": {
@@ -644,17 +750,17 @@
         },
         {
             "name": "symfony/event-dispatcher",
-            "version": "v2.3.5",
+            "version": "v2.3.7",
             "target-dir": "Symfony/Component/EventDispatcher",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/EventDispatcher.git",
-                "reference": "7fc72a7a346a1887d3968cc1ce5642a15cd182e9"
+                "reference": "2d8ece3c610726a73d0c95c885134efea182610e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/EventDispatcher/zipball/7fc72a7a346a1887d3968cc1ce5642a15cd182e9",
-                "reference": "7fc72a7a346a1887d3968cc1ce5642a15cd182e9",
+                "url": "https://api.github.com/repos/symfony/EventDispatcher/zipball/2d8ece3c610726a73d0c95c885134efea182610e",
+                "reference": "2d8ece3c610726a73d0c95c885134efea182610e",
                 "shasum": ""
             },
             "require": {
@@ -694,7 +800,57 @@
             ],
             "description": "Symfony EventDispatcher Component",
             "homepage": "http://symfony.com",
-            "time": "2013-09-19 09:45:20"
+            "time": "2013-10-13 06:32:10"
+        },
+        {
+            "name": "symfony/http-foundation",
+            "version": "v2.3.7",
+            "target-dir": "Symfony/Component/HttpFoundation",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/HttpFoundation.git",
+                "reference": "1c4b897064f4f621031a0e3bc19fd7054d5e0315"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/HttpFoundation/zipball/1c4b897064f4f621031a0e3bc19fd7054d5e0315",
+                "reference": "1c4b897064f4f621031a0e3bc19fd7054d5e0315",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.3-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Symfony\\Component\\HttpFoundation\\": ""
+                },
+                "classmap": [
+                    "Symfony/Component/HttpFoundation/Resources/stubs"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "http://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony HttpFoundation Component",
+            "homepage": "http://symfony.com",
+            "time": "2013-11-13 21:27:40"
         },
         {
             "name": "tedivm/stash",
