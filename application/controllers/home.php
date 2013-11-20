@@ -24,12 +24,7 @@ class Home extends CI_Controller{
 
 		if($response){
 
-			//clear all previous headers and add the new headers
-			header_remove();
 			$this->output->set_status_header($response['status']);
-			foreach($response['headers'] as $header){
-				header($header['name'] . ': ' . $header['value']);
-			}
 			echo $response['html'];
 
 		}else{
