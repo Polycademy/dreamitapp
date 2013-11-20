@@ -95,6 +95,7 @@ define([
 				'directives/FacebookLogin.Directive',
 				'directives/SignInPrompt.Directive',
 				'directives/Compile.Directive',
+				'directives/RotatingAdverts.Directive',
 				//FILTERS
 				'filters/StripHtml.Filter',
 				'filters/UrlFriendly.Filter',

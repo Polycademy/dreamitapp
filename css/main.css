@@ -6484,6 +6484,14 @@ header.navbar .nav li a {
 .main .control_panel .popular_tags ul li a:before {
   content: '\0023';
 }
+.main .control_panel .control_adverts {
+  padding: 20px;
+  overflow: hidden;
+}
+.main .control_panel .control_adverts .image_advert img {
+  display: block;
+  margin: 0 auto;
+}
 .main .control_panel .slider_menu {
   display: none;
   font-size: 22px;
@@ -8694,7 +8702,8 @@ body {
   }
   .main .control_panel .search_form,
   .main .control_panel .control_menu,
-  .main .control_panel .popular_tags {
+  .main .control_panel .popular_tags,
+  .main .control_panel .control_adverts {
     display: none;
   }
   .main .control_panel .slider_menu {
