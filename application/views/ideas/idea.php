@@ -108,6 +108,13 @@
 				</div>
 			</aside>
 		</div>
+		<div class="text_adverts">
+			<ul>
+				<li><a href="http://www.shareasale.com/r.cfm?b=213851&u=875004&m=25789&urllink=&afftrack=">Your Ideas + uBuildApp = Your App</a></li>
+				<li><a href="http://www.shareasale.com/r.cfm?b=270824&u=875004&m=30338&urllink=&afftrack=">The fast and easy way for any business to create an iPhone app for only $39 a month!</a></li>
+				<li><a href="http://www.shareasale.com/r.cfm?b=485240&u=875004&m=21459&urllink=&afftrack=">Need iPhone App Built?</a> Build your own app in Minutes, only $29 a month!</li>
+			</ul>
+		</div>
 		<section id="feedback" class="idea_comments" ng-controller="CommentsCtrl">
 			<h2 ng-show="loggedInAndComments">Feedback</h2>
 			<form class="comment_form" ng-submit="submitComment(idea.id)" name="comment_form" ng-show="loggedIn">

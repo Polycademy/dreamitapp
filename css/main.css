@@ -6666,6 +6666,17 @@ header.navbar .nav li a {
   padding: 6px 8px;
   font-size: 16px;
 }
+.idea_container .text_adverts {
+  padding: 30px;
+}
+.idea_container .text_adverts ul {
+  list-style-type: none;
+  margin: 0;
+  text-align: center;
+}
+.idea_container .text_adverts ul li {
+  padding: 5px;
+}
 .idea_container .idea_comments {
   padding: 0 24px 24px;
   margin: 0 auto;
