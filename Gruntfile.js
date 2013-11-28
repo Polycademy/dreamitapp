@@ -3,9 +3,6 @@ module.exports = function(grunt){
 	/*
 		The build directory is not tracked by git, but PagodaBox relies on Git to host your files.
 		So once you have the build. Copy it.
-		Create a new orphan branch.
-		Untar it into the orphan branch using git checkout branch_name --orphan
-		Push that branch to the Pagodabox
 	 */
 
 	//project configuration
