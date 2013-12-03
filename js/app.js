@@ -75,6 +75,7 @@ define([
 				'controllers/AddEditIdea.Controllers',
 				'controllers/AddEditBlog.Controllers',
 				'controllers/EditUser.Controllers',
+				'controllers/Password.Controllers',
 				//DIRECTIVES
 				'directives/EqualiseHeights.Directive',
 				'directives/EqualiseHeightTo.Directive',
@@ -121,7 +122,8 @@ define([
 				'resources/Blog.Service',
 				'resources/Comments.Service',
 				'resources/Oauth.Service',
-				'resources/About.Service'
+				'resources/About.Service',
+				'resources/Password.Service'
 			], function(){
 
 				/* ==========================================================================
@@ -212,6 +214,14 @@ define([
 										resolve: {
 											dialog: angular.noop
 										}
+									}
+								)
+								.state(
+									'passwordUser',
+									{
+										url: '/users/confirm_forgotten_password?user_id&forgotten_code',
+										templateUrl: 'confirm_forgotten_password.html',
+										controller: 'PasswordCtrl'
 									}
 								)
 								.state(
