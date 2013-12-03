@@ -24,6 +24,8 @@ Pigeon::map(function($r){
 		//for authentication/authorisation
 		$r->resources('accounts');
 		$r->get('accounts/activate', 'accounts/activate');
+		$r->get('accounts/forgotten_password/(:any)', 'accounts/forgotten_password/$1');
+		$r->post('accounts/confirm_forgotten_password', 'accounts/confirm_forgotten_password');
 		$r->resources('sessions');
 		$r->resources('oauth');
 

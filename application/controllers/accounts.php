@@ -148,4 +148,74 @@ class Accounts extends CI_Controller{
 
 	}
 
+	public function forgotten_password($identifier){
+
+		$query = $this->Accounts_model->send_forgotten_password_confirmation($identifier);
+
+		if($query){
+
+			$content = 'We sent an email allowing you to reset your password.';
+			$code = 'success';
+
+		}else{
+
+			$content = current($this->Accounts_model->get_errors());
+			$code = key($this->Accounts_model->get_errors());
+
+			if($code == 'validation_error'){
+				//identifier did not match anybody
+				$this->output->set_status_header(400);
+			}elseif($code == 'system_error'){
+				//emailing process did not work
+				$this->output->set_status_header(500);
+			}
+
+		}
+		
+		$output = array(
+			'content'	=> $content,
+			'code'		=> $code,
+		);
+		
+		Template::compose(false, $output, 'json');
+
+	}
+
+	public function confirm_forgotten_password(){
+
+		$data = $this->input->json(false);
+
+		$query = $this->Accounts_model->confirm_forgotten_password($data);
+		
+		if($query){
+		
+			$content = $query;
+			$code = 'success';
+		
+		}else{
+		
+			
+			$content = current($this->Accounts_model->get_errors());
+			$code = key($this->Accounts_model->get_errors());
+
+			if($code == 'validation_error'){
+				//the new password may not pass the requirements (might be the same old password)
+				//the forgotten code may be incorrect
+				//the user id may not exist in the system
+				$this->output->set_status_header(400);
+			}elseif($code == 'system_error'){
+				$this->output->set_status_header(500);
+			}
+			
+		}
+		
+		$output = array(
+			'content'	=> $content,
+			'code'		=> $code,
+		);
+		
+		Template::compose(false, $output, 'json');
+
+	}
+
 }

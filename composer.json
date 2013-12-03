@@ -2,7 +2,7 @@
     "require":{
 		"monolog/monolog": "1.6.0",
 		"pimple/pimple": "1.0.2",
-		"polycademy/polyauth": "0.0.4",
+		"polycademy/polyauth": "0.0.4.2",
 		"polycademy/citemplating": "1.0.7",
 		"jamierumbelow/pigeon": "0.2.0",
 		"michelf/php-markdown": "1.3",

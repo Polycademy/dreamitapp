@@ -355,6 +355,135 @@ class Accounts_model extends CI_Model{
 
 	}
 
+	public function send_forgotten_password_confirmation($identifier){
+
+		try{
+
+			$user = $this->accounts_manager->get_user(false, $identifier);
+
+			$this->accounts_manager->forgotten_password($user);
+
+			return true;
+
+		}catch(PolyAuthException $e){
+
+			$this->errors = array(
+				'error'	=> $e->get_error_string()
+			);
+
+			return false;
+
+		}
+
+	}
+
+	public function confirm_forgotten_password($input_data){
+
+		$data = elements(array(
+			'userId',
+			'forgottenCode',
+			'newPassword',
+			'newPasswordConfirm',
+		), $input_data, null, true);
+
+		$this->validator->set_data($data);
+
+		$this->validator->set_rules(array(
+			array(
+				'field'	=> 'userId',
+				'label'	=> 'User ID',
+				'rules'	=> 'required|integer',
+			),
+			array(
+				'field'	=> 'forgottenCode',
+				'label'	=> 'Forgotten Code',
+				'rules'	=> 'required',
+			),
+			array(
+				'field'	=> 'newPassword',
+				'label'	=> 'New Password',
+				'rules'	=> 'required'
+			),
+			array(
+				'field'	=> 'newPasswordConfirm',
+				'label'	=> 'New Password Confirm',
+				'rules'	=> 'required|matches[newPassword]'
+			),
+		));
+
+		$validation_errors = [];
+
+		if(!isset($data['userId'])){
+			$validation_errors['userId'] = 'User ID is necessary.';
+		}
+
+		if(!isset($data['forgottenCode'])){
+			$validation_errors['forgottenCode'] = 'Forgotten code is necessary.';
+		}
+
+		if(!isset($data['newPassword'])){
+			$validation_errors['newPassword'] = 'New Password is necessary.';
+		}
+
+		if(!isset($data['newPasswordConfirm'])){
+			$validation_errors['newPasswordConfirm'] = 'New Password Confirm is necessary.';
+		}
+
+		if($this->validator->run() ==  false){
+			$validation_errors = array_merge($validation_errors, $this->validator->error_array());
+		}
+
+		if(!empty($validation_errors)){
+
+			$this->errors = array(
+				'validation_error'	=> $validation_errors
+			);
+			return false;
+
+		}
+
+		//lets get the user
+		try{
+
+			$user = $this->accounts_manager->get_user($data['userId']);
+
+			$forgotten_check = $this->accounts_manager->forgotten_check($user, $data['forgottenCode']);
+
+			if($forgotten_check){
+
+				if($this->accounts_manager->forgotten_complete($user, $data['newPassword'])){
+
+					return $data['userId'];
+
+				}else{
+
+					$this->errors = array(
+						'system_error'	=> 'Unable to reset password, try again.'
+					);
+					return false;
+
+				}
+
+			}else{
+
+				$this->errors = array(
+					'error'	=> 'Forgotten code has expired or never existed. You need to resend a forgotten email.',
+				);
+				return false;
+
+			}
+
+		}catch(PolyAuthException $e){
+
+			$this->errors = array(
+				'validation_error'	=> $e->get_errors()
+			);
+			return false;
+
+		}
+
+	}
+
 	public function get_errors(){
 
 		return $this->errors;

@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "8e9cf0c154f1e7dc73b1eb25a7ced6ea",
+    "hash": "96104c893a67854fd9598d73b2dd0f1f",
     "packages": [
         {
             "name": "guzzle/guzzle",
@@ -595,16 +595,16 @@
         },
         {
             "name": "polycademy/polyauth",
-            "version": "0.0.4",
+            "version": "0.0.4.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Polycademy/PolyAuth.git",
-                "reference": "3c78bc3be55b7dc744d7397acca0105d856e8d21"
+                "reference": "261841d395c2c0ed6991c047f11e2d300dfc5dc6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Polycademy/PolyAuth/zipball/3c78bc3be55b7dc744d7397acca0105d856e8d21",
-                "reference": "3c78bc3be55b7dc744d7397acca0105d856e8d21",
+                "url": "https://api.github.com/repos/Polycademy/PolyAuth/zipball/261841d395c2c0ed6991c047f11e2d300dfc5dc6",
+                "reference": "261841d395c2c0ed6991c047f11e2d300dfc5dc6",
                 "shasum": ""
             },
             "require": {
@@ -652,7 +652,7 @@
                 "sessions",
                 "user accounts"
             ],
-            "time": "2013-09-20 23:23:16"
+            "time": "2013-12-03 18:59:21"
         },
         {
             "name": "polycademy/snapsearch-client-php",
@@ -750,17 +750,17 @@
         },
         {
             "name": "symfony/event-dispatcher",
-            "version": "v2.3.7",
+            "version": "v2.4.0",
             "target-dir": "Symfony/Component/EventDispatcher",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/EventDispatcher.git",
-                "reference": "2d8ece3c610726a73d0c95c885134efea182610e"
+                "reference": "acd1707236f6eb96fbb8d58f63d289b72ebc2f6e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/EventDispatcher/zipball/2d8ece3c610726a73d0c95c885134efea182610e",
-                "reference": "2d8ece3c610726a73d0c95c885134efea182610e",
+                "url": "https://api.github.com/repos/symfony/EventDispatcher/zipball/acd1707236f6eb96fbb8d58f63d289b72ebc2f6e",
+                "reference": "acd1707236f6eb96fbb8d58f63d289b72ebc2f6e",
                 "shasum": ""
             },
             "require": {
@@ -776,7 +776,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.3-dev"
+                    "dev-master": "2.4-dev"
                 }
             },
             "autoload": {
@@ -800,7 +800,7 @@
             ],
             "description": "Symfony EventDispatcher Component",
             "homepage": "http://symfony.com",
-            "time": "2013-10-13 06:32:10"
+            "time": "2013-12-03 14:52:22"
         },
         {
             "name": "symfony/http-foundation",
