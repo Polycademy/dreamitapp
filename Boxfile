@@ -3,6 +3,8 @@ global:
     - CI_ENV: production
 web1:
   name: dreamitapp
+  shared_writable_dirs:
+    - access_logs
   php_version: 5.4.14
   php_date_timezone: "Australia/ACT"
   php_upload_max_filesize: "8M"
