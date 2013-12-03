@@ -9,43 +9,47 @@
 					<div 
 						class="control-group" 
 						ng-class="{
-							error: reset_password_form.password.$invalid && reset_password_form.password.$dirty
+							error: reset_password_form.newPassword.$invalid && reset_password_form.newPassword.$dirty
 						}"
 					>
-						<label class="control-label" for="password">Password:</label>
+						<label class="control-label" for="newPassword">New Password:</label>
 						<div class="controls">
 							<input 
 								type="password" 
-								id="password" 
+								id="newPassword" 
 								class="input-block-level" 
-								name="password" 
-								ng-model="password" 
+								name="newPassword" 
+								ng-model="newPassword" 
 								ng-minlength="8" 
 								ng-maxlength="32" 
+								required
 							/>
-							<span class="help-block" ng-show="reset_password_form.password.$error.minlength">Password is too short.</span>
-							<span class="help-block" ng-show="reset_password_form.password.$error.maxlength">Password is too long.</span>
+							<span class="help-block" ng-show="reset_password_form.newPassword.$error.required">Required</span>
+							<span class="help-block" ng-show="reset_password_form.newPassword.$error.minlength">Password is too short.</span>
+							<span class="help-block" ng-show="reset_password_form.newPassword.$error.maxlength">Password is too long.</span>
 						</div>
 					</div>
 					<div 
 						class="control-group" 
 						ng-class="{
-							error: reset_password_form.passwordConfirm.$invalid && reset_password_form.passwordConfirm.$dirty
+							error: reset_password_form.newPasswordConfirm.$invalid && reset_password_form.newPasswordConfirm.$dirty
 						}"
 					>
-						<label class="control-label" for="passwordConfirm">Password Confirm:</label>
+						<label class="control-label" for="newPasswordConfirm">New Password Confirm:</label>
 						<div class="controls">
 							<input 
 								type="password" 
-								id="passwordConfirm" 
+								id="newPasswordConfirm" 
 								class="input-block-level" 
-								name="passwordConfirm" 
-								ng-model="passwordConfirm" 
+								name="newPasswordConfirm" 
+								ng-model="newPasswordConfirm" 
 								ng-minlength="8" 
 								ng-maxlength="32" 
+								required
 							/>
-							<span class="help-block" ng-show="reset_password_form.passwordConfirm.$error.minlength">Password Confirm is too short.</span>
-							<span class="help-block" ng-show="reset_password_form.passwordConfirm.$error.maxlength">Password Confirm is too long.</span>
+							<span class="help-block" ng-show="reset_password_form.newPasswordConfirm.$error.required">Required</span>
+							<span class="help-block" ng-show="reset_password_form.newPasswordConfirm.$error.minlength">New Password Confirm is too short.</span>
+							<span class="help-block" ng-show="reset_password_form.newPasswordConfirm.$error.maxlength">New Password Confirm is too long.</span>
 						</div>
 					</div>
 				</div>

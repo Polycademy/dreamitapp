@@ -58,6 +58,7 @@
 			<div class="form-actions">
 				<button type="submit" class="btn btn-primary">Sign In</button>
 				<button type="button" class="btn btn-info" facebook-login-dir facebook-overlay-close="closeOverlay()">Sign In via Facebook</button>
+				<button type="button" class="btn btn-info" ng-click="forgotPassword()">Forgot Password</button>
 			</div>
 		</form>
 	</div>

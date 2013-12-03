@@ -147,7 +147,7 @@ $forgotten_password_email = <<<'EOD'
 
 					<h4>Hi {{identity}},</h4>
 
-					<p>You have requested us help to reset your password. Head to this <a href="http://dreamitapp.com/users/confirm_forgotten_password/?user_id={{user_id}}&forgotten_code={{forgotten_code}}">link</a> to reset your password.</p>
+					<p>You have requested us help to reset your password. Head to this <a href="http://dreamitapp.com/users/confirm_forgotten_password?user_id={{user_id}}&forgotten_code={{forgotten_code}}">link</a> to reset your password.</p>
 
 					<div style="color: #8f8f8f; margin-top: 20px; font-size: 12px;">
 						<p>

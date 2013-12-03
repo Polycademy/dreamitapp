@@ -267,9 +267,10 @@ define(['angular', 'lodash'], function(angular, _){
 			'$scope',
 			'$rootScope',
 			'$timeout',
+			'$dialog',
 			'UsersServ',
 			'dialog',
-			function($scope, $rootScope, $timeout, UsersServ, dialog){
+			function($scope, $rootScope, $timeout, $dialog, UsersServ, dialog){
 
 				$scope.closeOverlay = function(){
 					dialog.close();
@@ -295,6 +296,62 @@ define(['angular', 'lodash'], function(angular, _){
 						$scope.validationErrors = [];
 						if(response.data.code == 'validation_error'){
 							//the content would be an object of fields to errors
+							for(var key in response.data.content){
+								$scope.validationErrors.push(response.data.content[key]); 
+							}
+						}else{
+							$scope.validationErrors = [response.data.content];
+						}
+
+					});
+
+				};
+
+				$scope.forgotPassword = function(){
+
+					//close this overlay
+					$scope.closeOverlay();
+
+					//open up ForgotPasswordCtrl
+					var dialog = $dialog.dialog({
+						backdrop: false,
+						keyboard: false,
+						dialogClass: 'modal',
+						templateUrl: 'forgot_password_modal.html',
+						controller: 'ForgotPasswordCtrl'
+					});
+
+					dialog.open();
+
+				};
+
+			}
+		])
+		.controller('ForgotPasswordCtrl', [
+			'$scope',
+			'PasswordServ',
+			'UtilitiesServ',
+			'dialog',
+			function($scope, PasswordServ, UtilitiesServ, dialog){
+
+				$scope.closeOverlay = function(){
+					dialog.close();
+				};
+
+				$scope.submitForgottenPassword = function(){
+
+					var identity = $scope.email;
+
+					PasswordServ.initiate.get({
+						'identity': identity
+					}, function(response){
+
+						$scope.successSubmit = 'Sent the forgotten password email.';
+
+					}, function(response){
+
+						$scope.validationErrors = [];
+						if(UtilitiesServ.type(response.data.content) === 'Array'){
 							for(var key in response.data.content){
 								$scope.validationErrors.push(response.data.content[key]); 
 							}
