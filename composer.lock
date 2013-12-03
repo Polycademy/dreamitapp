@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "abbb1c53e3bccb0e94c1e22b522a0fb0",
+    "hash": "8e9cf0c154f1e7dc73b1eb25a7ced6ea",
     "packages": [
         {
             "name": "guzzle/guzzle",
@@ -656,16 +656,16 @@
         },
         {
             "name": "polycademy/snapsearch-client-php",
-            "version": "0.0.1",
+            "version": "0.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Polycademy/SnapSearch-Client-PHP.git",
-                "reference": "6308dfac690b2307aefe172aadad1d6d10fd4eb8"
+                "reference": "27445a1aee5c404e832caece5fbc3a5fdc5bfaad"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Polycademy/SnapSearch-Client-PHP/zipball/6308dfac690b2307aefe172aadad1d6d10fd4eb8",
-                "reference": "6308dfac690b2307aefe172aadad1d6d10fd4eb8",
+                "url": "https://api.github.com/repos/Polycademy/SnapSearch-Client-PHP/zipball/27445a1aee5c404e832caece5fbc3a5fdc5bfaad",
+                "reference": "27445a1aee5c404e832caece5fbc3a5fdc5bfaad",
                 "shasum": ""
             },
             "require": {
@@ -708,7 +708,7 @@
                 "search engine optimisation",
                 "seo"
             ],
-            "time": "2013-11-19 20:17:39"
+            "time": "2013-12-03 03:59:30"
         },
         {
             "name": "psr/log",
