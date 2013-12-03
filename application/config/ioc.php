@@ -87,7 +87,11 @@ $ioc['PolyAuth\Options'] = $ioc->share(function($c){
  * PolyAuth Language
  */
 $ioc['PolyAuth\Language'] = $ioc->share(function($c){
-	return new PolyAuth\Language;
+	return new PolyAuth\Language(
+		array(
+			'email_forgotten_password_subject'	=> 'Forgotten Password Dream it App'
+		)
+	);
 });
 
 /**
