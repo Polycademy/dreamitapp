@@ -239,9 +239,11 @@ define(['angular', 'lodash'], function(angular, _){
 				};
 
 				//crap code but who cares anymore, not my fault! event comes from SignInPrompt.Directive
-				$rootScope.$on('closeIdeaOpenSignUp', function(event, args){
+				var cleanUp = $rootScope.$on('closeIdeaOpenSignUp', function(event, args){
 					//assume args is an object containing id & titleUrl
 					$scope.signUp(args);
+					//this function  needs to be cleaned up or else there will be a memory leak, since this controller does not persist across pages, it gets destroyed and reinstantiated each time you hit the homepage
+					cleanUp();
 				});
 
 			}

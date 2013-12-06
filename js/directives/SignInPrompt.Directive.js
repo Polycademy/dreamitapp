@@ -37,6 +37,7 @@ define(['angular', 'jquery', 'twitter-bootstrap'], function(angular, $){
 								try{
 									scope.closeOverlay();
 								}catch(e){}
+
 								$rootScope.$broadcast('closeIdeaOpenSignUp', {
 									ideaId: attributes.signInPromptIdeaId,
 									titleUrl: attributes.signInPromptIdeaUrl
