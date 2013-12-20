@@ -14,23 +14,24 @@ class Home extends CI_Controller{
 	
 	public function index(){
 
-		$real_ip = null;
-		if(isset($_SERVER['X_FORWARDED_FOR'])){
-			$real_ip = $_SERVER['X_FORWARDED_FOR'];
-		}
+		// ACCESS LOGGING (currently disabled)
+		// $real_ip = null;
+		// if(isset($_SERVER['X_FORWARDED_FOR'])){
+		// 	$real_ip = $_SERVER['X_FORWARDED_FOR'];
+		// }
 
-		file_put_contents(FCPATH . '/access_logs/access_log.txt', 
-			json_encode(
-				array(
-					$_SERVER['HTTP_USER_AGENT'],
-					$_SERVER['REMOTE_ADDR'],
-					$real_ip,
-					$_SERVER['REQUEST_URI'],
-					time()
-				),
-				JSON_PRETTY_PRINT
-			)
-		, FILE_APPEND | LOCK_EX);
+		// file_put_contents(FCPATH . '/access_logs/access_log.txt', 
+		// 	json_encode(
+		// 		array(
+		// 			$_SERVER['HTTP_USER_AGENT'],
+		// 			$_SERVER['REMOTE_ADDR'],
+		// 			$real_ip,
+		// 			$_SERVER['REQUEST_URI'],
+		// 			time()
+		// 		),
+		// 		JSON_PRETTY_PRINT
+		// 	)
+		// , FILE_APPEND | LOCK_EX);
 
 		//interception should only occur in production
 		$response = false;
