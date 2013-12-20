@@ -168,9 +168,16 @@ define(['angular'], function(angular){
 
 				$scope.loggedInAndComments = false;
 
-				if($rootScope.loggedIn){
-					$scope.loggedInAndComments = true;
-				}
+				$scope.$watch(
+					function(){
+						return $rootScope.loggedIn;
+					}, 
+					function(value){
+						if(value){
+							$scope.loggedInAndComments = true;
+						}
+					}
+				);
 
 				$scope.getComments = function(ideaId){
 
