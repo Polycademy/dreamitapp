@@ -37,6 +37,7 @@
 						image-centering-dir 
 						image-centering-limit="40px" 
 						ng-show="idea.image" 
+						image-loaded-dir="mainImageLoaded"
 					/>
 					<img 
 						ng-switch-when="false" 
@@ -45,6 +46,7 @@
 						image-centering-dir 
 						image-centering-limit="40px" 
 						ng-show="idea.image" 
+						image-loaded-dir="mainImageLoaded"
 					/>
 				</div>
 				<div class="idea_description" ng-bind-html="idea.descriptionParsed"></div>
@@ -115,8 +117,8 @@
 				<li><a href="http://www.shareasale.com/r.cfm?b=485240&u=875004&m=21459&urllink=&afftrack=">Need iPhone App Built?</a> Build your own app in Minutes, only $29 a month!</li>
 			</ul>
 		</div>
-		<section id="feedback" class="idea_comments" ng-controller="CommentsCtrl">
-			<h2 ng-show="loggedInAndComments">Feedback</h2>
+		<section id="feedback" class="idea_comments" ng-controller="CommentsCtrl" async-anchor-dir async-anchor-event="mainImageLoaded">
+			<h2>Feedback</h2>
 			<form class="comment_form" ng-submit="submitComment(idea.id)" name="comment_form" ng-show="loggedIn">
 				<div 
 					class="control-group" 
@@ -151,6 +153,7 @@
 					<button type="submit" class="btn btn-primary">Add Comment</button>
 				</div>
 			</form>
+			<p ng-show="!loggedInAndComments">Please sign in to see add your comments to this idea.</p>
 			<div 
 				class="comment_list" 
 				when-scrolled-dir="getComments(ideaId)" 

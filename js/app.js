@@ -97,6 +97,8 @@ define([
 				'directives/SignInPrompt.Directive',
 				'directives/Compile.Directive',
 				'directives/RotatingAdverts.Directive',
+				'directives/AsyncAnchor.Directive',
+				'directives/ImageLoaded.Directive',
 				//FILTERS
 				'filters/StripHtml.Filter',
 				'filters/UrlFriendly.Filter',
