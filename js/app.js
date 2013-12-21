@@ -94,7 +94,7 @@ define([
 				'directives/InputFocus.Directive',
 				'directives/WhenScrolled.Directive',
 				'directives/FacebookLogin.Directive',
-				'directives/SignInPrompt.Directive',
+				'directives/SignInOrSignUpPrompt.Directive',
 				'directives/Compile.Directive',
 				'directives/RotatingAdverts.Directive',
 				'directives/AsyncAnchor.Directive',

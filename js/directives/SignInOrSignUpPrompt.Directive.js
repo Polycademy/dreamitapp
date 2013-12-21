@@ -3,7 +3,7 @@ define(['angular', 'jquery', 'twitter-bootstrap'], function(angular, $){
 	'use strict';
 
 	angular.module('Directives')
-		.directive('signInPromptDir', [
+		.directive('signInOrSignUpPromptDir', [
 			'$rootScope',
 			'$timeout',
 			function($rootScope, $timeout){
@@ -12,12 +12,13 @@ define(['angular', 'jquery', 'twitter-bootstrap'], function(angular, $){
 
 						var trigger;
 
-						attributes.$observe('signInPromptDir', function(value){
-							value = (value == 'true');
-							trigger = value;
-							if(!value){
+						attributes.$observe('signInOrSignUpPromptDir', function(loggedIn){
+							//directive attribute comes in as as string
+							loggedIn = (loggedIn == 'true');
+							trigger = loggedIn;
+							if(!loggedIn){
 								element.tooltip({
-									title: attributes.signInPromptMessage,
+									title: attributes.signInOrSignUpPromptMessage,
 									trigger: 'manual'
 								});
 							}else{
@@ -28,22 +29,23 @@ define(['angular', 'jquery', 'twitter-bootstrap'], function(angular, $){
 						element.bind('click', function(){
 
 							if(!trigger){
+
 								element.tooltip('show');
 								$timeout(function(){
 									element.tooltip('hide');
 								}, 1000);
 
-								//crap code but who cares anymore
+								//close any possible overlay that is currently open, this most likely is the idea overlay
+								//it won't work on a full page idea
 								try{
 									scope.closeOverlay();
 								}catch(e){}
 
-								$rootScope.$broadcast('closeIdeaOpenSignUp', {
-									ideaId: attributes.signInPromptIdeaId,
-									titleUrl: attributes.signInPromptIdeaUrl
+								$rootScope.$broadcast('openSignInOrSignUp', {
+									ideaId: attributes.signInOrSignUpPromptIdeaId,
+									titleUrl: attributes.signInOrSignUpPromptIdeaUrl
 								});
 
-								return false;
 							}
 
 						});

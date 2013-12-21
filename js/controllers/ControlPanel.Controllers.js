@@ -190,7 +190,7 @@ define(['angular', 'lodash'], function(angular, _){
 				//POLYAUTH
 
 				//this will bring up an overlay as well
-				$scope.signIn = function(){
+				$scope.signIn = function(reopenIdea){
 
 					var dialog = $dialog.dialog({
 						backdrop: false,
@@ -200,7 +200,17 @@ define(['angular', 'lodash'], function(angular, _){
 						controller: 'SignInModalCtrl'
 					});
 
-					dialog.open();
+					var finishFunction = function(){
+						if(reopenIdea){
+							$state.transitionTo('idea', {
+								ideaId: reopenIdea.ideaId, 
+								ideaUrl: reopenIdea.titleUrl, 
+								force: 'true'
+							});
+						}
+					};
+
+					dialog.open().then(finishFunction);
 
 				};
 
@@ -238,12 +248,38 @@ define(['angular', 'lodash'], function(angular, _){
 
 				};
 
-				//crap code but who cares anymore, not my fault! event comes from SignInPrompt.Directive
-				var cleanUp = $rootScope.$on('closeIdeaOpenSignUp', function(event, args){
+				$scope.signInOrSignUp = function(reopenIdea){
+
+					var dialog = $dialog.dialog({
+						backdrop: false,
+						keyboard: false,
+						dialogClass: 'modal',
+						templateUrl: 'signin_or_signup_modal.html',
+						controller: 'SignInOrSignUpModalCtrl',
+						customOptions: {
+							previousIdea: reopenIdea
+						}
+					});
+
+					dialog.open();
+
+				};
+
+				var promptSignInOrUpListener = $rootScope.$on('openSignInOrSignUp', function(event, args){
 					//assume args is an object containing id & titleUrl
-					$scope.signUp(args);
+					$scope.signInOrSignUp(args);
 					//this function  needs to be cleaned up or else there will be a memory leak, since this controller does not persist across pages, it gets destroyed and reinstantiated each time you hit the homepage
-					cleanUp();
+					promptSignInOrUpListener();
+				});
+
+				var signInListener = $rootScope.$on('openSignIn', function(event, args){
+					$scope.signIn(args);
+					signInListener();
+				});
+
+				var signUpListener = $rootScope.$on('openSignUp', function(event, args){
+					$scope.signUp(args);
+					signUpListener();
 				});
 
 			}
@@ -429,6 +465,43 @@ define(['angular', 'lodash'], function(angular, _){
 						}
 
 					});
+
+				};
+
+			}
+		])
+		.controller('SignInOrSignUpModalCtrl', [
+			'$scope',
+			'$rootScope',
+			'$state',
+			'dialog',
+			function($scope, $rootScope, $state, dialog){
+
+				//this controller overlay only gets triggered from liking or trying to hit commenting buttons but not logged in
+
+				var previousIdea = dialog.options.customOptions.previousIdea;
+
+				$scope.closeOverlay = function(){
+					dialog.close();
+					//if it closes by itself, it needs to reopen the previous idea
+					$state.transitionTo('idea', {
+						ideaId: previousIdea.ideaId, 
+						ideaUrl: previousIdea.titleUrl, 
+						force: 'true'
+					});
+				};
+
+				$scope.openSignIn = function(){
+
+					$rootScope.$broadcast('openSignIn', previousIdea);
+					dialog.close();
+
+				};
+
+				$scope.openSignUp = function(){
+
+					$rootScope.$broadcast('openSignUp', previousIdea);
+					dialog.close();
 
 				};
 

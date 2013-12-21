@@ -4,10 +4,8 @@ define(['angular', 'bootstrap'], function(angular){
 
 	angular.module('Directives')
 		.directive('likeToggleDir', [
-			'$rootScope',
-			'$timeout',
 			'LikeServ',
-			function($rootScope, $timeout, LikeServ){
+			function(LikeServ){
 				return {
 					link: function(scope, element, attributes){
 

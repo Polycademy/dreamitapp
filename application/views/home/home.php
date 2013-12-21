@@ -42,6 +42,10 @@
 							class="item_feedback" 
 							ng-href="ideas/{{idea.id}}/{{idea.titleUrl}}#feedback" 
 							ng-click="openIdeaOverlay(idea.id, idea.titleUrl)" 
+							sign-in-or-sign-up-prompt-dir="{{loggedIn}}" 
+							sign-in-or-sign-up-prompt-idea-id="{{idea.id}}" 
+							sign-in-or-sign-up-prompt-idea-url="{{idea.titleUrl}}" 
+							sign-in-or-sign-up-prompt-message="Sign In or Up to Like Ideas!"
 						>
 							<div class="item_icon fui-chat">
 								<span class="item_number">{{idea.commentCount | NumCounter:2}}</span>
@@ -49,10 +53,10 @@
 						</a>
 						<a 
 							class="item_likes" 
-							sign-in-prompt-dir="{{loggedIn}}" 
-							sign-in-prompt-message="Sign up to like ideas!" 
-							sign-in-prompt-idea-id="{{idea.id}}" 
-							sign-in-prompt-idea-url="{{idea.titleUrl}}" 
+							sign-in-or-sign-up-prompt-dir="{{loggedIn}}" 
+							sign-in-or-sign-up-prompt-idea-id="{{idea.id}}" 
+							sign-in-or-sign-up-prompt-idea-url="{{idea.titleUrl}}" 
+							sign-in-or-sign-up-prompt-message="Sign In or Up to Like Ideas!" 
 							like-toggle-dir 
 							like-index="{{$index}}" 
 							like-id="{{idea.id}}"
