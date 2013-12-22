@@ -128,7 +128,7 @@
 				</li>
 			</ul>
 		</div>
-		<div class="control_adverts" rotating-adverts-dir="advertNum" rotate-between="1:3" ng-switch="advertNum">
+		<div class="control_adverts" rotating-adverts-dir="advertNum" rotate-between="1:4" ng-switch="advertNum">
 			<div class="image_advert" ng-switch-when="1">
 				<a target="_blank" href="http://www.shareasale.com/r.cfm?b=520409&u=875004&m=32431&urllink=&afftrack=">
 					<img src="http://www.shareasale.com/image/32431/300x250-Galaxy.jpg" alt="Galaxy of accessories. Upgrade your beloved Samsung!" />
@@ -142,6 +142,11 @@
 			<div class="image_advert" ng-switch-when="3">
 				<a target="_blank" href="http://www.shareasale.com/r.cfm?b=485235&u=875004&m=21459&urllink=&afftrack=">
 					<img src="http://www.shareasale.com/image/21459/BuildForMe125_00.jpg" alt="Need an iPhone App Built? Dedicated iOS developer starting at $15 an Hour!" />
+				</a>
+			</div>
+			<div class="image_advert" ng-switch-when="4">
+				<a target="_blank" href="http://www.shareasale.com/r.cfm?b=531904&u=875004&m=41388&urllink=&afftrack=">
+					<img src="http://www.shareasale.com/image/41388/sas_banner_250x250.jpg" alt="WP Engine" border="0" />
 				</a>
 			</div>
 		</div>
