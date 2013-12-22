@@ -1,0 +1,37 @@
+{
+	"name": "polycademy/polyauth",
+	"description": "Authentication & Authorisation Library",
+	"keywords": ["authentication", "authorisation", "sessions", "user accounts", "rbac", "access control", "oauth"],
+	"homepage": "https://github.com/Polycademy/PolyAuth",
+	"license": "MIT",
+	"authors": [{
+		"name": "Roger Qiu",
+		"email": "roger.qiu@polycademy.com",
+		"homepage": "http://polycademy.com",
+		"role": "Founder and Developer"
+	}],
+	"require": {
+		"php": ">=5.4.12",
+		"polycademy/php_rbac": "1.0.0",
+		"ircmaxell/password-compat": "1.0.3",
+		"phpmailer/phpmailer": "5.2.7",
+		"psr/log": "1.0.0",
+		"tedivm/stash": "0.10.5",
+		"lusitanian/oauth": "0.2.2"
+	},
+	"require-dev": {
+		"codeception/codeception": "1.6.7"
+	},
+	"suggest": {
+		"ext-apc": "Can provide a faster memory cache for PolyAuth.",
+		"ext-mcrypt": "Required for encryption and decryption."
+	},
+	"config": {
+		"bin-dir": "bin/"
+	},
+	"autoload": {
+		"psr-0": {
+			"PolyAuth": "src"
+		}
+	}
+}

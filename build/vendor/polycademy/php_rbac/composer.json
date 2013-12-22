@@ -1,0 +1,34 @@
+{
+    "name": "polycademy/php_rbac",
+    "type": "library",
+    "description": "An implementation of RBAC Level 2",
+    "homepage": "https://github.com/Polycademy/php_rbac",
+    "license": "MIT",
+    "keywords": ["auth", "authentication", "rbac", "database"],
+    "authors": [{
+        "name": "Roger Qiu",
+        "email": "roger.qiu@polycademy.com",
+        "homepage": "http://polycademy.com",
+        "role": "Founder and Developer"
+    },
+    {
+        "name": "Leigh MacDonald",
+        "email": "leigh.macdonald@gmail.com",
+        "homepage": "http://cudd.li",
+        "role": "Developer"
+    }],
+    "require": {
+        "php": ">=5.4.0",
+        "psr/log": "1.0.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "3.7.18",
+        "phpunit/dbunit": "1.2.*@dev",
+        "ext-apc": "*"
+    },
+    "autoload": {
+        "psr-0": {
+            "RBAC": "src/"
+        }
+    }
+}
