@@ -7081,9 +7081,13 @@ header.navbar .nav li a {
 /*
 	SIGN IN OR SIGN UP MODAL
 */
-.signin_or_signup_buttons {
+.signin_or_signup_actions {
+  margin: 10px;
+}
+.signin_or_signup_actions .signin_or_signup_buttons {
   display: inline-block;
   text-align: center;
+  margin-right: 10px;
 }
 /*
 	ABOUT

@@ -6,7 +6,9 @@
 				<span class="fui-cross"></span>
 			</button>
 		</header>
-		<button type="button" class="btn btn-primary signin_or_signup_buttons" ng-click="openSignIn()">Sign In</button>
-		<button type="button" class="btn btn-primary signin_or_signup_buttons" ng-click="openSignUp()">Sign Up</button>
+		<div class="signin_or_signup_actions">
+			<button type="button" class="btn btn-primary signin_or_signup_buttons" ng-click="openSignIn()">Sign In</button>
+			<button type="button" class="btn btn-primary signin_or_signup_buttons" ng-click="openSignUp()">Sign Up</button>
+		</div>
 	</div>
 </script>
