@@ -8,6 +8,7 @@ define(['angular', 'jquery', 'twitter-bootstrap'], function(angular, $){
 			'$timeout',
 			function($rootScope, $timeout){
 				return {
+					priority: 1, //runs before the ng-click, so it can intercept it
 					link: function(scope, element, attributes){
 
 						var trigger;
@@ -26,7 +27,9 @@ define(['angular', 'jquery', 'twitter-bootstrap'], function(angular, $){
 							}
 						});
 
-						element.bind('click', function(){
+						element.bind('click', function(event){
+
+							scope.disableOverlay = false;
 
 							if(!trigger){
 
@@ -45,6 +48,12 @@ define(['angular', 'jquery', 'twitter-bootstrap'], function(angular, $){
 									ideaId: attributes.signInOrSignUpPromptIdeaId,
 									titleUrl: attributes.signInOrSignUpPromptIdeaUrl
 								});
+
+								//prevents the opening of the overlay
+								scope.disableOverlay = true;
+
+								//stops the event propagation to prevent the href from working
+								return false;
 
 							}
 

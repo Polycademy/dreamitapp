@@ -40,12 +40,12 @@
 					<div class="item_actions">
 						<a 
 							class="item_feedback" 
-							ng-href="ideas/{{idea.id}}/{{idea.titleUrl}}#feedback" 
-							ng-click="openIdeaOverlay(idea.id, idea.titleUrl)" 
 							sign-in-or-sign-up-prompt-dir="{{loggedIn}}" 
 							sign-in-or-sign-up-prompt-idea-id="{{idea.id}}" 
 							sign-in-or-sign-up-prompt-idea-url="{{idea.titleUrl}}" 
 							sign-in-or-sign-up-prompt-message="Sign In or Up to Like Ideas!"
+							ng-href="ideas/{{idea.id}}/{{idea.titleUrl}}#feedback" 
+							ng-click="disableOverlay || openIdeaOverlay(idea.id, idea.titleUrl)" 
 						>
 							<div class="item_icon fui-chat">
 								<span class="item_number">{{idea.commentCount | NumCounter:2}}</span>
@@ -103,6 +103,11 @@
 			<ul ng-switch-default>
 				<li ng-class="{true: 'viewing_popular_ideas'}[viewingPopularIdeas]">
 					<a ng-click="viewPopularIdeas()"><span class="fui-heart"></span>Popular Ideas</a>
+				</li>
+				<li>
+					<a>
+						<span class="fui-radio-unchecked"></span>I have an Idea
+					</a>
 				</li>
 				<li>
 					<a ng-click="signIn()"><span class="login_icon"></span>Sign In</a>

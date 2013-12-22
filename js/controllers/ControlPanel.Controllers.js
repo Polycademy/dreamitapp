@@ -200,8 +200,8 @@ define(['angular', 'lodash'], function(angular, _){
 						controller: 'SignInModalCtrl'
 					});
 
-					var finishFunction = function(){
-						if(reopenIdea){
+					var finishFunction = function(shouldReopenIdea){
+						if(reopenIdea && shouldReopenIdea){
 							$state.transitionTo('idea', {
 								ideaId: reopenIdea.ideaId, 
 								ideaUrl: reopenIdea.titleUrl, 
@@ -233,8 +233,8 @@ define(['angular', 'lodash'], function(angular, _){
 						controller: 'SignUpModalCtrl'
 					});
 
-					var finishFunction = function(){
-						if(reopenIdea){
+					var finishFunction = function(shouldReopenIdea){
+						if(reopenIdea && shouldReopenIdea){
 							$state.transitionTo('idea', {
 								ideaId: reopenIdea.ideaId, 
 								ideaUrl: reopenIdea.titleUrl, 
@@ -268,17 +268,26 @@ define(['angular', 'lodash'], function(angular, _){
 				var promptSignInOrUpListener = $rootScope.$on('openSignInOrSignUp', function(event, args){
 					//assume args is an object containing id & titleUrl
 					$scope.signInOrSignUp(args);
-					//this function  needs to be cleaned up or else there will be a memory leak, since this controller does not persist across pages, it gets destroyed and reinstantiated each time you hit the homepage
-					promptSignInOrUpListener();
 				});
 
 				var signInListener = $rootScope.$on('openSignIn', function(event, args){
 					$scope.signIn(args);
-					signInListener();
 				});
 
 				var signUpListener = $rootScope.$on('openSignUp', function(event, args){
 					$scope.signUp(args);
+				});
+
+				//registering events on this controller can cause an event handling leak
+				//the browser remembers all the event handlers, however this controller's instance may be destroyed
+				//when switching pages
+				//when it reinstantiates, it reregisters the event handlers
+				//thie means on the destruction of this controller, we need to clean up the event handlers
+				//in future this code should be reworked, since controllers shouldn't really have to register event handlers
+				//and the manipulation of overlays should be handled by an overarching controller, or a service singleton
+				$scope.$on('$destroy', function() {
+					promptSignInOrUpListener();
+					signInListener();
 					signUpListener();
 				});
 
@@ -310,8 +319,9 @@ define(['angular', 'lodash'], function(angular, _){
 			'dialog',
 			function($scope, $rootScope, $timeout, $dialog, UsersServ, dialog){
 
-				$scope.closeOverlay = function(){
-					dialog.close();
+				$scope.closeOverlay = function(shouldReopenIdea){
+					shouldReopenIdea = (typeof shouldReopenIdea === 'undefined') ? true : shouldReopenIdea;
+					dialog.close(shouldReopenIdea);
 				};
 
 				$scope.submitSignIn = function(){
@@ -347,8 +357,8 @@ define(['angular', 'lodash'], function(angular, _){
 
 				$scope.forgotPassword = function(){
 
-					//close this overlay
-					$scope.closeOverlay();
+					//close this overlay but don't reopen the idea
+					$scope.closeOverlay(false);
 
 					//open up ForgotPasswordCtrl
 					var dialog = $dialog.dialog({
@@ -414,9 +424,12 @@ define(['angular', 'lodash'], function(angular, _){
 
 				$rootScope.viewingOverlay = true;
 
-				$scope.closeOverlay = function(){
+				$scope.closeOverlay = function(shouldReopenIdea){
+					//by default closing the signup overlay should reopen the idea if there was an action interception
+					//but if we successfully logged in, then we are transitioning to the user, not the idea
+					shouldReopenIdea = (typeof shouldReopenIdea === 'undefined') ? true : shouldReopenIdea;
 					$rootScope.viewingOverlay = false;
-					dialog.close();
+					dialog.close(shouldReopenIdea);
 				};
 
 				//default parameters
@@ -449,7 +462,7 @@ define(['angular', 'lodash'], function(angular, _){
 									$state.transitionTo('user', {userId: response.content});
 								});
 							}
-							$scope.closeOverlay();
+							$scope.closeOverlay(false);
 						}, 1000);
 
 					}, function(response){
