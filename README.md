@@ -177,7 +177,9 @@ then
 bower install
 ```
 
-These will install all the dependencies of the application. Also go into your drop box and grab the `keys.php`. Copy and paste this into `www/dreamitapp/secrets/keys.php`. This houses the secret API keys to the third party services.
+These will install all the dependencies of the application.
+
+Now we need the secret keys, this is not saved in the remote repository because it is secret. Go into your drop box and grab the `keys.php`. Copy and paste this into `www/dreamitapp/secrets/keys.php`. This houses the secret API keys to the third party services.
 
 You should be able to run the application now. By accessing `http://localhost/dreamitapp`.
 
