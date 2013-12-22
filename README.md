@@ -22,7 +22,7 @@ In order to setup Dream it App to be edited and deployed, you must first have a 
   * You must have an account on Github for this work.
   * Once downloaded go into tools > options and login to Github using this application.
   * In the default storage directory, point it to your "www" directory.
-  * On the left you should see Polycademy, go into there and clone both dreamitapp repository and dreamitapp_release respository.
+  * On the left you should see Polycademy, go into there and clone both dreamitapp repository.
   * This means you now have the full source code of Dream it App inside your "www" directory.
   * If you feel like it, you should fork the repository into your own respository and then make the necessary changes. This requires a more advanced understanding of Git however.
 3. Git Binary (http://git-scm.com/download/win)
@@ -92,9 +92,9 @@ Now you have a public and private key shared between Pagodabox and your local co
 
 Now we have to connect our git repositories to the server respositories.
 
-There are 2 repositories in your "www" folder. The first is dreamitapp and the second is dreamitapp_release. dreamitapp is the source code. dreamitapp_release is the compiled source code of dreamitapp and it will contain everything that is needed to deploy. From Github for Windows, go into the dreamitapp_release repo. Hit tools > open shell from here.
+There is a dream it app repository in your "www" folder. This contains the source code, and inside the build folder contains everything that is needed to deploy. From Github for Windows, go into the dreamitapp repo. Hit tools > open shell from here.
 
-You are going to add a new remote repo connecting to dreamitapp_release. The instructions are in this article: http://help.pagodabox.com/customer/portal/articles/274179 However we will need to skip some instructions.
+You are going to add a new remote repo connecting to the dreamitapp repository. The instructions are in this article: http://help.pagodabox.com/customer/portal/articles/274179 However we will need to skip some instructions.
 
 Write this into your terminal. IMPORTANT: Replace {your-app} with dreamitapp.
 
@@ -102,10 +102,10 @@ Write this into your terminal. IMPORTANT: Replace {your-app} with dreamitapp.
 git remote add pagoda git@git.pagodabox.com:{your-app}.git
 ```
 
-Now if you make any changes to dreamitapp repo, then compile to dreamitapp_release, you can then use this inside the same shell location:
+Now if you make any changes to dreamitapp repo, you can then use this inside the same shell location:
 
 ```
-git push pagoda master
+git push pagoda --all
 ```
 
 And this will push the repository to the server. Don't do this just yet, as we don't have code differences.
@@ -181,6 +181,8 @@ These will install all the dependencies of the application. Also go into your dr
 
 You should be able to run the application now. By accessing `http://localhost/dreamitapp`.
 
+Before you start editing, you should pull in any remote changes from Github. These changes can come from projectc collaborators or yourself when you produced a change from another computer. Simply go into the repository and synchronise it in order to pull in the remote changes into your local repository.
+
 Edit what you nee to edit. If you have done your edits. Go to Github for Windows and go into the repository and commit and synchronise your repository.
 
 Once you're done, run this at the root of the directory:
@@ -191,14 +193,12 @@ grunt
 
 This will compile a build version of the source code. You should see a `www/dreamitapp/build` directory.
 
-Inside this directory, copy the contents. Go into dreamitapp_release, and paste into this directory, but don't overwrite the `.git` folder that is inside the dreamitapp_release.
+Open up Github for Windows and commit and synchronise your dreamitapp repository.
 
-Open up Github for Windows and commit and synchronise your dreamitapp_release.
-
-Open up the terminal at the root of dreamitapp_release and run:
+Open up the terminal at the root of dreamitapp and run:
 
 ```
-git push pagoda master
+git push pagoda --all
 ```
 
 This will ask for your password for the SSH key you set.
