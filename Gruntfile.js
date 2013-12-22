@@ -79,7 +79,8 @@ module.exports = function(grunt){
 							filepath === '.gitattributes' || 
 							filepath === 'pkgscript.log' || 
 							filepath === 'npm_global_installer.js' || 
-							filepath === 'build.js'
+							filepath === 'build.js' || 
+							filepath === 'Boxfile'
 						){
 							grunt.log.writeln('Not copying: ' + filepath);
 							return false;
