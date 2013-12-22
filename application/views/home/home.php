@@ -105,8 +105,11 @@
 					<a ng-click="viewPopularIdeas()"><span class="fui-heart"></span>Popular Ideas</a>
 				</li>
 				<li>
-					<a>
-						<span class="fui-radio-unchecked"></span>I have an Idea
+					<a
+						sign-in-or-sign-up-prompt-dir="{{loggedIn}}" 
+						sign-in-or-sign-up-prompt-message="Sign In or Up to Add Ideas!" 
+					>
+						<span class="fui-radio-unchecked"></span>I Have An Idea
 					</a>
 				</li>
 				<li>

@@ -11,7 +11,10 @@ define(['angular', 'jquery', 'twitter-bootstrap'], function(angular, $){
 					priority: 1, //runs before the ng-click, so it can intercept it
 					link: function(scope, element, attributes){
 
-						var trigger;
+						//this only runs when the user is NOT logged in, meaning trigger should be false
+
+						var trigger,
+							reopenIdea;
 
 						attributes.$observe('signInOrSignUpPromptDir', function(loggedIn){
 							//directive attribute comes in as as string
@@ -44,10 +47,16 @@ define(['angular', 'jquery', 'twitter-bootstrap'], function(angular, $){
 									scope.closeOverlay();
 								}catch(e){}
 
-								$rootScope.$broadcast('openSignInOrSignUp', {
-									ideaId: attributes.signInOrSignUpPromptIdeaId,
-									titleUrl: attributes.signInOrSignUpPromptIdeaUrl
-								});
+								if(attributes.signInOrSignUpPromptIdeaId && attributes.signInOrSignUpPromptIdeaUrl){
+									reopenIdea = {
+										ideaId: attributes.signInOrSignUpPromptIdeaId,
+										titleUrl: attributes.signInOrSignUpPromptIdeaUrl
+									};
+								}else{
+									reopenIdea = false;
+								}
+
+								$rootScope.$broadcast('openSignInOrSignUp', reopenIdea);
 
 								//prevents the opening of the overlay
 								scope.disableOverlay = true;
