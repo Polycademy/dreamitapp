@@ -7081,10 +7081,40 @@ header.navbar .nav li a {
 /*
 	SIGN IN OR SIGN UP MODAL
 */
-.signin_or_signup_actions {
+.modal .signin_or_signup_container {
+  margin: 0 auto;
+  padding: 10px;
+}
+.modal .signin_or_signup_container .signin_or_signup_header {
+  margin: 0;
+  overflow: auto;
+  padding: 0;
+}
+.modal .signin_or_signup_container .signin_or_signup_header h3 {
+  float: left;
+  font-size: 22px;
+  font-family: 'source_sans_prosemibold', arial, sans-serif;
+  margin: 10px;
+  width: 70%;
+}
+.modal .signin_or_signup_container .signin_or_signup_header .signin_or_signup_close {
+  margin: 10px;
+  float: right;
+  font-size: 18px;
+  height: 30px;
+  border-radius: 4px;
+  border: 1px solid #e2dddd;
+  background: #efebe7;
+  color: #34495e;
+}
+.modal .signin_or_signup_container .signin_or_signup_header .signin_or_signup_close:hover {
+  background: #ecf0f1;
+  color: #2c3e50;
+}
+.modal .signin_or_signup_container .signin_or_signup_actions {
   margin: 10px;
 }
-.signin_or_signup_actions .signin_or_signup_buttons {
+.modal .signin_or_signup_container .signin_or_signup_actions .signin_or_signup_buttons {
   display: inline-block;
   text-align: center;
   margin-right: 10px;

@@ -75,7 +75,11 @@ define([
 				'controllers/AddEditIdea.Controllers',
 				'controllers/AddEditBlog.Controllers',
 				'controllers/EditUser.Controllers',
-				'controllers/Password.Controllers',
+				'controllers/ForgotPassword.Controllers',
+				'controllers/ConfirmForgotPassword.Controllers',
+				'controllers/SignIn.Controllers',
+				'controllers/SignUp.Controllers',
+				'controllers/SignInOrSignUp.Controllers',
 				//DIRECTIVES
 				'directives/EqualiseHeights.Directive',
 				'directives/EqualiseHeightTo.Directive',
@@ -219,11 +223,35 @@ define([
 									}
 								)
 								.state(
-									'passwordUser',
+									'signUpUser',
+									{
+										url: '/users/signup?idea_id&title_url',
+										templateUrl: 'signup.html',
+										controller: 'SignUpCtrl'
+									}
+								)
+								.state(
+									'signInUser',
+									{
+										url: '/users/signin?idea_id&title_url',
+										templateUrl: 'signin.html',
+										controller: 'SignInCtrl'
+									}
+								)
+								.state(
+									'forgotPassword',
+									{
+										url: '/users/forgot_password',
+										templateUrl: 'forgot_password.html',
+										controller: 'ForgotPasswordCtrl'
+									}
+								)
+								.state(
+									'confirmForgotPassword',
 									{
 										url: '/users/confirm_forgotten_password?user_id&forgotten_code',
 										templateUrl: 'confirm_forgotten_password.html',
-										controller: 'PasswordCtrl'
+										controller: 'ConfirmForgotPasswordCtrl'
 									}
 								)
 								.state(

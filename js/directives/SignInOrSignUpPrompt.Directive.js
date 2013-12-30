@@ -18,28 +18,15 @@ define(['angular', 'jquery', 'twitter-bootstrap'], function(angular, $){
 
 						attributes.$observe('signInOrSignUpPromptDir', function(loggedIn){
 							//directive attribute comes in as as string
-							loggedIn = (loggedIn == 'true');
-							trigger = loggedIn;
-							if(!loggedIn){
-								element.tooltip({
-									title: attributes.signInOrSignUpPromptMessage,
-									trigger: 'manual'
-								});
-							}else{
-								element.tooltip('destroy');
-							}
+							trigger = (loggedIn == 'true');
 						});
 
 						element.bind('click', function(event){
 
+							//allow the overlay
 							scope.disableOverlay = false;
 
 							if(!trigger){
-
-								element.tooltip('show');
-								$timeout(function(){
-									element.tooltip('hide');
-								}, 1000);
 
 								//close any possible overlay that is currently open, this most likely is the idea overlay
 								//it won't work on a full page idea
@@ -58,11 +45,17 @@ define(['angular', 'jquery', 'twitter-bootstrap'], function(angular, $){
 
 								$rootScope.$broadcast('openSignInOrSignUp', reopenIdea);
 
-								//prevents the opening of the overlay
+								//prevent the idea overlay from opening up
 								scope.disableOverlay = true;
 
-								//stops the event propagation to prevent the href from working
-								return false;
+								//if there was a reopen idea, then we need to cancel the href change event
+								//if there wasn't a reopen idea, then there's probably no href change event
+								//most likely from the I Have An Idea button
+								//stopPropagation() actually stops AngularJS from changing the URL because the anchor element is a directive
+								if(reopenIdea){
+									event.preventDefault();
+									event.stopPropagation();
+								}
 
 							}
 

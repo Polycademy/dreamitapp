@@ -81,13 +81,15 @@
 				<hr />
 				<div class="idea_actions idea_aside_text">
 					<ul>
-						<li 
-							sign-in-or-sign-up-prompt-dir="{{loggedIn}}" 
-							sign-in-or-sign-up-prompt-idea-id="{{idea.id}}" 
-							sign-in-or-sign-up-prompt-idea-url="{{idea.titleUrl}}" 
-							sign-in-or-sign-up-prompt-message="Sign In or Up to Like Ideas!"
-						>
-							<a ng-click="likeAction(idea.id)"><span class="fui-heart"></span>Like</a>
+						<li>
+							<a 
+								sign-in-or-sign-up-prompt-dir="{{loggedIn}}" 
+								sign-in-or-sign-up-prompt-idea-id="{{idea.id}}" 
+								sign-in-or-sign-up-prompt-idea-url="{{idea.titleUrl}}" 
+								ng-click="likeAction(idea.id)"
+							>
+								<span class="fui-heart"></span>Like
+							</a>
 						</li>
 						<li>
 							<a ng-click="contactAuthor(idea.authorId, idea.id)" ng-show="loggedInDeveloper"><span class="fui-mail"></span>Contact</a>
@@ -104,13 +106,15 @@
 								<span class="fui-plus"></span>Share
 							</a>
 						</li>
-						<li 
-							sign-in-or-sign-up-prompt-dir="{{loggedIn}}" 
-							sign-in-or-sign-up-prompt-idea-id="{{idea.id}}" 
-							sign-in-or-sign-up-prompt-idea-url="{{idea.titleUrl}}" 
-							sign-in-or-sign-up-prompt-message="Sign In or Up to Like Ideas!"
-						>
-							<a anchor-scroll-dir="feedback"><span class="fui-chat"></span>Give Feedback</a>
+						<li>
+							<a 
+								sign-in-or-sign-up-prompt-dir="{{loggedIn}}" 
+								sign-in-or-sign-up-prompt-idea-id="{{idea.id}}" 
+								sign-in-or-sign-up-prompt-idea-url="{{idea.titleUrl}}" 
+								anchor-scroll-dir="feedback"
+							>
+								<span class="fui-chat"></span>Give Feedback
+							</a>
 						</li>
 					</ul>
 				</div>
