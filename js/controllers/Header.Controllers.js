@@ -7,7 +7,8 @@ define(['angular'], function(angular){
 			'$scope',
 			'$rootScope',
 			'$dialog',
-			function($scope, $rootScope, $dialog){
+			'$timeout',
+			function($scope, $rootScope, $dialog, $timeout){
 
 				$scope.reloadWall = function(){
 					$rootScope.$broadcast('reloadWall');
@@ -30,7 +31,11 @@ define(['angular'], function(angular){
 						}
 					});
 
-					dialog.open();
+					//delay the execution to allow the DOM to finish updating or other important work
+					//could cause bugs if this is not done
+					$timeout(function(){
+						dialog.open();
+					}, 0);
 
 				};
 
