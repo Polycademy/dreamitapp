@@ -96,10 +96,10 @@ There is a dream it app repository in your "www" folder. This contains the sourc
 
 You are going to add a new remote repo connecting to the dreamitapp repository. The instructions are in this article: http://help.pagodabox.com/customer/portal/articles/274179 However we will need to skip some instructions.
 
-Write this into your terminal. IMPORTANT: Replace {your-app} with dreamitapp.
+Write this into your terminal.
 
 ```
-git remote add pagoda git@git.pagodabox.com:{your-app}.git
+git remote add pagoda git@git.pagodabox.com:dreamitapp.git
 ```
 
 Now if you make any changes to dreamitapp repo, you can then use this inside the same shell location:
@@ -179,11 +179,11 @@ bower install
 
 These will install all the dependencies of the application.
 
-Now we need the secret keys, this is not saved in the remote repository because it is secret. Go into your drop box and grab the `keys.php`. Copy and paste this into `www/dreamitapp/secrets/keys.php`. This houses the secret API keys to the third party services.
+The secret API keys should now be available inside the respository since it is saved in the repository.
 
 You should be able to run the application now. By accessing `http://localhost/dreamitapp`.
 
-Before you start editing, you should pull in any remote changes from Github. These changes can come from projectc collaborators or yourself when you produced a change from another computer. Simply go into the repository and synchronise it in order to pull in the remote changes into your local repository.
+Before you start editing, you should pull in any remote changes from Github. These changes can come from project collaborators or yourself when you produced a change from another computer. Simply go into the repository and synchronise it in order to pull in the remote changes into your local repository.
 
 Edit what you nee to edit. If you have done your edits. Go to Github for Windows and go into the repository and commit and synchronise your repository.
 

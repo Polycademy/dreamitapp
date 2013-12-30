@@ -12,8 +12,6 @@ bin/*
 node_modules/*
 bower_components/*
 .c9revisions/*
-secrets/*
-!secrets/*.example
 access_logs/*
 
 #################
