@@ -1,4 +1,4 @@
-<script type="text/ng-template" id="signin_modal.html">
+<script type="text/ng-template" id="signin.html">
 	<div class="signin_container">
 		<header class="signin_header page-header">
 			<h3>Sign In</h3>

@@ -12,6 +12,10 @@ define(['angular'], function(angular){
 			'dialog',
 			function($scope, $rootScope, $timeout, $state, UsersServ, dialog){
 
+				//Follow the Users controller
+				//this can be both a modal dialog
+				//or a single page
+
 				$rootScope.viewingOverlay = true;
 
 				$scope.closeOverlay = function(shouldReopenIdea){

@@ -110,10 +110,10 @@
 					</a>
 				</li>
 				<li>
-					<a href="users/signin"><span class="login_icon"></span>Sign In</a>
+					<a ng-click="signIn()"><span class="login_icon"></span>Sign In</a>
 				</li>
 				<li>
-					<a href="users/signup"><span class="fui-user"></span>Sign Up</a>
+					<a ng-click="signUp()"><span class="fui-user"></span>Sign Up</a>
 				</li>
 			</ul>
 		</div>
@@ -184,10 +184,10 @@
 					</a>
 				</li>
 				<li>
-					<a href="users/signin" title="Sign In"><span class="login_icon"></span></a>
+					<a ng-click="signIn()" title="Sign In"><span class="login_icon"></span></a>
 				</li>
 				<li>
-					<a href="users/signup" title="Sign Up"><span class="fui-user"></span></a>
+					<a ng-click="signUp()" title="Sign Up"><span class="fui-user"></span></a>
 				</li>
 			</ul>
 		</div>

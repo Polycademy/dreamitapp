@@ -12,6 +12,11 @@ define(['angular'], function(angular){
 			'dialog',
 			function($scope, $rootScope, $timeout, $dialog, UsersServ, dialog){
 
+				//Follow the Users controller
+				//this can be both a modal dialog
+				//or a single page
+				//also template needs to be changed
+
 				$scope.closeOverlay = function(shouldReopenIdea){
 					shouldReopenIdea = (typeof shouldReopenIdea === 'undefined') ? true : shouldReopenIdea;
 					dialog.close(shouldReopenIdea);
@@ -58,7 +63,7 @@ define(['angular'], function(angular){
 						backdrop: false,
 						keyboard: false,
 						dialogClass: 'modal',
-						templateUrl: 'forgot_password_modal.html',
+						templateUrl: 'forgot_password.html',
 						controller: 'ForgotPasswordCtrl'
 					});
 

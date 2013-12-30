@@ -1,4 +1,4 @@
-<script type="text/ng-template" id="forgot_password_modal.html">
+<script type="text/ng-template" id="forgot_password.html">
 	<div class="signin_container">
 		<header class="signin_header page-header">
 			<h3>Forgot Password</h3>

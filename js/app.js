@@ -227,7 +227,10 @@ define([
 									{
 										url: '/users/signup?idea_id&title_url',
 										templateUrl: 'signup.html',
-										controller: 'SignUpCtrl'
+										controller: 'SignUpCtrl',
+										resolve: {
+											dialog: angular.noop
+										}
 									}
 								)
 								.state(
@@ -235,7 +238,10 @@ define([
 									{
 										url: '/users/signin?idea_id&title_url',
 										templateUrl: 'signin.html',
-										controller: 'SignInCtrl'
+										controller: 'SignInCtrl',
+										resolve: {
+											dialog: angular.noop
+										}
 									}
 								)
 								.state(

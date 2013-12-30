@@ -189,28 +189,17 @@ define(['angular', 'lodash'], function(angular, _){
 
 				//POLYAUTH
 
-				//this will bring up an overlay as well
-				$scope.signIn = function(reopenIdea){
+				$scope.signIn = function(){
 
 					var dialog = $dialog.dialog({
 						backdrop: false,
 						keyboard: false,
 						dialogClass: 'modal',
-						templateUrl: 'signin_modal.html',
-						controller: 'SignInModalCtrl'
+						templateUrl: 'signin.html',
+						controller: 'SignInCtrl'
 					});
 
-					var finishFunction = function(shouldReopenIdea){
-						if(reopenIdea && shouldReopenIdea){
-							$state.transitionTo('idea', {
-								ideaId: reopenIdea.ideaId, 
-								ideaUrl: reopenIdea.titleUrl, 
-								force: 'true'
-							});
-						}
-					};
-
-					dialog.open().then(finishFunction);
+					dialog.open();
 
 				};
 
@@ -223,28 +212,17 @@ define(['angular', 'lodash'], function(angular, _){
 
 				};
 
-				$scope.signUp = function(reopenIdea){
+				$scope.signUp = function(){
 
 					var dialog = $dialog.dialog({
 						backdrop: false,
 						keyboard: true,
 						dialogClass: 'modal overlay_backdrop',
-						templateUrl: 'signup_modal.html',
-						controller: 'SignUpModalCtrl'
+						templateUrl: 'signup.html',
+						controller: 'SignUpCtrl'
 					});
 
-					var finishFunction = function(shouldReopenIdea){
-						if(reopenIdea && shouldReopenIdea){
-							$state.transitionTo('idea', {
-								ideaId: reopenIdea.ideaId, 
-								ideaUrl: reopenIdea.titleUrl, 
-								force: 'true'
-							});
-						}
-					};
-
-					//after signing up, should we allow auto sign in? nah, have to go and activate account first
-					dialog.open().then(finishFunction);
+					dialog.open();
 
 				};
 

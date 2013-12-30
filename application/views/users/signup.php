@@ -1,4 +1,4 @@
-<script type="text/ng-template" id="signup_modal.html">
+<script type="text/ng-template" id="signup.html">
 	<div 
 		class="signup_container overlay_container" 
 		overlay-close-dir="viewingOverlay" 
