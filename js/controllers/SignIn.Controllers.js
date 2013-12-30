@@ -7,20 +7,36 @@ define(['angular'], function(angular){
 			'$scope',
 			'$rootScope',
 			'$timeout',
+			'$state',
+			'$analytics',
 			'$dialog',
 			'UsersServ',
 			'dialog',
-			function($scope, $rootScope, $timeout, $dialog, UsersServ, dialog){
+			function($scope, $rootScope, $timeout, $state, $analytics, $dialog, UsersServ, dialog){
 
-				//Follow the Users controller
-				//this can be both a modal dialog
-				//or a single page
-				//also template needs to be changed
+				//if ideaId and titleUrl is passed, redirect and transition to the idea
+				//if they are not passed, redirect and transition him to his profile page
+				//if the user applied to a be developer, transition back to home page
+				//facebook should get the finish function (not a close overlay function)
 
-				$scope.closeOverlay = function(shouldReopenIdea){
-					shouldReopenIdea = (typeof shouldReopenIdea === 'undefined') ? true : shouldReopenIdea;
-					dialog.close(shouldReopenIdea);
-				};
+				var ideaId = $state.params.idea_id;
+				var titleUrl = $state.params.title_url;
+
+				if(dialog){
+
+					$rootScope.viewingOverlay = true;
+					$scope.closeOverlay = function(){
+						$rootScope.viewingOverlay = false;
+						dialog.close();
+					};
+					$analytics.pageTrack('users/signin');
+
+				}else{
+
+					$rootScope.viewingOverlay = false;
+					$scope.closeOverlay = angular.noop;
+
+				}
 
 				$scope.submitSignIn = function(){
 

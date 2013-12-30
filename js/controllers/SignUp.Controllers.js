@@ -8,23 +8,34 @@ define(['angular'], function(angular){
 			'$rootScope',
 			'$timeout',
 			'$state',
+			'$analytics',
 			'UsersServ',
 			'dialog',
-			function($scope, $rootScope, $timeout, $state, UsersServ, dialog){
+			function($scope, $rootScope, $timeout, $state, $analytics, UsersServ, dialog){
 
-				//Follow the Users controller
-				//this can be both a modal dialog
-				//or a single page
+				//if ideaId and titleUrl is passed, redirect and transition to the idea
+				//if they are not passed, redirect and transition him to his profile page
+				//if the user applied to a be developer, transition back to home page
+				//facebook should get the finish function (not a close overlay function)
 
-				$rootScope.viewingOverlay = true;
+				var ideaId = $state.params.idea_id;
+				var titleUrl = $state.params.title_url;
 
-				$scope.closeOverlay = function(shouldReopenIdea){
-					//by default closing the signup overlay should reopen the idea if there was an action interception
-					//but if we successfully logged in, then we are transitioning to the user, not the idea
-					shouldReopenIdea = (typeof shouldReopenIdea === 'undefined') ? true : shouldReopenIdea;
+				if(dialog){
+
+					$rootScope.viewingOverlay = true;
+					$scope.closeOverlay = function(){
+						$rootScope.viewingOverlay = false;
+						dialog.close();
+					};
+					$analytics.pageTrack('users/signup');
+
+				}else{
+
 					$rootScope.viewingOverlay = false;
-					dialog.close(shouldReopenIdea);
-				};
+					$scope.closeOverlay = angular.noop;
+
+				}
 
 				//default parameters
 				$scope.developer = 0;
@@ -56,7 +67,7 @@ define(['angular'], function(angular){
 									$state.transitionTo('user', {userId: response.content});
 								});
 							}
-							$scope.closeOverlay(false);
+							$scope.closeOverlay();
 						}, 1000);
 
 					}, function(response){

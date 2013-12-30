@@ -1,12 +1,12 @@
 <script type="text/ng-template" id="forgot_password.html">
-	<div class="signin_container">
-		<header class="signin_header page-header">
+	<div class="forgot_password_container">
+		<header class="forgot_password_header page-header">
 			<h3>Forgot Password</h3>
-			<button class="signin_close overlay_close" ng-click="closeOverlay()">
+			<button class="forgot_password_close overlay_close" ng-click="closeOverlay()">
 				<span class="fui-cross"></span>
 			</button>
 		</header>
-		<form class="signin_form" ng-submit="submitForgottenPassword()" name="forgotten_password">
+		<form class="forgot_password_form" ng-submit="submitForgottenPassword()" name="forgotten_password">
 			<div 
 				class="control-group" 
 				ng-class="{

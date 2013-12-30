@@ -1,12 +1,22 @@
 <script type="text/ng-template" id="signin.html">
-	<div class="signin_container">
+	<div 
+		class="signin_container"
+		ng-class="{'overlay_container': viewingOverlay, 'container': !viewingOverlay}"
+		overlay-close-dir="viewingOverlay" 
+		overlay-close-func="closeOverlay()" 
+		pull-down-to-window-dir
+	>
 		<header class="signin_header page-header">
-			<h3>Sign In</h3>
-			<button class="signin_close overlay_close" ng-click="closeOverlay()">
+			<h3 class="signin_heading">Sign In</h3>
+			<button 
+				class="signin_close overlay_close" 
+				ng-click="closeOverlay()" 
+				ng-show="viewingOverlay"
+			>
 				<span class="fui-cross"></span>
 			</button>
 		</header>
-		<form class="signin_form" ng-submit="submitSignIn()" name="signin_form">
+		<form class="signin_form form-horizontal" ng-submit="submitSignIn()" name="signin_form">
 			<div 
 				class="control-group" 
 				ng-class="{

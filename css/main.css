@@ -6995,6 +6995,42 @@ header.navbar .nav li a {
   padding-left: 0;
 }
 /*
+	SIGN IN
+*/
+.overlay_backdrop .signin_container {
+  margin: 0 auto;
+  border-left: 1px solid #b8e0d8;
+  border-right: 1px solid #b8e0d8;
+}
+.overlay_backdrop .signin_container .signin_header {
+  overflow: auto;
+}
+.overlay_backdrop .signin_container .signin_header .signin_heading {
+  float: left;
+  font-size: 32px;
+  font-family: 'source_sans_prosemibold', arial, sans-serif;
+  font-weight: normal;
+  padding: 20px 40px;
+  margin: 0;
+}
+.overlay_backdrop .signin_container .signin_header .signin_close {
+  margin: 10px 30px;
+}
+.overlay_backdrop .signin_container .signin_form {
+  margin: 20px auto;
+  width: 90%;
+}
+.overlay_backdrop .signin_container .signin_form .control-label {
+  width: 120px;
+}
+.overlay_backdrop .signin_container .signin_form .controls {
+  margin-left: 134px;
+  margin-right: 60px;
+}
+.overlay_backdrop .signin_container .signin_form .form-actions {
+  padding-left: 0;
+}
+/*
 	DEVELOPER CONTACT MODAL
 */
 .modal .developer_contact_container {
@@ -7037,24 +7073,24 @@ header.navbar .nav li a {
   padding: 10px;
 }
 /*
-	SIGN IN MODAL
+	FORGOT PASSWORD MODAL
 */
-.modal .signin_container {
+.modal .forgot_password_container {
   margin: 0 auto;
   padding: 10px;
 }
-.modal .signin_container .signin_header {
+.modal .forgot_password_container .forgot_password_header {
   margin: 0;
   overflow: auto;
   padding: 0;
 }
-.modal .signin_container .signin_header h3 {
+.modal .forgot_password_container .forgot_password_header h3 {
   float: left;
   font-size: 28px;
   font-family: 'source_sans_prosemibold', arial, sans-serif;
   margin: 10px;
 }
-.modal .signin_container .signin_header .signin_close {
+.modal .forgot_password_container .forgot_password_header .forgot_password_close {
   margin: 10px;
   float: right;
   font-size: 18px;
@@ -7064,15 +7100,15 @@ header.navbar .nav li a {
   background: #efebe7;
   color: #34495e;
 }
-.modal .signin_container .signin_header .signin_close:hover {
+.modal .forgot_password_container .forgot_password_header .forgot_password_close:hover {
   background: #ecf0f1;
   color: #2c3e50;
 }
-.modal .signin_container .signin_form {
+.modal .forgot_password_container .forgot_password_form {
   margin: 0;
   padding: 10px;
 }
-.modal .signin_container .signin_form .form-actions {
+.modal .forgot_password_container .forgot_password_form .form-actions {
   border-top: none;
   margin: 0;
   text-align: center;

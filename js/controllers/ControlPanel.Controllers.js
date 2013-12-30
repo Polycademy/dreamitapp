@@ -187,28 +187,17 @@ define(['angular', 'lodash'], function(angular, _){
 				// SIGN IN & SIGN OUT & SIGN UP //
 				//////////////////////////////////
 
-				//POLYAUTH
-
 				$scope.signIn = function(){
 
 					var dialog = $dialog.dialog({
 						backdrop: false,
-						keyboard: false,
-						dialogClass: 'modal',
+						keyboard: true,
+						dialogClass: 'modal overlay_backdrop',
 						templateUrl: 'signin.html',
 						controller: 'SignInCtrl'
 					});
 
 					dialog.open();
-
-				};
-
-				//this does not bring up an overlay
-				$scope.signOut = function(){
-
-					UsersServ.logoutSession(0, function(){
-						$rootScope.$broadcast('reloadWall');
-					});
 
 				};
 
@@ -223,6 +212,15 @@ define(['angular', 'lodash'], function(angular, _){
 					});
 
 					dialog.open();
+
+				};
+
+				//this does not bring up an overlay
+				$scope.signOut = function(){
+
+					UsersServ.logoutSession(0, function(){
+						$rootScope.$broadcast('reloadWall');
+					});
 
 				};
 

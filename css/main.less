@@ -882,6 +882,45 @@ header.navbar{
 }
 
 /*
+	SIGN IN
+*/
+.overlay_backdrop{
+	.signin_container{
+		margin: 0 auto;
+		border-left: 1px solid @colour_green_highlight;
+		border-right: 1px solid @colour_green_highlight;
+		.signin_header{
+			overflow: auto;
+			.signin_heading{
+				float: left;
+				font-size: 32px;
+				font-family: 'source_sans_prosemibold', arial, sans-serif;
+				font-weight: normal;
+				padding: 20px 40px;
+				margin: 0;
+			}
+			.signin_close{
+				margin: 10px 30px;
+			}
+		}
+		.signin_form{
+			margin: 20px auto;
+			width: 90%;
+			.control-label{
+				width: 120px;
+			}
+			.controls{
+				margin-left: 134px;
+				margin-right: 60px;
+			}
+			.form-actions{
+				padding-left: 0;
+			}
+		}
+	}
+}
+
+/*
 	DEVELOPER CONTACT MODAL
 */
 .modal{
@@ -927,13 +966,13 @@ header.navbar{
 }
 
 /*
-	SIGN IN MODAL
+	FORGOT PASSWORD MODAL
 */
 .modal{
-	.signin_container{
+	.forgot_password_container{
 		margin: 0 auto;
 		padding: 10px;
-		.signin_header{
+		.forgot_password_header{
 			margin: 0;
 			overflow: auto;
 			padding: 0;
@@ -943,7 +982,7 @@ header.navbar{
 				font-family: 'source_sans_prosemibold', arial, sans-serif;
 				margin: 10px;
 			}
-			.signin_close{
+			.forgot_password_close{
 				margin: 10px;
 				float: right;
 				font-size: 18px;
@@ -958,7 +997,7 @@ header.navbar{
 				}
 			}
 		}
-		.signin_form{
+		.forgot_password_form{
 			margin: 0;
 			padding: 10px;
 			.form-actions{

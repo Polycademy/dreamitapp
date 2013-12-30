@@ -1,13 +1,18 @@
 <script type="text/ng-template" id="signup.html">
 	<div 
-		class="signup_container overlay_container" 
+		class="signup_container" 
+		ng-class="{'overlay_container': viewingOverlay, 'container': !viewingOverlay}"
 		overlay-close-dir="viewingOverlay" 
 		overlay-close-func="closeOverlay()" 
 		pull-down-to-window-dir
 	>
 		<header class="signup_header page-header">
 			<h3 class="signup_heading">Sign Up</h3>
-			<button class="signup_close overlay_close" ng-click="closeOverlay()">
+			<button 
+				class="signup_close overlay_close" 
+				ng-click="closeOverlay()" 
+				ng-show="viewingOverlay"
+			>
 				<span class="fui-cross"></span>
 			</button>
 		</header>
