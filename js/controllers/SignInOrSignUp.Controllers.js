@@ -32,6 +32,12 @@ define(['angular'], function(angular){
 
 				};
 
+				$scope.transitionToSignInOrSignUp = function(){
+
+					dialog.close();
+					
+				};
+
 			}
 		]);
 

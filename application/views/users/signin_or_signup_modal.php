@@ -7,8 +7,8 @@
 			</button>
 		</header>
 		<div class="signin_or_signup_actions">
-			<a ng-href="{{'users/signin' + redirect}}" class="btn btn-primary signin_or_signup_buttons">Sign In</a>
-			<a ng-href="{{'users/signup' + redirect}}" class="btn btn-primary signin_or_signup_buttons">Register</a>
+			<a ng-href="{{'users/signin' + redirect}}" ng-click="transitionToSignInOrSignUp()" class="btn btn-primary signin_or_signup_buttons">Sign In</a>
+			<a ng-href="{{'users/signup' + redirect}}" ng-click="transitionToSignInOrSignUp()" class="btn btn-primary signin_or_signup_buttons">Register</a>
 		</div>
 	</div>
 </script>
