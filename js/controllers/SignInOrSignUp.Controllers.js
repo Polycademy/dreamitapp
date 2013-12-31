@@ -14,7 +14,7 @@ define(['angular'], function(angular){
 				var previousIdea = dialog.options.customOptions.previousIdea;
 
 				if(previousIdea){
-					$scope.redirect = '?idea_id=' + $window.encodeURIComponent(previousIdea.ideaId) + '&title_url=' + $window.encodeURIComponent(previousIdea.titleUrl);
+					$scope.redirect = '?idea_id=' + $window.encodeURIComponent(previousIdea.ideaId) + '&idea_url=' + $window.encodeURIComponent(previousIdea.ideaUrl);
 				}
 
 				$scope.closeOverlay = function(){
@@ -25,7 +25,7 @@ define(['angular'], function(angular){
 						//if it closes by itself, it needs to reopen the previous idea
 						$state.transitionTo('idea', {
 							ideaId: previousIdea.ideaId, 
-							ideaUrl: previousIdea.titleUrl, 
+							ideaUrl: previousIdea.ideaUrl, 
 							force: 'true'
 						});
 					}

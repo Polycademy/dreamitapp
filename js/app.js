@@ -225,7 +225,7 @@ define([
 								.state(
 									'signUpUser',
 									{
-										url: '/users/signup?idea_id&title_url',
+										url: '/users/signup?idea_id&idea_url',
 										templateUrl: 'signup.html',
 										controller: 'SignUpCtrl',
 										resolve: {
@@ -236,7 +236,7 @@ define([
 								.state(
 									'signInUser',
 									{
-										url: '/users/signin?idea_id&title_url',
+										url: '/users/signin?idea_id&idea_url',
 										templateUrl: 'signin.html',
 										controller: 'SignInCtrl',
 										resolve: {

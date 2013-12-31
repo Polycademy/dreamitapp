@@ -7,7 +7,7 @@
 		pull-down-to-window-dir
 	>
 		<header class="signup_header page-header">
-			<h3 class="signup_heading">Sign Up</h3>
+			<h3 class="signup_heading"><a href="users/signup">Sign Up</a></h3>
 			<button 
 				class="signup_close overlay_close" 
 				ng-click="closeOverlay()" 
@@ -178,7 +178,7 @@
 			</div>
 			<div class="form-actions">
 				<button type="submit" class="btn btn-primary">Sign Up</button>
-				<button type="button" class="btn btn-info" facebook-login-dir facebook-overlay-close="closeOverlay()">Sign Up via Facebook</button>
+				<button type="button" class="btn btn-info" facebook-login-dir facebook-overlay-close="finishSignUp()">Sign Up via Facebook</button>
 			</div>
 		</form>
 	</div>

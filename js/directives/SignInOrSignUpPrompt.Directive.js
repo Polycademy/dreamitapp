@@ -37,7 +37,7 @@ define(['angular', 'jquery', 'twitter-bootstrap'], function(angular, $){
 								if(attributes.signInOrSignUpPromptIdeaId && attributes.signInOrSignUpPromptIdeaUrl){
 									reopenIdea = {
 										ideaId: attributes.signInOrSignUpPromptIdeaId,
-										titleUrl: attributes.signInOrSignUpPromptIdeaUrl
+										ideaUrl: attributes.signInOrSignUpPromptIdeaUrl
 									};
 								}else{
 									reopenIdea = false;

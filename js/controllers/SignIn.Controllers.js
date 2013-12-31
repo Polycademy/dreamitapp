@@ -14,13 +14,8 @@ define(['angular'], function(angular){
 			'dialog',
 			function($scope, $rootScope, $timeout, $state, $analytics, $dialog, UsersServ, dialog){
 
-				//if ideaId and titleUrl is passed, redirect and transition to the idea
-				//if they are not passed, redirect and transition him to his profile page
-				//if the user applied to a be developer, transition back to home page
-				//facebook should get the finish function (not a close overlay function)
-
 				var ideaId = $state.params.idea_id;
-				var titleUrl = $state.params.title_url;
+				var ideaUrl = $state.params.idea_url;
 
 				if(dialog){
 
@@ -38,6 +33,24 @@ define(['angular'], function(angular){
 
 				}
 
+				$scope.finishSignIn = function(){
+
+					$scope.closeOverlay();
+
+					if(ideaId && ideaUrl){
+
+						//transition to idea if ideaId and ideaUrl were passed in
+						$state.transitionTo('idea', {'ideaId': ideaId, 'ideaUrl': ideaUrl, 'force': true});
+
+					}else{
+
+						//transition to home if signed up as a developer or other situations
+						$state.transitionTo('home');
+
+					}
+
+				};
+
 				$scope.submitSignIn = function(){
 
 					var credentials = {
@@ -49,7 +62,7 @@ define(['angular'], function(angular){
 
 						$scope.successSubmit = 'Successfully Signed In';
 						$timeout(function(){
-							$scope.closeOverlay();
+							$scope.finishSignIn();
 							$rootScope.$broadcast('reloadWall');
 						}, 1000);
 
@@ -71,8 +84,8 @@ define(['angular'], function(angular){
 
 				$scope.forgotPassword = function(){
 
-					//close this overlay but don't reopen the idea
-					$scope.closeOverlay(false);
+					//close this overlay if this was a modal
+					$scope.closeOverlay();
 
 					//open up ForgotPasswordCtrl
 					var dialog = $dialog.dialog({

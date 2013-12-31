@@ -6878,6 +6878,18 @@ header.navbar .nav li a {
   padding-left: 0;
 }
 /*
+	SIGN IN
+*/
+.signin_container .signin_header .signin_heading a {
+  color: #34495e;
+}
+/*
+	SIGN UP
+*/
+.signup_container .signup_header .signup_heading a {
+  color: #34495e;
+}
+/*
 	OVERLAY BACKDROP
 */
 .overlay_backdrop {
@@ -6951,7 +6963,7 @@ header.navbar .nav li a {
   width: 178px;
 }
 /*
-	SIGN UP
+	SIGN UP MODAL
 */
 .overlay_backdrop .signup_container {
   margin: 0 auto;
@@ -6995,7 +7007,7 @@ header.navbar .nav li a {
   padding-left: 0;
 }
 /*
-	SIGN IN
+	SIGN IN MODAL
 */
 .overlay_backdrop .signin_container {
   margin: 0 auto;

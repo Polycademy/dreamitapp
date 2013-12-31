@@ -16,7 +16,7 @@ define(['angular'], function(angular){
 
 				/**
 				 * Open Sign In or Sign Up Modal
-				 * @param  {Object} reopenIdea An object containing {id, titleUrl}
+				 * @param  {Object} reopenIdea An object containing {ideaId, ideaUrl}
 				 */
 				var openSignInOrSignUpModal = function(reopenIdea){
 
