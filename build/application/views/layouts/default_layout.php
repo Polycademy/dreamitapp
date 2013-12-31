@@ -19,9 +19,9 @@
 		<link rel="apple-touch-icon-precomposed" sizes="114x114" href="img/apple-touch-icon-114x114-precomposed.png">
 		<link rel="apple-touch-icon-precomposed" sizes="72x72" href="img/apple-touch-icon-72x72-precomposed.png">
 		<link rel="apple-touch-icon-precomposed" href="img/apple-touch-icon-57x57-precomposed.png">
-		<link rel="stylesheet" href="css/main.1387727396813.css">
+		<link rel="stylesheet" href="css/main.1388510679565.css">
 		<script src="js/lib/modernizr-2.6.2-respond-1.1.0.min.js"></script>
-		<script src="js/config.1387727396813.js"></script>
+		<script src="js/config.1388510679565.js"></script>
 		<script>
 			(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
 			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),

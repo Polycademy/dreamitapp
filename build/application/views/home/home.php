@@ -43,7 +43,6 @@
 							sign-in-or-sign-up-prompt-dir="{{loggedIn}}" 
 							sign-in-or-sign-up-prompt-idea-id="{{idea.id}}" 
 							sign-in-or-sign-up-prompt-idea-url="{{idea.titleUrl}}" 
-							sign-in-or-sign-up-prompt-message="Sign In or Up to Like Ideas!"
 							ng-href="ideas/{{idea.id}}/{{idea.titleUrl}}#feedback" 
 							ng-click="disableOverlay || openIdeaOverlay(idea.id, idea.titleUrl)" 
 						>
@@ -56,7 +55,6 @@
 							sign-in-or-sign-up-prompt-dir="{{loggedIn}}" 
 							sign-in-or-sign-up-prompt-idea-id="{{idea.id}}" 
 							sign-in-or-sign-up-prompt-idea-url="{{idea.titleUrl}}" 
-							sign-in-or-sign-up-prompt-message="Sign In or Up to Like Ideas!" 
 							like-toggle-dir 
 							like-index="{{$index}}" 
 							like-id="{{idea.id}}"
@@ -107,7 +105,6 @@
 				<li>
 					<a
 						sign-in-or-sign-up-prompt-dir="{{loggedIn}}" 
-						sign-in-or-sign-up-prompt-message="Sign In or Up to Add Ideas!" 
 					>
 						<span class="fui-radio-unchecked"></span>I Have An Idea
 					</a>
@@ -177,6 +174,14 @@
 				</li>
 				<li ng-class="{true: 'viewing_popular_ideas'}[viewingPopularIdeas]">
 					<a ng-click="viewPopularIdeas()" title="Popular Ideas"><span class="fui-heart"></span></a>
+				</li>
+				<li>
+					<a
+						sign-in-or-sign-up-prompt-dir="{{loggedIn}}" 
+						title="I Have An Idea"
+					>
+						<span class="fui-radio-unchecked"></span>
+					</a>
 				</li>
 				<li>
 					<a ng-click="signIn()" title="Sign In"><span class="login_icon"></span></a>

@@ -1,7 +1,5 @@
 <?php
 
-//THESE ARE KEYS to external services. Drop this into dreamitapp/secrets repo after cloning. This is not stored in the repository.
-
 //encryption
 
 $secrets['encryption_key'] = 'gherg9834v(&#T&*RGBUDy98342tneyt';
