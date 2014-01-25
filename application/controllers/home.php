@@ -43,7 +43,16 @@ class Home extends CI_Controller{
 
 		if($response){
 
+			if(!empty($response['headers'])){
+				foreach($response['headers'] as $header){
+					if($header['name'] == 'Location'){
+						header($header['name'] . ': ' . $header['value']);
+					}
+				}
+			}
+
 			$this->output->set_status_header($response['status']);
+
 			echo $response['html'];
 
 		}else{

@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "96104c893a67854fd9598d73b2dd0f1f",
+    "hash": "203ee1c0ad369885686df7641765ed33",
     "packages": [
         {
             "name": "guzzle/guzzle",
@@ -656,22 +656,22 @@
         },
         {
             "name": "polycademy/snapsearch-client-php",
-            "version": "0.0.2",
+            "version": "1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Polycademy/SnapSearch-Client-PHP.git",
-                "reference": "27445a1aee5c404e832caece5fbc3a5fdc5bfaad"
+                "reference": "37f6bdbe8c792a9c2ac42d06cb1b657e1572c37c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Polycademy/SnapSearch-Client-PHP/zipball/27445a1aee5c404e832caece5fbc3a5fdc5bfaad",
-                "reference": "27445a1aee5c404e832caece5fbc3a5fdc5bfaad",
+                "url": "https://api.github.com/repos/Polycademy/SnapSearch-Client-PHP/zipball/37f6bdbe8c792a9c2ac42d06cb1b657e1572c37c",
+                "reference": "37f6bdbe8c792a9c2ac42d06cb1b657e1572c37c",
                 "shasum": ""
             },
             "require": {
-                "nategood/httpful": "0.2.11",
+                "nategood/httpful": "~0.2.11",
                 "php": ">=5.3.3",
-                "symfony/http-foundation": "2.3.7"
+                "symfony/http-foundation": "~2.3"
             },
             "require-dev": {
                 "codeception/codeception": "1.8.0.1"
@@ -708,7 +708,7 @@
                 "search engine optimisation",
                 "seo"
             ],
-            "time": "2013-12-03 03:59:30"
+            "time": "2014-01-24 07:52:27"
         },
         {
             "name": "psr/log",
@@ -750,17 +750,17 @@
         },
         {
             "name": "symfony/event-dispatcher",
-            "version": "v2.4.0",
+            "version": "v2.4.1",
             "target-dir": "Symfony/Component/EventDispatcher",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/EventDispatcher.git",
-                "reference": "acd1707236f6eb96fbb8d58f63d289b72ebc2f6e"
+                "reference": "e3ba42f6a70554ed05749e61b829550f6ac33601"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/EventDispatcher/zipball/acd1707236f6eb96fbb8d58f63d289b72ebc2f6e",
-                "reference": "acd1707236f6eb96fbb8d58f63d289b72ebc2f6e",
+                "url": "https://api.github.com/repos/symfony/EventDispatcher/zipball/e3ba42f6a70554ed05749e61b829550f6ac33601",
+                "reference": "e3ba42f6a70554ed05749e61b829550f6ac33601",
                 "shasum": ""
             },
             "require": {
@@ -800,21 +800,21 @@
             ],
             "description": "Symfony EventDispatcher Component",
             "homepage": "http://symfony.com",
-            "time": "2013-12-03 14:52:22"
+            "time": "2013-12-28 08:12:03"
         },
         {
             "name": "symfony/http-foundation",
-            "version": "v2.3.7",
+            "version": "v2.4.1",
             "target-dir": "Symfony/Component/HttpFoundation",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/HttpFoundation.git",
-                "reference": "1c4b897064f4f621031a0e3bc19fd7054d5e0315"
+                "reference": "6c6b8a7bcd7e2cc920cd6acace563fdbf121d844"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/HttpFoundation/zipball/1c4b897064f4f621031a0e3bc19fd7054d5e0315",
-                "reference": "1c4b897064f4f621031a0e3bc19fd7054d5e0315",
+                "url": "https://api.github.com/repos/symfony/HttpFoundation/zipball/6c6b8a7bcd7e2cc920cd6acace563fdbf121d844",
+                "reference": "6c6b8a7bcd7e2cc920cd6acace563fdbf121d844",
                 "shasum": ""
             },
             "require": {
@@ -823,7 +823,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.3-dev"
+                    "dev-master": "2.4-dev"
                 }
             },
             "autoload": {
@@ -850,7 +850,7 @@
             ],
             "description": "Symfony HttpFoundation Component",
             "homepage": "http://symfony.com",
-            "time": "2013-11-13 21:27:40"
+            "time": "2014-01-05 02:10:50"
         },
         {
             "name": "tedivm/stash",

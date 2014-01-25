@@ -26,7 +26,10 @@ $ioc['Database'] = $ioc->share(function($c){
 
 $ioc['SnapSearchClientPHP'] = $ioc->share(function($c){
 
-	$client = new SnapSearchClientPHP\Client('randomkey');
+	$client = new SnapSearchClientPHP\Client(
+		$_ENV['secrets']['snapsearch_api_user'], 
+		$_ENV['secrets']['snapsearch_api_key']
+	);
 	$detector = new SnapSearchClientPHP\Detector;
 	$interceptor = new SnapSearchClientPHP\Interceptor($client, $detector);
 	return $interceptor;
