@@ -9,7 +9,7 @@ return array(
     'Symfony\\Component\\HttpFoundation\\' => array($vendorDir . '/symfony/http-foundation'),
     'Symfony\\Component\\EventDispatcher\\' => array($vendorDir . '/symfony/event-dispatcher'),
     'Stash' => array($vendorDir . '/tedivm/stash/src'),
-    'SnapSearchClientPHP' => array($vendorDir . '/polycademy/snapsearch-client-php/src'),
+    'SnapSearchClientPHP' => array($vendorDir . '/snapsearch/snapsearch-client-php/src'),
     'RBAC' => array($vendorDir . '/polycademy/php_rbac/src'),
     'Psr\\Log\\' => array($vendorDir . '/psr/log'),
     'PolyAuth' => array($vendorDir . '/polycademy/polyauth/src'),
