@@ -1,6 +1,6 @@
 {
   "name": "outlayer",
-  "version": "1.1.6",
+  "version": "1.1.10",
   "description": "the brains and guts of a layout library",
   "main": [
     "item.js",
@@ -20,14 +20,18 @@
     "qunit": "~1.12.0"
   },
   "ignore": [
-    "test/"
+    "test/",
+    "docs/",
+    "examples",
+    ".*",
+    "notes.md"
   ],
   "homepage": "https://github.com/metafizzy/outlayer",
-  "_release": "1.1.6",
+  "_release": "1.1.10",
   "_resolution": {
     "type": "version",
-    "tag": "v1.1.6",
-    "commit": "8a3407d184ca2abf5001d62dbd804197fda94469"
+    "tag": "v1.1.10",
+    "commit": "722dea9c9c19b1f7365bd20bef8991033629c759"
   },
   "_source": "git://github.com/metafizzy/outlayer.git",
   "_target": ">=1.1.2 <2.0",

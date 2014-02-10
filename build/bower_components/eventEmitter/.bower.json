@@ -1,7 +1,7 @@
 {
   "name": "eventEmitter",
   "description": "Event based JavaScript for the browser",
-  "version": "4.2.3",
+  "version": "4.2.7",
   "main": [
     "./EventEmitter.js"
   ],
@@ -19,12 +19,19 @@
     "events",
     "structure"
   ],
+  "ignore": [
+    "docs",
+    "tests",
+    "tools",
+    ".gitignore",
+    "package.json"
+  ],
   "homepage": "https://github.com/Wolfy87/EventEmitter",
-  "_release": "4.2.3",
+  "_release": "4.2.7",
   "_resolution": {
     "type": "version",
-    "tag": "v4.2.3",
-    "commit": "9330b7622de3e05950b5550873333790df43d67f"
+    "tag": "v4.2.7",
+    "commit": "5cba254c056a143df1c4f5505bfa8c3531ebd56c"
   },
   "_source": "git://github.com/Wolfy87/EventEmitter.git",
   "_target": "4.x",

@@ -101,7 +101,7 @@ test( 'ex8: 66.666% values', function() {
   if ( size.width % 1 ) {
     ok( size.width > 266.6 && size.width < 266.7, 'width is between 266.6 and 266.7' );
   } else {
-    // IE8
+    // IE8 and Safari
     equal( size.width, 267, 'width is 267' );
   }
 
@@ -142,6 +142,18 @@ test( 'display: none', function() {
   size = getSize( document.querySelector('#hidden .box2') );
   strictEqual( size.width, 0, 'cannot over write zeroSize' );
 
+});
+
+test( 'percent values', function() {
+  var size = getSize( document.querySelector('#percent .box') );
+  strictEqual( size.marginLeft, 40, 'marginLeft' );
+  strictEqual( size.marginTop, 80, 'marginTop' );
+  strictEqual( size.width, 200, 'width' );
+  strictEqual( size.height, 100, 'height' );
+  strictEqual( size.innerWidth, 200, 'innerWidth' );
+  strictEqual( size.innerHeight, 100, 'innerHeight' );
+  strictEqual( size.outerWidth, 240, 'outerWidth' );
+  strictEqual( size.outerHeight, 180, 'outerHeight' );
 });
 
 
