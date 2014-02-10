@@ -38,8 +38,6 @@ class Home extends CI_Controller{
 		if(ENVIRONMENT == 'production'){
 			try{
 				$response = $this->interceptor->intercept();
-				var_dump($response);
-				exit;
 			}catch(SnapSearchClientPHP\SnapSearchException $e){}
 		}
 

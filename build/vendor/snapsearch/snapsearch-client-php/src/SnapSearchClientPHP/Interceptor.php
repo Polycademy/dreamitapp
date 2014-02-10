@@ -34,9 +34,7 @@ class Interceptor{
 	public function intercept(){
 
 		if($this->detector->detect()){
-			var_dump('GOT DETECTED');
 			$raw_current_url = $this->detector->get_encoded_url();
-			var_dump($raw_current_url);
 			return $this->client->request($raw_current_url);
 		}
 
